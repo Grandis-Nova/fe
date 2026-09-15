@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/directory-structure.md": {
+      "pageVersion": "sha256:2b22d6fb6c3ba224fc58dfb1ce961a92a5548788d3b01edf0c1d6a085c90f823",
+      "completedBy": "claude-code",
+      "completedRunId": "4865152d-eb8c-4e73-990d-dc325bc0aaac",
+      "gitHead": "c3e522b9f92200a55536aa14c33d702aa6a01b4d",
+      "sourceFingerprint": "sha256:309f43d685a01c1fab8dff5a0e25a0b6e2644ef136f1ef88ec8e62c57b41cafd"
+    },
+    "/openwiki/architecture/tooling.md": {
+      "pageVersion": "sha256:9f0029bd02a2d49ffc61290383ad86b10656528109270978692af6b8b00e5c9b",
+      "completedBy": "claude-code",
+      "completedRunId": "4865152d-eb8c-4e73-990d-dc325bc0aaac",
+      "gitHead": "c3e522b9f92200a55536aa14c33d702aa6a01b4d",
+      "sourceFingerprint": "sha256:309f43d685a01c1fab8dff5a0e25a0b6e2644ef136f1ef88ec8e62c57b41cafd"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:d50fcea46558513f6041acd0927ca3594c58a1c82748c530a21546293b91fd35",
+      "completedBy": "claude-code",
+      "completedRunId": "4865152d-eb8c-4e73-990d-dc325bc0aaac",
+      "gitHead": "c3e522b9f92200a55536aa14c33d702aa6a01b4d",
+      "sourceFingerprint": "sha256:309f43d685a01c1fab8dff5a0e25a0b6e2644ef136f1ef88ec8e62c57b41cafd"
+    }
+  }
+}

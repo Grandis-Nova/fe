@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9f0029bd02a2d49ffc61290383ad86b10656528109270978692af6b8b00e5c9b",
+  "claims": [
+    {
+      "id": "claim_64b9e2038976438cb08d2479fa638cfe",
+      "statement": "The build script runs `tsc -b` before `vite build`, so a TypeScript project-reference type check must pass before Vite produces the production bundle.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:f20c6723e4a146da1922f049e7d83b72dbc7e4949d5bc7770f48b8f1e31503aa"
+        }
+      ]
+    },
+    {
+      "id": "claim_79bfcb2d2718442c85212a248e4c96c6",
+      "statement": "vite.config.ts registers both @vitejs/plugin-react and @vanilla-extract/vite-plugin's vanillaExtractPlugin(), which together enable JSX/Fast Refresh handling and build-time compilation of .css.ts files.",
+      "evidence": [
+        {
+          "resource": "repo://vite.config.ts",
+          "version": "repo-file-v1:sha256:530efc259e4c7897dc82e555b6ab3344272e6e015ef8da94f25e206052ed1992"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd2370f25e6d432491b09653690b815f",
+      "statement": "App.css.ts defines vanilla-extract style objects (card, logo) including a :hover pseudo-class inside the style() call, and App.tsx imports them to set className props.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/App.css.ts",
+          "version": "repo-file-v1:sha256:43c81787997303cd6db089c234387014fcc7e83bec883e722ab5636851d36983"
+        }
+      ]
+    },
+    {
+      "id": "claim_071db6b98e9544a88b83a88f1fbe1cb0",
+      "statement": "Global styles are kept in a plain .css file (src/app/styles/index.css) rather than vanilla-extract, so component-scoped styles use .css.ts while global styles use .css.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/styles/index.css",
+          "version": "repo-file-v1:sha256:535c25dd1f338486ab3678832fc698011c8b8d1fe4ffd3d0ef5e33181457cc9f"
+        }
+      ]
+    },
+    {
+      "id": "claim_277f7d06f43e4bea8aea5fb39e15f13f",
+      "statement": "tsconfig.json contains no files of its own and only wires tsconfig.app.json (src app code, bundler module resolution, noEmit) and tsconfig.node.json (vite.config.ts under a Node typing context) as project references.",
+      "evidence": [
+        {
+          "resource": "repo://tsconfig.app.json",
+          "version": "repo-file-v1:sha256:8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0"
+        },
+        {
+          "resource": "repo://tsconfig.json",
+          "version": "repo-file-v1:sha256:770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+        },
+        {
+          "resource": "repo://tsconfig.node.json",
+          "version": "repo-file-v1:sha256:d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8"
+        }
+      ]
+    },
+    {
+      "id": "claim_18941b71622b4e22a48d63ce152ce53f",
+      "statement": ".oxlintrc.json enables the react, typescript, and oxc oxlint plugins, sets react/rules-of-hooks to error, and sets react/only-export-components to warn with allowConstantExport.",
+      "evidence": [
+        {
+          "resource": "repo://.oxlintrc.json",
+          "version": "repo-file-v1:sha256:b4d344818a1e1bf43997e4744a9153c8eef770c98b58229cd86363dabb85ded4"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-15T04:58:54.229Z"
+  }
+}

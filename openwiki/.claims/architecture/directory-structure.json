@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2b22d6fb6c3ba224fc58dfb1ce961a92a5548788d3b01edf0c1d6a085c90f823",
+  "claims": [
+    {
+      "id": "claim_07e7581dc0474dcaa7dbcc04e014e303",
+      "statement": "src/main.tsx is a bootstrap file outside the FSD layers that only creates the React root and imports the App component and global styles from the app layer.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.tsx",
+          "version": "repo-file-v1:sha256:4ab315a70577af86846ee0888314c3bfc88c32efb2ce168d697806e006ebe954"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe5886956323453488f6a01949d90305",
+      "statement": "The app layer's App.tsx imports logo assets from the shared layer (src/shared/assets), following the FSD rule that higher layers may import from lower layers.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/App.tsx#L1-L4",
+          "version": "repo-lines-v1:sha256:d28a9f85561d997e0668836643b325a1280ce452fca61c486b24a4896d794b1d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTEzZDczZDhhNTcxZDk0MDRkNGJkMTZkYTg2NjgxMzEzOWMxOTc1MmQyMzYxOTk1MDBiNDgzYjUxMzlhNTg0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJlODgxMmVmNThkZGRhNGMyZDJmMDE1OTgwNGE4NWM2YTg1YjNhNmE3YjYzOGY3YjZmNzg0MzExNzFmNWY4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2VhZDVlOTBhY2Q5ZDcyZGY4ODEwODk0NDdlMmIxOTNmOWEzZTA4MjA2YjJjNmNmMzMzYzlhYjZiMzEzNjM5MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b437fd5615be463b958841cf28345808",
+      "statement": "The pages, widgets, features, and entities layers currently contain no implementation code, only a .gitkeep placeholder file each to keep the empty directories tracked in git.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/.gitkeep",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://src/features/.gitkeep",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://src/pages/.gitkeep",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://src/widgets/.gitkeep",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "id": "claim_2359c7850ce14347a4d72b74c3a3960e",
+      "statement": "The shared layer currently only has an assets segment (react.svg, vite.svg); conventional shared sub-segments like ui, lib, api, and config have not been created because they have no content yet.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/assets/react.svg",
+          "version": "repo-file-v1:sha256:35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+        },
+        {
+          "resource": "repo://src/shared/assets/vite.svg",
+          "version": "repo-file-v1:sha256:5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-15T04:58:54.229Z"
+  }
+}

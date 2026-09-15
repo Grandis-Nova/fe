@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d50fcea46558513f6041acd0927ca3594c58a1c82748c530a21546293b91fd35",
+  "claims": [
+    {
+      "id": "claim_8ba99ab02eb741f1996ce1c30404745c",
+      "statement": "The npm scripts dev, build, preview, and lint respectively run the Vite dev server, tsc -b followed by vite build, a local preview of the build output, and oxlint.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:f20c6723e4a146da1922f049e7d83b72dbc7e4949d5bc7770f48b8f1e31503aa"
+        }
+      ]
+    },
+    {
+      "id": "claim_18a93f114bae4e0b8a8fe9b283fdbac4",
+      "statement": "src/main.tsx is the app entrypoint that creates the React root and imports the root component and global styles from the app layer.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.tsx",
+          "version": "repo-file-v1:sha256:4ab315a70577af86846ee0888314c3bfc88c32efb2ce168d697806e006ebe954"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-15T04:58:54.229Z"
+  }
+}

@@ -1,8 +1,5 @@
-import bellIcon from '@/shared/assets/icons/bell.svg'
-import cartIcon from '@/shared/assets/icons/cart.svg'
-import logoutIcon from '@/shared/assets/icons/logout.svg'
-import searchIcon from '@/shared/assets/icons/search.svg'
-import userIcon from '@/shared/assets/icons/user.svg'
+import { Bell, LogOut, Search, ShoppingCart, User } from 'lucide-react'
+import { color } from '@/shared/config/theme/tokens/color/semantic.css'
 import * as styles from './Header.css'
 
 export type HeaderProps = {
@@ -29,23 +26,23 @@ export function Header({
       <span className={[styles.logo, isMember && styles.logoMember].filter(Boolean).join(' ')}>NOVA</span>
       <div className={styles.actions}>
         <button type="button" className={styles.iconButton} aria-label="검색" onClick={onSearchClick}>
-          <img src={searchIcon} alt="" className={styles.icon} />
+          <Search className={styles.icon} color={color.text.tertiary} aria-hidden="true" />
         </button>
         {isMember ? (
           <>
             <button type="button" className={styles.iconButton} aria-label="알림" onClick={onNotificationClick}>
-              <img src={bellIcon} alt="" className={styles.icon} />
+              <Bell className={styles.icon} color={color.primary.hover} aria-hidden="true" />
             </button>
             <button type="button" className={styles.iconButton} aria-label="장바구니" onClick={onCartClick}>
-              <img src={cartIcon} alt="" className={styles.icon} />
+              <ShoppingCart className={styles.icon} color={color.primary.hover} aria-hidden="true" />
             </button>
             <button type="button" className={styles.iconButton} aria-label="로그아웃" onClick={onLogoutClick}>
-              <img src={logoutIcon} alt="" className={styles.icon} />
+              <LogOut className={styles.icon} color={color.primary.hover} aria-hidden="true" />
             </button>
           </>
         ) : (
           <button type="button" className={styles.iconButton} aria-label="계정" onClick={onAccountClick}>
-            <img src={userIcon} alt="" className={styles.icon} />
+            <User className={styles.icon} color={color.primary.hover} aria-hidden="true" />
           </button>
         )}
       </div>

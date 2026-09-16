@@ -1,5 +1,5 @@
-import chevronDown from '../assets/icons/chevron-down.svg'
-import chevronUp from '../assets/icons/chevron-up.svg'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { color } from '../config/theme/tokens/color/semantic.css'
 import * as styles from './Dropdown.css'
 
 export type DropdownProps = {
@@ -27,7 +27,11 @@ export function Dropdown({
     <div className={[styles.root, styles.size[size], open && styles.rootOpen, className].filter(Boolean).join(' ')}>
       <button type="button" className={styles.trigger} onClick={onToggle} aria-expanded={open}>
         {label}
-        <img src={open ? chevronUp : chevronDown} alt="" className={styles.triggerIcon} />
+        {open ? (
+          <ChevronUp className={styles.triggerIcon} color={color.text.tertiary} aria-hidden="true" />
+        ) : (
+          <ChevronDown className={styles.triggerIcon} color={color.text.tertiary} aria-hidden="true" />
+        )}
       </button>
       {open &&
         options.map((option, index) => (

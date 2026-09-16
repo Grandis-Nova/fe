@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react'
-import checkIcon from '../assets/icons/check.svg'
+import { Check } from 'lucide-react'
+import { color } from '../config/theme/tokens/color/semantic.css'
 import * as styles from './Checkbox.css'
 
 export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> & {
@@ -10,7 +11,9 @@ export function Checkbox({ checked = false, className, ...rest }: CheckboxProps)
   return (
     <span className={[styles.root, className].filter(Boolean).join(' ')}>
       <input type="checkbox" className={styles.input} checked={checked} {...rest} />
-      <span className={styles.box}>{checked && <img src={checkIcon} alt="" className={styles.icon} />}</span>
+      <span className={styles.box}>
+        {checked && <Check className={styles.icon} color={color.text.inverse} aria-hidden="true" />}
+      </span>
     </span>
   )
 }

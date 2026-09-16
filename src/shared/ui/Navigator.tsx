@@ -1,5 +1,5 @@
-import chevronDoubleLeft from '../assets/icons/chevron-double-left.svg'
-import chevronLeft from '../assets/icons/chevron-left.svg'
+import { ChevronLeft, ChevronsLeft } from 'lucide-react'
+import { color } from '../config/theme/tokens/color/semantic.css'
 import * as styles from './Navigator.css'
 
 export type NavigatorProps = {
@@ -20,7 +20,7 @@ export function Navigator({ totalPages, currentPage, onPageChange, className }: 
         aria-label="first page"
         onClick={() => onPageChange?.(1)}
       >
-        <img src={chevronDoubleLeft} alt="" className={styles.arrowIcon} />
+        <ChevronsLeft className={styles.arrowIcon} color={color.text.tertiary} aria-hidden="true" />
       </button>
       <button
         type="button"
@@ -28,7 +28,7 @@ export function Navigator({ totalPages, currentPage, onPageChange, className }: 
         aria-label="previous page"
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
       >
-        <img src={chevronLeft} alt="" className={styles.arrowIcon} />
+        <ChevronLeft className={styles.arrowIcon} color={color.text.tertiary} aria-hidden="true" />
       </button>
       {pages.map((page) => (
         <button
@@ -49,7 +49,11 @@ export function Navigator({ totalPages, currentPage, onPageChange, className }: 
         aria-label="next page"
         onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
       >
-        <img src={chevronLeft} alt="" className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`} />
+        <ChevronLeft
+          className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
+          color={color.text.tertiary}
+          aria-hidden="true"
+        />
       </button>
       <button
         type="button"
@@ -57,7 +61,11 @@ export function Navigator({ totalPages, currentPage, onPageChange, className }: 
         aria-label="last page"
         onClick={() => onPageChange?.(totalPages)}
       >
-        <img src={chevronDoubleLeft} alt="" className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`} />
+        <ChevronsLeft
+          className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
+          color={color.text.tertiary}
+          aria-hidden="true"
+        />
       </button>
     </nav>
   )

@@ -1,5 +1,5 @@
-import rocketIcon from './assets/rocket.svg'
-import rocketMarkIcon from './assets/rocket-mark.svg'
+import { Rocket } from 'lucide-react'
+import { color } from '@/shared/config/theme/tokens/color/semantic.css'
 import * as styles from './QueueCard.css'
 
 export type QueueCardProps = {
@@ -37,7 +37,7 @@ export function QueueCard({
           <br />
           <span className={styles.headlineAccent}>{headlineAccent}</span>
         </p>
-        <img src={rocketIcon} alt="" className={styles.icon} />
+        <Rocket className={styles.icon} color={color.text.tertiary} aria-hidden="true" />
       </div>
       <p className={styles.productName}>{productName}</p>
       <div className={styles.panel}>
@@ -48,11 +48,11 @@ export function QueueCard({
         <div className={styles.progressGroup}>
           <div className={styles.progressTrack}>
             <div className={styles.progressFill} style={{ width: `${clampedPercent}%` }} />
-            <img
-              src={rocketMarkIcon}
-              alt=""
+            <Rocket
+              color={color.text.inverse}
               className={styles.progressMark}
               style={{ left: `${clampedPercent}%` }}
+              aria-hidden="true"
             />
           </div>
           <p className={styles.noticeText}>{noticeText}</p>

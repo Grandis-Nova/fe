@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import chevronDown from '@/shared/assets/icons/chevron-down.svg'
+import { ChevronDown } from 'lucide-react'
 import { ProductPaymentCard } from '@/entities/product'
 import * as styles from './HistoryCard.css'
 
@@ -106,9 +106,8 @@ export function HistoryCard({
           <div className={styles.divider} />
           <button type="button" className={styles.expandRow} onClick={() => setExpanded((value) => !value)}>
             {expanded ? '접기' : `${restItems.length}개 더 보기`}
-            <img
-              src={chevronDown}
-              alt=""
+            <ChevronDown
+              aria-hidden="true"
               className={[styles.expandIcon, expanded && styles.expandIconOpen].filter(Boolean).join(' ')}
             />
           </button>

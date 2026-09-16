@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'react'
-import alertIcon from '../assets/icons/alert-circle.svg'
+import { AlertCircle } from 'lucide-react'
 import * as styles from './Input.css'
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
@@ -17,7 +17,7 @@ export function Input({ label, size = 'medium', error, className, placeholder, .
       </div>
       {error && (
         <div className={styles.errorRow}>
-          <img src={alertIcon} alt="" className={styles.errorIcon} />
+          <AlertCircle className={styles.errorIcon} aria-hidden="true" />
           <span className={styles.errorText}>{error}</span>
         </div>
       )}

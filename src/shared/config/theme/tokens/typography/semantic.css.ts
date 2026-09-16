@@ -69,6 +69,13 @@ export const navigation = {
 }
 
 export const button = {
+  smMedium: style({
+    ...face,
+    fontSize: fontSize[14],
+    fontWeight: fontWeight.medium,
+    lineHeight: lineHeight[130],
+    letterSpacing: letterSpacing[0],
+  }),
   lgSemibold: style({
     ...face,
     fontSize: fontSize[20],

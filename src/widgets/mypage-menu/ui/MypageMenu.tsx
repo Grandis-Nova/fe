@@ -1,0 +1,76 @@
+import * as styles from './MypageMenu.css'
+
+export type MypageMenuLink = 'preorder-check' | 'cart' | 'history' | 'address-manage' | 'alert-setting'
+
+export type MypageMenuProps = {
+  userName: string
+  activeLink: MypageMenuLink
+  onLinkClick?: (link: MypageMenuLink) => void
+  className?: string
+}
+
+const shoppingLinks: { link: MypageMenuLink; label: string }[] = [
+  { link: 'preorder-check', label: '사전 예약 확인' },
+  { link: 'cart', label: '장바구니' },
+  { link: 'history', label: '구매 내역' },
+]
+
+const accountLinks: { link: MypageMenuLink; label: string }[] = [
+  { link: 'address-manage', label: '주소록 관리' },
+  { link: 'alert-setting', label: '알림 설정' },
+]
+
+export function MypageMenu({ userName, activeLink, onLinkClick, className }: MypageMenuProps) {
+  return (
+    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+      <div className={styles.heading}>
+        <p className={styles.headingLabel}>마이페이지</p>
+        <p className={styles.userName}>{userName} 님</p>
+      </div>
+      <div className={styles.sections}>
+        <div className={styles.section}>
+          <p className={styles.sectionTitle}>쇼핑정보</p>
+          <div className={styles.linkList}>
+            {shoppingLinks.map(({ link, label }) => {
+              const isActive = link === activeLink
+              return (
+                <button
+                  key={link}
+                  type="button"
+                  className={[
+                    styles.link,
+                    isActive && styles.linkActive,
+                    isActive && styles.linkActiveUnderlined,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  onClick={() => onLinkClick?.(link)}
+                >
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+        <div className={styles.section}>
+          <p className={styles.sectionTitle}>회원정보</p>
+          <div className={styles.linkList}>
+            {accountLinks.map(({ link, label }) => {
+              const isActive = link === activeLink
+              return (
+                <button
+                  key={link}
+                  type="button"
+                  className={[styles.link, isActive && styles.linkActive].filter(Boolean).join(' ')}
+                  onClick={() => onLinkClick?.(link)}
+                >
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

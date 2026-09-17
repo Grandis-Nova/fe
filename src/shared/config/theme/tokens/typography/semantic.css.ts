@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css'
+
 import { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } from './base'
 
 const face = { fontFamily: fontFamily.pretendard }

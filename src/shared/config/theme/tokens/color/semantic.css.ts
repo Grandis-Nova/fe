@@ -1,4 +1,5 @@
 import { createGlobalTheme } from '@vanilla-extract/css'
+
 import { baseColor } from './base'
 
 export const color = createGlobalTheme(':root', {

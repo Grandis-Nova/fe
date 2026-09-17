@@ -1,6 +1,6 @@
-import * as styles from './PromoCard.css'
+import * as styles from './PreorderCard.css'
 
-export type PromoCardProps = {
+export type PreorderCardProps = {
   imageSrc: string
   imageAlt?: string
   title: string
@@ -8,7 +8,7 @@ export type PromoCardProps = {
   className?: string
 }
 
-export function PromoCard({ imageSrc, imageAlt = '', title, period, className }: PromoCardProps) {
+export function PreorderCard({ imageSrc, imageAlt = '', title, period, className }: PreorderCardProps) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <img src={imageSrc} alt={imageAlt} className={styles.image} />

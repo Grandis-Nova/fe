@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
@@ -22,9 +24,9 @@ export const image = style({
 export const body_ = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: spacing[10],
   width: '100%',
-  padding: '12px 8px',
+  padding: `${spacing[12]} ${spacing[8]}`,
 })
 
 export const title_ = style([title.mdMedium, { color: color.text.primary }])

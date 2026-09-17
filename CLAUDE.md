@@ -5,3 +5,27 @@
 See [AGENTS.md](AGENTS.md) for OpenWiki agent instructions.
 
 <!-- OPENWIKI:END -->
+
+## Commands
+
+```bash
+npm run dev             # Vite dev server
+npm run build            # tsc -b && vite build
+npm run lint              # eslint . (oxlint is still installed but no longer the active linter)
+npm run lint:fix          # eslint . --fix
+npm run storybook         # Storybook dev server on :6006
+```
+
+## Architecture
+
+- **Feature-Sliced Design**: `src/app` → `pages` → `widgets` → `features` → `entities` → `shared`. Higher layers may import lower layers, never the reverse — enforced by `import-x/no-restricted-paths` in `eslint.config.js`.
+- **Routing**: `react-router` v7, config in `src/app/router/index.tsx`. Nested layout routes: `RootLayout` (always renders `Header`) → `MainLayout` (renders `CategoryNav` + a max-width 1200px content wrapper). Admin routes should sit as a sibling of `MainLayout` under `RootLayout` so they get `Header` but skip `CategoryNav`/the width cap.
+- **Styling**: Vanilla Extract (`*.css.ts`). Design tokens live in `src/shared/config/theme/tokens/`: `color` (two-tier — `base.ts` raw hex, `semantic.css.ts` renames by usage, e.g. `primary.hover` = `baseColor.primary.focus`), `typography`, `spacing`, `breakpoint`, `container` (maxWidth scale), `motion` (`duration`/`easing`).
+- **Responsive**: `@vanilla-extract/sprinkles` (`src/shared/config/theme/sprinkles.css.ts`), mobile-first, `desktop` = `(min-width: 744px)`. Only use `sprinkles()` for properties that actually differ by breakpoint — static values stay in plain `style()`.
+
+## Gotchas
+
+- 텍스트 요소에는 `<p>` 대신 `<div>`/`<span>`을 쓴다 (`<p>`는 사용하지 않는다).
+- `maxWidth` + `padding`을 같은 요소에 쓸 땐 `boxSizing: 'border-box'`를 꼭 같이 줘야 한다 — 안 그러면 실제 렌더링 너비가 `maxWidth + padding*2`가 된다 (`Header`/`CategoryNav`에서 겪음).
+- hover 시 두꺼워 보이는 효과가 필요하면 `font-weight`를 transition하지 말 것(레이아웃 폭이 흔들림). 대신 `-webkit-text-stroke-color`(transparent → `currentColor`)를 transition — `CategoryNav.css.ts`의 `link` 스타일 참고.
+- lucide-react 아이콘은 `color` prop을 직접 주지 않는다(정적 값이라 `:hover`에 반응 안 함). prop을 비워두면 아이콘의 `stroke="currentColor"`가 부모의 CSS `color`를 상속하므로, 부모에서 `color`를 transition하면 hover가 된다.

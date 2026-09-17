@@ -10,7 +10,7 @@ export function MainLayout() {
   return (
     <>
       <CategoryNav showBorder={!isMainPage} />
-      <div className={sprinkles({ maxWidth: { desktop: 'content' }, marginX: 'auto' })}>
+      <div className={sprinkles({ marginX: 'auto' })}>
         <Outlet />
       </div>
     </>

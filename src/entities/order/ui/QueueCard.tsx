@@ -34,18 +34,18 @@ export function QueueCard({
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.headline}>
-        <p className={styles.headlineText}>
+        <div className={styles.headlineText}>
           {headline}
           <br />
           <span className={styles.headlineAccent}>{headlineAccent}</span>
-        </p>
+        </div>
         <Rocket className={styles.icon} color={color.text.tertiary} aria-hidden="true" />
       </div>
-      <p className={styles.productName}>{productName}</p>
+      <div className={styles.productName}>{productName}</div>
       <div className={styles.panel}>
         <div className={styles.orderGroup}>
-          <p className={styles.orderLabel}>{myOrderLabel}</p>
-          <p className={styles.orderNumber}>{myOrderNumber}</p>
+          <div className={styles.orderLabel}>{myOrderLabel}</div>
+          <div className={styles.orderNumber}>{myOrderNumber}</div>
         </div>
         <div className={styles.progressGroup}>
           <div className={styles.progressTrack}>
@@ -57,12 +57,12 @@ export function QueueCard({
               aria-hidden="true"
             />
           </div>
-          <p className={styles.noticeText}>{noticeText}</p>
+          <div className={styles.noticeText}>{noticeText}</div>
         </div>
         <div className={styles.divider} />
         <div className={styles.totalRow}>
-          <p className={styles.totalLabel}>{totalWaitingLabel}</p>
-          <p className={styles.totalValue}>{totalWaitingCount}</p>
+          <div className={styles.totalLabel}>{totalWaitingLabel}</div>
+          <div className={styles.totalValue}>{totalWaitingCount}</div>
         </div>
       </div>
     </div>

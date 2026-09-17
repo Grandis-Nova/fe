@@ -35,7 +35,7 @@ const badgeBase = style([
   {
     display: 'inline-flex',
     alignItems: 'center',
-    padding: '5px 8px',
+    padding: `5px ${spacing[8]}`,
     borderRadius: '999px',
     fontSize: '10px',
   },

@@ -1,6 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import { fontFamily, fontSize, fontWeight, letterSpacing } from '../config/theme/tokens/typography/base'
 
 const base = style({
@@ -19,8 +20,8 @@ const base = style({
 })
 
 export const shape = styleVariants({
-  pill: [base, { padding: '5px 10px', borderRadius: '9999px' }],
-  rounded: [base, { padding: '5px 8px', borderRadius: '6px' }],
+  pill: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
+  rounded: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
 })
 
 const solidText = { color: color.text.inverse }

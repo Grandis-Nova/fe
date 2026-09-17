@@ -14,8 +14,8 @@ export function ProductSummary({ name, optionSummary, ctaLabel, onCtaClick, clas
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.info}>
-        <p className={styles.name}>{name}</p>
-        <p className={styles.options}>{optionSummary}</p>
+        <div className={styles.name}>{name}</div>
+        <div className={styles.options}>{optionSummary}</div>
       </div>
       <button type="button" className={styles.cta} onClick={onCtaClick}>
         {ctaLabel}

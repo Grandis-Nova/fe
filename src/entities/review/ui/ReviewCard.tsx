@@ -27,10 +27,10 @@ export function ReviewCard({
         <div className={styles.thumbnail} />
       )}
       <div className={styles.main}>
-        <p className={styles.rating}>{'★'.repeat(Math.max(0, Math.min(5, rating)))}</p>
+        <div className={styles.rating}>{'★'.repeat(Math.max(0, Math.min(5, rating)))}</div>
         <div className={styles.textGroup}>
-          <p className={styles.reviewText}>{reviewText}</p>
-          <p className={styles.productName}>{productName}</p>
+          <div className={styles.reviewText}>{reviewText}</div>
+          <div className={styles.productName}>{productName}</div>
         </div>
       </div>
       <div className={styles.meta}>

@@ -60,8 +60,8 @@ export function HistoryCard({
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.header}>
         <div className={styles.headerMeta}>
-          <p className={styles.orderDate}>{orderDate} 주문</p>
-          <p className={styles.orderNumber}>{orderNumber}</p>
+          <div className={styles.orderDate}>{orderDate} 주문</div>
+          <div className={styles.orderNumber}>{orderNumber}</div>
         </div>
         <span className={styles.badge[badge.variant]}>{badge.label}</span>
       </div>

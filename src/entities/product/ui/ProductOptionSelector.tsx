@@ -17,7 +17,7 @@ export type ProductOptionSelectorProps = {
 export function ProductOptionSelector({ label, options, onSelect, className }: ProductOptionSelectorProps) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
-      <p className={styles.label}>{label}</p>
+      <div className={styles.label}>{label}</div>
       <div className={styles.optionRow}>
         {options.map((option, index) => (
           <SelectButton

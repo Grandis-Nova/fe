@@ -47,8 +47,8 @@ export function ProductPaymentCard({
         <div className={styles.infoGroup}>
           <div className={styles.titleRow}>
             <div>
-              <p className={styles.name}>{name}</p>
-              <p className={styles.modelNumber}>{modelNumber}</p>
+              <div className={styles.name}>{name}</div>
+              <div className={styles.modelNumber}>{modelNumber}</div>
             </div>
             {(variant === 'preorder-pending' || variant === 'checkout') && (
               <button
@@ -64,7 +64,7 @@ export function ProductPaymentCard({
               </button>
             )}
           </div>
-          <p className={styles.optionSummary}>{optionSummary}</p>
+          <div className={styles.optionSummary}>{optionSummary}</div>
         </div>
         <div className={styles.quantityPriceRow}>
           <span>{quantityLabel}</span>

@@ -1,11 +1,13 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '20px',
+  gap: spacing[20],
   width: '100%',
 })
 
@@ -21,23 +23,23 @@ export const thumbnail = style({
 export const body_ = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: spacing[12],
   flex: '1 0 0',
   minWidth: 0,
-  padding: '4px 0',
+  padding: `${spacing[4]} 0`,
 })
 
 export const infoGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: spacing[6],
 })
 
 export const titleRow = style({
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'space-between',
-  gap: '12px',
+  gap: spacing[12],
 })
 
 export const name = style([title.mdSemibold, { color: color.text.primary }])
@@ -63,7 +65,7 @@ export const action = style([
     alignItems: 'center',
     justifyContent: 'center',
     height: '39px',
-    padding: '0 14px',
+    padding: `0 ${spacing[14]}`,
     borderRadius: '8px',
     border: 'none',
     whiteSpace: 'nowrap',

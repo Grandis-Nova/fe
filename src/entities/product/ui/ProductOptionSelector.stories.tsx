@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ProductOptionSelector } from './ProductOptionSelector'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: ProductOptionSelector,

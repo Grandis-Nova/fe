@@ -1,4 +1,5 @@
 import { Checkbox } from '@/shared/ui'
+
 import * as styles from './ProductPaymentCard.css'
 
 export type ProductPaymentCardVariant = 'default' | 'preorder-pending' | 'checkout' | 'cart'

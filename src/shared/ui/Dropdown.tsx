@@ -1,5 +1,7 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+
 import * as styles from './Dropdown.css'
 
 export type DropdownProps = {

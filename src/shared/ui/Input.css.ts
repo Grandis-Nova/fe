@@ -1,11 +1,15 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { duration, easing } from '../config/theme/tokens/motion'
+import { spacing } from '../config/theme/tokens/spacing'
+import { fontSize } from '../config/theme/tokens/typography/base'
 import { body } from '../config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: spacing[8],
   width: '100%',
 })
 
@@ -16,7 +20,7 @@ const boxBase = style({
   width: '100%',
   background: color.background.base,
   border: `1px solid ${color.primary.surface}`,
-  transition: 'border-color 150ms',
+  transition: `border-color ${duration.fast} ${easing.default}`,
   selectors: {
     '&:focus-within': {
       borderColor: color.primary.base,
@@ -25,8 +29,8 @@ const boxBase = style({
 })
 
 export const box = styleVariants({
-  medium: [boxBase, { height: '56px', borderRadius: '12px', padding: '0 16px' }],
-  small: [boxBase, { height: '46px', borderRadius: '8px', padding: '0 12px' }],
+  medium: [boxBase, { height: '56px', borderRadius: '12px', padding: `0 ${spacing[16]}` }],
+  small: [boxBase, { height: '46px', borderRadius: '8px', padding: `0 ${spacing[12]}` }],
 })
 
 export const boxError = style({
@@ -47,7 +51,7 @@ export const field = style([
     outline: 'none',
     background: 'transparent',
     color: color.text.primary,
-    paddingTop: '14px',
+    paddingTop: spacing[14],
   },
 ])
 
@@ -60,12 +64,12 @@ export const label = style([
     transform: 'translateY(-50%)',
     color: color.text.tertiary,
     pointerEvents: 'none',
-    transition: 'all 150ms',
+    transition: `all ${duration.fast} ${easing.default}`,
     selectors: {
       [`${field}:focus ~ &, ${field}:not(:placeholder-shown) ~ &`]: {
-        top: '8px',
+        top: spacing[8],
         transform: 'translateY(0)',
-        fontSize: '12px',
+        fontSize: fontSize[12],
         color: color.primary.base,
       },
     },
@@ -75,7 +79,7 @@ export const label = style([
 export const errorRow = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: spacing[4],
   color: color.status.danger,
 })
 

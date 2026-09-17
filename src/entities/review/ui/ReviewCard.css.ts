@@ -1,13 +1,16 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
+import { fontSize } from '@/shared/config/theme/tokens/typography/base'
 import { body } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
-  gap: '20px',
+  gap: spacing[20],
   alignItems: 'center',
   width: '100%',
-  padding: '0 20px',
+  padding: `0 ${spacing[20]}`,
   background: color.background.base,
 })
 
@@ -24,20 +27,20 @@ export const main = style({
   display: 'flex',
   flex: '1 0 0',
   flexDirection: 'column',
-  gap: '12px',
+  gap: spacing[12],
   alignItems: 'flex-end',
-  padding: '12px 0',
+  padding: `${spacing[12]} 0`,
 })
 
 export const rating = style({
-  fontSize: '20px',
+  fontSize: fontSize[20],
   color: color.primary.base,
 })
 
 export const textGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: spacing[8],
   width: '100%',
 })
 
@@ -48,7 +51,7 @@ export const meta = style([
   body.subMedium,
   {
     display: 'flex',
-    gap: '8px',
+    gap: spacing[8],
     alignItems: 'center',
     color: color.text.tertiary,
     flexShrink: 0,

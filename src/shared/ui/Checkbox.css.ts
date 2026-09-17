@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
 
 export const root = style({

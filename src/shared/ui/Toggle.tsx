@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from 'react'
+
 import * as styles from './Toggle.css'
 
 export type ToggleProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> & {

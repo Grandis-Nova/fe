@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import placeholderImage from '@/shared/assets/react.svg'
+
 import { ProductCard } from './ProductCard'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: ProductCard,

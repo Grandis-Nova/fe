@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes } from 'react'
+
 import * as styles from './ProductSummary.css'
 
 export type ProductSummaryProps = {

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { CategoryNav } from './CategoryNav'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: CategoryNav,
@@ -15,4 +16,8 @@ export const Default: Story = {
 
 export const ActiveLink: Story = {
   args: { activeLink: '구매후기' },
+}
+
+export const NoBorder: Story = {
+  args: { showBorder: false },
 }

@@ -1,5 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import { body } from '../config/theme/tokens/typography/semantic.css'
 
 const base = style({
@@ -28,8 +30,8 @@ const selectedBase = style({
 })
 
 export const size = styleVariants({
-  medium: [base, body.defaultRegular, { padding: '4px 10px', borderRadius: '5px' }],
-  small: [base, body.sub, { padding: '4px 6px', borderRadius: '4px' }],
+  medium: [base, body.defaultRegular, { padding: `${spacing[4]} ${spacing[10]}`, borderRadius: '5px' }],
+  small: [base, body.sub, { padding: `${spacing[4]} ${spacing[6]}`, borderRadius: '4px' }],
 })
 
 export const selected = selectedBase

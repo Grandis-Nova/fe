@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes } from 'react'
+
 import { AlertCircle } from 'lucide-react'
+
 import * as styles from './Input.css'
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {

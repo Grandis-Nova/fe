@@ -1,4 +1,5 @@
 import { SelectButton } from '@/shared/ui'
+
 import * as styles from './ProductCard.css'
 
 export type ProductColorSwatch = {

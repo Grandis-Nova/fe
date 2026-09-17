@@ -1,9 +1,12 @@
 import type { HTMLAttributes } from 'react'
-import * as styles from './Tag.css'
+
+import { outline, shape as shapeStyles, solid, subtle } from './Tag.css'
 
 type TagColor = 'primary' | 'secondary' | 'blue' | 'green' | 'yellow' | 'red' | 'gray'
 type TagVariant = 'solid' | 'subtle' | 'outline'
 type TagShape = 'pill' | 'rounded'
+
+const variantStyles = { solid, subtle, outline }
 
 export type TagProps = HTMLAttributes<HTMLSpanElement> & {
   color?: TagColor
@@ -19,10 +22,10 @@ export function Tag({
   children,
   ...rest
 }: TagProps) {
-  const variantClassName = styles[variant][color]
+  const variantClassName = variantStyles[variant][color]
 
   return (
-    <span className={[styles.shape[shape], variantClassName, className].filter(Boolean).join(' ')} {...rest}>
+    <span className={[shapeStyles[shape], variantClassName, className].filter(Boolean).join(' ')} {...rest}>
       {children}
     </span>
   )

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Tag } from './Tag'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: Tag,

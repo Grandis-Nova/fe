@@ -1,5 +1,7 @@
 import { Rocket } from 'lucide-react'
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+
+import { color } from '@/shared/config/theme'
+
 import * as styles from './QueueCard.css'
 
 export type QueueCardProps = {

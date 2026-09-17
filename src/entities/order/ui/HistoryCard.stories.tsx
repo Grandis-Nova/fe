@@ -1,7 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect } from 'storybook/test'
+
+import { ProductPaymentCard } from '@/entities/product'
 import placeholderImage from '@/shared/assets/react.svg'
-import { HistoryCard } from './HistoryCard'
+
+import { HistoryCard, type HistoryCardItem } from './HistoryCard'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: HistoryCard,
@@ -20,7 +24,18 @@ const item = {
   priceLabel: '1,290,000원',
 }
 
-const base = { orderDate: '2026.09.01', orderNumber: '20260901-000123', items: [item] }
+const renderItem = (item: HistoryCardItem) => (
+  <ProductPaymentCard
+    imageSrc={item.imageSrc}
+    name={item.name}
+    modelNumber={item.modelNumber}
+    optionSummary={item.optionSummary}
+    quantityLabel={item.quantityLabel}
+    priceLabel={item.priceLabel}
+  />
+)
+
+const base = { orderDate: '2026.09.01', orderNumber: '20260901-000123', items: [item], renderItem }
 
 export const DeliveredBeforeReview: Story = {
   args: { ...base, status: 'delivered-before-review' },

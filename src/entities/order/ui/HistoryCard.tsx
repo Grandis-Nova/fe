@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
+
 import { ChevronDown } from 'lucide-react'
-import { ProductPaymentCard } from '@/entities/product'
+
 import * as styles from './HistoryCard.css'
 
 export type HistoryCardStatus =
@@ -24,6 +25,7 @@ export type HistoryCardProps = {
   orderDate: string
   orderNumber: string
   items: HistoryCardItem[]
+  renderItem: (item: HistoryCardItem, index: number) => ReactNode
   onWriteReview?: () => void
   onViewReview?: () => void
   onCancelOrder?: () => void
@@ -43,6 +45,7 @@ export function HistoryCard({
   orderDate,
   orderNumber,
   items,
+  renderItem,
   onWriteReview,
   onViewReview,
   onCancelOrder,
@@ -66,16 +69,7 @@ export function HistoryCard({
       {visibleItems.map((item, index) => (
         <div key={`${item.name}-${index}`}>
           {index > 0 && <div className={styles.divider} />}
-          <div className={styles.itemRow}>
-            <ProductPaymentCard
-              imageSrc={item.imageSrc}
-              name={item.name}
-              modelNumber={item.modelNumber}
-              optionSummary={item.optionSummary}
-              quantityLabel={item.quantityLabel}
-              priceLabel={item.priceLabel}
-            />
-          </div>
+          <div className={styles.itemRow}>{renderItem(item, index)}</div>
         </div>
       ))}
 

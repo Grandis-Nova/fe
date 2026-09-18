@@ -14,20 +14,14 @@ export const root = style({
   overflow: 'hidden',
   width: '267.5px',
   borderRadius: '16px',
-  background: color.background.base,
+  // opacity는 자식(텍스트/이미지)까지 다 흐려지므로, 배경색에만 alpha를 섞는다.
+  background: `color-mix(in srgb, ${color.background.base} 95%, transparent)`,
 });
 
 export const media = style({
   position: 'relative',
   width: '267.5px',
   height: '267.5px',
-  background: color.secondary.surface,
-  borderRadius: '16px',
-});
-
-export const mediaSurface = style({
-  position: 'absolute',
-  inset: 0,
   background: color.background.surface,
   borderRadius: '16px',
 });
@@ -39,25 +33,6 @@ export const image = style({
   width: '200px',
   height: '200px',
   objectFit: 'cover',
-});
-
-export const dots = style({
-  position: 'absolute',
-  left: '117px',
-  top: '251px',
-  display: 'flex',
-  gap: spacing[8],
-});
-
-export const dot = style({
-  width: '6px',
-  height: '6px',
-  borderRadius: '9999px',
-  background: color.border.default,
-});
-
-export const dotActive = style({
-  background: color.border.focus,
 });
 
 export const content = style({

@@ -1,5 +1,5 @@
 export { ProductCard } from './ui/ProductCard'
-export type { ProductCardProps, ProductColorSwatch, ProductStorageOption } from './ui/ProductCard'
+export type { ProductCardProps, ProductCardData, ProductStorageOption } from './ui/ProductCard'
 export { ProductColorSelector } from './ui/ProductColorSelector'
 export type { ProductColorSelectorProps, ProductColorOption } from './ui/ProductColorSelector'
 export { ProductColorSwatches } from './ui/ProductColorSwatches'

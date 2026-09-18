@@ -21,27 +21,42 @@ export function ProductColorSwatches({
   onSelect,
   className,
 }: ProductColorSwatchesProps) {
+  const selectedLabel = colors.find((item) => item.selected)?.label ?? colorName;
+
   return (
     <div className={[styles.root[size], className].filter(Boolean).join(' ')}>
-      <div className={styles.colorName[size]}>{colorName}</div>
+      <div className={styles.colorName[size]}>{selectedLabel}</div>
       <div className={styles.swatchRow[size]}>
         {colors.map((item, index) =>
           onSelect ? (
             <button
               key={`${item.hex}-${index}`}
-              type='button'
               aria-pressed={item.selected}
-              className={[styles.swatch[size], item.selected && styles.swatchSelected, styles.swatchInteractive]
+              className={[
+                styles.swatch[size],
+                item.selected && styles.swatchSelected,
+                styles.swatchInteractive,
+              ]
                 .filter(Boolean)
                 .join(' ')}
-              style={{ background: item.hex }}
+              style={{
+                background: item.hex,
+                ...(item.selected
+                  ? { outline: `1.5px solid ${item.hex}` }
+                  : {}),
+              }}
               onClick={() => onSelect(index)}
             />
           ) : (
             <span
               key={`${item.hex}-${index}`}
               title={item.label}
-              className={[styles.swatch[size], item.selected && styles.swatchSelected].filter(Boolean).join(' ')}
+              className={[
+                styles.swatch[size],
+                item.selected && styles.swatchSelected,
+              ]
+                .filter(Boolean)
+                .join(' ')}
               style={{ background: item.hex }}
             />
           ),

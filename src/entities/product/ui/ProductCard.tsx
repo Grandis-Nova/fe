@@ -3,58 +3,52 @@ import { SelectButton } from '@/shared/ui';
 import * as styles from './ProductCard.css';
 import { ProductColorSwatches } from './ProductColorSwatches';
 
-export type ProductColorSwatch = {
-  hex: string;
-  label: string;
-};
+import type { ProductColorSwatchItem } from './ProductColorSwatches';
 
 export type ProductStorageOption = {
   label: string;
   selected?: boolean;
 };
 
-export type ProductCardProps = {
+export type ProductCardData = {
   imageSrc: string;
   imageAlt?: string;
   name: string;
   modelNumber: string;
   colorName: string;
-  colorSwatches: ProductColorSwatch[];
+  colorSwatches: ProductColorSwatchItem[];
   storageOptions: ProductStorageOption[];
-  onStorageSelect?: (index: number) => void;
   priceAmount: string;
   priceUnit?: string;
+};
+
+export type ProductCardProps = {
+  product: ProductCardData;
+  onColorSelect?: (index: number) => void;
+  onStorageSelect?: (index: number) => void;
   className?: string;
 };
 
 export function ProductCard({
-  imageSrc,
-  imageAlt = '',
-  name,
-  modelNumber,
-  colorName,
-  colorSwatches,
-  storageOptions,
+  product,
+  onColorSelect,
   onStorageSelect,
-  priceAmount,
-  priceUnit = '원',
   className,
 }: ProductCardProps) {
+  const {
+    imageSrc,
+    imageAlt = '',
+    name,
+    modelNumber,
+    colorName,
+    colorSwatches,
+    storageOptions,
+    priceAmount,
+    priceUnit = '원',
+  } = product;
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.media}>
-        {/* 
-        인디케이터
-        <div className={styles.dots}>
-          {[0, 1, 2].map((index) => (
-            <span
-              key={index}
-              className={[styles.dot, index === 0 && styles.dotActive]
-                .filter(Boolean)
-                .join(' ')}
-            />
-          ))}
-        </div> */}
         <img src={imageSrc} alt={imageAlt} className={styles.image} />
       </div>
       <div className={styles.content}>
@@ -65,11 +59,8 @@ export function ProductCard({
         <ProductColorSwatches
           colorName={colorName}
           size='small'
-          colors={colorSwatches.map((swatch, index) => ({
-            hex: swatch.hex,
-            label: swatch.label,
-            selected: index === 0,
-          }))}
+          colors={colorSwatches}
+          onSelect={onColorSelect}
         />
         <div className={styles.storageRow}>
           {storageOptions.map((option, index) => (

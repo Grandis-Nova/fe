@@ -1,11 +1,13 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import { body } from '../config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '16px',
+  gap: spacing[16],
 })
 
 export const arrowButton = style({

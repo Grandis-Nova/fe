@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { QueueCard } from './QueueCard'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: QueueCard,

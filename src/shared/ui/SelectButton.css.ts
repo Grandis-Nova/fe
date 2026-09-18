@@ -1,5 +1,8 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { duration, easing } from '../config/theme/tokens/motion'
+import { spacing } from '../config/theme/tokens/spacing'
 import { body } from '../config/theme/tokens/typography/semantic.css'
 
 const base = style({
@@ -11,6 +14,10 @@ const base = style({
   color: color.primary.hover,
   cursor: 'pointer',
   textAlign: 'center',
+  transition: [
+    `background ${duration.fast} ${easing.default}`,
+    `border-color ${duration.fast} ${easing.default}`,
+  ].join(', '),
   selectors: {
     '&:hover:not(:disabled)': {
       background: color.primary.subtler,
@@ -19,17 +26,18 @@ const base = style({
   },
 })
 
-const selectedBase = style({
+export const size = styleVariants({
+  medium: [base, body.defaultRegular, { padding: `${spacing[4]} ${spacing[10]}`, borderRadius: '5px' }],
+  small: [base, body.sub, { padding: `${spacing[4]} ${spacing[6]}`, borderRadius: '4px' }],
+})
+
+// base 다음에 선언 — 동일 특이도(selector specificity)에서는 나중에 선언된 규칙이 이겨야
+// hover 시에도 selected 쪽 배경/테두리가 유지된다(= selected일 땐 hover 스타일이 안 먹음).
+export const selected = style({
   selectors: {
     '&, &:hover:not(:disabled)': {
+      background: color.background.base,
       borderColor: color.primary.hover,
     },
   },
 })
-
-export const size = styleVariants({
-  medium: [base, body.defaultRegular, { padding: '4px 10px', borderRadius: '5px' }],
-  small: [base, body.sub, { padding: '4px 6px', borderRadius: '4px' }],
-})
-
-export const selected = selectedBase

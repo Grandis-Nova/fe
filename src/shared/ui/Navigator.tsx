@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronsLeft } from 'lucide-react'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+
 import * as styles from './Navigator.css'
 
 export type NavigatorProps = {

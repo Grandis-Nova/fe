@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import placeholderImage from '@/shared/assets/react.svg'
-import { PromoCard } from './PromoCard'
+
+import { PreorderCard } from './PreorderCard'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  component: PromoCard,
+  component: PreorderCard,
   tags: ['ai-generated'],
-} satisfies Meta<typeof PromoCard>
+} satisfies Meta<typeof PreorderCard>
 
 export default meta
 type Story = StoryObj<typeof meta>

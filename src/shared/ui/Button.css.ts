@@ -1,9 +1,14 @@
-import { style, styleVariants } from '@vanilla-extract/css'
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { body, button as buttonTypography } from '../config/theme/tokens/typography/semantic.css'
+import { style, styleVariants } from '@vanilla-extract/css';
+
+import { color } from '../config/theme/tokens/color/semantic.css';
+import { spacing } from '../config/theme/tokens/spacing';
+import {
+  body,
+  button as buttonTypography,
+} from '../config/theme/tokens/typography/semantic.css';
 
 export const base = style({
-  display: 'inline-flex',
+  // display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   border: '1px solid transparent',
@@ -16,16 +21,16 @@ export const base = style({
       color: color.text.disabled,
     },
   },
-})
+});
 
 export const size = styleVariants({
   medium: [
     base,
     body.defaultMedium,
     {
-      height: '47px',
-      gap: '10px',
-      padding: '0 16px',
+      height: '46px',
+      gap: spacing[10],
+      padding: `0 ${spacing[16]}`,
       borderRadius: '12px',
     },
   ],
@@ -34,12 +39,12 @@ export const size = styleVariants({
     buttonTypography.smMedium,
     {
       height: '37px',
-      gap: '6px',
-      padding: '0 12px',
+      gap: spacing[6],
+      padding: `0 ${spacing[12]}`,
       borderRadius: '10px',
     },
   ],
-})
+});
 
 export const solid = styleVariants({
   primary: {
@@ -74,7 +79,7 @@ export const solid = styleVariants({
       },
     },
   },
-})
+});
 
 export const outline = styleVariants({
   primary: {
@@ -110,9 +115,9 @@ export const outline = styleVariants({
       },
     },
   },
-})
+});
 
 export const icon = style({
   display: 'inline-flex',
   flexShrink: 0,
-})
+});

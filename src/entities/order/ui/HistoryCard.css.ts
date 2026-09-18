@@ -1,5 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { body } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
@@ -15,14 +17,14 @@ export const header = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '16px',
+  padding: spacing[16],
   borderBottom: `1px solid ${color.border.default}`,
 })
 
 export const headerMeta = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: spacing[12],
 })
 
 export const orderDate = style([body.subMedium, { color: color.text.secondary }])
@@ -33,7 +35,7 @@ const badgeBase = style([
   {
     display: 'inline-flex',
     alignItems: 'center',
-    padding: '5px 8px',
+    padding: `5px ${spacing[8]}`,
     borderRadius: '999px',
     fontSize: '10px',
   },
@@ -47,12 +49,12 @@ export const badge = styleVariants({
 })
 
 export const itemRow = style({
-  padding: '16px',
+  padding: spacing[16],
 })
 
 export const actionRow = style({
   display: 'flex',
-  padding: '0 16px 16px',
+  padding: `0 ${spacing[16]} ${spacing[16]}`,
 })
 
 export const primaryAction = style([
@@ -95,7 +97,7 @@ export const cancelAction = style([
 ])
 
 export const divider = style({
-  margin: '0 16px',
+  margin: `0 ${spacing[16]}`,
   height: '1px',
   background: color.border.default,
 })
@@ -106,9 +108,9 @@ export const expandRow = style([
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '4px',
+    gap: spacing[4],
     width: '100%',
-    padding: '16px',
+    padding: spacing[16],
     color: color.text.tertiary,
     background: 'transparent',
     border: 'none',

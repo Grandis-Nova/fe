@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { SelectButton } from './SelectButton'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: SelectButton,

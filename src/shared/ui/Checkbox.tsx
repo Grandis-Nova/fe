@@ -1,6 +1,9 @@
 import type { InputHTMLAttributes } from 'react'
+
 import { Check } from 'lucide-react'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+
 import * as styles from './Checkbox.css'
 
 export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> & {

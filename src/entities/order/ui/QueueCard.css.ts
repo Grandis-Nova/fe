@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
@@ -7,8 +9,8 @@ export const root = style({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '16px',
-  padding: '30px',
+  gap: spacing[16],
+  padding: spacing[30],
   borderRadius: '16px',
   background: color.background.base,
   width: '402px',
@@ -45,9 +47,9 @@ export const panel = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '16px',
+  gap: spacing[16],
   width: '100%',
-  padding: '16px 20px',
+  padding: `${spacing[16]} ${spacing[20]}`,
   borderRadius: '8px',
   border: `1px solid ${color.border.default}`,
   background: color.background.base,
@@ -66,7 +68,7 @@ export const orderNumber = style([title.xlSemibold, { color: color.primary.base 
 export const progressGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: spacing[8],
   alignItems: 'flex-start',
   width: '100%',
 })

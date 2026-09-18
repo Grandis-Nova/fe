@@ -24,12 +24,12 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.heading}>
-        <p className={styles.headingLabel}>마이페이지</p>
-        <p className={styles.userName}>{userName} 님</p>
+        <div className={styles.headingLabel}>마이페이지</div>
+        <div className={styles.userName}>{userName} 님</div>
       </div>
       <div className={styles.sections}>
         <div className={styles.section}>
-          <p className={styles.sectionTitle}>쇼핑정보</p>
+          <div className={styles.sectionTitle}>쇼핑정보</div>
           <div className={styles.linkList}>
             {shoppingLinks.map(({ link, label }) => {
               const isActive = link === activeLink
@@ -53,7 +53,7 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
           </div>
         </div>
         <div className={styles.section}>
-          <p className={styles.sectionTitle}>회원정보</p>
+          <div className={styles.sectionTitle}>회원정보</div>
           <div className={styles.linkList}>
             {accountLinks.map(({ link, label }) => {
               const isActive = link === activeLink

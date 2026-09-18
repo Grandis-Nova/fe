@@ -1,6 +1,8 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
-import { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } from '../config/theme/tokens/typography/base'
+import { spacing } from '../config/theme/tokens/spacing'
+import { fontFamily, fontSize, fontWeight, letterSpacing } from '../config/theme/tokens/typography/base'
 
 const base = style({
   display: 'inline-flex',
@@ -10,14 +12,16 @@ const base = style({
   fontFamily: fontFamily.pretendard,
   fontSize: fontSize[12],
   fontWeight: fontWeight.medium,
-  lineHeight: lineHeight[130],
+  // Pretendard's Hangul metrics push the body line-height(1.3) box's ink upward
+  // when flex-centered; a tight line-height keeps the pill text optically centered.
+  lineHeight: 1,
   letterSpacing: letterSpacing[2],
   whiteSpace: 'nowrap',
 })
 
 export const shape = styleVariants({
-  pill: [base, { padding: '5px 10px', borderRadius: '9999px' }],
-  rounded: [base, { padding: '5px 8px', borderRadius: '6px' }],
+  pill: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
+  rounded: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
 })
 
 const solidText = { color: color.text.inverse }

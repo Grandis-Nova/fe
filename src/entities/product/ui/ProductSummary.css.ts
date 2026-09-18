@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { body, button, title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
@@ -7,7 +9,7 @@ export const root = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  padding: '16px 20px',
+  padding: `${spacing[16]} ${spacing[20]}`,
   background: color.background.base,
   borderBottom: `1px solid ${color.primary.hover}`,
 })
@@ -15,7 +17,7 @@ export const root = style({
 export const info = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: spacing[12],
 })
 
 export const name = style([title.lgSemibold, { color: color.text.primary }])
@@ -28,7 +30,7 @@ export const cta = style([
     alignItems: 'center',
     justifyContent: 'center',
     height: '47px',
-    padding: '0 16px',
+    padding: `0 ${spacing[16]}`,
     borderRadius: '12px',
     border: 'none',
     background: color.primary.hover,

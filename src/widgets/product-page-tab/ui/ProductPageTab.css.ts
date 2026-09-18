@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css'
+
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
 import { title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
@@ -20,7 +22,7 @@ export const tab = style([
     border: 'none',
     borderBottom: '2px solid transparent',
     color: color.text.tertiary,
-    fontWeight: 400,
+    fontWeight: fontWeight.regular,
     cursor: 'pointer',
   },
 ])
@@ -28,5 +30,5 @@ export const tab = style([
 export const tabActive = style({
   borderBottomColor: color.primary.base,
   color: color.primary.base,
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
 })

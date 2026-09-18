@@ -1,77 +1,72 @@
-import { SelectButton } from '@/shared/ui'
-import * as styles from './ProductCard.css'
+import { SelectButton } from '@/shared/ui';
 
-export type ProductColorSwatch = {
-  hex: string
-  label: string
-}
+import * as styles from './ProductCard.css';
+import { ProductColorSwatches } from './ProductColorSwatches';
+
+import type { ProductColorSwatchItem } from './ProductColorSwatches';
 
 export type ProductStorageOption = {
-  label: string
-  selected?: boolean
-}
+  label: string;
+  selected?: boolean;
+};
+
+export type ProductCardData = {
+  imageSrc: string;
+  imageAlt?: string;
+  name: string;
+  modelNumber: string;
+  colorName: string;
+  colorSwatches: ProductColorSwatchItem[];
+  storageOptions: ProductStorageOption[];
+  priceAmount: string;
+  priceUnit?: string;
+};
 
 export type ProductCardProps = {
-  imageSrc: string
-  imageAlt?: string
-  name: string
-  modelNumber: string
-  colorName: string
-  colorSwatches: ProductColorSwatch[]
-  storageOptions: ProductStorageOption[]
-  onStorageSelect?: (index: number) => void
-  priceAmount: string
-  priceUnit?: string
-  className?: string
-}
+  product: ProductCardData;
+  onColorSelect?: (index: number) => void;
+  onStorageSelect?: (index: number) => void;
+  className?: string;
+};
 
 export function ProductCard({
-  imageSrc,
-  imageAlt = '',
-  name,
-  modelNumber,
-  colorName,
-  colorSwatches,
-  storageOptions,
+  product,
+  onColorSelect,
   onStorageSelect,
-  priceAmount,
-  priceUnit = '원',
   className,
 }: ProductCardProps) {
+  const {
+    imageSrc,
+    imageAlt = '',
+    name,
+    modelNumber,
+    colorName,
+    colorSwatches,
+    storageOptions,
+    priceAmount,
+    priceUnit = '원',
+  } = product;
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.media}>
-        <div className={styles.mediaSurface} />
-        <div className={styles.dots}>
-          {[0, 1, 2].map((index) => (
-            <span key={index} className={[styles.dot, index === 0 && styles.dotActive].filter(Boolean).join(' ')} />
-          ))}
-        </div>
         <img src={imageSrc} alt={imageAlt} className={styles.image} />
       </div>
       <div className={styles.content}>
-        <div>
-          <p className={styles.name}>{name}</p>
-          <p className={styles.modelNumber}>{modelNumber}</p>
+        <div className={styles.nameGroup}>
+          <div className={styles.name}>{name}</div>
+          <div className={styles.modelNumber}>{modelNumber}</div>
         </div>
-        <div className={styles.colorRow}>
-          <p className={styles.colorName}>{colorName}</p>
-          <div className={styles.swatchRow}>
-            {colorSwatches.map((swatch, index) => (
-              <span
-                key={swatch.label}
-                title={swatch.label}
-                className={styles.swatch}
-                style={{ background: swatch.hex, borderWidth: index === 0 ? '2px' : undefined }}
-              />
-            ))}
-          </div>
-        </div>
+        <ProductColorSwatches
+          colorName={colorName}
+          size='small'
+          colors={colorSwatches}
+          onSelect={onColorSelect}
+        />
         <div className={styles.storageRow}>
           {storageOptions.map((option, index) => (
             <SelectButton
               key={option.label}
-              size="small"
+              size='small'
               selected={option.selected}
               onClick={() => onStorageSelect?.(index)}
             >
@@ -79,11 +74,11 @@ export function ProductCard({
             </SelectButton>
           ))}
         </div>
-        <p className={styles.priceRow}>
+        <div className={styles.priceRow}>
           <span className={styles.priceAmount}>{priceAmount}</span>
           <span className={styles.priceUnit}>{priceUnit}</span>
-        </p>
+        </div>
       </div>
     </div>
-  )
+  );
 }

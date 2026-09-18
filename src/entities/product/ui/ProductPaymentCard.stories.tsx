@@ -1,7 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
+
 import placeholderImage from '@/shared/assets/react.svg'
+
 import { ProductPaymentCard } from './ProductPaymentCard'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: ProductPaymentCard,

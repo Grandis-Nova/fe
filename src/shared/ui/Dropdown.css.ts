@@ -1,5 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css'
+
 import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import { body } from '../config/theme/tokens/typography/semantic.css'
 
 export const root = style([
@@ -27,7 +29,7 @@ export const trigger = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  padding: '8px 10px 8px 16px',
+  padding: `${spacing[8]} ${spacing[10]} ${spacing[8]} ${spacing[16]}`,
   color: color.text.primary,
   cursor: 'pointer',
   border: 'none',
@@ -46,7 +48,7 @@ export const option = style([
   {
     display: 'flex',
     width: '100%',
-    padding: '8px 16px',
+    padding: `${spacing[8]} ${spacing[16]}`,
     color: color.text.secondary,
     background: color.background.subSurface,
     border: 'none',

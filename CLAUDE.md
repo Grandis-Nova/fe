@@ -29,3 +29,7 @@ npm run storybook         # Storybook dev server on :6006
 - `maxWidth` + `padding`을 같은 요소에 쓸 땐 `boxSizing: 'border-box'`를 꼭 같이 줘야 한다 — 안 그러면 실제 렌더링 너비가 `maxWidth + padding*2`가 된다 (`Header`/`CategoryNav`에서 겪음).
 - hover 시 두꺼워 보이는 효과가 필요하면 `font-weight`를 transition하지 말 것(레이아웃 폭이 흔들림). 대신 `-webkit-text-stroke-color`(transparent → `currentColor`)를 transition — `CategoryNav.css.ts`의 `link` 스타일 참고.
 - lucide-react 아이콘은 `color` prop을 직접 주지 않는다(정적 값이라 `:hover`에 반응 안 함). prop을 비워두면 아이콘의 `stroke="currentColor"`가 부모의 CSS `color`를 상속하므로, 부모에서 `color`를 transition하면 hover가 된다.
+- `embla-carousel` + `loop: true`로 무한 오토스크롤 캐러셀을 만들 때:
+  - flex 슬라이드 컨테이너에 `width`를 명시하지 않는다 (`auto`로 뷰포트 폭만큼만 잡혀야 함). `max-content`를 주면 Embla의 `canLoop()`가 항상 실패해서 `loop`가 조용히 `false`로 폴백되고 오토스크롤 자체가 멈춘다.
+  - flex `gap`은 마지막↔첫 슬라이드 사이에는 안 먹는다(Embla/CSS 공통 한계) — 마지막 슬라이드에 `gap`만큼 `margin-right`을 추가로 줘야 이음매 간격이 안 튄다.
+  - `AutoScroll` 플러그인과 같이 쓸 땐 `dragFree: true`를 켜야 한다 — 안 그러면 스냅포인트마다 멈칫거린다.

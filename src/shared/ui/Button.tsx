@@ -22,12 +22,15 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
-  const variantClassName = variant === 'outline' ? styles.outline[color] : styles.solid[color]
+  const variantClassName =
+    variant === 'outline' ? styles.outline[color] : styles.solid[color]
 
   return (
     <button
       type="button"
-      className={[styles.size[size], variantClassName, className].filter(Boolean).join(' ')}
+      className={[styles.size[size], variantClassName, className]
+        .filter(Boolean)
+        .join(' ')}
       {...rest}
     >
       {icon && <span className={styles.icon}>{icon}</span>}

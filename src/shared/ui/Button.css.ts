@@ -1,11 +1,11 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css';
-import { spacing } from '../config/theme/tokens/spacing';
+import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import {
   body,
   button as buttonTypography,
-} from '../config/theme/tokens/typography/semantic.css';
+} from '../config/theme/tokens/typography/semantic.css'
 
 export const base = style({
   // display: 'inline-flex',
@@ -21,7 +21,7 @@ export const base = style({
       color: color.text.disabled,
     },
   },
-});
+})
 
 export const size = styleVariants({
   medium: [
@@ -44,7 +44,7 @@ export const size = styleVariants({
       borderRadius: '10px',
     },
   ],
-});
+})
 
 export const solid = styleVariants({
   primary: {
@@ -79,7 +79,7 @@ export const solid = styleVariants({
       },
     },
   },
-});
+})
 
 export const outline = styleVariants({
   primary: {
@@ -115,9 +115,9 @@ export const outline = styleVariants({
       },
     },
   },
-});
+})
 
 export const icon = style({
   display: 'inline-flex',
   flexShrink: 0,
-});
+})

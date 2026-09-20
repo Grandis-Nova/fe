@@ -1,4 +1,4 @@
-import { createGlobalTheme } from '@vanilla-extract/css'
+import { createGlobalTheme, globalStyle } from '@vanilla-extract/css'
 
 import { baseColor } from './base'
 
@@ -47,3 +47,6 @@ export const color = createGlobalTheme(':root', {
     subtleDanger: baseColor.background.subtleDanger,
   },
 })
+
+// 모든 페이지의 기본 텍스트 색상 — 다른 색이 필요한 곳(히어로의 text.inverse 등)만 개별적으로 덮어쓴다.
+globalStyle('body', { color: color.text.primary })

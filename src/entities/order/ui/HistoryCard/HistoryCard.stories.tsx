@@ -35,7 +35,12 @@ const renderItem = (item: HistoryCardItem) => (
   />
 )
 
-const base = { orderDate: '2026.09.01', orderNumber: '20260901-000123', items: [item], renderItem }
+const base = {
+  orderDate: '2026.09.01',
+  orderNumber: '20260901-000123',
+  items: [item],
+  renderItem,
+}
 
 export const DeliveredBeforeReview: Story = {
   args: { ...base, status: 'delivered-before-review' },
@@ -58,7 +63,11 @@ export const Cancelled: Story = {
 }
 
 export const ExpandableItems: Story = {
-  args: { ...base, status: 'shipping', items: [item, { ...item, name: 'NOVA Watch' }] },
+  args: {
+    ...base,
+    status: 'shipping',
+    items: [item, { ...item, name: 'NOVA Watch' }],
+  },
   play: async ({ canvas }) => {
     const expandButton = canvas.getByRole('button', { name: /더 보기/ })
     await expandButton.click()

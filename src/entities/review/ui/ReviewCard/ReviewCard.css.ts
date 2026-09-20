@@ -1,9 +1,7 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
-import { spacing } from '@/shared/config/theme/tokens/spacing'
+import { color, spacing } from '@/shared/config/theme'
 import { fontSize } from '@/shared/config/theme/tokens/typography/base'
-import { body } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
@@ -45,15 +43,12 @@ export const textGroup = style({
 })
 
 export const reviewText = style({ color: color.text.primary, margin: 0 })
-export const productName = style([body.subMedium, { color: color.text.tertiary }])
+export const productName = style({ color: color.text.tertiary })
 
-export const meta = style([
-  body.subMedium,
-  {
-    display: 'flex',
-    gap: spacing[8],
-    alignItems: 'center',
-    color: color.text.tertiary,
-    flexShrink: 0,
-  },
-])
+export const meta = style({
+  display: 'flex',
+  gap: spacing[8],
+  alignItems: 'center',
+  color: color.text.tertiary,
+  flexShrink: 0,
+})

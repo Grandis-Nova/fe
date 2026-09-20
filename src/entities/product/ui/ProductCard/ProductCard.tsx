@@ -1,33 +1,35 @@
-import { SelectButton } from '@/shared/ui';
+import { typography } from '@/shared/config/theme'
+import { SelectButton } from '@/shared/ui'
 
-import * as styles from './ProductCard.css';
-import { ProductColorSwatches } from './ProductColorSwatches';
+import { ProductColorSwatches } from '../ProductColorSwatches'
 
-import type { ProductColorSwatchItem } from './ProductColorSwatches';
+import * as styles from './ProductCard.css'
+
+import type { ProductColorSwatchItem } from '../ProductColorSwatches'
 
 export type ProductStorageOption = {
-  label: string;
-  selected?: boolean;
-};
+  label: string
+  selected?: boolean
+}
 
 export type ProductCardData = {
-  imageSrc: string;
-  imageAlt?: string;
-  name: string;
-  modelNumber: string;
-  colorName: string;
-  colorSwatches: ProductColorSwatchItem[];
-  storageOptions: ProductStorageOption[];
-  priceAmount: string;
-  priceUnit?: string;
-};
+  imageSrc: string
+  imageAlt?: string
+  name: string
+  modelNumber: string
+  colorName: string
+  colorSwatches: ProductColorSwatchItem[]
+  storageOptions: ProductStorageOption[]
+  priceAmount: string
+  priceUnit?: string
+}
 
 export type ProductCardProps = {
-  product: ProductCardData;
-  onColorSelect?: (index: number) => void;
-  onStorageSelect?: (index: number) => void;
-  className?: string;
-};
+  product: ProductCardData
+  onColorSelect?: (index: number) => void
+  onStorageSelect?: (index: number) => void
+  className?: string
+}
 
 export function ProductCard({
   product,
@@ -45,7 +47,7 @@ export function ProductCard({
     storageOptions,
     priceAmount,
     priceUnit = '원',
-  } = product;
+  } = product
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.media}>
@@ -53,12 +55,16 @@ export function ProductCard({
       </div>
       <div className={styles.content}>
         <div className={styles.nameGroup}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.modelNumber}>{modelNumber}</div>
+          <div className={[typography.title.mdMedium, styles.name].join(' ')}>
+            {name}
+          </div>
+          <div className={[typography.body.sub, styles.modelNumber].join(' ')}>
+            {modelNumber}
+          </div>
         </div>
         <ProductColorSwatches
           colorName={colorName}
-          size='small'
+          size="small"
           colors={colorSwatches}
           onSelect={onColorSelect}
         />
@@ -66,7 +72,7 @@ export function ProductCard({
           {storageOptions.map((option, index) => (
             <SelectButton
               key={option.label}
-              size='small'
+              size="small"
               selected={option.selected}
               onClick={() => onStorageSelect?.(index)}
             >
@@ -74,11 +80,25 @@ export function ProductCard({
             </SelectButton>
           ))}
         </div>
-        <div className={styles.priceRow}>
-          <span className={styles.priceAmount}>{priceAmount}</span>
-          <span className={styles.priceUnit}>{priceUnit}</span>
+        <div
+          className={[typography.body.subSemibold, styles.priceRow].join(' ')}
+        >
+          <span
+            className={[typography.title.lgSemibold, styles.priceAmount].join(
+              ' ',
+            )}
+          >
+            {priceAmount}
+          </span>
+          <span
+            className={[typography.title.mdSemibold, styles.priceUnit].join(
+              ' ',
+            )}
+          >
+            {priceUnit}
+          </span>
         </div>
       </div>
     </div>
-  );
+  )
 }

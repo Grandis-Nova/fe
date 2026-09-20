@@ -32,7 +32,12 @@ export const PreorderPending: Story = {
 }
 
 export const Checkout: Story = {
-  args: { ...base, variant: 'checkout', actionLabel: '결제하기', onActionClick: fn() },
+  args: {
+    ...base,
+    variant: 'checkout',
+    actionLabel: '결제하기',
+    onActionClick: fn(),
+  },
   play: async ({ canvas, args }) => {
     await canvas.getByRole('button', { name: '결제하기' }).click()
     await expect(args.onActionClick).toHaveBeenCalledOnce()

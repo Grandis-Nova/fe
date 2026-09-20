@@ -1,6 +1,6 @@
 import { Rocket } from 'lucide-react'
 
-import { color } from '@/shared/config/theme'
+import { color, typography } from '@/shared/config/theme'
 
 import * as styles from './QueueCard.css'
 
@@ -34,22 +34,49 @@ export function QueueCard({
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.headline}>
-        <div className={styles.headlineText}>
+        <div
+          className={[typography.title.lgSemibold, styles.headlineText].join(
+            ' ',
+          )}
+        >
           {headline}
           <br />
           <span className={styles.headlineAccent}>{headlineAccent}</span>
         </div>
-        <Rocket className={styles.icon} color={color.text.tertiary} aria-hidden="true" />
+        <Rocket
+          className={styles.icon}
+          color={color.text.tertiary}
+          aria-hidden="true"
+        />
       </div>
-      <div className={styles.productName}>{productName}</div>
+      <div
+        className={[typography.body.defaultMedium, styles.productName].join(
+          ' ',
+        )}
+      >
+        {productName}
+      </div>
       <div className={styles.panel}>
         <div className={styles.orderGroup}>
-          <div className={styles.orderLabel}>{myOrderLabel}</div>
-          <div className={styles.orderNumber}>{myOrderNumber}</div>
+          <div
+            className={[typography.body.caption, styles.orderLabel].join(' ')}
+          >
+            {myOrderLabel}
+          </div>
+          <div
+            className={[typography.title.xlSemibold, styles.orderNumber].join(
+              ' ',
+            )}
+          >
+            {myOrderNumber}
+          </div>
         </div>
         <div className={styles.progressGroup}>
           <div className={styles.progressTrack}>
-            <div className={styles.progressFill} style={{ width: `${clampedPercent}%` }} />
+            <div
+              className={styles.progressFill}
+              style={{ width: `${clampedPercent}%` }}
+            />
             <Rocket
               color={color.text.inverse}
               className={styles.progressMark}
@@ -57,12 +84,26 @@ export function QueueCard({
               aria-hidden="true"
             />
           </div>
-          <div className={styles.noticeText}>{noticeText}</div>
+          <div
+            className={[typography.body.caption, styles.noticeText].join(' ')}
+          >
+            {noticeText}
+          </div>
         </div>
         <div className={styles.divider} />
         <div className={styles.totalRow}>
-          <div className={styles.totalLabel}>{totalWaitingLabel}</div>
-          <div className={styles.totalValue}>{totalWaitingCount}</div>
+          <div
+            className={[typography.body.caption, styles.totalLabel].join(' ')}
+          >
+            {totalWaitingLabel}
+          </div>
+          <div
+            className={[typography.body.subSemibold, styles.totalValue].join(
+              ' ',
+            )}
+          >
+            {totalWaitingCount}
+          </div>
         </div>
       </div>
     </div>

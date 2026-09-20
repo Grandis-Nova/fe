@@ -1,3 +1,4 @@
+import { typography } from '@/shared/config/theme'
 import { SelectButton } from '@/shared/ui'
 
 import * as styles from './ProductOptionSelector.css'
@@ -14,10 +15,17 @@ export type ProductOptionSelectorProps = {
   className?: string
 }
 
-export function ProductOptionSelector({ label, options, onSelect, className }: ProductOptionSelectorProps) {
+export function ProductOptionSelector({
+  label,
+  options,
+  onSelect,
+  className,
+}: ProductOptionSelectorProps) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
-      <div className={styles.label}>{label}</div>
+      <div className={[typography.title.smMedium, styles.label].join(' ')}>
+        {label}
+      </div>
       <div className={styles.optionRow}>
         {options.map((option, index) => (
           <SelectButton

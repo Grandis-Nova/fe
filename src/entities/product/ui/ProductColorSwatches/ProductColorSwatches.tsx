@@ -1,18 +1,29 @@
-import * as styles from './ProductColorSwatches.css';
+import { typography } from '@/shared/config/theme'
+
+import * as styles from './ProductColorSwatches.css'
+
+// shared/ui의 Button은 "행동을 실행"하는 CTA(확인, 제출 등)용이라 라벨/색상 팔레트 API를 갖는다.
+// 반면 이 컴포넌트는 여러 옵션 중 하나를 고르는 선택 상태(라디오에 가까움)라 성격이 달라서
+// Button을 재사용하지 않고 분리했다 — 그래서 선택 여부를 aria-pressed로 표현한다.
+
+const colorNameTypography = {
+  small: typography.body.caption,
+  medium: typography.body.subMedium,
+}
 
 export type ProductColorSwatchItem = {
-  hex: string;
-  label?: string;
-  selected?: boolean;
-};
+  hex: string
+  label?: string
+  selected?: boolean
+}
 
 export type ProductColorSwatchesProps = {
-  colorName: string;
-  colors: ProductColorSwatchItem[];
-  size?: 'small' | 'medium';
-  onSelect?: (index: number) => void;
-  className?: string;
-};
+  colorName: string
+  colors: ProductColorSwatchItem[]
+  size?: 'small' | 'medium'
+  onSelect?: (index: number) => void
+  className?: string
+}
 
 export function ProductColorSwatches({
   colorName,
@@ -21,47 +32,36 @@ export function ProductColorSwatches({
   onSelect,
   className,
 }: ProductColorSwatchesProps) {
-  const selectedLabel = colors.find((item) => item.selected)?.label ?? colorName;
+  const selectedLabel = colors.find((item) => item.selected)?.label ?? colorName
 
   return (
     <div className={[styles.root[size], className].filter(Boolean).join(' ')}>
-      <div className={styles.colorName[size]}>{selectedLabel}</div>
+      <div className={[colorNameTypography[size], styles.colorName].join(' ')}>
+        {selectedLabel}
+      </div>
       <div className={styles.swatchRow[size]}>
-        {colors.map((item, index) =>
-          onSelect ? (
-            <button
-              key={`${item.hex}-${index}`}
-              aria-pressed={item.selected}
-              className={[
-                styles.swatch[size],
-                item.selected && styles.swatchSelected,
-                styles.swatchInteractive,
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              style={{
-                background: item.hex,
-                ...(item.selected
-                  ? { outline: `1.5px solid ${item.hex}` }
-                  : {}),
-              }}
-              onClick={() => onSelect(index)}
-            />
-          ) : (
-            <span
-              key={`${item.hex}-${index}`}
-              title={item.label}
-              className={[
-                styles.swatch[size],
-                item.selected && styles.swatchSelected,
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              style={{ background: item.hex }}
-            />
-          ),
-        )}
+        {colors.map((item, index) => (
+          <button
+            key={`${item.hex}-${index}`}
+            type="button"
+            title={item.label}
+            disabled={!onSelect}
+            aria-pressed={onSelect ? item.selected : undefined}
+            className={[
+              styles.swatch[size],
+              item.selected && styles.swatchSelected,
+              onSelect && styles.swatchInteractive,
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            style={{
+              background: item.hex,
+              ...(item.selected ? { outline: `1.5px solid ${item.hex}` } : {}),
+            }}
+            onClick={() => onSelect?.(index)}
+          />
+        ))}
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
-import { spacing } from '@/shared/config/theme/tokens/spacing'
-import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
+import { color, spacing } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -22,14 +20,11 @@ export const headline = style({
   width: '100%',
 })
 
-export const headlineText = style([
-  title.lgSemibold,
-  {
-    flex: '1 0 0',
-    color: color.text.primary,
-    margin: 0,
-  },
-])
+export const headlineText = style({
+  flex: '1 0 0',
+  color: color.text.primary,
+  margin: 0,
+})
 
 export const headlineAccent = style({
   color: color.primary.base,
@@ -41,7 +36,7 @@ export const icon = style({
   flexShrink: 0,
 })
 
-export const productName = style([body.defaultMedium, { color: color.text.secondary, width: '100%' }])
+export const productName = style({ color: color.text.secondary, width: '100%' })
 
 export const panel = style({
   display: 'flex',
@@ -62,8 +57,8 @@ export const orderGroup = style({
   width: '100%',
 })
 
-export const orderLabel = style([body.caption, { color: color.secondary.hover }])
-export const orderNumber = style([title.xlSemibold, { color: color.primary.base }])
+export const orderLabel = style({ color: color.secondary.hover })
+export const orderNumber = style({ color: color.primary.base })
 
 export const progressGroup = style({
   display: 'flex',
@@ -98,7 +93,7 @@ export const progressMark = style({
   transform: 'translate(-50%, -50%) rotate(45deg)',
 })
 
-export const noticeText = style([body.caption, { color: color.text.secondary, margin: 0 }])
+export const noticeText = style({ color: color.text.secondary, margin: 0 })
 
 export const divider = style({
   width: '100%',
@@ -113,5 +108,5 @@ export const totalRow = style({
   width: '100%',
 })
 
-export const totalLabel = style([body.caption, { color: color.text.secondary }])
-export const totalValue = style([body.subSemibold, { color: color.secondary.base }])
+export const totalLabel = style({ color: color.text.secondary })
+export const totalValue = style({ color: color.secondary.base })

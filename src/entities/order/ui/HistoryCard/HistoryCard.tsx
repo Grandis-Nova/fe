@@ -2,6 +2,8 @@ import { useState, type ReactNode } from 'react'
 
 import { ChevronDown } from 'lucide-react'
 
+import { typography } from '@/shared/config/theme'
+
 import * as styles from './HistoryCard.css'
 
 export type HistoryCardStatus =
@@ -32,7 +34,10 @@ export type HistoryCardProps = {
   className?: string
 }
 
-const badgeByStatus: Record<HistoryCardStatus, { label: string; variant: keyof typeof styles.badge }> = {
+const badgeByStatus: Record<
+  HistoryCardStatus,
+  { label: string; variant: keyof typeof styles.badge }
+> = {
   'delivered-before-review': { label: '배송 완료', variant: 'delivered' },
   'delivered-after-review': { label: '배송 완료', variant: 'delivered' },
   shipping: { label: '배송중', variant: 'shipping' },
@@ -60,10 +65,25 @@ export function HistoryCard({
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.header}>
         <div className={styles.headerMeta}>
-          <div className={styles.orderDate}>{orderDate} 주문</div>
-          <div className={styles.orderNumber}>{orderNumber}</div>
+          <div
+            className={[typography.body.subMedium, styles.orderDate].join(' ')}
+          >
+            {orderDate} 주문
+          </div>
+          <div
+            className={[typography.body.caption, styles.orderNumber].join(' ')}
+          >
+            {orderNumber}
+          </div>
         </div>
-        <span className={styles.badge[badge.variant]}>{badge.label}</span>
+        <span
+          className={[
+            typography.body.caption,
+            styles.badge[badge.variant],
+          ].join(' ')}
+        >
+          {badge.label}
+        </span>
       </div>
 
       {visibleItems.map((item, index) => (
@@ -75,21 +95,39 @@ export function HistoryCard({
 
       {status === 'delivered-before-review' && (
         <div className={styles.actionRow}>
-          <button type="button" className={styles.primaryAction} onClick={onWriteReview}>
+          <button
+            type="button"
+            className={[typography.body.subMedium, styles.primaryAction].join(
+              ' ',
+            )}
+            onClick={onWriteReview}
+          >
             리뷰 쓰기
           </button>
         </div>
       )}
       {status === 'delivered-after-review' && (
         <div className={styles.actionRow}>
-          <button type="button" className={styles.secondaryAction} onClick={onViewReview}>
+          <button
+            type="button"
+            className={[typography.body.subMedium, styles.secondaryAction].join(
+              ' ',
+            )}
+            onClick={onViewReview}
+          >
             내가 쓴 리뷰 보기
           </button>
         </div>
       )}
       {status === 'preparing' && (
         <div className={styles.actionRow}>
-          <button type="button" className={styles.cancelAction} onClick={onCancelOrder}>
+          <button
+            type="button"
+            className={[typography.body.subMedium, styles.cancelAction].join(
+              ' ',
+            )}
+            onClick={onCancelOrder}
+          >
             주문 취소
           </button>
         </div>
@@ -98,11 +136,17 @@ export function HistoryCard({
       {restItems.length > 0 && (
         <>
           <div className={styles.divider} />
-          <button type="button" className={styles.expandRow} onClick={() => setExpanded((value) => !value)}>
+          <button
+            type="button"
+            className={[typography.body.sub, styles.expandRow].join(' ')}
+            onClick={() => setExpanded((value) => !value)}
+          >
             {expanded ? '접기' : `${restItems.length}개 더 보기`}
             <ChevronDown
               aria-hidden="true"
-              className={[styles.expandIcon, expanded && styles.expandIconOpen].filter(Boolean).join(' ')}
+              className={[styles.expandIcon, expanded && styles.expandIconOpen]
+                .filter(Boolean)
+                .join(' ')}
             />
           </button>
         </>

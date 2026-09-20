@@ -13,6 +13,10 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     label: '용량',
-    options: [{ label: '128GB', selected: true }, { label: '256GB' }, { label: '512GB' }],
+    options: [
+      { label: '128GB', selected: true },
+      { label: '256GB' },
+      { label: '512GB' },
+    ],
   },
 }

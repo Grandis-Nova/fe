@@ -1,8 +1,10 @@
+import { typography } from '@/shared/config/theme'
 import { Checkbox } from '@/shared/ui'
 
 import * as styles from './ProductPaymentCard.css'
 
-export type ProductPaymentCardVariant = 'default' | 'preorder-pending' | 'checkout' | 'cart'
+export type ProductPaymentCardVariant =
+  'default' | 'preorder-pending' | 'checkout' | 'cart'
 
 export type ProductPaymentCardProps = {
   variant?: ProductPaymentCardVariant
@@ -36,7 +38,10 @@ export function ProductPaymentCard({
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       {variant === 'cart' && (
-        <Checkbox checked={checked} onChange={(event) => onCheckedChange?.(event.target.checked)} />
+        <Checkbox
+          checked={checked}
+          onChange={(event) => onCheckedChange?.(event.target.checked)}
+        />
       )}
       {imageSrc ? (
         <img src={imageSrc} alt="" className={styles.thumbnail} />
@@ -47,15 +52,28 @@ export function ProductPaymentCard({
         <div className={styles.infoGroup}>
           <div className={styles.titleRow}>
             <div>
-              <div className={styles.name}>{name}</div>
-              <div className={styles.modelNumber}>{modelNumber}</div>
+              <div
+                className={[typography.title.mdSemibold, styles.name].join(' ')}
+              >
+                {name}
+              </div>
+              <div
+                className={[typography.body.subMedium, styles.modelNumber].join(
+                  ' ',
+                )}
+              >
+                {modelNumber}
+              </div>
             </div>
             {(variant === 'preorder-pending' || variant === 'checkout') && (
               <button
                 type="button"
                 className={[
+                  typography.body.subMedium,
                   styles.action,
-                  variant === 'checkout' ? styles.actionCheckout : styles.actionPending,
+                  variant === 'checkout'
+                    ? styles.actionCheckout
+                    : styles.actionPending,
                 ].join(' ')}
                 disabled={variant === 'preorder-pending'}
                 onClick={onActionClick}
@@ -64,11 +82,20 @@ export function ProductPaymentCard({
               </button>
             )}
           </div>
-          <div className={styles.optionSummary}>{optionSummary}</div>
+          <div
+            className={[typography.body.sub, styles.optionSummary].join(' ')}
+          >
+            {optionSummary}
+          </div>
         </div>
-        <div className={styles.quantityPriceRow}>
+        <div
+          className={[
+            typography.title.mdSemibold,
+            styles.quantityPriceRow,
+          ].join(' ')}
+        >
           <span>{quantityLabel}</span>
-          <span className={styles.price}>{priceLabel}</span>
+          <span className={typography.title.lgSemibold}>{priceLabel}</span>
         </div>
       </div>
     </div>

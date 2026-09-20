@@ -14,8 +14,10 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    imageSrc: placeholderImage,
-    title: 'NOVA Phone 사전예약 혜택',
-    period: '2026.09.01 - 2026.09.30',
+    data: {
+      imageSrc: placeholderImage,
+      title: 'NOVA Phone 사전예약 혜택',
+      period: '2026.09.01 - 2026.09.30',
+    },
   },
 }

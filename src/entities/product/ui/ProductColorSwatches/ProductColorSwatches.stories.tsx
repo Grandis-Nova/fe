@@ -1,14 +1,14 @@
-import { ProductColorSwatches } from './ProductColorSwatches';
+import { ProductColorSwatches } from './ProductColorSwatches'
 
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   component: ProductColorSwatches,
   tags: ['ai-generated'],
-} satisfies Meta<typeof ProductColorSwatches>;
+} satisfies Meta<typeof ProductColorSwatches>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Small: Story = {
   args: {
@@ -20,7 +20,7 @@ export const Small: Story = {
       { hex: '#3F4891', label: '코발트', selected: false },
     ],
   },
-};
+}
 
 export const MediumInteractive: Story = {
   args: {
@@ -33,4 +33,4 @@ export const MediumInteractive: Story = {
     ],
     onSelect: () => {},
   },
-};
+}

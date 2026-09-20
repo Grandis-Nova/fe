@@ -1,8 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
-import { spacing } from '@/shared/config/theme/tokens/spacing'
-import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
+import { color, spacing } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -42,37 +40,29 @@ export const titleRow = style({
   gap: spacing[12],
 })
 
-export const name = style([title.mdSemibold, { color: color.text.primary }])
-export const modelNumber = style([body.subMedium, { color: color.text.tertiary }])
-export const optionSummary = style([body.sub, { color: color.text.secondary }])
+export const name = style({ color: color.text.primary })
+export const modelNumber = style({ color: color.text.tertiary })
+export const optionSummary = style({ color: color.text.secondary })
 
-export const quantityPriceRow = style([
-  title.mdSemibold,
-  {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    color: color.text.primary,
-  },
-])
+export const quantityPriceRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  color: color.text.primary,
+})
 
-export const price = title.lgSemibold
-
-export const action = style([
-  body.subMedium,
-  {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '39px',
-    padding: `0 ${spacing[14]}`,
-    borderRadius: '8px',
-    border: 'none',
-    whiteSpace: 'nowrap',
-    flexShrink: 0,
-    cursor: 'pointer',
-  },
-])
+export const action = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '39px',
+  padding: `0 ${spacing[14]}`,
+  borderRadius: '8px',
+  border: 'none',
+  whiteSpace: 'nowrap',
+  flexShrink: 0,
+  cursor: 'pointer',
+})
 
 export const actionCheckout = style({
   background: color.primary.base,

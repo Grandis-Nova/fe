@@ -1,3 +1,5 @@
+import { typography } from '@/shared/config/theme'
+
 import * as styles from './ReviewCard.css'
 
 export type ReviewCardProps = {
@@ -27,13 +29,21 @@ export function ReviewCard({
         <div className={styles.thumbnail} />
       )}
       <div className={styles.main}>
-        <div className={styles.rating}>{'★'.repeat(Math.max(0, Math.min(5, rating)))}</div>
+        <div className={styles.rating}>
+          {'★'.repeat(Math.max(0, Math.min(5, rating)))}
+        </div>
         <div className={styles.textGroup}>
           <div className={styles.reviewText}>{reviewText}</div>
-          <div className={styles.productName}>{productName}</div>
+          <div
+            className={[typography.body.subMedium, styles.productName].join(
+              ' ',
+            )}
+          >
+            {productName}
+          </div>
         </div>
       </div>
-      <div className={styles.meta}>
+      <div className={[typography.body.subMedium, styles.meta].join(' ')}>
         <span>{maskedAuthorName}</span>
         <span>{date}</span>
       </div>

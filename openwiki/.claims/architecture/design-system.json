@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8e75de938c37614f9f13e89caeda71edfe2b56a72b233ca8d6cc321e5f82477d",
+  "claims": [
+    {
+      "id": "claim_a41ade77f4ae45b89874f2421802119a",
+      "statement": "shared/config/theme/index.ts는 color, typography, motion, sprinkles(및 Sprinkles 타입)만 공개 배럴로 내보내며 spacing/breakpoint/container는 이 배럴에 포함되지 않는다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/index.ts#L1-L7",
+          "version": "repo-lines-v1:sha256:926ac242bf9443bf986f5f67e1d161bc96165cf36338326150269512a6fedc89:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAzNTJmNDI4NGJlY2Q3YmMxN2EzNWE2MTQzY2Y3ZDUzOTNkNjRhNTJkOGNiZGE4NWYyZTcwY2U5OGFhYjMwNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjU1MDMyM2Y1ZjQ3NTdlYzgzY2IxNzM2ZDY0Yzk5MmFjYTI4NTNmODU5ZTNjZTg0MDA3NTg4NDVjMThhZGZlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4ab287daf89445829bf05428d049eda8",
+      "statement": "color 토큰은 base.ts의 raw hex(baseColor)와 semantic.css.ts의 용도별 이름(color)으로 2단 구성되며, semantic.css.ts는 createGlobalTheme(':root', ...)으로 baseColor 값을 재매핑한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/color/base.ts#L1-L49",
+          "version": "repo-lines-v1:sha256:d47efb8d65e673bd65e75b64508dc6cdcb013f52d624b28ccfeec187f0decb26:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMDRmY2YwOTEzM2ZiNzY0M2IxOWUzZjlmZmY1ZGZlYTQ2ZjkwMDkwMjJiZTczOTZhZTgzMDllZDVmYTIyYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWVkOTUyNDE5OWNmY2RjMjIyM2Y4NTczN2Q2NmNhYmEyNGM2OWU4Y2U3OWEwMTY1NWE2ZjVkYmQ1ZDllNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/shared/config/theme/tokens/color/semantic.css.ts#L1-L49",
+          "version": "repo-lines-v1:sha256:8d91243ccd52a7b81bf713807e57e120db60397a37fc90bcf009804d6d4cb815:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkOGVkMDdmNDExNzkwZTQzOWZiNmJlYzQ0MmQ5NzRkZmFiNzVkNzBkMTBhZDcyM2UxODg3MTIyMTM2NmE5M2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlYjY3NzQ3Y2RhZWZhN2FiNzI3YWJjMWZmZWVlZGVmZjIzNDgzNmM4MTU1N2NmMzZlMGVlYTFjMmYyZjk5YjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7bcc696a887543898197d5029ea6949a",
+      "statement": "semantic.css.ts는 globalStyle('body', { color: color.text.primary })로 바디 기본 텍스트 색을 전역 지정한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/color/semantic.css.ts#L51-L52",
+          "version": "repo-lines-v1:sha256:0a92d3a56b4d81859323e91a89cdf55698319c0e1312e5602b10e2c1aded09f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWM2MTY0MzdmODAwYjdhMWIxNTY5ZGE0ZDhhZTRkMTNlNjU4OWEwY2M3NjQ1MTA2MzA2YWY4MWNhY2NmZWQzNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE4NTc3ODM5ZjNjMjg5YmYzYTg4ZjRkZDQ3MDBkYmJkN2NlMjAyZTc1OWIyNGI0ZjE4N2ViZTgwOTQ2YTZkOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDNmMDQxYTM5MTAxNTczNTExNmYzNmEwOWJjODRjZWZiYjI0NTk3MGZhMjZlZDQ4YWRlZDg2ZDEwN2FkYTU0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cd76a17a93c04c9da763a76af6f527c6",
+      "statement": "typography/base.ts는 fontFamily/fontWeight/fontSize/lineHeight/letterSpacing 원시 스케일만 담고, typography/semantic.css.ts가 이를 조합해 title/body/button 등 바로 쓸 수 있는 vanilla-extract 스타일 프리셋을 만든다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/typography/base.ts#L1-L34",
+          "version": "repo-lines-v1:sha256:819566b1466248af6d3234ec88faaac723cbf8ceabdd5871447c4ca8d90f853a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZTdkYzFlMjY1YTk4ODYyNmJkYzQ2MjEyMjQyYTA5M2ZkYTU3MjU1ZTcyOGZmM2VjMGQ3YjM3NDhhZWRjMTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWVkOTUyNDE5OWNmY2RjMjIyM2Y4NTczN2Q2NmNhYmEyNGM2OWU4Y2U3OWEwMTY1NWE2ZjVkYmQ1ZDllNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d58d2c8d53c401894359885ed6cbd56",
+      "statement": "spacing 스케일은 0부터 100px까지 고정된 스텝(0,2,4,6,8,10,12,14,16,20,24,30,32,40,50,60,70,80,90,100)만 제공한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/spacing.ts#L1-L22",
+          "version": "repo-lines-v1:sha256:55f4b3e3eca6ced7d18d24835803ba10dc270c5040544b7e6378999e2dc7b0cf:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkMDA4N2UyN2U0ZDM3Y2ViZDY0MDQyYTAxMWM5OWI2ZTc0ODUwZGU4ZTZjNTIzOWUyODJiZDUwN2Y0ODY1ODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NGVlOGE4ZDFhYTg0NTM5MWJjNjc5ZWI3MGNlN2Y0NmEzY2Q2ZmIyZDE2ZmNjYTY3ZmExNzhmNGY4YzFlMGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c9be1f8c6bc4250bc17c8f5c52715ad",
+      "statement": "motion 토큰은 duration.fast('150ms')와 easing.default('ease') 두 값만 정의하는 최소 구성이다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/motion.ts#L1-L7",
+          "version": "repo-lines-v1:sha256:86c495891ecc7d9e931ed030e0139c0d99f4e9f7a609872be9e68dfd1b430707:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg1YzM4OWE2YjM5OTA5Y2QzNDA1YjA1YWNlNjczOWZmNDMxMzcyNzllYTAxN2M0YzRkYzI0NzkzNjc4NjA0MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzc1ZWQ5NTI0MTk5Y2ZjZGMyMjIzZjg1NzM3ZDY2Y2FiYTI0YzY5ZThjZTc5YTAxNjU1YTZmNWRiZDVkOWU2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad2726136fc74efb86d631b80695df69",
+      "statement": "container 토큰은 maxWidth.none/content(1200px)/full(100%) 세 값을, breakpoint 토큰은 mobile(max-width:743px)/desktop(min-width:744px) 두 값을 제공한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/tokens/breakpoint.ts#L1-L4",
+          "version": "repo-lines-v1:sha256:40fead93b8474581f50a011c9f5db56d764919fd239ebb5dbea7ff682c1200e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWY4ZDU4NGE5YjRkMzc2ZmQ3MjAyNzYzODBlMmJhMzA0YzVjMWQyZmU3MmY4ZjNiOWM5MjhhNDMwNTM1ZTM1ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzc1ZWQ5NTI0MTk5Y2ZjZGMyMjIzZjg1NzM3ZDY2Y2FiYTI0YzY5ZThjZTc5YTAxNjU1YTZmNWRiZDVkOWU2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/shared/config/theme/tokens/container.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:9b1376075cb5a466909bef9ed8959f0ffbf5cda0c1821c0aa2348978e6301ac0:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk5ZWE3ZWMzYzc3NWQxOTQ5N2ViMDBhMWNmODljZjk1OGY1MzJkNDBmYmMwMTU2ODU3OWRjNWM2NDBhNGZmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTc0ZWU4YThkMWFhODQ1MzkxYmM2NzllYjcwY2U3ZjQ2YTNjZDZmYjJkMTZmY2NhNjdmYTE3OGY0ZjhjMWUwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d43c95f47fa470ebd1a7984130a30d7",
+      "statement": "sprinkles.css.ts는 mobile을 기본 조건으로 desktop(@media breakpoint.desktop)만 추가 조건으로 갖는 defineProperties를 만들고, display/flexDirection/alignItems/justifyContent/flexWrap/gap/padding*/margin*/maxWidth/fontSize/color 속성만 반응형 유틸로 노출한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/sprinkles.css.ts#L24-L57",
+          "version": "repo-lines-v1:sha256:6877e2b57061cf5995120a83791cec1eef9b620c1562337983fab1122909b6aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3M2RjYTQzZGU1NDE2YTVkYTIwOTZmZjIyYWMzNDNkOTcwMTAzODBhNDlhYjgwMTE2ZjI3YWU1MDliYmZhMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFmYTRlOWY2MjA3NTRkMmJlNDUyZjAzNmI4MTkzZTkyMzA4YThiMmJhZDlkZWIxN2UxOGZhZGJmNmMyOTM1MDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0MDU3NzA3OGIwMTAxNDI3MGQ3ODdlNTUxZDQzMmI3MjFhMjg5NWM1YTQyMWE4MTAyNGEwZWY4NWNlYTcxNmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5aa14c484b054abf8706bfb4b272d29d",
+      "statement": "sprinkles의 color 속성은 color.text.* semantic 토큰으로 만든 textColor 맵을 쓰며, 타이포그래피 프리셋과 sprinkles(color) 조합만으로 색 있는 텍스트를 완성할 수 있게 하려는 의도로 추가됐다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/config/theme/sprinkles.css.ts#L11-L20",
+          "version": "repo-lines-v1:sha256:f4c756afdb74d024f078e1cd0f517907989fcc786bf40b2f65ab61636405c5d1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0ZDIxZWI1YjEzMmY2MDI1YjU1MzEyMGE5ZWE5YmIwODhhYTYzODU5MTQxMGI4OTRkZDU0YmI3ZTgyM2NmNTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjExMDU0NmUyYTZiNmQ1NDVjYzI2NzM5YzYwYTNjNDZkM2Q5MGE0MTY3ODNmY2JjNjUyMDBmNzI1N2E2YTI5YWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFmYTRlOWY2MjA3NTRkMmJlNDUyZjAzNmI4MTkzZTkyMzA4YThiMmJhZDlkZWIxN2UxOGZhZGJmNmMyOTM1MDAifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-19T17:13:03.359Z"
+  }
+}

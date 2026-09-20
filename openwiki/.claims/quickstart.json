@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d50fcea46558513f6041acd0927ca3594c58a1c82748c530a21546293b91fd35",
+  "pageVersion": "sha256:c8840ab1f064f6bfb3d9c3cae94ce1cf17808549332ed90eb758df6a79b64471",
   "claims": [
     {
-      "id": "claim_8ba99ab02eb741f1996ce1c30404745c",
-      "statement": "The npm scripts dev, build, preview, and lint respectively run the Vite dev server, tsc -b followed by vite build, a local preview of the build output, and oxlint.",
+      "id": "claim_cb9bc4bc5b3a4d23b9b4776746c4f267",
+      "statement": "package.json의 dev/build/preview/lint/lint:fix/storybook/build-storybook 스크립트은 각각 vite 개발 서버, tsc -b && vite build, vite preview, eslint ., eslint . --fix, storybook dev -p 6006, storybook build를 실행한다.",
       "evidence": [
         {
-          "resource": "repo://package.json",
-          "version": "repo-file-v1:sha256:f20c6723e4a146da1922f049e7d83b72dbc7e4949d5bc7770f48b8f1e31503aa"
+          "resource": "repo://package.json#L6-L13",
+          "version": "repo-lines-v1:sha256:dd7eca97f43bb8ced26cf95f89b32ba784edce2d1b93199196d3feb78fee7cc3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODljNDJjNGIyZDJjNmY1YTg4N2M5ZWI5ZGRjYTAyMDA0YjRkZjJkMmFhNTgyMTQxZWYxMDg4NDgzMTgwYjQxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2E2M2JmMDk0ZjUzYTg5MTIzMjc5MjRlMjllMTE5MzIzYjJjOTU5YWNjMDEzMmZhZmEyNzE1MmI1YmQ5Zjg2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2YwMDU3Mjg5YzgxMDJlMmQ3MjQxZjE0YzYxYjBiYTRkMGNkMWIxMWU5ZmZiZDJjMTM4MzU3Y2M4YjA0YTU1NiJ9"
         }
       ]
     },
     {
-      "id": "claim_18a93f114bae4e0b8a8fe9b283fdbac4",
-      "statement": "src/main.tsx is the app entrypoint that creates the React root and imports the root component and global styles from the app layer.",
+      "id": "claim_5a9e265ee3b4449c990379ea49729416",
+      "statement": "src/main.tsx는 src/app/router/index.tsx가 만드는 router를 RouterProvider에 넘기고 전역 스타일/디자인 토큰을 불러오는 것 외에는 로직이 없는 순수 부트스트랩 파일이다.",
       "evidence": [
         {
           "resource": "repo://src/main.tsx",
-          "version": "repo-file-v1:sha256:4ab315a70577af86846ee0888314c3bfc88c32efb2ce168d697806e006ebe954"
+          "version": "repo-file-v1:sha256:8af84349bfd07d17ac380386fbd6e44501dbf7f40fd5dc4b7239cec9ee29191f"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-15T04:58:54.229Z"
+    "at": "2026-09-20T04:54:43.226Z"
   }
 }

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5758f80b2cce5fb9e66549e2dc38536de173399d6f26da746f69c1fc43ba482a",
+  "claims": [
+    {
+      "id": "claim_fc8c9900dc76466287af2778f2b1b79b",
+      "statement": "SwirlBackground는 useRef로 얻은 컴테이너 안에 순수 DOM API로 <canvas> 요소를 직접 생성해 파티클 애니메이션을 그리며, 리사이즈 시 container.clientWidth/clientHeight를 읽어 캤버스 크기를 맞추므로 부모 컴테이너 크기가 곷 애니메이션 영역이 된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/ui/SwirlBackground.tsx",
+          "version": "repo-file-v1:sha256:f88467550eec415202feb84146c305aadf1297b16f35ede1d85ee0a01b84d226"
+        }
+      ]
+    },
+    {
+      "id": "claim_148b78c699f34e90bd4540c722cc14b5",
+      "statement": "SwirlBackground.css.ts의 root는 position:absolute; inset:0으로 부모 요소 전체를 채우며, MainPage.tsx에서는 height:770px인 hero div가 그 부모여서 뛰포트 전체가 아니라 hero의 크기에 맞춰 리사이즈된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts#L7-L12",
+          "version": "repo-lines-v1:sha256:7f660a4c790cceec2da091012bad00617db5d9e188ca1c3a9dc4a2528385b3e1:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDlmNmQxNjkzMTA1YjNkZTQ4Yzk3MTE3NDRlY2I5ZjNjY2U5ZjhlY2I3OGI3YmY4NTcwN2UwMzM1ZTZkN2E3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTVlZmYxZTliZTFiMzk1N2E3OWY2YjFkZGMxM2VmYmEzNjk0MDYzYzZjNjViZjJiZTYyMGE1OGI1YWI5NmQ2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzg1OWYzM2FiMWMzNTVmMWI4MDlmNmEyNjEwNWI3ZWMzMjc2OGQxYmViZTI5NDFkNWYyNjM1OWYwMDg1ZGMwOCJ9"
+        },
+        {
+          "resource": "repo://src/shared/ui/SwirlBackground.css.ts#L3-L10",
+          "version": "repo-lines-v1:sha256:1279740b85eefb3cf08ee3bd74bd4d595605cfaec4eb3832eda92773d0af247c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjAxNTNiZjJiMmRlNDUzNTExZmI2NzM1YTlhOWFjM2UzMmQzNjY4ZmZhNDU5NTVlNjE3YzZmNTFjMjAyODdkOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjBkOTJjZTQyNGRiNWEwYzIxZmZmNjdjY2Y3ZWQ3Njc1MTAyNDNiNWViOTkwMmNiYzlmZmNkZjc4Zjg3ZjNmNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_27070806219e47de9b9a30fab195c5c8",
+      "statement": "MainPage.tsx는 useEmblaCarousel({ loop: true, dragFree: true, align: 'start' }, [AutoScroll({ speed: 1, stopOnInteraction: false })])로 히어로 캐러셀을 구성한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.tsx#L33-L36",
+          "version": "repo-lines-v1:sha256:f75d9a1921645c9764609778a5cacfc956f725001ffd10c7b56b7b158beed6a9:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQyNjc4YTM2ZjEyYjk1YmJjNjU3NmZmMzVjMmI4MGY2NTFhNjg5ZGVkMTUzMzk5YjUxM2U5ZTcyNTE0OTVhMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTVlZjAxYmMwOGRiYzNiNjNlNGU3NWVhM2QyNmE1Yjk0MTg5MTg3N2UyN2FkODkxMzI5Yzg0MTFkN2Q4ZGM0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWE0NDhkZWY1NDgyYTE3NzFiMzkwZTdiMTI3ZWRhNDhiYjQ0MzM0NGFiNzk4MmNmZGI4MjhlYzM5NGNiNGVkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGFlOGM5NDBkMjJkZTNmNmQyYWFmZGVlYThhZjQ2OWFkMzg1MGNlY2FhOGIxN2RmYjllMTE3NmRlOWY0MzMzOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1844de1c0f14f5cbb0ec1dbdd7ae02d",
+      "statement": "carouselContainer 스타일은 width를 명시하지 않는다 — 코드 주석에 따르면 Embla의 canLoop() 판정이 이 요소 자신의 박스 폭이 전체 슬라이드 합계 폭보다 충분히 작아야(=런포트 정도) 통과하기 때문이며, width:'max-content'를 주면 canLoop()가 항상 실패해 loop가 loop:false로 조용히 폴백된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts#L26-L33",
+          "version": "repo-lines-v1:sha256:6a5b75d61ffc5887b8e133ae8ac4fd53b5616bd3c4cf7050a59549d3650ad8d1:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWZhZmJmNjlmN2E0ZjA4YmVmOWNjOWJmMTFiNmVlYjUwODI0YWQ3N2E5OTQ1OTUwYWE1NWM0OTg3NWFmYjY4NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmI1ZTBiZDZlOTQwMTViYjc5NWFlZjRjMjc2YjNhYjMwMmE3YzIxMGEyODFkYWM0NWJlYzkzNWMxMjZkYzk2MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTI2Njc2MmI4NTUyMzVjYTI2ZmJlYzE3ZDUzMzAxYzkzNTM0MjlmYjU3ZWZiZGYwOWIzNjQ3OWYxOGNhMDhjNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f3c3bfce014249398cc15c11f3977961",
+      "statement": "carouselSlide 스타일은 &:last-child에 gap과 같은 크기의 marginRight를 추가해 flex gap이 마지막↔첫 슬라이드 사이에는 적용되지 않는다는 CSS 제약을 보정한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts#L35-L45",
+          "version": "repo-lines-v1:sha256:8d3fdb55880a349bbb887360e81a2dac252a779dcc42c5db46050d00a3376dc4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1OTUwMDA5MTAzNzJjMjEzMDZiMDEwYThlNmI1MTg3M2E3NDIzMWY2MGU2Yjg4ZmIzMTMyMTBlMTMyYzdhYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2ZjU1MGEzMjRjNGY0ZTA5OWI5ZjhkYmQyZDVjMzVhMjBhYjYwYzlhNGM1ZGUyOTA3MDY0NWZiYWZlYjk5ZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY1MTU5YmJhZWYxZmI3MjE0OWU4YWMyMDgxM2JjODc1NGVhNDMzMzZlNWU1MzAyNDU5ZWMxNGJiZGZiNmI1ZDcifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-19T17:13:03.359Z"
+  }
+}

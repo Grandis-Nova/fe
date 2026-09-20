@@ -1,15 +1,13 @@
-import { style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css';
-import { spacing } from '@/shared/config/theme/tokens/spacing';
-import { title as titleToken } from '@/shared/config/theme/tokens/typography/semantic.css';
+import { color, typography, spacing } from '@/shared/config/theme'
 
 export const hero = style({
   position: 'relative',
   width: '100%',
   height: '770px',
   overflow: 'hidden',
-});
+})
 
 export const carouselViewport = style({
   position: 'relative',
@@ -21,7 +19,7 @@ export const carouselViewport = style({
     'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
   WebkitMaskImage:
     'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-});
+})
 
 export const carouselContainer = style({
   display: 'flex',
@@ -30,7 +28,7 @@ export const carouselContainer = style({
   // 전체 슬라이드 합계 폭보다 충분히 작아야(=뷰포트 정도) 통과한다. width:auto가
   // 부모(뷰포트) 폭만큼만 잡히는 게 오히려 맞는 값 — max-content로 콘텐츠 전체 폭과
   // 같게 만들면 canLoop가 무조건 실패해서 loop가 통째로 꺼져버린다.
-});
+})
 
 export const carouselSlide = style({
   flex: '0 0 auto',
@@ -42,27 +40,13 @@ export const carouselSlide = style({
       marginRight: spacing[24],
     },
   },
-});
-
-export const recommendedSection = style({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(267.5px, 1fr))',
-  gap: spacing[30],
-});
-
-export const recommendedTitle = style([
-  titleToken.lgSemibold,
-  {
-    color: color.text.primary,
-    padding: `0 ${spacing[16]}`,
-  },
-]);
+})
 
 // apple-design 스킬 §15(타이포그래피) + §12(vibrancy): 배경 위에 얹히는 큰 텍스트는
 // 살짝 더 타이트한 자간/행간을 쓰고, 반투명/움직이는 배경 위에서도 또렷이 읽히도록
 // 흐린 회색이 아니라 고대비 색을 쓴다.
-export const title = style([
-  titleToken.xxlSemibold,
+export const bestTitle = style([
+  typography.title.xxlSemibold,
   {
     position: 'relative',
     zIndex: 1,
@@ -77,4 +61,24 @@ export const title = style([
       `0 0 64px color-mix(in srgb, ${color.secondary.base} 40%, transparent)`,
     ].join(', '),
   },
-]);
+])
+
+export const recommendedSection = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+  gap: spacing[24],
+})
+
+export const recommendedTitle = style([
+  typography.title.lgSemibold,
+  {
+    marginBottom: spacing[30],
+    padding: `0 ${spacing[16]}`,
+  },
+])
+
+export const cardGrid = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+  gap: spacing[24],
+})

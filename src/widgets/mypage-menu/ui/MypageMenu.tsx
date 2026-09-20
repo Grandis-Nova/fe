@@ -1,6 +1,7 @@
 import * as styles from './MypageMenu.css'
 
-export type MypageMenuLink = 'preorder-check' | 'cart' | 'history' | 'address-manage' | 'alert-setting'
+export type MypageMenuLink =
+  'preorder-check' | 'cart' | 'history' | 'address-manage' | 'alert-setting'
 
 export type MypageMenuProps = {
   userName: string
@@ -20,7 +21,12 @@ const accountLinks: { link: MypageMenuLink; label: string }[] = [
   { link: 'alert-setting', label: '알림 설정' },
 ]
 
-export function MypageMenu({ userName, activeLink, onLinkClick, className }: MypageMenuProps) {
+export function MypageMenu({
+  userName,
+  activeLink,
+  onLinkClick,
+  className,
+}: MypageMenuProps) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.heading}>
@@ -61,7 +67,9 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
                 <button
                   key={link}
                   type="button"
-                  className={[styles.link, isActive && styles.linkActive].filter(Boolean).join(' ')}
+                  className={[styles.link, isActive && styles.linkActive]
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => onLinkClick?.(link)}
                 >
                   {label}

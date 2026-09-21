@@ -1,10 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { duration, easing } from '../config/theme/tokens/motion'
-import { spacing } from '../config/theme/tokens/spacing'
-import { fontSize } from '../config/theme/tokens/typography/base'
-import { body } from '../config/theme/tokens/typography/semantic.css'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
+import { fontSize } from '@/shared/config/theme/tokens/typography/base'
 
 export const root = style({
   display: 'flex',
@@ -20,7 +17,7 @@ const boxBase = style({
   width: '100%',
   background: color.background.base,
   border: `1px solid ${color.primary.surface}`,
-  transition: `border-color ${duration.fast} ${easing.default}`,
+  transition: `border-color ${motion.duration.fast} ${motion.easing.default}`,
   selectors: {
     '&:focus-within': {
       borderColor: color.primary.base,
@@ -50,7 +47,7 @@ export const boxError = style({
 })
 
 export const field = style([
-  body.defaultRegular,
+  typography.body.defaultRegular,
   {
     width: '100%',
     border: 'none',
@@ -62,7 +59,7 @@ export const field = style([
 ])
 
 export const label = style([
-  body.sub,
+  typography.body.sub,
   {
     position: 'absolute',
     left: 0,
@@ -70,7 +67,7 @@ export const label = style([
     transform: 'translateY(-50%)',
     color: color.text.tertiary,
     pointerEvents: 'none',
-    transition: `all ${duration.fast} ${easing.default}`,
+    transition: `all ${motion.duration.fast} ${motion.easing.default}`,
     selectors: {
       [`${field}:focus ~ &, ${field}:not(:placeholder-shown) ~ &`]: {
         top: spacing[8],
@@ -95,4 +92,4 @@ export const errorIcon = style({
   flexShrink: 0,
 })
 
-export const errorText = body.caption
+export const errorText = typography.body.caption

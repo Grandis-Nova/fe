@@ -1,11 +1,9 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { spacing } from '../config/theme/tokens/spacing'
-import { body } from '../config/theme/tokens/typography/semantic.css'
+import { color, spacing, typography } from '@/shared/config/theme'
 
 export const root = style([
-  body.subMedium,
+  typography.body.subMedium,
   {
     display: 'flex',
     flexDirection: 'column',
@@ -41,10 +39,11 @@ export const triggerIcon = style({
   width: '24px',
   height: '24px',
   flexShrink: 0,
+  color: color.text.tertiary,
 })
 
 export const option = style([
-  body.sub,
+  typography.body.sub,
   {
     display: 'flex',
     width: '100%',

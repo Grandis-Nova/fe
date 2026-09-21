@@ -1,7 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { duration, easing } from '../config/theme/tokens/motion'
+import { color, motion } from '@/shared/config/theme'
 
 export const root = style({
   display: 'inline-flex',
@@ -26,7 +25,7 @@ export const track = style({
   borderRadius: '9999px',
   background: color.background.subSurface,
   pointerEvents: 'none',
-  transition: `background-color ${duration.fast} ${easing.default}`,
+  transition: `background-color ${motion.duration.fast} ${motion.easing.default}`,
   selectors: {
     [`${input}:checked ~ &`]: {
       background: color.primary.subtle,
@@ -42,7 +41,7 @@ export const thumb = style({
   height: '16px',
   borderRadius: '9999px',
   background: color.background.base,
-  transition: `left ${duration.fast} ${easing.default}`,
+  transition: `left ${motion.duration.fast} ${motion.easing.default}`,
   selectors: {
     [`${input}:checked ~ &`]: {
       left: '22px',

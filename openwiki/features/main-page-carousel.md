@@ -9,14 +9,14 @@ sources:
     resource: repo://src/pages/main/ui/MainPage.css.ts
   - id: openwiki-source-9d07391d0987e367447a753a
     resource: repo://src/pages/main/ui/MainPage.tsx
-  - id: openwiki-source-042ce990dd5471a52b5500d2
-    resource: repo://src/shared/ui/SwirlBackground.css.ts
-  - id: openwiki-source-4cf73d81f10980ec3e5e4d7f
-    resource: repo://src/shared/ui/SwirlBackground.tsx
+  - id: openwiki-source-106882e9cc35fe9cd43bb118
+    resource: repo://src/shared/ui/SwirlBackground/SwirlBackground.css.ts
+  - id: openwiki-source-1cd6e8b1b508a390e34f873a
+    resource: repo://src/shared/ui/SwirlBackground/SwirlBackground.tsx
 generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-20T09:53:37.867Z
+    at: 2026-09-21T01:15:36.692Z
 ---
 
 ## 개요

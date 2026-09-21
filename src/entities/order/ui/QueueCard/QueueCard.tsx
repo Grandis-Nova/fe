@@ -1,6 +1,6 @@
 import { Rocket } from 'lucide-react'
 
-import { color, typography } from '@/shared/config/theme'
+import { typography } from '@/shared/config/theme'
 
 import * as styles from './QueueCard.css'
 
@@ -43,11 +43,7 @@ export function QueueCard({
           <br />
           <span className={styles.headlineAccent}>{headlineAccent}</span>
         </div>
-        <Rocket
-          className={styles.icon}
-          color={color.text.tertiary}
-          aria-hidden="true"
-        />
+        <Rocket className={styles.icon} aria-hidden="true" />
       </div>
       <div
         className={[typography.body.defaultMedium, styles.productName].join(
@@ -78,7 +74,6 @@ export function QueueCard({
               style={{ width: `${clampedPercent}%` }}
             />
             <Rocket
-              color={color.text.inverse}
               className={styles.progressMark}
               style={{ left: `${clampedPercent}%` }}
               aria-hidden="true"

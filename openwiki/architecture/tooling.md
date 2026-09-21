@@ -33,7 +33,7 @@ sources:
 generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-20T09:53:37.867Z
+    at: 2026-09-21T00:58:42.533Z
 ---
 
 ## 개요

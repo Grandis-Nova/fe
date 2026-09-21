@@ -1,28 +1,20 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { spacing } from '../config/theme/tokens/spacing'
-import {
-  fontFamily,
-  fontSize,
-  fontWeight,
-  letterSpacing,
-} from '../config/theme/tokens/typography/base'
+import { color, spacing, typography } from '@/shared/config/theme'
 
-const base = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: '1px solid transparent',
-  fontFamily: fontFamily.pretendard,
-  fontSize: fontSize[12],
-  fontWeight: fontWeight.medium,
-  // Pretendard's Hangul metrics push the body line-height(1.3) box's ink upward
-  // when flex-centered; a tight line-height keeps the pill text optically centered.
-  lineHeight: 1,
-  letterSpacing: letterSpacing[2],
-  whiteSpace: 'nowrap',
-})
+const base = style([
+  typography.body.captionMedium,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid transparent',
+    // Pretendard's Hangul metrics push the body line-height(1.3) box's ink upward
+    // when flex-centered; a tight line-height keeps the pill text optically centered.
+    lineHeight: 1,
+    whiteSpace: 'nowrap',
+  },
+])
 
 export const shape = styleVariants({
   pill: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],

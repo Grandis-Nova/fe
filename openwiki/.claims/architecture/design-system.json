@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:67692d97342f0e80eb0e40de3e5b91ac5099811673cf6b3cea37bcd069a8f38c",
+  "pageVersion": "sha256:08bb3b7b10ce0326ef4669e71ae09e451fc304042118197c93ef47acb1dcfff3",
   "claims": [
     {
       "id": "claim_7bcc696a887543898197d5029ea6949a",
@@ -44,21 +44,21 @@
     },
     {
       "id": "claim_d90ca9cc9ddb4818b056459e61ac7464",
-      "statement": "shared/config/theme/index.ts는 color, spacing, typography, motion, sprinkles(+Sprinkles 타입)를 공개 배럴로 내보내며 breakpoint/container/typography-base는 이 배럴에 없다.",
+      "statement": "shared/config/theme/index.ts는 color, spacing, typography, motion, sprinkles(+Sprinkles 타입), lineClamp를 공개 배럴로 내보내며 breakpoint/container/typography-base는 이 배럴에 없다.",
       "evidence": [
         {
           "resource": "repo://src/shared/config/theme/index.ts",
-          "version": "repo-file-v1:sha256:81811ad82595a0caf8fba3e06b72f76dc058cf1dd6781254e8fe351aa6a5803d"
+          "version": "repo-file-v1:sha256:746200cab6bebb6ebbf725a415c2bad3655a4841749ce09dae17d401e2d56f34"
         }
       ]
     },
     {
       "id": "claim_a13949a46bfd4c0694afb2dd3cef7222",
-      "statement": "color 토큰은 base.ts 없이 tokens/color/semantic.css.ts 하나에 hex가 직접 들어있는 단일 파일로 합쳐졌으며, 다크모드용으로 쓰이던 backgroundDark 값은 이때 함께 삭제됐다.",
+      "statement": "color 토큰은 base.ts 없이 tokens/color/semantic.css.ts 하나에 hex가 직접 들어있는 단일 파일로 합쳐졌다. backgroundDark(base/surface 두 값)는 이 병합 이후에도 색상 객체 안에 그대로 남아 있지만 앱 코드 어디에서도 참조되지 않아, 다크모드는 아직 구현되어 있지 않다.",
       "evidence": [
         {
           "resource": "repo://src/shared/config/theme/tokens/color/semantic.css.ts",
-          "version": "repo-file-v1:sha256:fd5f78e488022b980bca4732e8f3cf15c08d75b5c8c4f63dc891a686188680a6"
+          "version": "repo-file-v1:sha256:34463eba4b45c4bdf89de99edd1218d2b7b810452de84fe8b179a1e1ac90e265"
         }
       ]
     },
@@ -95,10 +95,42 @@
           "version": "repo-lines-v1:sha256:20f3a355d0565458d6f7f4866c429c9714071d1c1e87046582eae009b4527e13:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3M2RjYTQzZGU1NDE2YTVkYTIwOTZmZjIyYWMzNDNkOTcwMTAzODBhNDlhYjgwMTE2ZjI3YWU1MDliYmZhMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFmYTRlOWY2MjA3NTRkMmJlNDUyZjAzNmI4MTkzZTkyMzA4YThiMmJhZDlkZWIxN2UxOGZhZGJmNmMyOTM1MDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0MDU3NzA3OGIwMTAxNDI3MGQ3ODdlNTUxZDQzMmI3MjFhMjg5NWM1YTQyMWE4MTAyNGEwZWY4NWNlYTcxNmIifQ"
         }
       ]
+    },
+    {
+      "id": "claim_2496249074f94c3d91134e61eb5c2401",
+      "statement": "mixins.ts는 lineClamp(lines) 헬퍼 하나만 내보내며, -webkit-line-clamp 기반 말줄임 스타일 객체를 반환한다. 고정값 토큰이 아니라 인자를 받는 스타일 조각이라 tokens/가 아닌 별도 파일에 있다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/preorder/ui/PreorderCard/PreorderCard.css.ts#L34-L38",
+          "version": "repo-lines-v1:sha256:1ce595a4e63210bd9a8ab75674cb54dfc0a15ade884d2410cb49b9fbbc012f51:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNhNjdlZWFmYzAxMTQyYTcwMzUwMWI1NzZkZjRlODk1OWM4ZWJiYTNkZGNkYWRhZTNjNjdkMzJjMTkzOGU0ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2FjMjNlMWIzMTU0MjU5NDM5YjlhZGI1M2E2YzAxOWJiNzBjZThlNWU1NTNjY2RmZmE4ZDAwN2Q4MmI1ODFmNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2RlN2FiMTcyNjBjYWNlOTM5ZWU5YjM1N2QxNzJhZWE0OWY1YmFlNjQwZDQwYjU1ZjdkODEwYmFhNmViZDEyMCJ9"
+        },
+        {
+          "resource": "repo://src/shared/config/theme/mixins.ts",
+          "version": "repo-file-v1:sha256:4491a143fe4cdd36784132f59ac80f093c0d3b6de5505bbba314596c4b585131"
+        }
+      ]
+    },
+    {
+      "id": "claim_4529cbcf2d384394991e10a3820e3b8b",
+      "statement": "eslint.config.js의 import-x/order는 pathGroups에서 '@/**'를 external 다음, parent/sibling(상대경로) 앞에 오는 별도 internal 그룹으로 분리한다 — 이 때문에 shared/config/theme 밖의 토큰을 참조하는 .css.ts/.tsx 파일은 상대경로가 아니라 '@/shared/config/theme/...' 액리어스를 쓴다.",
+      "evidence": [
+        {
+          "resource": "repo://eslint.config.js#L14-L41",
+          "version": "repo-lines-v1:sha256:e567dceb249c74a81789f88802cfebc96c95fa8b75e76a17c601cf57e13f747f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0NmQyZjJkMTM4YmZjYWRhOTA0Yjc3MzFmOGRhY2JlOGY0NjFmMmI2M2Y0M2I1MjI3MDcxZThhZmViNjUyOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MTAxMzQ2YzExYTdlNzQwMzQwYjhhYTEzNGZkMWZmNDczOTBlZjI4ZTgxNWJiMzdjZGJhMmM5NDkxZDJjYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ0NDk5MDFkMzgzZjNhMTcxZDZiYzdmM2YyY2UzYmM5MDlkZjk4ZmRkZmM1MmI3ODM1YTUxYzBiNDJmOTk3ZjUifQ"
+        },
+        {
+          "resource": "repo://src/shared/ui/BottomSheet/BottomSheet.css.ts",
+          "version": "repo-file-v1:sha256:4f5d0d01aa39db521c0cbb75c23ece2e2ddb2da2a8f172ce97999a63b599bc01"
+        },
+        {
+          "resource": "repo://src/shared/ui/Button/Button.css.ts",
+          "version": "repo-file-v1:sha256:7aea526c42579e1f4012e3eabaf866ee9461adf52d0492eaabbbb74f82a708dd"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-20T09:53:37.867Z"
+    "at": "2026-09-21T01:15:36.692Z"
   }
 }

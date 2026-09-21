@@ -1,8 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { spacing } from '../config/theme/tokens/spacing'
-import { body } from '../config/theme/tokens/typography/semantic.css'
+import { color, spacing, typography } from '@/shared/config/theme'
 
 export const root = style({
   display: 'inline-flex',
@@ -25,6 +23,7 @@ export const arrowButton = style({
 export const arrowIcon = style({
   width: '16px',
   height: '16px',
+  color: color.text.tertiary,
 })
 
 export const arrowIconFlipped = style({
@@ -32,7 +31,7 @@ export const arrowIconFlipped = style({
 })
 
 export const pageButton = style([
-  body.subMedium,
+  typography.body.subMedium,
   {
     display: 'inline-flex',
     alignItems: 'center',

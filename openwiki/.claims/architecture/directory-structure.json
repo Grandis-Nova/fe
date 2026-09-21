@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d17b18f2fc95b0d5d2ae4317a0a13dc19ba3a06c630923698c7953b3398da5de",
+  "pageVersion": "sha256:db329ffd5ef982d2a598262ef199269acc963a64583ba454b037dc295cef52fd",
   "claims": [
     {
       "id": "claim_34f5be3abf084e719cda0ec74f23df3f",
@@ -88,7 +88,7 @@
     },
     {
       "id": "claim_df4dc822c4e44854a06d45a5646646ce",
-      "statement": "entities 레이어는 order, preorder, product, review 4개 도메인 슬라이스로 채워졌고, features 레이어는 여전히 .gitkeep뿐인 빈 레이어다.",
+      "statement": "entities 레이어는 order, preorder(PreorderCard, PreorderModelSummary), product, review 4개 도메인 슬라이스로 채워졌고, features 레이어는 여전히 .gitkeep뿐인 빈 레이어다.",
       "evidence": [
         {
           "resource": "repo://src/entities/order/index.ts",
@@ -96,7 +96,7 @@
         },
         {
           "resource": "repo://src/entities/preorder/index.ts",
-          "version": "repo-file-v1:sha256:f519f6b38faefc265556ddb5eea2c5e26c62cd3925643a590a407c6acd85b2c9"
+          "version": "repo-file-v1:sha256:b1d50c81306d26c872292a57e164628478eb16a05b4f84b65f65a9ff2f26fadc"
         },
         {
           "resource": "repo://src/entities/product/index.ts",
@@ -124,7 +124,7 @@
     },
     {
       "id": "claim_903c808b19e04994a98e467f12d21b66",
-      "statement": "shared 레이어는 초기에 이미지 자산만 있었으나 지금은 ui, config/theme, lib 세그먼트가 채워졌고 api 세그먼트만 여전히 없다.",
+      "statement": "shared 레이어는 초기에 이미지 자산만 있었으나 지금은 ui, config/theme, lib 세그먼트가 채워졌고 api 세그먼트만 여전히 없다. shared/ui의 모든 컴포넌트(BottomSheet, Slider 포함)가 entities/product와 같은 컴포넌트별 하위 폴더 패턴을 따른다 — 예전에 flat하게 있던 Button/Checkbox/Dropdown/Input/Navigator/SelectButton/Tag/Toggle/SwirlBackground도 각자 폴더로 정리되었다.",
       "evidence": [
         {
           "resource": "repo://src/shared/assets/react.svg",
@@ -132,21 +132,25 @@
         },
         {
           "resource": "repo://src/shared/config/theme/index.ts",
-          "version": "repo-file-v1:sha256:81811ad82595a0caf8fba3e06b72f76dc058cf1dd6781254e8fe351aa6a5803d"
+          "version": "repo-file-v1:sha256:746200cab6bebb6ebbf725a415c2bad3655a4841749ce09dae17d401e2d56f34"
         },
         {
           "resource": "repo://src/shared/lib/simplexNoise.js",
           "version": "repo-file-v1:sha256:dddecbc80184f5cf0b36f8ebff23c923e833b7cd1d6c615a6cb885212b4c5fd6"
         },
         {
+          "resource": "repo://src/shared/ui/Button/index.ts",
+          "version": "repo-file-v1:sha256:09cba733866a92cbb2bff3b5551f4b5a8f88827c1d682814b63f5d22eedf3ba0"
+        },
+        {
           "resource": "repo://src/shared/ui/index.ts",
-          "version": "repo-file-v1:sha256:33fad04957f03105851ada06e601f10a02f653743420158bea0e237cf8b7dc3d"
+          "version": "repo-file-v1:sha256:942e904a5349cc0545a1fb03115ac5a099dd7bc04df8bfe7c395e31ab7128cdc"
         }
       ]
     },
     {
       "id": "claim_aa7459f5ff334c179e13ce18d27816c2",
-      "statement": "shared/ui에는 Container와 Box가 추가되었다 — Container는 페이지 콘텐츠 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px + 고정 padding)을 강제하는 전용 컴포넌트이고, Box는 sprinkles 속성을 sx prop으로 받는 범용 div 래퍼다.",
+      "statement": "Container는 페이지 콘텐츠 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px)을 강제하는 전용 컴포넌트로, maxWidth는 prop으로 못 바꿀지만 desktopPaddingX/desktopPaddingY/mobilePaddingX/mobilePaddingY 네 padding 값은 모두 옵션 prop(기본 30/50/16/24)으로 덮어쓸 수 있다. Box는 sprinkles 속성을 sx prop으로 받는 범용 div 래퍼다.",
       "evidence": [
         {
           "resource": "repo://src/shared/ui/Box/Box.tsx",
@@ -154,13 +158,13 @@
         },
         {
           "resource": "repo://src/shared/ui/Container/Container.tsx",
-          "version": "repo-file-v1:sha256:9e546d4d91c5f62998120cd75293b21cea28a6ae692a58bfb6bf843c6b5224bf"
+          "version": "repo-file-v1:sha256:11fb6b5b99240158bb5c158a2f4caf32134d1272d7c151f728b3d9b859e57110"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-20T09:53:37.867Z"
+    "at": "2026-09-21T01:15:36.692Z"
   }
 }

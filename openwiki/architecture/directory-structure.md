@@ -52,6 +52,8 @@ sources:
     resource: repo://src/shared/lib/simplexNoise.js
   - id: openwiki-source-9745756b2be49dfe2491129c
     resource: repo://src/shared/ui/Box/Box.tsx
+  - id: openwiki-source-41cdc0d556f053790c7f346f
+    resource: repo://src/shared/ui/Button/index.ts
   - id: openwiki-source-1e4537c3eaa8f33a608e1699
     resource: repo://src/shared/ui/Container/Container.tsx
   - id: openwiki-source-d131a7da28ef0d717bef8452
@@ -66,10 +68,10 @@ sources:
     resource: repo://src/widgets/mypage-menu/index.ts
   - id: openwiki-source-fe9d4837246c407a3285609f
     resource: repo://src/widgets/product-page-tab/index.ts
-generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+generated: { by: "claude-code", at: "2026-09-21T01:15:36.692Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-20T09:53:37.867Z
+    at: 2026-09-21T01:15:36.692Z
 ---
 
 ## 개요
@@ -114,8 +116,16 @@ FSD 레이어 밖의 순수 부트스트랩 파일로서 `router`의 `RouterProv
 
 ### entities
 
-`order`(`HistoryCard`, `QueueCard`), `preorder`(`PreorderCard`), `product`, `review`
-(`ReviewCard`) 도메인 슬라이스. `features`는 아직 `.gitkeep`만 있는 빈 레이어다.
+`order`(`HistoryCard`, `QueueCard`), `preorder`(`PreorderCard`, `PreorderModelSummary`),
+`product`, `review`(`ReviewCard`) 도메인 슬라이스. `features`는 아직 `.gitkeep`만 있는 빈
+레이어다.
+
+`entities/preorder`의 `PreorderModelSummary`는 사전예약 상세 바텀시트 안에서 쓰는 "모델 한
+줄 요약" 컴포넌트로, `isOver`/`isAlert` 두 boolean만 받아 CTA 라벨("예약 하기"/"알림
+신청"/"신청 완료")과 비활성화 여부를 컴포넌트 내부에서 계산한다 — 다만 그 라벨을 눌렀을 때
+실제로 무엇을 하는지(페이지 이동 vs 알림 처리)는 `onReserve`/`onNotify` 콜백으로 호출부에
+위임해, "무엇을 보여줄지"와 "무엇을 할지"의 책임을 분리한다. 자세한 흐름은
+[사전예약 상세 페이지 알림/예약 플로우](../features/preorder-detail.md) 참고.
 
 `entities/product`는 다른 슬라이스와 다르게 **컴포넌트별 하위 폴더** 패턴을 쓴다 —
 `ui/ProductCard.tsx` 단일 파일이 아니라 `ui/ProductCard/{ProductCard.tsx,
@@ -129,11 +139,24 @@ ProductCard.css.ts, ProductCard.stories.tsx, index.ts}`처럼 컴포넌트마다
 초기엔 이미지 자산만 있던 레이어였지만 지금은 관례적 하위 세그먼트가 대부분 채워졌다.
 
 - `ui/` — `Button`, `Checkbox`, `Container`, `Box`, `Dropdown`, `Input`, `Navigator`,
-  `SelectButton`, `Tag`, `Toggle`, `SwirlBackground` 등 범용 UI 컴포넌트. `index.ts`가 공개
-  API를 배럴로 내보낸다. `Container`와 `Box`는 이름이 비슷해 보이지만 역할이 다르다 —
-  `Container`는 페이지 콘텐츠의 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px +
-  고정 padding)을 강제하는 전용 컴포넌트고, `Box`는 `sprinkles`가 지원하는 임의의 속성을
-  `sx` prop으로 받는 범용 div 래퍼다.
+  `SelectButton`, `Tag`, `Toggle`, `SwirlBackground`, `BottomSheet`, `Slider` 등 범용 UI
+  컴포넌트. `index.ts`가 공개 API를 배럴로 내보낸다. 전부 `entities/product`와 동일한
+  컴포넌트별 하위 폴더 패턴(`ui/ComponentName/{ComponentName.tsx, .css.ts, .stories.tsx,
+  index.ts}`)을 따른다 — 예전엔 `Box`/`Container`/`BottomSheet`/`Slider`만 이 패턴이고
+  나머지(`Button`, `Checkbox`, `Dropdown`, `Input`, `Navigator`, `SelectButton`, `Tag`,
+  `Toggle`, `SwirlBackground`)는 `ui/` 바로 아래 flat하게 있었지만, 지금은 그 예외가 전부
+  없어졌다. `Container`와 `Box`는 이름이 비슷해 보이지만 역할이 다르다 — `Container`는
+  페이지 콘텐츠의 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px)을 강제하는 전용
+  컴포넌트고, `Box`는 `sprinkles`가 지원하는 임의의 속성을 `sx` prop으로 받는 범용 div
+  래퍼다. `Container`의 `maxWidth` 계약 자체는 prop으로 못 바꾸지만,
+  `desktopPaddingX`/`desktopPaddingY`/`mobilePaddingX`/`mobilePaddingY` 네 값은 모두 옵션
+  prop으로 노출돼 있어(기본 30/50/16/24) 호출부가 덮어쓸 수 있다 — 예를 들어
+  `PreorderDetailPage`는 네 값을 전부 `0`으로 넘겨 자체 레이아웃을 쓴다.
+  `BottomSheet`는 `vaul`의 `Drawer`를 얇게 감싼 바텀시트 프리미티브, `Slider`는
+  `embla-carousel-react` 기반으로 점 인디케이터가 붙은 슬라이더 프리미티브다. 폴더 안
+  파일이 `shared/config/theme` 밖의 토큰을 참조할 때는 상대경로가 아니라 `@/shared/config/
+  theme/...` 앨리어스를 쓴다 — 자세한 근거는 [디자인 토큰과 vanilla-extract 스타일
+  시스템](design-system.md) 참고.
 - `config/theme/` — 디자인 토큰과 vanilla-extract 스타일 시스템(색상 토큰은 `base.ts` 없이
   `semantic.css.ts` 한 파일로 관리된다). 자세한 내용은
   [디자인 토큰과 vanilla-extract 스타일 시스템](design-system.md) 참고.

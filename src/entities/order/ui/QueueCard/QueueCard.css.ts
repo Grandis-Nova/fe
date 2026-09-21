@@ -34,6 +34,7 @@ export const icon = style({
   width: '24px',
   height: '24px',
   flexShrink: 0,
+  color: color.text.tertiary,
 })
 
 export const productName = style({ color: color.text.secondary, width: '100%' })
@@ -91,6 +92,7 @@ export const progressMark = style({
   width: '16px',
   height: '16px',
   transform: 'translate(-50%, -50%) rotate(45deg)',
+  color: color.text.inverse,
 })
 
 export const noticeText = style({ color: color.text.secondary, margin: 0 })

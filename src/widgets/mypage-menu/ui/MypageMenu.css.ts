@@ -1,12 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css';
-import { spacing } from '@/shared/config/theme/tokens/spacing';
+import { color, spacing, typography } from '@/shared/config/theme';
 import { fontWeight } from '@/shared/config/theme/tokens/typography/base';
-import {
-  body,
-  title,
-} from '@/shared/config/theme/tokens/typography/semantic.css';
 
 export const root = style({
   display: 'flex',
@@ -26,11 +21,11 @@ export const heading = style({
 });
 
 export const headingLabel = style([
-  body.subMedium,
+  typography.body.subMedium,
   { color: color.text.tertiary },
 ]);
 export const userName = style([
-  title.lgSemibold,
+  typography.title.lgSemibold,
   { color: color.text.primary },
 ]);
 
@@ -49,9 +44,12 @@ export const section = style({
 });
 
 export const sectionTitle = styleVariants({
-  active: [body.subMedium, { color: color.primary.focus, textAlign: 'left' }],
+  active: [
+    typography.body.subMedium,
+    { color: color.primary.focus, textAlign: 'left' },
+  ],
   inactive: [
-    body.subMedium,
+    typography.body.subMedium,
     { color: color.text.tertiary, textAlign: 'left' },
   ],
 });
@@ -64,7 +62,7 @@ export const linkList = style({
 });
 
 export const link = style([
-  body.sub,
+  typography.body.sub,
   {
     padding: `${spacing[2]} 0`,
     color: color.text.secondary,

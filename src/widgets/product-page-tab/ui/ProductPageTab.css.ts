@@ -1,8 +1,7 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
+import { color, typography } from '@/shared/config/theme'
 import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
-import { title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
@@ -11,7 +10,7 @@ export const root = style({
 })
 
 export const tab = style([
-  title.lgSemibold,
+  typography.title.lgSemibold,
   {
     flex: '1 0 0',
     height: '56px',

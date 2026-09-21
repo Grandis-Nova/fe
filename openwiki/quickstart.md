@@ -8,10 +8,10 @@ sources:
     resource: repo://package.json
   - id: openwiki-source-95bfccfd0c712f6e72040e0d
     resource: repo://src/main.tsx
-generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+generated: { by: "claude-code", at: "2026-09-21T00:58:42.533Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-20T09:53:37.867Z
+    at: 2026-09-21T00:58:42.533Z
 ---
 
 ## 이 저장소는 무엇인가
@@ -57,6 +57,8 @@ npm run build-storybook  # Storybook 정적 빌드
   `entities/product`의 다섯 컴포넌트가 나누는 책임과 합성 관계.
 - [메인 페이지 히어로 오토스크롤 캐러셀](repo://openwiki/features/main-page-carousel.md) —
   `embla-carousel` 무한 루프 구현에서 실제로 겪은 비직관적 제약.
+- [사전예약 상세 페이지 알림/예약 플로우](repo://openwiki/features/preorder-detail.md) —
+  카운트다운 게이트와 `BottomSheet`(`vaul`) 기반 모델별 예약/알림 신청 UI.
 
 ## 참고
 

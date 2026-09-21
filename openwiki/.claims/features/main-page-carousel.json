@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d7ad30bd37be3872b3eb7178933f209419d185718397ea3bc166352c49ff3339",
+  "pageVersion": "sha256:5e25aa6dda84199f82828c6ad5a69510c1d79cf6d39e1e8b041281f2806e23be",
   "claims": [
     {
       "id": "claim_fc8c9900dc76466287af2778f2b1b79b",
-      "statement": "SwirlBackground는 useRef로 얻은 컴테이너 안에 순수 DOM API로 <canvas> 요소를 직접 생성해 파티클 애니메이션을 그리며, 리사이즈 시 container.clientWidth/clientHeight를 읽어 캤버스 크기를 맞추므로 부모 컴테이너 크기가 곷 애니메이션 영역이 된다.",
+      "statement": "SwirlBackground는 useRef로 얻은 컴테이너 안에 순수 DOM API로 <canvas> 요소를 직접 생성해 파티클 애니메이션을 그리며, 리사이즈 시 container.clientWidth/clientHeight를 읽어 캔버스 크기를 맞추므로 부모 컴테이너 크기가 곷 애니메이션 영역이 된다.",
       "evidence": [
         {
-          "resource": "repo://src/shared/ui/SwirlBackground.tsx",
-          "version": "repo-file-v1:sha256:5e44f6dfe8d4ad0943f136a9b2e4b7011896501a46bd74a033e3a5bbf0937afa"
+          "resource": "repo://src/shared/ui/SwirlBackground/SwirlBackground.tsx",
+          "version": "repo-file-v1:sha256:50556b923c5dac2ae97c0660c4248b487770a97995b004766c029bec36d920bc"
         }
       ]
     },
     {
       "id": "claim_148b78c699f34e90bd4540c722cc14b5",
-      "statement": "SwirlBackground.css.ts의 root는 position:absolute; inset:0으로 부모 요소 전체를 채우며, MainPage.tsx에서는 height:770px인 hero div가 그 부모여서 뛰포트 전체가 아니라 hero의 크기에 맞춰 리사이즈된다.",
+      "statement": "SwirlBackground.css.ts의 root는 position:absolute; inset:0으로 부모 요소 전체를 채우며, MainPage.tsx에서는 height:770px인 hero div가 그 부모여서 뷰포트 전체가 아니라 hero의 크기에 맞춰 리사이즈된다.",
       "evidence": [
         {
           "resource": "repo://src/pages/main/ui/MainPage.css.ts",
-          "version": "repo-file-v1:sha256:daa0ad30e974be3ca11cc17f89cf19798131b055aa93a4518cf7640eb7777e42"
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
         },
         {
-          "resource": "repo://src/shared/ui/SwirlBackground.css.ts",
+          "resource": "repo://src/shared/ui/SwirlBackground/SwirlBackground.css.ts",
           "version": "repo-file-v1:sha256:3220bd92ca0ed9c90b01d4efe0e39b49de30795ad4907b6beab70aa72bb62ba8"
         }
       ]
@@ -42,7 +42,7 @@
       "evidence": [
         {
           "resource": "repo://src/pages/main/ui/MainPage.css.ts",
-          "version": "repo-file-v1:sha256:daa0ad30e974be3ca11cc17f89cf19798131b055aa93a4518cf7640eb7777e42"
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
         }
       ]
     },
@@ -52,7 +52,7 @@
       "evidence": [
         {
           "resource": "repo://src/pages/main/ui/MainPage.css.ts",
-          "version": "repo-file-v1:sha256:daa0ad30e974be3ca11cc17f89cf19798131b055aa93a4518cf7640eb7777e42"
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
         }
       ]
     },
@@ -62,7 +62,7 @@
       "evidence": [
         {
           "resource": "repo://src/pages/main/ui/MainPage.css.ts",
-          "version": "repo-file-v1:sha256:daa0ad30e974be3ca11cc17f89cf19798131b055aa93a4518cf7640eb7777e42"
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
         },
         {
           "resource": "repo://src/pages/main/ui/MainPage.tsx",
@@ -73,6 +73,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-20T09:53:37.867Z"
+    "at": "2026-09-21T01:15:36.692Z"
   }
 }

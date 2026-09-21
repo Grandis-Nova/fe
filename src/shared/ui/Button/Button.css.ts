@@ -1,11 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-import { spacing } from '../config/theme/tokens/spacing'
-import {
-  body,
-  button as buttonTypography,
-} from '../config/theme/tokens/typography/semantic.css'
+import { color, spacing, typography } from '@/shared/config/theme'
 
 export const base = style({
   // display: 'inline-flex',
@@ -26,7 +21,7 @@ export const base = style({
 export const size = styleVariants({
   large: [
     base,
-    buttonTypography.lgSemibold,
+    typography.button.lgSemibold,
     {
       height: spacing[60],
       gap: spacing[12],
@@ -36,7 +31,7 @@ export const size = styleVariants({
   ],
   medium: [
     base,
-    body.defaultMedium,
+    typography.body.defaultMedium,
     {
       height: '46px',
       gap: spacing[10],
@@ -46,7 +41,7 @@ export const size = styleVariants({
   ],
   small: [
     base,
-    buttonTypography.smMedium,
+    typography.button.smMedium,
     {
       height: '37px',
       gap: spacing[6],

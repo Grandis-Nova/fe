@@ -1,7 +1,5 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-
 import * as styles from './Dropdown.css'
 
 export type DropdownProps = {
@@ -44,17 +42,9 @@ export function Dropdown({
       >
         {label}
         {open ? (
-          <ChevronUp
-            className={styles.triggerIcon}
-            color={color.text.tertiary}
-            aria-hidden="true"
-          />
+          <ChevronUp className={styles.triggerIcon} aria-hidden="true" />
         ) : (
-          <ChevronDown
-            className={styles.triggerIcon}
-            color={color.text.tertiary}
-            aria-hidden="true"
-          />
+          <ChevronDown className={styles.triggerIcon} aria-hidden="true" />
         )}
       </button>
       {open &&

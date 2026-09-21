@@ -2,8 +2,6 @@ import type { InputHTMLAttributes } from 'react'
 
 import { Check } from 'lucide-react'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-
 import * as styles from './Checkbox.css'
 
 export type CheckboxProps = Omit<
@@ -28,11 +26,7 @@ export function Checkbox({
       />
       <span className={styles.box}>
         {checked && (
-          <Check
-            className={styles.icon}
-            color={color.text.inverse}
-            aria-hidden="true"
-          />
+          <Check className={styles.icon} aria-hidden="true" />
         )}
       </span>
     </span>

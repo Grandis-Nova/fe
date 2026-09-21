@@ -5,10 +5,16 @@ description: shared/config/theme 아래의 color/typography/spacing/breakpoint/c
 tags: [architecture, design-tokens, vanilla-extract, sprinkles, styling, frontend]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-20T09:53:37.867Z
+    at: 2026-09-21T01:15:36.692Z
 sources:
+  - id: openwiki-source-276795f6d5ad19adb078c64e
+    resource: repo://eslint.config.js
+  - id: openwiki-source-78ab8fda5442c3abe8a80e51
+    resource: repo://src/entities/preorder/ui/PreorderCard/PreorderCard.css.ts
   - id: openwiki-source-180dbe3e59ccf9bf4f9ea9ad
     resource: repo://src/shared/config/theme/index.ts
+  - id: openwiki-source-a2d17cc7a9c2e5a69a1bfd38
+    resource: repo://src/shared/config/theme/mixins.ts
   - id: openwiki-source-52bc90a7f51011b21df8a8e3
     resource: repo://src/shared/config/theme/sprinkles.css.ts
   - id: openwiki-source-0be4609a25decb74f07c8bb9
@@ -23,7 +29,11 @@ sources:
     resource: repo://src/shared/config/theme/tokens/spacing.ts
   - id: openwiki-source-60f66069b720e1c7eb394b69
     resource: repo://src/shared/config/theme/tokens/typography/base.ts
-generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+  - id: openwiki-source-2ceede115a3430c4a9aaf46c
+    resource: repo://src/shared/ui/BottomSheet/BottomSheet.css.ts
+  - id: openwiki-source-3b45612287bea1ac240dba0c
+    resource: repo://src/shared/ui/Button/Button.css.ts
+generated: { by: "claude-code", at: "2026-09-21T01:15:36.692Z" }
 ---
 
 ## 개요
@@ -34,10 +44,15 @@ import해서 쓰는 것이 관례이며, `CLAUDE.md`의 "Reuse before adding" �
 바이기도 하다.
 
 `src/shared/config/theme/index.ts`가 외부에 노출하는 공개 API는 `color`, `spacing`,
-`typography`, `motion`, `sprinkles`(+`Sprinkles` 타입)다. `breakpoint`, `container`,
-`typography/base`는 이 배럴에 없어 `tokens/*` 경로에서 직접 import해야 한다 — `.css.ts` 파일은
-토큰 모듈을 대부분 직접 참조하는 vanilla-extract 관례를 따르고, `.tsx` 파일(레이아웃 등)만
-배럴에서 가져다 쓴다.
+`typography`, `motion`, `sprinkles`(+`Sprinkles` 타입), `lineClamp`다. `breakpoint`,
+`container`, `typography/base`는 이 배럴에 없어 `tokens/*` 경로에서 직접 import해야 한다 —
+`.css.ts` 파일은 토큰 모듈을 대부분 직접 참조하는 vanilla-extract 관례를 따르고, `.tsx` 파일
+(레이아웃 등)만 배럴에서 가져다 쓴다.
+
+`lineClamp`는 `mixins.ts`가 내보내는 유일한 헬퍼로, 줄 수를 받아 `-webkit-line-clamp` 기반
+말줄임 스타일 객체를 반환하는 함수다(토큰처럼 고정값이 아니라 인자를 받는 스타일 조각이라
+`tokens/`가 아닌 별도 `mixins.ts`에 둔다). `entities/preorder`의 `PreorderCard` 제목이
+`...lineClamp(2)`로 2줄 말줄임에 쓴다.
 
 ## 색상: semantic.css.ts 단일 파일
 
@@ -46,9 +61,12 @@ import해서 쓰는 것이 관례이며, `CLAUDE.md`의 "Reuse before adding" �
 값이 1:1로만 매핑돼 있어 분리해 둘 이점이 크지 않다고 판단해 `base.ts`를 없애고 hex 값을
 `semantic.css.ts`에 직접 인라인했다. `createGlobalTheme(':root', ...)`으로 `color` 객체를
 만들고, `globalStyle('body', { color: color.text.primary })`로 바디 기본 텍스트 색을 전역
-지정한다 — 히어로 섹션처럼 다른 색이 필요한 곳만 개별 스타일에서 덮어쓴다. 다크모드용으로
-쓰이던 `backgroundDark` 값은 실제로 어디서도 참조되지 않아 병합 과정에서 함께 정리됐다(=
-다크모드는 아직 구현되어 있지 않다).
+지정한다 — 히어로 섹션처럼 다른 색이 필요한 곳만 개별 스타일에서 덮어쓴다.
+
+`backgroundDark`(`base`/`surface` 두 값만 있는 축소된 팔레트) 토큰은 `base.ts` 정리 이후에도
+`color` 객체 안에 그대로 남아 있다 — 다만 `text`/`border` 등 다크모드에 필요한 나머지
+카테고리는 다크 변형이 없고, `backgroundDark` 자체도 앱 코드 어디에서도 import되지 않는다.
+즉 다크모드는 색상 토큰 절반만 준비된 채로 아직 구현되어 있지 않다.
 
 ## 타이포그래피: base 토큰 + 완성된 스타일 프리셋
 
@@ -89,6 +107,19 @@ breakpoint.desktop`) 두 가지이며 둘 다 명시적 media query를 쓴다. `
 'mobile'`이라 모바일 값을 생략할 수 없다. **정적이라 브레이크포인트별로 안 바뀌는 값은
 sprinkles를 쓰지 않고 plain `style()`로 남기는 것이 관례** — sprinkles는 반응형이 실제로
 필요한 속성에만 쓴다.
+
+## 토큰 import 경로: 상대경로가 아니라 `@/` 앨리어스
+
+같은 컴포넌트 폴더 안의 형제 파일(예: `Button.tsx`가 `./Button.css`를 참조)은 상대경로를
+쓰지만, `shared/config/theme` 밖으로 나가 토큰을 참조할 때는 상대경로(`../../config/theme/...`)
+대신 `@/shared/config/theme/...` 앨리어스를 쓴다. 이건 스타일 취향이 아니라
+`eslint.config.js`의 `import-x/order` 설정이 실제로 구분하는 경계다 — `pathGroups`가
+`@/**`를 `external` 다음, `parent`/`sibling`(상대경로) 앞에 오는 별도 `internal` 그룹으로
+분리해 두 스타일이 같은 파일 안에서 섞이면 그룹 순서가 어긋난다. `BottomSheet.css.ts`,
+`PreorderCard.css.ts`처럼 이후에 작성된 컴포넌트들은 처음부터 `@/shared/config/theme/...`를
+쓰고, `shared/ui`의 오래된 컴포넌트들(`Button`, `Checkbox`, `Dropdown`, `Input`, `Navigator`,
+`SelectButton`, `Tag`, `Toggle`, `SwirlBackground`)도 컴포넌트별 폴더로 옮기면서 같은 방식으로
+정리됐다.
 
 ## 관련
 

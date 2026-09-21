@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
+import { color } from '@/shared/config/theme'
 
 export const root = style({
   display: 'inline-flex',
@@ -40,4 +40,5 @@ export const box = style({
 export const icon = style({
   width: '14px',
   height: '14px',
+  color: color.text.inverse,
 })

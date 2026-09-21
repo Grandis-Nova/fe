@@ -1,7 +1,5 @@
 import { ChevronLeft, ChevronsLeft } from 'lucide-react'
 
-import { color } from '../config/theme/tokens/color/semantic.css'
-
 import * as styles from './Navigator.css'
 
 export type NavigatorProps = {
@@ -30,11 +28,7 @@ export function Navigator({
         aria-label="first page"
         onClick={() => onPageChange?.(1)}
       >
-        <ChevronsLeft
-          className={styles.arrowIcon}
-          color={color.text.tertiary}
-          aria-hidden="true"
-        />
+        <ChevronsLeft className={styles.arrowIcon} aria-hidden="true" />
       </button>
       <button
         type="button"
@@ -42,11 +36,7 @@ export function Navigator({
         aria-label="previous page"
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
       >
-        <ChevronLeft
-          className={styles.arrowIcon}
-          color={color.text.tertiary}
-          aria-hidden="true"
-        />
+        <ChevronLeft className={styles.arrowIcon} aria-hidden="true" />
       </button>
       {pages.map((page) => (
         <button
@@ -72,7 +62,6 @@ export function Navigator({
       >
         <ChevronLeft
           className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
-          color={color.text.tertiary}
           aria-hidden="true"
         />
       </button>
@@ -84,7 +73,6 @@ export function Navigator({
       >
         <ChevronsLeft
           className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
-          color={color.text.tertiary}
           aria-hidden="true"
         />
       </button>

@@ -1,29 +1,24 @@
-import * as styles from './MypageMenu.css';
+import * as styles from './MypageMenu.css'
 
 export type MypageMenuLink =
-  | 'preorder-check'
-  | 'cart'
-  | 'history'
-  | 'address-manage'
-  | 'alert-setting';
+  'preorder-check' | 'cart' | 'history' | 'address-manage'
 
 export type MypageMenuProps = {
-  userName: string;
-  activeLink: MypageMenuLink;
-  onLinkClick?: (link: MypageMenuLink) => void;
-  className?: string;
-};
+  userName: string
+  activeLink: MypageMenuLink
+  onLinkClick?: (link: MypageMenuLink) => void
+  className?: string
+}
 
 const shoppingLinks: { link: MypageMenuLink; label: string }[] = [
   { link: 'preorder-check', label: '사전 예약 확인' },
   { link: 'cart', label: '장바구니' },
   { link: 'history', label: '구매 내역' },
-];
+]
 
 const accountLinks: { link: MypageMenuLink; label: string }[] = [
   { link: 'address-manage', label: '주소록 관리' },
-  { link: 'alert-setting', label: '알림 설정' },
-];
+]
 
 export function MypageMenu({
   userName,
@@ -31,10 +26,8 @@ export function MypageMenu({
   onLinkClick,
   className,
 }: MypageMenuProps) {
-  const isShoppingActive = shoppingLinks.some(
-    ({ link }) => link === activeLink,
-  );
-  const isAccountActive = accountLinks.some(({ link }) => link === activeLink);
+  const isShoppingActive = shoppingLinks.some(({ link }) => link === activeLink)
+  const isAccountActive = accountLinks.some(({ link }) => link === activeLink)
 
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
@@ -53,7 +46,7 @@ export function MypageMenu({
           </div>
           <div className={styles.linkList}>
             {shoppingLinks.map(({ link, label }) => {
-              const isActive = link === activeLink;
+              const isActive = link === activeLink
               return (
                 <button
                   key={link}
@@ -65,7 +58,7 @@ export function MypageMenu({
                 >
                   {label}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
@@ -79,7 +72,7 @@ export function MypageMenu({
           </div>
           <div className={styles.linkList}>
             {accountLinks.map(({ link, label }) => {
-              const isActive = link === activeLink;
+              const isActive = link === activeLink
               return (
                 <button
                   key={link}
@@ -91,11 +84,11 @@ export function MypageMenu({
                 >
                   {label}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

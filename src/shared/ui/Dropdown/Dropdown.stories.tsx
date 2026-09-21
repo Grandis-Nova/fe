@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { expect } from 'storybook/test'
+import { expect, waitFor } from 'storybook/test'
 
 import { Dropdown } from './Dropdown'
 
@@ -26,7 +26,7 @@ export const Open: Story = {
     await expect(
       canvas.getByRole('button', { name: '경기도', expanded: true }),
     ).toBeInTheDocument()
-    await expect(canvas.getByText('부산광역시')).toBeVisible()
+    await waitFor(() => expect(canvas.getByText('부산광역시')).toBeVisible())
   },
 }
 
@@ -59,7 +59,7 @@ export const Interactive: Story = {
     await userEvent.click(trigger)
     await expect(trigger).toHaveAttribute('aria-expanded', 'true')
     const busanOption = canvas.getByRole('button', { name: '부산광역시' })
-    await expect(busanOption).toBeVisible()
+    await waitFor(() => expect(busanOption).toBeVisible())
 
     await userEvent.click(busanOption)
     await expect(trigger).toHaveAttribute('aria-expanded', 'false')

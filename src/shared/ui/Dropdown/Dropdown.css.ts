@@ -1,6 +1,11 @@
-import { style, styleVariants } from '@vanilla-extract/css'
+import { keyframes, style, styleVariants } from '@vanilla-extract/css'
 
-import { color, spacing, typography } from '@/shared/config/theme'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
+
+const optionEnter = keyframes({
+  from: { opacity: 0, transform: 'translateY(-4px)' },
+  to: { opacity: 1, transform: 'translateY(0)' },
+})
 
 export const root = style([
   typography.body.subMedium,
@@ -10,6 +15,7 @@ export const root = style([
     background: color.background.base,
     border: `1px solid ${color.border.default}`,
     overflow: 'hidden',
+    transition: `border-color ${motion.duration.fast} ${motion.easing.default}`,
   },
 ])
 
@@ -83,6 +89,7 @@ export const option = styleVariants({
       border: 'none',
       textAlign: 'left',
       cursor: 'pointer',
+      animation: `${optionEnter} ${motion.duration.fast} ${motion.easing.default}`,
       selectors: {
         '&:hover': {
           background: color.background.subSurface,
@@ -101,6 +108,7 @@ export const option = styleVariants({
       border: 'none',
       textAlign: 'left',
       cursor: 'pointer',
+      animation: `${optionEnter} ${motion.duration.fast} ${motion.easing.default}`,
       selectors: {
         '&:hover': {
           background: color.background.subSurface,

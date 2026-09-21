@@ -1,4 +1,4 @@
-import { expect } from 'storybook/test'
+import { expect, waitFor } from 'storybook/test'
 
 import { Button } from './Button'
 
@@ -40,6 +40,33 @@ export const Outline: Story = {
     color: 'primary',
     variant: 'outline',
     size: 'medium',
+  },
+}
+
+export const WithIcon: Story = {
+  args: {
+    children: '장바구니',
+    color: 'primary',
+    variant: 'solid',
+    size: 'small',
+    icon: 'shopping-cart',
+  },
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button', { name: '장바구니' })
+    // size='small' -> icon size = spacing[16] = 16px
+    await waitFor(() =>
+      expect(button.querySelector('svg')).toHaveAttribute('width', '16px'),
+    )
+  },
+}
+
+export const IconSizes: Story = {
+  args: {
+    children: '장바구니',
+    color: 'primary',
+    variant: 'solid',
+    size: 'medium',
+    icon: 'shopping-cart',
   },
 }
 

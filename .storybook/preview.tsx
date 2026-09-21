@@ -1,8 +1,17 @@
+import { MemoryRouter } from 'react-router'
+
 import type { Preview } from '@storybook/react-vite'
 import '../src/app/styles/index.css'
 import '../src/shared/config/theme'
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {

@@ -25,6 +25,8 @@ export const indicators = style({
   justifyContent: 'center',
   gap: spacing[8],
   bottom: spacing[12],
+  left: '50%',
+  transform: 'translateX(-50%)',
 })
 
 export const indicator = style({

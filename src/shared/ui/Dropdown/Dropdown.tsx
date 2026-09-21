@@ -40,7 +40,7 @@ export function Dropdown({
         onClick={onToggle}
         aria-expanded={open}
       >
-        {label}
+        {selectedOption ?? label}
         {open ? (
           <ChevronUp className={styles.triggerIcon} aria-hidden="true" />
         ) : (

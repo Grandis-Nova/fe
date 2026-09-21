@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color, typography } from '@/shared/config/theme'
+import { color, motion, typography } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -21,6 +21,12 @@ export const tab = style([
     borderBottom: '2px solid transparent',
     color: color.text.tertiary,
     cursor: 'pointer',
+    transition: `color ${motion.duration.fast} ${motion.easing.default}`,
+    selectors: {
+      '&:hover': {
+        color: color.primary.base,
+      },
+    },
   },
 ])
 

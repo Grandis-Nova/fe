@@ -50,7 +50,7 @@ export function PreorderModelSummary({
         onClick={isOver ? onReserve : onNotify}
         disabled={ctaDisabled}
         size="small"
-        // icon={<Bell size={16} />}
+
         rounded
       >
         {ctaLabel}

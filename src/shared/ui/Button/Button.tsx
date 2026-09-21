@@ -1,4 +1,8 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
+
+import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
+
+import { spacing } from '@/shared/config/theme'
 
 import * as styles from './Button.css'
 
@@ -6,12 +10,18 @@ type ButtonColor = 'primary' | 'secondary' | 'cancel'
 type ButtonVariant = 'solid' | 'outline'
 type ButtonSize = 'large' | 'medium' | 'small'
 
+const iconSize: Record<ButtonSize, string> = {
+  small: spacing[16],
+  medium: spacing[20],
+  large: spacing[24],
+}
+
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: ButtonColor
   variant?: ButtonVariant
   size?: ButtonSize
   rounded?: boolean
-  icon?: ReactNode
+  icon?: IconName
 }
 
 export function Button({
@@ -40,7 +50,13 @@ export function Button({
         .join(' ')}
       {...rest}
     >
-      {icon && <div className={styles.icon}>{icon}</div>}
+      {icon && (
+        <DynamicIcon
+          name={icon}
+          size={iconSize[size]}
+          className={styles.icon}
+        />
+      )}
       {children}
     </button>
   )

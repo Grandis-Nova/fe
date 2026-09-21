@@ -3,7 +3,7 @@ import { style, styleVariants } from '@vanilla-extract/css'
 import { color, spacing, typography } from '@/shared/config/theme'
 
 export const base = style({
-  // display: 'inline-flex',
+  display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   border: '1px solid transparent',
@@ -27,6 +27,7 @@ export const size = styleVariants({
       gap: spacing[12],
       padding: `0 ${spacing[20]}`,
       borderRadius: '14px',
+      borderWidth: '2px',
     },
   ],
   medium: [
@@ -37,6 +38,7 @@ export const size = styleVariants({
       gap: spacing[10],
       padding: `0 ${spacing[16]}`,
       borderRadius: '12px',
+      borderWidth: '1.5px',
     },
   ],
   small: [
@@ -47,6 +49,7 @@ export const size = styleVariants({
       gap: spacing[6],
       padding: `0 ${spacing[12]}`,
       borderRadius: '10px',
+      borderWidth: '1px',
     },
   ],
 })
@@ -90,7 +93,6 @@ export const outline = styleVariants({
   primary: {
     background: color.background.base,
     borderColor: color.primary.base,
-    borderWidth: '1.5px',
     color: color.primary.base,
     selectors: {
       '&:hover:not(:disabled)': {
@@ -101,7 +103,6 @@ export const outline = styleVariants({
   secondary: {
     background: color.background.base,
     borderColor: color.secondary.base,
-    borderWidth: '1.5px',
     color: color.secondary.base,
     selectors: {
       '&:hover:not(:disabled)': {
@@ -112,7 +113,6 @@ export const outline = styleVariants({
   cancel: {
     background: color.background.base,
     borderColor: color.border.hover,
-    borderWidth: '1.5px',
     color: color.text.secondary,
     selectors: {
       '&:hover:not(:disabled)': {

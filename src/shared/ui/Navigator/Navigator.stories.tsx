@@ -13,11 +13,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const FirstPage: Story = {
-  args: { totalPages: 8, currentPage: 1 },
+  args: { totalPages: 7, currentPage: 1 },
 }
 
 export const MiddlePage: Story = {
-  args: { totalPages: 8, currentPage: 4 },
+  args: { totalPages: 7, currentPage: 4 },
   play: async ({ canvas }) => {
     await expect(canvas.getByRole('button', { name: '4' })).toHaveAttribute(
       'aria-current',
@@ -27,5 +27,5 @@ export const MiddlePage: Story = {
 }
 
 export const LastPage: Story = {
-  args: { totalPages: 8, currentPage: 8 },
+  args: { totalPages: 7, currentPage: 7 },
 }

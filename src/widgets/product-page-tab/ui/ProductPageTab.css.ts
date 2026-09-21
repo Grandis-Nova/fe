@@ -1,7 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
 import { color, typography } from '@/shared/config/theme'
-import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
 
 export const root = style({
   display: 'flex',
@@ -10,7 +9,7 @@ export const root = style({
 })
 
 export const tab = style([
-  typography.title.lgSemibold,
+  typography.navigation.tab,
   {
     flex: '1 0 0',
     height: '56px',
@@ -21,13 +20,14 @@ export const tab = style([
     border: 'none',
     borderBottom: '2px solid transparent',
     color: color.text.tertiary,
-    fontWeight: fontWeight.regular,
     cursor: 'pointer',
   },
 ])
 
-export const tabActive = style({
-  borderBottomColor: color.primary.base,
-  color: color.primary.base,
-  fontWeight: fontWeight.semibold,
-})
+export const tabActive = style([
+  typography.button.lgSemibold,
+  {
+    borderBottomColor: color.primary.base,
+    color: color.primary.base,
+  },
+])

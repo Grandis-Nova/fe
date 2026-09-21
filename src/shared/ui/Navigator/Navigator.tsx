@@ -11,13 +11,55 @@ export type NavigatorProps = {
   className?: string
 }
 
+const VISIBLE_PAGE_COUNT = 7
+const SIBLING_COUNT = 1
+
+type PageItem = number | 'ellipsis'
+
+function getPageItems(totalPages: number, currentPage: number): PageItem[] {
+  if (totalPages <= VISIBLE_PAGE_COUNT) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1)
+  }
+
+  const leftSibling = Math.max(currentPage - SIBLING_COUNT, 1)
+  const rightSibling = Math.min(currentPage + SIBLING_COUNT, totalPages)
+  const showLeftEllipsis = leftSibling > 2
+  const showRightEllipsis = rightSibling < totalPages - 1
+
+  if (!showLeftEllipsis && showRightEllipsis) {
+    return [1, 2, 3, 4, 5, 'ellipsis', totalPages]
+  }
+
+  if (showLeftEllipsis && !showRightEllipsis) {
+    return [
+      1,
+      'ellipsis',
+      totalPages - 4,
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages,
+    ]
+  }
+
+  return [
+    1,
+    'ellipsis',
+    leftSibling,
+    currentPage,
+    rightSibling,
+    'ellipsis',
+    totalPages,
+  ]
+}
+
 export function Navigator({
   totalPages,
   currentPage,
   onPageChange,
   className,
 }: NavigatorProps) {
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
+  const pageItems = getPageItems(totalPages, currentPage)
 
   return (
     <nav
@@ -38,21 +80,31 @@ export function Navigator({
       >
         <ChevronLeft className={styles.arrowIcon} aria-hidden="true" />
       </Button>
-      {pages.map((page) => (
-        <Button
-          key={page}
-          className={[
-            styles.pageButton,
-            page === currentPage && styles.pageButtonActive,
-          ]
-            .filter(Boolean)
-            .join(' ')}
-          aria-current={page === currentPage ? 'page' : undefined}
-          onClick={() => onPageChange?.(page)}
-        >
-          {page}
-        </Button>
-      ))}
+      {pageItems.map((item, index) =>
+        item === 'ellipsis' ? (
+          <span
+            key={`ellipsis-${index}`}
+            className={styles.ellipsis}
+            aria-hidden="true"
+          >
+            …
+          </span>
+        ) : (
+          <Button
+            key={item}
+            className={[
+              styles.pageButton,
+              item === currentPage && styles.pageButtonActive,
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            aria-current={item === currentPage ? 'page' : undefined}
+            onClick={() => onPageChange?.(item)}
+          >
+            {item}
+          </Button>
+        ),
+      )}
       <Button
         className={styles.arrowButton}
         aria-label="next page"

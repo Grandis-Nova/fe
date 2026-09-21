@@ -39,7 +39,7 @@ export const arrowIconFlipped = style({
 })
 
 export const pageButton = style([
-  typography.body.subMedium,
+  typography.body.sub,
   {
     display: 'inline-flex',
     alignItems: 'center',
@@ -51,6 +51,7 @@ export const pageButton = style([
     background: color.background.base,
     color: color.text.tertiary,
     cursor: 'pointer',
+    transition: `background ${motion.duration.fast} ${motion.easing.default}`,
     selectors: {
       '&:hover:not(:disabled)': {
         background: color.primary.subtler,
@@ -59,12 +60,28 @@ export const pageButton = style([
   },
 ])
 
-export const pageButtonActive = style({
-  background: color.primary.subtler,
-  color: color.primary.base,
-  selectors: {
-    '&:hover:not(:disabled)': {
-      background: color.primary.surface,
+export const ellipsis = style([
+  typography.body.sub,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '38px',
+    height: '38px',
+    color: color.text.tertiary,
+  },
+])
+
+export const pageButtonActive = style([
+  typography.body.subMedium,
+  {
+    background: color.primary.subtler,
+    color: color.primary.base,
+    transition: `background ${motion.duration.fast} ${motion.easing.default}`,
+    selectors: {
+      '&:hover:not(:disabled)': {
+        background: color.primary.surface,
+      },
     },
   },
-})
+])

@@ -1,24 +1,15 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from 'eslint-plugin-storybook';
+import storybook from 'eslint-plugin-storybook'
 
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import importX from 'eslint-plugin-import-x';
-import unusedImports from 'eslint-plugin-unused-imports';
-import prettierConfig from 'eslint-config-prettier';
-
-// Supabase Edge Functions(Deno 런타임)에서 사용하는 전역 객체.
-// globals 패키지에 deno 환경이 없어 수동으로 정의한다.
-// process 는 @types/node 가 제공하므로 제외한다.
-const denoGlobals = {
-  Deno: 'readonly',
-  EdgeRuntime: 'readonly',
-  console: 'readonly',
-};
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import importX from 'eslint-plugin-import-x'
+import unusedImports from 'eslint-plugin-unused-imports'
+import prettierConfig from 'eslint-config-prettier'
 
 // import 순서를 그룹별로 강제하는 공통 규칙.
 // 외부 패키지 → 내부 별칭(@/) → 상대경로 → 타입 import 순으로 정렬한다.
@@ -47,7 +38,7 @@ const importOrderRules = {
   ],
   'import-x/no-duplicates': 'error',
   'import-x/no-cycle': 'warn',
-};
+}
 
 // 미사용 import/변수를 자동 제거하는 공통 규칙.
 // typescript-eslint의 no-unused-vars를 unused-imports로 위임한다.
@@ -64,7 +55,7 @@ const unusedImportsRules = {
       argsIgnorePattern: '^_',
     },
   ],
-};
+}
 
 // FSD 레이어 의존성 규칙 — 상위 레이어가 하위 레이어로만 import 가능
 // app → pages → widgets → features → entities → shared
@@ -101,7 +92,7 @@ const fsdBoundaryRules = {
       ],
     },
   ],
-};
+}
 
 export default defineConfig([
   globalIgnores([
@@ -110,9 +101,6 @@ export default defineConfig([
     'storybook-static',
     'node_modules',
     'stats.html',
-    // Supabase Edge Functions(Deno 런타임)는 npm: specifier 를 사용하므로
-    // import-x resolver 가 해석할 수 없어 별도 런타임 검사로 분리한다.
-    'supabase/functions/**/*.{ts,tsx}',
     // flat config 파일 자신을 자기 자신으로 린트하면 순환적 경고가 발생하므로 제외
     'eslint.config.js',
   ]),
@@ -174,32 +162,7 @@ export default defineConfig([
     },
   },
 
-  // Supabase Edge Functions(Deno 런타임)
-  // 브라우저 글로벌이 아닌 Deno/EdgeRuntime 글로벌을 사용한다.
-  // supabase/tsconfig.json 을 resolver 대상으로 지정하여 .ts 확장자 import 를 해석한다.
-  {
-    files: ['supabase/functions/**/*.{ts,tsx}'],
-    extends: [js.configs.recommended, tseslint.configs.recommended],
-    plugins: {
-      'unused-imports': unusedImports,
-    },
-    languageOptions: {
-      globals: denoGlobals,
-    },
-    settings: {
-      'import-x/resolver': {
-        typescript: {
-          project: 'supabase/tsconfig.json',
-        },
-      },
-    },
-    rules: {
-      ...importOrderRules,
-      ...unusedImportsRules,
-    },
-  },
-
   // Prettier와 충돌하는 ESLint 스타일 규칙 비활성화 (항상 마지막)
   prettierConfig,
   ...storybook.configs['flat/recommended'],
-]);
+])

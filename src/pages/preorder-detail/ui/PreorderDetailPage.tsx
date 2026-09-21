@@ -1,3 +1,115 @@
+import { useState } from 'react'
+
+import { useNavigate } from 'react-router'
+
+import { PreorderModelSummary } from '@/entities/preorder'
+import { useCountdown } from '@/shared/lib/useCountdown'
+import { Container, Button, BottomSheet } from '@/shared/ui'
+
+import * as styles from './PreorderDetailPage.css'
+
+// ponytail: 임시 하드코딩된 오픈 시간, 실제 데이터 연동 시 API 응답으로 교체
+const TEMP_OPENS_AT = new Date('2026-09-20T10:00:00')
+
 export function PreorderDetailPage() {
-  return <div>Preorder Detail Page</div>
+  // const { preorderId } = useParams()
+  const navigate = useNavigate()
+  const { days, hours, minutes, seconds, isOver } = useCountdown(TEMP_OPENS_AT)
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false)
+  const [isAlert, setIsAlert] = useState(false)
+
+  const handleActionClick = () => {
+    setBottomSheetOpen(true)
+  }
+
+  const handleNotify = () => {
+    // ponytail: 알림 신청 API 연동 전 임시 처리 — 연동 시 실제 제출 로직으로 교체
+    setIsAlert(true)
+    alert('IPhone 18 Pro 알림 신청이 완료됐습니다.')
+  }
+
+  const handleNotifySubmit = () => {
+    // ponytail: 알림 신청 API 연동 전 임시 처리 — 연동 시 실제 제출 로직으로 교체
+    setBottomSheetOpen(false)
+  }
+
+  return (
+    <Container
+      desktopPaddingX={0}
+      desktopPaddingY={0}
+      mobilePaddingX={0}
+      mobilePaddingY={0}
+      className={styles.Container}
+    >
+      <div className={styles.title}>
+        아이폰 18프로, 18프로맥스, 울트라 사전예약 프로모션
+      </div>
+
+      <div
+        style={{
+          width: '100%',
+          height: '1000px',
+          backgroundColor: '#c4c4c4',
+        }}
+      >
+        first information section
+      </div>
+      <div className={styles.countdownWrapper}>
+        <div className={styles.countdown}>
+          {!isOver &&
+            `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 후 신청 시작`}
+        </div>
+        <Button
+          style={{ width: '100%' }}
+          onClick={handleActionClick}
+          size="large"
+        >
+          {isOver ? '사전예약 하러가기' : '예약알림 신청하기'}
+        </Button>
+      </div>
+
+      <BottomSheet.Root
+        open={bottomSheetOpen}
+        onOpenChange={setBottomSheetOpen}
+      >
+        <BottomSheet.Content>
+          <BottomSheet.Title className={styles.bottomSheetTitle}>
+            {isOver ? '사전예약 이동' : '예약알림 신청'}
+          </BottomSheet.Title>
+          <BottomSheet.Description className={styles.bottomSheetDescription}>
+            {isOver
+              ? '예약할 모델을 선택해주세요.'
+              : '알림을 받을 모델을 선택해주세요.'}
+          </BottomSheet.Description>
+          <div className={styles.modelSummary}>
+            <PreorderModelSummary
+              name="IPhone 18 Pro"
+              opensAtLabel={`오픈일 ${TEMP_OPENS_AT.toLocaleDateString()}`}
+              isOver={isOver}
+              isAlert={isAlert}
+              onReserve={() => navigate(`/products/1`)}
+              onNotify={handleNotify}
+            />
+
+            <PreorderModelSummary
+              name="IPhone 18 Pro Max"
+              opensAtLabel={`오픈일 ${TEMP_OPENS_AT.toLocaleDateString()}`}
+              isOver={isOver}
+              isAlert={isAlert}
+              onReserve={() => navigate(`/products/2`)}
+              onNotify={handleNotify}
+            />
+          </div>
+          <Button
+            onClick={handleNotifySubmit}
+            rounded
+            color="cancel"
+            // variant="outline"
+          >
+            닫기
+          </Button>
+        </BottomSheet.Content>
+      </BottomSheet.Root>
+    </Container>
+  )
 }

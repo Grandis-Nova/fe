@@ -1,14 +1,23 @@
 export { ProductCard } from './ui/ProductCard'
-export type { ProductCardProps, ProductCardData, ProductStorageOption } from './ui/ProductCard'
-export { ProductColorSelector } from './ui/ProductColorSelector'
-export type { ProductColorSelectorProps, ProductColorOption } from './ui/ProductColorSelector'
+export type {
+  ProductCardProps,
+  ProductCardData,
+  ProductStorageOption,
+} from './ui/ProductCard'
 export { ProductColorSwatches } from './ui/ProductColorSwatches'
-export type { ProductColorSwatchesProps, ProductColorSwatchItem } from './ui/ProductColorSwatches'
-export { ProductStorageSelector } from './ui/ProductStorageSelector'
-export type { ProductStorageSelectorProps } from './ui/ProductStorageSelector'
-export { ProductServiceSelector } from './ui/ProductServiceSelector'
-export type { ProductServiceSelectorProps } from './ui/ProductServiceSelector'
+export type {
+  ProductColorSwatchesProps,
+  ProductColorSwatchItem,
+} from './ui/ProductColorSwatches'
+export { ProductOptionSelector } from './ui/ProductOptionSelector'
+export type {
+  ProductOptionSelectorProps,
+  ProductOption,
+} from './ui/ProductOptionSelector'
 export { ProductSummary } from './ui/ProductSummary'
 export type { ProductSummaryProps } from './ui/ProductSummary'
 export { ProductPaymentCard } from './ui/ProductPaymentCard'
-export type { ProductPaymentCardProps, ProductPaymentCardVariant } from './ui/ProductPaymentCard'
+export type {
+  ProductPaymentCardProps,
+  ProductPaymentCardVariant,
+} from './ui/ProductPaymentCard'

@@ -4,7 +4,8 @@ export type MypageMenuLink =
   | 'preorder-check'
   | 'cart'
   | 'history'
-  | 'address-manage';
+  | 'address-manage'
+  | 'alert-setting';
 
 export type MypageMenuProps = {
   userName: string;
@@ -21,6 +22,7 @@ const shoppingLinks: { link: MypageMenuLink; label: string }[] = [
 
 const accountLinks: { link: MypageMenuLink; label: string }[] = [
   { link: 'address-manage', label: '주소록 관리' },
+  { link: 'alert-setting', label: '알림 설정' },
 ];
 
 export function MypageMenu({

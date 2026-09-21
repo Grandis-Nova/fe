@@ -1,78 +1,102 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9f0029bd02a2d49ffc61290383ad86b10656528109270978692af6b8b00e5c9b",
+  "pageVersion": "sha256:dc9949d8bab8d6802bc801883b894be73072a204684bd13e2e1585c61ce407f3",
   "claims": [
     {
-      "id": "claim_64b9e2038976438cb08d2479fa638cfe",
-      "statement": "The build script runs `tsc -b` before `vite build`, so a TypeScript project-reference type check must pass before Vite produces the production bundle.",
+      "id": "claim_b1221eca1c884cd480be757b64b3b479",
+      "statement": "package.json의 lint/lint:fix 스크립트는 oxlint가 아니라 eslint .와 eslint . --fix를 호출하며, oxlint는 devDependency와 .oxlintrc.json으로만 남아있고 더 이상 활성 린터가 아니다.",
       "evidence": [
         {
-          "resource": "repo://package.json",
-          "version": "repo-file-v1:sha256:f20c6723e4a146da1922f049e7d83b72dbc7e4949d5bc7770f48b8f1e31503aa"
+          "resource": "repo://package.json#L6-L13",
+          "version": "repo-lines-v1:sha256:d40a70292357d047fd6484ad449b9e76d13551a72f87e622e32685c35012e724:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5YzQyYzRiMmQyYzZmNWE4ODdjOWViOWRkY2EwMjAwNGI0ZGYyZDJhYTU4MjE0MWVmMTA4ODQ4MzE4MGI0MTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhNjNiZjA5NGY1M2E4OTEyMzI3OTI0ZTI5ZTExOTMyM2IyYzk1OWFjYzAxMzJmYWZhMjcxNTJiNWJkOWY4NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmMDA1NzI4OWM4MTAyZTJkNzI0MWYxNGM2MWIwYmE0ZDBjZDFiMTFlOWZmYmQyYzEzODM1N2NjOGIwNGE1NTYifQ"
         }
       ]
     },
     {
-      "id": "claim_79bfcb2d2718442c85212a248e4c96c6",
-      "statement": "vite.config.ts registers both @vitejs/plugin-react and @vanilla-extract/vite-plugin's vanillaExtractPlugin(), which together enable JSX/Fast Refresh handling and build-time compilation of .css.ts files.",
+      "id": "claim_4d5c28fd4a99444dbfb45d94262e5897",
+      "statement": "build 스크립트는 tsc -b && vite build로, TypeScript 프로젝트 참조 빌드가 먼저 통과해야 Vite가 프로덕션 번들을 만든다.",
       "evidence": [
         {
-          "resource": "repo://vite.config.ts",
-          "version": "repo-file-v1:sha256:530efc259e4c7897dc82e555b6ab3344272e6e015ef8da94f25e206052ed1992"
+          "resource": "repo://package.json#L8-L8",
+          "version": "repo-lines-v1:sha256:7406bc423aab401421a04f1580264ee55ce87de097dc98c26baa6ba0ce4c2ec1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQwNmJjNDIzYWFiNDAxNDIxYTA0ZjE1ODAyNjRlZTU1Y2U4N2RlMDk3ZGM5OGMyNmJhYTZiYTBjZTRjMmVjMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQwNmJjNDIzYWFiNDAxNDIxYTA0ZjE1ODAyNjRlZTU1Y2U4N2RlMDk3ZGM5OGMyNmJhYTZiYTBjZTRjMmVjMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzY4MjlmNDAyYjVmODk3NGVlMzNkYjdhNzQwZWU1NWQxNTVjOTRjZjUwYjI3YjE1Njc3M2Q4MmM4ZmYzNzFlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzYxODIxNTM3YjY3YmZhOThmMjk2YTZhYjkzYWMyMmZlOGJlMmE3YzU4Y2I5Zjg5MGM3N2Y0MWY2NDY5ODZlZCJ9"
         }
       ]
     },
     {
-      "id": "claim_dd2370f25e6d432491b09653690b815f",
-      "statement": "App.css.ts defines vanilla-extract style objects (card, logo) including a :hover pseudo-class inside the style() call, and App.tsx imports them to set className props.",
+      "id": "claim_101bbafe64e6471ea9feeb38e819fc51",
+      "statement": "vite.config.ts는 @vitejs/plugin-react와 vanillaExtractPlugin()을 등록하고, @/* 경로 별칭을 정의하며, @storybook/addon-vitest의 storybookTest()를 test.projects에 연결해 스토리를 @vitest/browser-playwright(Chromium) 브라우저 모드 Vitest로도 실행한다.",
       "evidence": [
         {
-          "resource": "repo://src/app/App.css.ts",
-          "version": "repo-file-v1:sha256:43c81787997303cd6db089c234387014fcc7e83bec883e722ab5636851d36983"
+          "resource": "repo://vite.config.ts#L14-L48",
+          "version": "repo-lines-v1:sha256:600460a7b5a19087c4cdc88a7b09847c60ba913d9dead8a61fdde68c84c74458:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyY2VjYjE0NGE0NmY1ZGNmMTJhNjE2OWZjZWVkNzY5NWU4Mjk0YjA5MGRlNzZmMzY2MWNkZDAyNDkzMDAxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2YzUyYWQyZWY5YWRkYzY0Yjg4NGVlMDg4YjljYTMzNzhmYzY1NmQzY2E0NjAyZTExOGU2YzlhZGUzZGIwYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
     {
-      "id": "claim_071db6b98e9544a88b83a88f1fbe1cb0",
-      "statement": "Global styles are kept in a plain .css file (src/app/styles/index.css) rather than vanilla-extract, so component-scoped styles use .css.ts while global styles use .css.",
+      "id": "claim_bc334bfa8b8341c6810dd8f01b7f7f0d",
+      "statement": "전역 스타일(리셋 등)은 Vanilla Extract가 아닌 순수 .css 파일(src/app/styles/index.css)로 유지되고, 컴포넌트 스코프 스타일은 *.css.ts로 역할이 나눠져 있다.",
       "evidence": [
         {
           "resource": "repo://src/app/styles/index.css",
-          "version": "repo-file-v1:sha256:535c25dd1f338486ab3678832fc698011c8b8d1fe4ffd3d0ef5e33181457cc9f"
+          "version": "repo-file-v1:sha256:613ec945a479027bd0c72615d63665fd411b9adafc8d79a7caaa5233377a776e"
         }
       ]
     },
     {
-      "id": "claim_277f7d06f43e4bea8aea5fb39e15f13f",
-      "statement": "tsconfig.json contains no files of its own and only wires tsconfig.app.json (src app code, bundler module resolution, noEmit) and tsconfig.node.json (vite.config.ts under a Node typing context) as project references.",
+      "id": "claim_e67b133423d4479a992db0674f61cea9",
+      "statement": "tsconfig.json은 자체 파일을 포함하지 않고 tsconfig.app.json과 tsconfig.node.json을 project reference로만 묶는다.",
       "evidence": [
         {
-          "resource": "repo://tsconfig.app.json",
-          "version": "repo-file-v1:sha256:8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0"
+          "resource": "repo://tsconfig.app.json#L1-L29",
+          "version": "repo-lines-v1:sha256:42e2ac780ef3012109b9321e883ef4dbd7e90242435d873ae1a0a9e4e0814e6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://tsconfig.json",
           "version": "repo-file-v1:sha256:770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
-        },
-        {
-          "resource": "repo://tsconfig.node.json",
-          "version": "repo-file-v1:sha256:d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8"
         }
       ]
     },
     {
-      "id": "claim_18941b71622b4e22a48d63ce152ce53f",
-      "statement": ".oxlintrc.json enables the react, typescript, and oxc oxlint plugins, sets react/rules-of-hooks to error, and sets react/only-export-components to warn with allowConstantExport.",
+      "id": "claim_bfad969549944f60a7688c58740cfedd",
+      "statement": ".storybook/main.ts는 src 하위 *.stories.tsx/*.mdx를 수집하고 @storybook/addon-vitest, addon-a11y, addon-docs, addon-mcp, chromatic-com/storybook 애드온과 @storybook/react-vite 프레임워크를 쓴다. preview.tsx는 전역 스타일과 디자인 토큰을 로드하고 a11y 검사를 test:'todo'로 설정해 위반이 CI를 실패시키지 않는다.",
       "evidence": [
         {
-          "resource": "repo://.oxlintrc.json",
-          "version": "repo-file-v1:sha256:b4d344818a1e1bf43997e4744a9153c8eef770c98b58229cd86363dabb85ded4"
+          "resource": "repo://.storybook/main.ts",
+          "version": "repo-file-v1:sha256:0b854a8d4d2132e5035364c3f3e8032fe136d9687405ae075085c606d9b0b4c3"
+        },
+        {
+          "resource": "repo://.storybook/preview.tsx",
+          "version": "repo-file-v1:sha256:c86e2804075409cc1c1ecdc03ac632af516068e477a1f8f58b491c750a38876b"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d17d719971840c981fe985e67cda15e",
+      "statement": "oxlint는 devDependency와 .oxlintrc.json 설정 파일 모두 저장소에서 완전히 제거되었고, 린터는 eslint.config.js 기반 ESLint 하나뿐이다.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L28-L58",
+          "version": "repo-lines-v1:sha256:f2baa5ec8c020312486f78b9ab3f32f3b04d4fdc31c8d886a26f56260905bd51:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYzRkZTdlZDM1YTIzMzY0NTM5ODY0ZGFkYjkzOGI4NzIzMzM3OTE3OWQ2MjkyYjlmZjVmNjE5YTZjMTMxNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmMWQ3NWM1ZDFlOWNmZWE1MjQxZTRkMTY5OTQyYTVhZjY0MzhmOGNiODhjZmQ4M2YwZmM0ZWNjZmFkMWVjYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6469bbcd24fe40f083ce8702bb1517be",
+      "statement": "Prettier가 포맷터로 도입되어 있으며 format/format:fix 스크립트로 실행되고, .prettierrc는 singleQuote:true, semi:false만 지정하며 eslint-config-prettier로 ESLint와 규칙 충돌을 방지한다.",
+      "evidence": [
+        {
+          "resource": "repo://.prettierrc",
+          "version": "repo-file-v1:sha256:63bb4e4bdb4fd024c9d53bc8ba5822586efa2257791907cf91caf3da7a07b7af"
+        },
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:24d8199b4a63c22b107bb52f1d00e3485a36396d7e5b6635f677e122bd187d9d"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-15T04:58:54.229Z"
+    "at": "2026-09-20T09:53:37.867Z"
   }
 }

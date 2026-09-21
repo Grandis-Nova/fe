@@ -29,8 +29,14 @@ const boxBase = style({
 })
 
 export const box = styleVariants({
-  medium: [boxBase, { height: '56px', borderRadius: '12px', padding: `0 ${spacing[16]}` }],
-  small: [boxBase, { height: '46px', borderRadius: '8px', padding: `0 ${spacing[12]}` }],
+  medium: [
+    boxBase,
+    { height: '56px', borderRadius: '12px', padding: `0 ${spacing[16]}` },
+  ],
+  small: [
+    boxBase,
+    { height: '46px', borderRadius: '8px', padding: `0 ${spacing[12]}` },
+  ],
 })
 
 export const boxError = style({

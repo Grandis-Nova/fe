@@ -15,14 +15,20 @@ const tabs: { key: ProductPageTabKey; label: string }[] = [
   { key: 'review', label: '구매 후기' },
 ]
 
-export function ProductPageTab({ activeTab, onTabChange, className }: ProductPageTabProps) {
+export function ProductPageTab({
+  activeTab,
+  onTabChange,
+  className,
+}: ProductPageTabProps) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       {tabs.map(({ key, label }) => (
         <button
           key={key}
           type="button"
-          className={[styles.tab, key === activeTab && styles.tabActive].filter(Boolean).join(' ')}
+          className={[styles.tab, key === activeTab && styles.tabActive]
+            .filter(Boolean)
+            .join(' ')}
           onClick={() => onTabChange?.(key)}
         >
           {label}

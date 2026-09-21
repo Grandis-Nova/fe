@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d50fcea46558513f6041acd0927ca3594c58a1c82748c530a21546293b91fd35",
+  "pageVersion": "sha256:55870d14e86d0221bf2248ae6d791d0ba91c1761bb7aa4b09acb7a3c2b3e8b8d",
   "claims": [
     {
-      "id": "claim_8ba99ab02eb741f1996ce1c30404745c",
-      "statement": "The npm scripts dev, build, preview, and lint respectively run the Vite dev server, tsc -b followed by vite build, a local preview of the build output, and oxlint.",
+      "id": "claim_cb9bc4bc5b3a4d23b9b4776746c4f267",
+      "statement": "package.json의 dev/build/preview/lint/lint:fix/format/format:fix/storybook/build-storybook 스크립트는 각각 vite 개발 서버, tsc -b && vite build, vite preview, eslint ., eslint . --fix, prettier --check ., prettier --write ., storybook dev -p 6006, storybook build를 실행한다.",
       "evidence": [
         {
           "resource": "repo://package.json",
-          "version": "repo-file-v1:sha256:f20c6723e4a146da1922f049e7d83b72dbc7e4949d5bc7770f48b8f1e31503aa"
+          "version": "repo-file-v1:sha256:24d8199b4a63c22b107bb52f1d00e3485a36396d7e5b6635f677e122bd187d9d"
         }
       ]
     },
     {
-      "id": "claim_18a93f114bae4e0b8a8fe9b283fdbac4",
-      "statement": "src/main.tsx is the app entrypoint that creates the React root and imports the root component and global styles from the app layer.",
+      "id": "claim_5a9e265ee3b4449c990379ea49729416",
+      "statement": "src/main.tsx는 src/app/router/index.tsx가 만드는 router를 RouterProvider에 넘기고 전역 스타일/디자인 토큰을 불러오는 것 외에는 로직이 없는 순수 부트스트랩 파일이다.",
       "evidence": [
         {
           "resource": "repo://src/main.tsx",
-          "version": "repo-file-v1:sha256:4ab315a70577af86846ee0888314c3bfc88c32efb2ce168d697806e006ebe954"
+          "version": "repo-file-v1:sha256:8af84349bfd07d17ac380386fbd6e44501dbf7f40fd5dc4b7239cec9ee29191f"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-15T04:58:54.229Z"
+    "at": "2026-09-20T09:53:37.867Z"
   }
 }

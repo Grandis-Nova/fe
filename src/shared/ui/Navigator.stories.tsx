@@ -19,7 +19,10 @@ export const FirstPage: Story = {
 export const MiddlePage: Story = {
   args: { totalPages: 8, currentPage: 4 },
   play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button', { name: '4' })).toHaveAttribute('aria-current', 'page')
+    await expect(canvas.getByRole('button', { name: '4' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
   },
 }
 

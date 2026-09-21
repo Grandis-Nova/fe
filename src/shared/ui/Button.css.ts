@@ -1,11 +1,11 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '../config/theme/tokens/color/semantic.css';
-import { spacing } from '../config/theme/tokens/spacing';
+import { color } from '../config/theme/tokens/color/semantic.css'
+import { spacing } from '../config/theme/tokens/spacing'
 import {
   body,
   button as buttonTypography,
-} from '../config/theme/tokens/typography/semantic.css';
+} from '../config/theme/tokens/typography/semantic.css'
 
 export const base = style({
   // display: 'inline-flex',
@@ -21,9 +21,19 @@ export const base = style({
       color: color.text.disabled,
     },
   },
-});
+})
 
 export const size = styleVariants({
+  large: [
+    base,
+    buttonTypography.lgSemibold,
+    {
+      height: spacing[60],
+      gap: spacing[12],
+      padding: `0 ${spacing[20]}`,
+      borderRadius: '14px',
+    },
+  ],
   medium: [
     base,
     body.defaultMedium,
@@ -44,7 +54,7 @@ export const size = styleVariants({
       borderRadius: '10px',
     },
   ],
-});
+})
 
 export const solid = styleVariants({
   primary: {
@@ -53,8 +63,8 @@ export const solid = styleVariants({
     color: color.text.inverse,
     selectors: {
       '&:hover:not(:disabled)': {
-        background: color.primary.hover,
-        borderColor: color.primary.hover,
+        background: color.primary.focus,
+        borderColor: color.primary.focus,
       },
     },
   },
@@ -64,8 +74,8 @@ export const solid = styleVariants({
     color: color.text.inverse,
     selectors: {
       '&:hover:not(:disabled)': {
-        background: color.secondary.hover,
-        borderColor: color.secondary.hover,
+        background: color.secondary.focus,
+        borderColor: color.secondary.focus,
       },
     },
   },
@@ -79,7 +89,7 @@ export const solid = styleVariants({
       },
     },
   },
-});
+})
 
 export const outline = styleVariants({
   primary: {
@@ -115,9 +125,13 @@ export const outline = styleVariants({
       },
     },
   },
-});
+})
+
+export const rounded = style({
+  borderRadius: '9999px',
+})
 
 export const icon = style({
   display: 'inline-flex',
   flexShrink: 0,
-});
+})

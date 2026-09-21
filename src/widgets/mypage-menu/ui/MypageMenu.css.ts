@@ -49,8 +49,11 @@ export const section = style({
 });
 
 export const sectionTitle = styleVariants({
-  active: [body.subMedium, { color: color.primary.hover, textAlign: 'left' }],
-  inactive: [body.subMedium, { color: color.text.tertiary, textAlign: 'left' }],
+  active: [body.subMedium, { color: color.primary.focus, textAlign: 'left' }],
+  inactive: [
+    body.subMedium,
+    { color: color.text.tertiary, textAlign: 'left' },
+  ],
 });
 
 export const linkList = style({

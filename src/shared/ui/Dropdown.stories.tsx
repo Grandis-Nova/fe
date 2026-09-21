@@ -21,7 +21,9 @@ export const Closed: Story = {
 export const Open: Story = {
   args: { label: '지역 선택', options, open: true, selectedOption: '경기도' },
   play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button', { name: '지역 선택' })).toHaveAttribute('aria-expanded', 'true')
+    await expect(
+      canvas.getByRole('button', { name: '지역 선택' }),
+    ).toHaveAttribute('aria-expanded', 'true')
     await expect(canvas.getByText('부산광역시')).toBeVisible()
   },
 }

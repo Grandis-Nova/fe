@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:69a909581cc7ede08b32a6bdf054ea2e84e662a6f0537d0c562ad86609dbc05e",
+  "claims": [
+    {
+      "id": "claim_d60cc1b2fd9543fe9b19079e8aee7fc1",
+      "statement": "entities/product/index.ts는 ProductCard, ProductColorSwatches, ProductOptionSelector, ProductSummary, ProductPaymentCard 다섯 컴포넌트와 관련 타입을 모두 공개 API로 재수출한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/index.ts",
+          "version": "repo-file-v1:sha256:577525265346a03bdd79c8474cf4c01cd37657f0f1b5582327fcb6f6f77fbafb"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b1c16805db34c87ab71f20f31addb9a",
+      "statement": "ProductCardProps는 데이터 필드를 product: ProductCardData 객체 하나로 묶고 onColorSelect/onStorageSelect/className만 얷은 레벨 props로 받으며, ProductCardData.colorSwatches는 ProductColorSwatches가 export하는 ProductColorSwatchItem 타입을 그대로 재사용한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductCard/ProductCard.tsx",
+          "version": "repo-file-v1:sha256:303ee6c8c74310b69e7a77eeae05e92d012d54148da3fea25ed374243947a13e"
+        }
+      ]
+    },
+    {
+      "id": "claim_92b044a392a743aaba74b2770d761b75",
+      "statement": "ProductCard는 색상 선택 UI를 직접 그리지 않고 <ProductColorSwatches colorName={colorName} size='small' colors={colorSwatches} onSelect={onColorSelect} />로 위임하며, 용량 선택은 shared/ui의 SelectButton을 직접 매핑해서 쓴다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductCard/ProductCard.tsx",
+          "version": "repo-file-v1:sha256:303ee6c8c74310b69e7a77eeae05e92d012d54148da3fea25ed374243947a13e"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ab21451c6aa4b7aa90aec0ea683b3e3",
+      "statement": "ProductColorSwatches.tsx 상단 주석은 shared/ui의 Button이 CTA용이라 색상 스와치(선택 상태) 대신 재사용하지 않고 별도 컴포넌트로 분리했다고 명시하며, 실제로 선택 여부를 aria-pressed로 표현하고 onSelect가 없으면 disabled인 표시 전용 모드로 동작한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductColorSwatches/ProductColorSwatches.tsx",
+          "version": "repo-file-v1:sha256:135208bdc086130488d89b5614511243fbebd47469524deb8d194ace3d9278c6"
+        }
+      ]
+    },
+    {
+      "id": "claim_239a98c8ecc84503b8e945f68a0446ad",
+      "statement": "ProductOptionSelector는 label과 ProductOption[]을 받아 shared/ui의 SelectButton을 medium 크기로 나열하는 범용 선택 컴포넌트로, ProductCard와 달리 도메인 데이터 객체 없이 엇은 props를 그대로 받는다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductOptionSelector/ProductOptionSelector.tsx",
+          "version": "repo-file-v1:sha256:46b1bc3e0b5d64c16e60bb4b79fdbcaca996062d4522419f177bf57c4261e24c"
+        }
+      ]
+    },
+    {
+      "id": "claim_d7a0d46afcc449aeb5a5df053ed39ab9",
+      "statement": "ProductPaymentCard는 variant('default'|'preorder-pending'|'checkout'|'cart') 하나로 네 가지 맥락을 한 컴포넌트에서 처리하며, variant==='cart'일 때만 shared/ui의 Checkbox가, preorder-pending/checkout일 때만 액션 버튼이 서로 다른 스타일로 나타난다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductPaymentCard/ProductPaymentCard.tsx",
+          "version": "repo-file-v1:sha256:5f1694b1a4aaccff3d43385bfc05f42573b772c7988297e65c390f4d67c4510e"
+        }
+      ]
+    },
+    {
+      "id": "claim_c5de70ff04674a5bbbc33d2175800806",
+      "statement": "ProductSummary는 name/optionSummary/ctaLabel/onCtaClick만 갖는 가장 단순한 컴포넌트로 색상/이미지/가격을 다루지 않는다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductSummary/ProductSummary.tsx",
+          "version": "repo-file-v1:sha256:008ec50f793eb5870e2d93899c121959fa25692d8d44e313ab31b6c1b7a1ab07"
+        }
+      ]
+    },
+    {
+      "id": "claim_9befb3aa9e9c45fb86cdec635bbf13eb",
+      "statement": "다섯 컴포넌트 모두 .css.ts에서 타이포그래피 프리셋을 조합하지 않고 .tsx에서 typography 배럴을 className으로 직접 합성하며, ProductColorSwatches는 size별로 다른 프리셋을 colorNameTypography 매핑 객체로 처리한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductColorSwatches/ProductColorSwatches.tsx",
+          "version": "repo-file-v1:sha256:135208bdc086130488d89b5614511243fbebd47469524deb8d194ace3d9278c6"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-20T09:53:37.867Z"
+  }
+}

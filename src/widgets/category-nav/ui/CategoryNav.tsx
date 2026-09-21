@@ -19,17 +19,30 @@ const linkPaths: Record<CategoryNavLink, string> = {
   마이페이지: '/mypage',
 }
 
-export function CategoryNav({ activeLink, showBorder = true, onLinkClick, className }: CategoryNavProps) {
+export function CategoryNav({
+  activeLink,
+  showBorder = true,
+  onLinkClick,
+  className,
+}: CategoryNavProps) {
   return (
     <nav
-      className={[styles.root, styles.border[showBorder ? 'visible' : 'hidden'], className]
+      className={[
+        styles.root,
+        styles.border[showBorder ? 'visible' : 'hidden'],
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
     >
       <div className={styles.row}>
         <div className={styles.links}>
           {brands.map((brand) => (
-            <Link key={brand} to={`/products?brand=${encodeURIComponent(brand)}`} className={styles.link}>
+            <Link
+              key={brand}
+              to={`/products?brand=${encodeURIComponent(brand)}`}
+              className={styles.link}
+            >
               {brand}
             </Link>
           ))}
@@ -40,7 +53,9 @@ export function CategoryNav({ activeLink, showBorder = true, onLinkClick, classN
             <Link
               key={link}
               to={linkPaths[link]}
-              className={[styles.link, link === activeLink && styles.linkActive].filter(Boolean).join(' ')}
+              className={[styles.link, link === activeLink && styles.linkActive]
+                .filter(Boolean)
+                .join(' ')}
               onClick={() => onLinkClick?.(link)}
             >
               {link}

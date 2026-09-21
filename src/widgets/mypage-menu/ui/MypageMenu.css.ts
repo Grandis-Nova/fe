@@ -3,7 +3,10 @@ import { style } from '@vanilla-extract/css'
 import { color } from '@/shared/config/theme/tokens/color/semantic.css'
 import { spacing } from '@/shared/config/theme/tokens/spacing'
 import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
-import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
+import {
+  body,
+  title,
+} from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
@@ -22,7 +25,10 @@ export const heading = style({
   alignItems: 'center',
 })
 
-export const headingLabel = style([body.subMedium, { color: color.text.tertiary }])
+export const headingLabel = style([
+  body.subMedium,
+  { color: color.text.tertiary },
+])
 export const userName = style([title.lgSemibold, { color: color.text.primary }])
 
 export const sections = style({
@@ -41,7 +47,7 @@ export const section = style({
 
 export const sectionTitle = style([
   body.subMedium,
-  { color: color.primary.hover, textAlign: 'center' },
+  { color: color.primary.focus, textAlign: 'center' },
 ])
 
 export const linkList = style({

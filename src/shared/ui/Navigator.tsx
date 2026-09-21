@@ -11,18 +11,30 @@ export type NavigatorProps = {
   className?: string
 }
 
-export function Navigator({ totalPages, currentPage, onPageChange, className }: NavigatorProps) {
+export function Navigator({
+  totalPages,
+  currentPage,
+  onPageChange,
+  className,
+}: NavigatorProps) {
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
 
   return (
-    <nav className={[styles.root, className].filter(Boolean).join(' ')} aria-label="pagination">
+    <nav
+      className={[styles.root, className].filter(Boolean).join(' ')}
+      aria-label="pagination"
+    >
       <button
         type="button"
         className={styles.arrowButton}
         aria-label="first page"
         onClick={() => onPageChange?.(1)}
       >
-        <ChevronsLeft className={styles.arrowIcon} color={color.text.tertiary} aria-hidden="true" />
+        <ChevronsLeft
+          className={styles.arrowIcon}
+          color={color.text.tertiary}
+          aria-hidden="true"
+        />
       </button>
       <button
         type="button"
@@ -30,13 +42,20 @@ export function Navigator({ totalPages, currentPage, onPageChange, className }: 
         aria-label="previous page"
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
       >
-        <ChevronLeft className={styles.arrowIcon} color={color.text.tertiary} aria-hidden="true" />
+        <ChevronLeft
+          className={styles.arrowIcon}
+          color={color.text.tertiary}
+          aria-hidden="true"
+        />
       </button>
       {pages.map((page) => (
         <button
           key={page}
           type="button"
-          className={[styles.pageButton, page === currentPage && styles.pageButtonActive]
+          className={[
+            styles.pageButton,
+            page === currentPage && styles.pageButtonActive,
+          ]
             .filter(Boolean)
             .join(' ')}
           aria-current={page === currentPage ? 'page' : undefined}

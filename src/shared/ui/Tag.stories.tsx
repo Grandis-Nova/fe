@@ -15,11 +15,21 @@ export const Solid: Story = {
 }
 
 export const Subtle: Story = {
-  args: { children: '사전예약', color: 'primary', variant: 'subtle', shape: 'pill' },
+  args: {
+    children: '사전예약',
+    color: 'primary',
+    variant: 'subtle',
+    shape: 'pill',
+  },
 }
 
 export const Outline: Story = {
-  args: { children: '한정수량', color: 'secondary', variant: 'outline', shape: 'pill' },
+  args: {
+    children: '한정수량',
+    color: 'secondary',
+    variant: 'outline',
+    shape: 'pill',
+  },
 }
 
 export const Rounded: Story = {
@@ -27,11 +37,21 @@ export const Rounded: Story = {
 }
 
 export const Success: Story = {
-  args: { children: '배송완료', color: 'green', variant: 'subtle', shape: 'pill' },
+  args: {
+    children: '배송완료',
+    color: 'green',
+    variant: 'subtle',
+    shape: 'pill',
+  },
 }
 
 export const Warning: Story = {
-  args: { children: '품절임박', color: 'yellow', variant: 'subtle', shape: 'pill' },
+  args: {
+    children: '품절임박',
+    color: 'yellow',
+    variant: 'subtle',
+    shape: 'pill',
+  },
 }
 
 export const Danger: Story = {

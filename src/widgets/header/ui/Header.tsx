@@ -23,25 +23,56 @@ export function Header({
 }: HeaderProps) {
   return (
     <header className={[styles.root, className].filter(Boolean).join(' ')}>
-      <span className={[styles.logo, isMember && styles.logoMember].filter(Boolean).join(' ')}>NOVA</span>
+      <span
+        className={[styles.logo, isMember && styles.logoMember]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        NOVA
+      </span>
       <div className={styles.actions}>
-        <button type="button" className={styles.iconButton} aria-label="검색" onClick={onSearchClick}>
+        <button
+          type="button"
+          className={styles.iconButton}
+          aria-label="검색"
+          onClick={onSearchClick}
+        >
           <Search className={styles.icon} aria-hidden="true" />
         </button>
         {isMember ? (
           <>
-            <button type="button" className={styles.iconButton} aria-label="알림" onClick={onNotificationClick}>
+            <button
+              type="button"
+              className={styles.iconButton}
+              aria-label="알림"
+              onClick={onNotificationClick}
+            >
               <Bell className={styles.icon} aria-hidden="true" />
             </button>
-            <button type="button" className={styles.iconButton} aria-label="장바구니" onClick={onCartClick}>
+            <button
+              type="button"
+              className={styles.iconButton}
+              aria-label="장바구니"
+              onClick={onCartClick}
+            >
               <ShoppingCart className={styles.icon} aria-hidden="true" />
             </button>
-            <button type="button" className={styles.iconButton} aria-label="로그아웃" onClick={onLogoutClick}>
+            <button
+              type="button"
+              className={styles.iconButton}
+              aria-label="로그아웃"
+              onClick={onLogoutClick}
+            >
               <LogOut className={styles.icon} aria-hidden="true" />
             </button>
           </>
         ) : (
-          <button type="button" className={styles.iconButton} aria-label="계정" onClick={onAccountClick}>
+          <button
+            type="button"
+            className={styles.iconButton}
+            aria-label="계정"
+            onClick={onAccountClick}
+          >
             <User className={styles.icon} aria-hidden="true" />
           </button>
         )}

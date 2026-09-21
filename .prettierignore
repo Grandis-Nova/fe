@@ -1,0 +1,9 @@
+dist
+build
+storybook-static
+node_modules
+stats.html
+coverage
+package-lock.json
+.claude
+.agents

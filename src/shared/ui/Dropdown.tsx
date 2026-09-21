@@ -26,13 +26,35 @@ export function Dropdown({
   className,
 }: DropdownProps) {
   return (
-    <div className={[styles.root, styles.size[size], open && styles.rootOpen, className].filter(Boolean).join(' ')}>
-      <button type="button" className={styles.trigger} onClick={onToggle} aria-expanded={open}>
+    <div
+      className={[
+        styles.root,
+        styles.size[size],
+        open && styles.rootOpen,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <button
+        type="button"
+        className={styles.trigger}
+        onClick={onToggle}
+        aria-expanded={open}
+      >
         {label}
         {open ? (
-          <ChevronUp className={styles.triggerIcon} color={color.text.tertiary} aria-hidden="true" />
+          <ChevronUp
+            className={styles.triggerIcon}
+            color={color.text.tertiary}
+            aria-hidden="true"
+          />
         ) : (
-          <ChevronDown className={styles.triggerIcon} color={color.text.tertiary} aria-hidden="true" />
+          <ChevronDown
+            className={styles.triggerIcon}
+            color={color.text.tertiary}
+            aria-hidden="true"
+          />
         )}
       </button>
       {open &&
@@ -40,7 +62,10 @@ export function Dropdown({
           <button
             key={option}
             type="button"
-            className={[styles.option, option === selectedOption && styles.optionSelected]
+            className={[
+              styles.option,
+              option === selectedOption && styles.optionSelected,
+            ]
               .filter(Boolean)
               .join(' ')}
             onClick={() => onSelect?.(option, index)}

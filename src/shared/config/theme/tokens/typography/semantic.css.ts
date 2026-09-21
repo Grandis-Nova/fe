@@ -1,6 +1,12 @@
 import { style } from '@vanilla-extract/css'
 
-import { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } from './base'
+import {
+  fontFamily,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
+} from './base'
 
 const face = { fontFamily: fontFamily.pretendard }
 
@@ -52,10 +58,10 @@ export const title = {
 export const display = {
   time: style({
     ...face,
-    fontSize: fontSize[20],
-    fontWeight: fontWeight.semibold,
+    fontSize: fontSize[16],
+    fontWeight: fontWeight.medium,
     lineHeight: lineHeight[150],
-    letterSpacing: letterSpacing[4],
+    letterSpacing: letterSpacing[2],
   }),
 }
 

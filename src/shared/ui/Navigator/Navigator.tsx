@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronsLeft } from 'lucide-react'
 
+import { Button } from '@/shared/ui/Button'
+
 import * as styles from './Navigator.css'
 
 export type NavigatorProps = {
@@ -22,26 +24,23 @@ export function Navigator({
       className={[styles.root, className].filter(Boolean).join(' ')}
       aria-label="pagination"
     >
-      <button
-        type="button"
+      <Button
         className={styles.arrowButton}
         aria-label="first page"
         onClick={() => onPageChange?.(1)}
       >
         <ChevronsLeft className={styles.arrowIcon} aria-hidden="true" />
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         className={styles.arrowButton}
         aria-label="previous page"
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
       >
         <ChevronLeft className={styles.arrowIcon} aria-hidden="true" />
-      </button>
+      </Button>
       {pages.map((page) => (
-        <button
+        <Button
           key={page}
-          type="button"
           className={[
             styles.pageButton,
             page === currentPage && styles.pageButtonActive,
@@ -52,10 +51,9 @@ export function Navigator({
           onClick={() => onPageChange?.(page)}
         >
           {page}
-        </button>
+        </Button>
       ))}
-      <button
-        type="button"
+      <Button
         className={styles.arrowButton}
         aria-label="next page"
         onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
@@ -64,9 +62,8 @@ export function Navigator({
           className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
           aria-hidden="true"
         />
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         className={styles.arrowButton}
         aria-label="last page"
         onClick={() => onPageChange?.(totalPages)}
@@ -75,7 +72,7 @@ export function Navigator({
           className={`${styles.arrowIcon} ${styles.arrowIconFlipped}`}
           aria-hidden="true"
         />
-      </button>
+      </Button>
     </nav>
   )
 }

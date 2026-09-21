@@ -13,10 +13,9 @@ tags:
     storybook,
     tooling,
   ]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-20T04:54:43.226Z
 sources:
+  - id: openwiki-source-1911308755a010411fc9869e
+    resource: repo://.prettierrc
   - id: openwiki-source-808b9ff10fba3d7819aa09ab
     resource: repo://.storybook/main.ts
   - id: openwiki-source-dc148dcfd63a2eebc35c0f06
@@ -31,14 +30,17 @@ sources:
     resource: repo://tsconfig.json
   - id: openwiki-source-5e1b077422a94ae165e88e4e
     resource: repo://vite.config.ts
-generated: { by: 'claude-code', at: '2026-09-20T04:54:43.226Z' }
+generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-20T09:53:37.867Z
 ---
 
 ## 개요
 
 Vite가 번들러, TypeScript가 타입 체커, Vanilla Extract가 CSS-in-TS 솔루션, ESLint가
-린터, Storybook이 컴포넌트 문서화/테스트 도구다. `package.json` 스크립트와
-`vite.config.ts`의 플러그인 설정이 이들을 하나의 파이프라인으로 연결한다.
+린터, Prettier가 포맷터, Storybook이 컴포넌트 문서화/테스트 도구다. `package.json`
+스크립트와 `vite.config.ts`의 플러그인 설정이 이들을 하나의 파이프라인으로 연결한다.
 
 ## 스크립트
 
@@ -46,9 +48,16 @@ Vite가 번들러, TypeScript가 타입 체커, Vanilla Extract가 CSS-in-TS 솔
 - `build` — `tsc -b && vite build`. TypeScript 프로젝트 참조 빌드가 먼저 통과해야 Vite가
   실제 프로덕션 번들을 만든다.
 - `lint` / `lint:fix` — `eslint .` / `eslint . --fix`
+- `format` / `format:fix` — `prettier --check .` / `prettier --write .`
 - `preview` — 빌드 결과물 로컬 미리보기
 - `storybook` — `:6006`에서 Storybook 개발 서버
 - `build-storybook` — Storybook 정적 빌드
+
+## 포맷터: Prettier
+
+`.prettierrc`는 `singleQuote: true, semi: false`만 지정한다 — 나머지는 Prettier 기본값을
+따른다. ESLint와 별도 도구로 분리되어 있어(`eslint-config-prettier`로 규칙 충돌 방지),
+포맷은 Prettier가, 코드 품질/레이어 경계는 ESLint가 담당하는 역할 분리 구조다.
 
 ## 린터: ESLint
 

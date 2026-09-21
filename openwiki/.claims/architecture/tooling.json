@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:539999efb205031208012d8aa55d8d74b2fc55a39d36bda042817b7cbab7eaa7",
+  "pageVersion": "sha256:dc9949d8bab8d6802bc801883b894be73072a204684bd13e2e1585c61ce407f3",
   "claims": [
     {
       "id": "claim_b1221eca1c884cd480be757b64b3b479",
@@ -8,7 +8,7 @@
       "evidence": [
         {
           "resource": "repo://package.json#L6-L13",
-          "version": "repo-lines-v1:sha256:dd7eca97f43bb8ced26cf95f89b32ba784edce2d1b93199196d3feb78fee7cc3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODljNDJjNGIyZDJjNmY1YTg4N2M5ZWI5ZGRjYTAyMDA0YjRkZjJkMmFhNTgyMTQxZWYxMDg4NDgzMTgwYjQxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2E2M2JmMDk0ZjUzYTg5MTIzMjc5MjRlMjllMTE5MzIzYjJjOTU5YWNjMDEzMmZhZmEyNzE1MmI1YmQ5Zjg2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2YwMDU3Mjg5YzgxMDJlMmQ3MjQxZjE0YzYxYjBiYTRkMGNkMWIxMWU5ZmZiZDJjMTM4MzU3Y2M4YjA0YTU1NiJ9"
+          "version": "repo-lines-v1:sha256:d40a70292357d047fd6484ad449b9e76d13551a72f87e622e32685c35012e724:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5YzQyYzRiMmQyYzZmNWE4ODdjOWViOWRkY2EwMjAwNGI0ZGYyZDJhYTU4MjE0MWVmMTA4ODQ4MzE4MGI0MTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhNjNiZjA5NGY1M2E4OTEyMzI3OTI0ZTI5ZTExOTMyM2IyYzk1OWFjYzAxMzJmYWZhMjcxNTJiNWJkOWY4NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmMDA1NzI4OWM4MTAyZTJkNzI0MWYxNGM2MWIwYmE0ZDBjZDFiMTFlOWZmYmQyYzEzODM1N2NjOGIwNGE1NTYifQ"
         }
       ]
     },
@@ -27,8 +27,8 @@
       "statement": "vite.config.ts는 @vitejs/plugin-react와 vanillaExtractPlugin()을 등록하고, @/* 경로 별칭을 정의하며, @storybook/addon-vitest의 storybookTest()를 test.projects에 연결해 스토리를 @vitest/browser-playwright(Chromium) 브라우저 모드 Vitest로도 실행한다.",
       "evidence": [
         {
-          "resource": "repo://vite.config.ts#L14-L42",
-          "version": "repo-lines-v1:sha256:f3d97412f108c6804fca62f72e7b1edff26be643f45a74e9d43d451b6032519a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyY2VjYjE0NGE0NmY1ZGNmMTJhNjE2OWZjZWVkNzY5NWU4Mjk0YjA5MGRlNzZmMzY2MWNkZDAyNDkzMDAxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwODI3ZDQ5ZGJkMjUzNzc5OTEyYjI1YjRmZjMwMTFiY2M5MDMyM2U4MzFkZWYxNTM1OWRkYTYzZTc0NTI5YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5NTc2YjU0ZTI1NWUzYzk0OGVlYTViNTkwNGZhMzhiODE2ODJmZGQzY2JkOWFlODQxZmYwZTdiZDgwZDM5NGMifQ"
+          "resource": "repo://vite.config.ts#L14-L48",
+          "version": "repo-lines-v1:sha256:600460a7b5a19087c4cdc88a7b09847c60ba913d9dead8a61fdde68c84c74458:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyY2VjYjE0NGE0NmY1ZGNmMTJhNjE2OWZjZWVkNzY5NWU4Mjk0YjA5MGRlNzZmMzY2MWNkZDAyNDkzMDAxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2YzUyYWQyZWY5YWRkYzY0Yjg4NGVlMDg4YjljYTMzNzhmYzY1NmQzY2E0NjAyZTExOGU2YzlhZGUzZGIwYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -62,11 +62,11 @@
       "evidence": [
         {
           "resource": "repo://.storybook/main.ts",
-          "version": "repo-file-v1:sha256:730b1ec40e651dfe1a6872f2dbf8042ed3abc2eb8c1a530b527ad93ff29c927a"
+          "version": "repo-file-v1:sha256:0b854a8d4d2132e5035364c3f3e8032fe136d9687405ae075085c606d9b0b4c3"
         },
         {
           "resource": "repo://.storybook/preview.tsx",
-          "version": "repo-file-v1:sha256:c7dadb447c3656287df8f5c3c7eb44c30792df3e7ac4f3df6bc774460f99cbfa"
+          "version": "repo-file-v1:sha256:c86e2804075409cc1c1ecdc03ac632af516068e477a1f8f58b491c750a38876b"
         }
       ]
     },
@@ -76,13 +76,27 @@
       "evidence": [
         {
           "resource": "repo://package.json#L28-L58",
-          "version": "repo-lines-v1:sha256:4ad978ec7fb8dd89a273c3ab7204916f3a4b4010c60a9c1117b62da0270ce188:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYzRkZTdlZDM1YTIzMzY0NTM5ODY0ZGFkYjkzOGI4NzIzMzM3OTE3OWQ2MjkyYjlmZjVmNjE5YTZjMTMxNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmMWQ3NWM1ZDFlOWNmZWE1MjQxZTRkMTY5OTQyYTVhZjY0MzhmOGNiODhjZmQ4M2YwZmM0ZWNjZmFkMWVjYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:f2baa5ec8c020312486f78b9ab3f32f3b04d4fdc31c8d886a26f56260905bd51:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYzRkZTdlZDM1YTIzMzY0NTM5ODY0ZGFkYjkzOGI4NzIzMzM3OTE3OWQ2MjkyYjlmZjVmNjE5YTZjMTMxNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmMWQ3NWM1ZDFlOWNmZWE1MjQxZTRkMTY5OTQyYTVhZjY0MzhmOGNiODhjZmQ4M2YwZmM0ZWNjZmFkMWVjYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6469bbcd24fe40f083ce8702bb1517be",
+      "statement": "Prettier가 포맷터로 도입되어 있으며 format/format:fix 스크립트로 실행되고, .prettierrc는 singleQuote:true, semi:false만 지정하며 eslint-config-prettier로 ESLint와 규칙 충돌을 방지한다.",
+      "evidence": [
+        {
+          "resource": "repo://.prettierrc",
+          "version": "repo-file-v1:sha256:63bb4e4bdb4fd024c9d53bc8ba5822586efa2257791907cf91caf3da7a07b7af"
+        },
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:24d8199b4a63c22b107bb52f1d00e3485a36396d7e5b6635f677e122bd187d9d"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-20T04:54:43.226Z"
+    "at": "2026-09-20T09:53:37.867Z"
   }
 }

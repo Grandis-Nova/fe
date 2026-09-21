@@ -68,8 +68,8 @@ export const CssCheck: Story = {
   },
   play: async ({ canvas }) => {
     const button = canvas.getByRole('button', { name: '구매하기' })
-    // color.primary.base resolves to baseColor.primary.base = #3F4891 (see
-    // src/shared/config/theme/tokens/color/base.ts) once the theme module is loaded.
+    // color.primary.base = #3F4891 (see
+    // src/shared/config/theme/tokens/color/semantic.css.ts) once the theme module is loaded.
     await expect(getComputedStyle(button).backgroundColor).toBe(
       'rgb(63, 72, 145)',
     )

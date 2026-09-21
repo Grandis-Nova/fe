@@ -3,9 +3,6 @@ type: concept
 title: 상품 카탈로그 컴포넌트 구성
 description: entities/product 슬라이스의 ProductCard/ProductColorSwatches/ProductOptionSelector/ProductPaymentCard/ProductSummary가 어떤 책임을 나누어 갖고 서로 어떻게 합성되는지 설명한다.
 tags: [concept, entities, product, component-composition, frontend]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-19T17:13:03.359Z
 sources:
   - id: openwiki-source-d776cca5236e216ba85991fa
     resource: repo://src/entities/product/index.ts
@@ -19,7 +16,10 @@ sources:
     resource: repo://src/entities/product/ui/ProductPaymentCard/ProductPaymentCard.tsx
   - id: openwiki-source-8194c2288602f84972a1ce3d
     resource: repo://src/entities/product/ui/ProductSummary/ProductSummary.tsx
-generated: { by: 'claude-code', at: '2026-09-19T17:13:03.359Z' }
+generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-20T09:53:37.867Z
 ---
 
 ## 개요
@@ -75,6 +75,20 @@ colorName={colorName} size="small" colors={colorSwatches} onSelect={onColorSelec
 
 `ProductSummary`는 상품명, 옵션 요약 텍스트, CTA 버튼(`ctaLabel`/`onCtaClick`)만 가진
 가장 단순한 컴포넌트로, 다른 네 컴포넌트와 달리 색상/이미지/가격을 다루지 않는다.
+
+## 타이포그래피 적용 방식
+
+다섯 컴포넌트 모두 `.css.ts`에서 `title`/`body`/`button` 프리셋을 더 이상 조합하지 않는다.
+대신 `.tsx`에서 `@/shared/config/theme`의 `typography` 배럴을 import해 `[typography.title
+.mdMedium, styles.name].join(' ')`처럼 프리셋 클래스명을 나머지 스타일과 className 레벨에서
+직접 합성한다(`PreorderPage`와 동일한 패턴). `.css.ts`는 색상·레이아웃 등 프리셋이 아닌
+값만 갖는다.
+
+`ProductColorSwatches`는 `size`에 따라 다른 프리셋(`small`→`body.caption`,
+`medium`→`body.subMedium`)을 써야 해서, 컴포넌트 안에 `colorNameTypography = { small:
+typography.body.caption, medium: typography.body.subMedium }` 매핑 객체를 두고
+`colorNameTypography[size]`로 골라 쓴다 — 정적으로 하나만 쓰면 되는 다른 컴포넌트와 달리
+런타임 `size` 값에 따라 분기해야 하기 때문이다.
 
 ## 관련
 

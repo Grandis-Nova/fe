@@ -47,7 +47,7 @@ export const section = style({
 
 export const sectionTitle = style([
   body.subMedium,
-  { color: color.primary.hover, textAlign: 'center' },
+  { color: color.primary.focus, textAlign: 'center' },
 ])
 
 export const linkList = style({

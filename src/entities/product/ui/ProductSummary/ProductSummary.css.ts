@@ -9,7 +9,7 @@ export const root = style({
   width: '100%',
   padding: `${spacing[16]} ${spacing[20]}`,
   background: color.background.base,
-  borderBottom: `1px solid ${color.primary.hover}`,
+  borderBottom: `1px solid ${color.primary.focus}`,
 })
 
 export const info = style({
@@ -29,7 +29,7 @@ export const cta = style({
   padding: `0 ${spacing[16]}`,
   borderRadius: '12px',
   border: 'none',
-  background: color.primary.hover,
+  background: color.primary.focus,
   color: color.text.inverse,
   cursor: 'pointer',
 })

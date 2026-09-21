@@ -73,7 +73,7 @@ export const recommendedTitle = style([
   typography.title.lgSemibold,
   {
     marginBottom: spacing[30],
-    padding: `0 ${spacing[16]}`,
+    padding: `0 ${spacing[8]}`,
   },
 ])
 

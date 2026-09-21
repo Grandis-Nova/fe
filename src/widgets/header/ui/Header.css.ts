@@ -28,7 +28,7 @@ export const logo = style([
 ])
 
 export const logoMember = style({
-  backgroundImage: `linear-gradient(90deg, ${color.primary.hover}, #55428c, ${color.secondary.subtle})`,
+  backgroundImage: `linear-gradient(90deg, ${color.primary.focus}, #55428c, ${color.secondary.subtle})`,
   backgroundClip: 'text',
   color: 'transparent',
 })
@@ -49,7 +49,7 @@ export const iconButton = style({
   transition: `color ${motion.duration.fast} ${motion.easing.default}`,
   selectors: {
     '&:hover': {
-      color: color.primary.hover,
+      color: color.primary.focus,
     },
   },
 })

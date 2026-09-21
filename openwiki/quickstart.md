@@ -3,15 +3,15 @@ type: quickstart
 title: 빠른 시작
 description: 저장소를 처음 접하는 사람이나 에이전트가 로컬에서 실행하고, 이 위키에서 어디를 봐야 할지 찾도록 안내하는 진입 페이지.
 tags: [quickstart, onboarding, getting-started]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-20T04:54:43.226Z
 sources:
   - id: openwiki-source-5b54a58d1b51cd490b0e7162
     resource: repo://package.json
   - id: openwiki-source-95bfccfd0c712f6e72040e0d
     resource: repo://src/main.tsx
-generated: { by: 'claude-code', at: '2026-09-20T04:54:43.226Z' }
+generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-20T09:53:37.867Z
 ---
 
 ## 이 저장소는 무엇인가
@@ -33,6 +33,8 @@ npm run build            # tsc -b 타입 체크 후 프로덕션 번들 생성
 npm run preview          # 빌드 결과물 로컬 미리보기
 npm run lint             # eslint . 실행
 npm run lint:fix         # eslint . --fix
+npm run format           # prettier --check .
+npm run format:fix       # prettier --write .
 npm run storybook        # Storybook 개발 서버 (:6006)
 npm run build-storybook  # Storybook 정적 빌드
 ```

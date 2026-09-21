@@ -9,8 +9,8 @@ const rootBase = style({
 })
 
 export const root = styleVariants({
-  small: [rootBase, { gap: spacing[6] }],
-  medium: [rootBase, { gap: spacing[6] }],
+  small: [rootBase, { gap: spacing[6], marginBottom: spacing[4] }],
+  medium: [rootBase, { gap: spacing[6], marginBottom: spacing[4] }],
 })
 
 export const colorName = style({ color: color.text.tertiary })
@@ -34,7 +34,7 @@ export const swatch = styleVariants({
 })
 
 export const swatchSelected = style({
-  outline: `1.5px solid ${color.primary.hover}`,
+  outline: `1.5px solid ${color.primary.focus}`,
   outlineOffset: '2px',
   border: 'none',
 })

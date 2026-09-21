@@ -24,6 +24,16 @@ export const base = style({
 })
 
 export const size = styleVariants({
+  large: [
+    base,
+    buttonTypography.lgSemibold,
+    {
+      height: spacing[60],
+      gap: spacing[12],
+      padding: `0 ${spacing[20]}`,
+      borderRadius: '14px',
+    },
+  ],
   medium: [
     base,
     body.defaultMedium,
@@ -53,8 +63,8 @@ export const solid = styleVariants({
     color: color.text.inverse,
     selectors: {
       '&:hover:not(:disabled)': {
-        background: color.primary.hover,
-        borderColor: color.primary.hover,
+        background: color.primary.focus,
+        borderColor: color.primary.focus,
       },
     },
   },
@@ -64,8 +74,8 @@ export const solid = styleVariants({
     color: color.text.inverse,
     selectors: {
       '&:hover:not(:disabled)': {
-        background: color.secondary.hover,
-        borderColor: color.secondary.hover,
+        background: color.secondary.focus,
+        borderColor: color.secondary.focus,
       },
     },
   },
@@ -115,6 +125,10 @@ export const outline = styleVariants({
       },
     },
   },
+})
+
+export const rounded = style({
+  borderRadius: '9999px',
 })
 
 export const icon = style({

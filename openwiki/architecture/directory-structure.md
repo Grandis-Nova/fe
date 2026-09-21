@@ -11,9 +11,6 @@ tags:
     eslint,
     frontend,
   ]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-19T17:13:03.359Z
 sources:
   - id: openwiki-source-276795f6d5ad19adb078c64e
     resource: repo://eslint.config.js
@@ -53,6 +50,10 @@ sources:
     resource: repo://src/shared/config/theme/index.ts
   - id: openwiki-source-eaa28e59aee0c79ba0697842
     resource: repo://src/shared/lib/simplexNoise.js
+  - id: openwiki-source-9745756b2be49dfe2491129c
+    resource: repo://src/shared/ui/Box/Box.tsx
+  - id: openwiki-source-1e4537c3eaa8f33a608e1699
+    resource: repo://src/shared/ui/Container/Container.tsx
   - id: openwiki-source-d131a7da28ef0d717bef8452
     resource: repo://src/shared/ui/index.ts
   - id: openwiki-source-40f3921f4b0510e0c5986ce8
@@ -65,7 +66,10 @@ sources:
     resource: repo://src/widgets/mypage-menu/index.ts
   - id: openwiki-source-fe9d4837246c407a3285609f
     resource: repo://src/widgets/product-page-tab/index.ts
-generated: { by: 'claude-code', at: '2026-09-19T17:13:03.359Z' }
+generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-20T09:53:37.867Z
 ---
 
 ## 개요
@@ -124,9 +128,14 @@ ProductCard.css.ts, ProductCard.stories.tsx, index.ts}`처럼 컴포넌트마다
 
 초기엔 이미지 자산만 있던 레이어였지만 지금은 관례적 하위 세그먼트가 대부분 채워졌다.
 
-- `ui/` — `Button`, `Checkbox`, `Dropdown`, `Input`, `Navigator`, `SelectButton`, `Tag`,
-  `Toggle`, `SwirlBackground` 등 범용 UI 컴포넌트. `index.ts`가 공개 API를 배럴로 내보낸다.
-- `config/theme/` — 디자인 토큰과 vanilla-extract 스타일 시스템. 자세한 내용은
+- `ui/` — `Button`, `Checkbox`, `Container`, `Box`, `Dropdown`, `Input`, `Navigator`,
+  `SelectButton`, `Tag`, `Toggle`, `SwirlBackground` 등 범용 UI 컴포넌트. `index.ts`가 공개
+  API를 배럴로 내보낸다. `Container`와 `Box`는 이름이 비슷해 보이지만 역할이 다르다 —
+  `Container`는 페이지 콘텐츠의 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px +
+  고정 padding)을 강제하는 전용 컴포넌트고, `Box`는 `sprinkles`가 지원하는 임의의 속성을
+  `sx` prop으로 받는 범용 div 래퍼다.
+- `config/theme/` — 디자인 토큰과 vanilla-extract 스타일 시스템(색상 토큰은 `base.ts` 없이
+  `semantic.css.ts` 한 파일로 관리된다). 자세한 내용은
   [디자인 토큰과 vanilla-extract 스타일 시스템](design-system.md) 참고.
 - `lib/` — `simplexNoise.js`(+`.d.ts`) — `SwirlBackground`가 쓰는 노이즈 함수 서드파티 이식.
 - `assets/` — 로고 등 이미지 자산.

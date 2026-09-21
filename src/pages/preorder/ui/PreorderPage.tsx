@@ -11,66 +11,83 @@ export function PreorderPage() {
       <div className={styles.cardGrid}>
         <PreorderCard
           data={{
+            id: '1',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
-            title: 'Preorder Title',
-            period: 'Preorder Period',
+            title:
+              '아이폰 18프로, 18프로맥스, 울트라 사전예약 프로모션 아이폰 18프로, 18프로맥스, 울트라 사전예약 프로모션 아이폰 18프로, 18프로맥스, 울트라 사전예약 프로모션',
+            opens_at: '2026.09.01',
+            closes_at: '2026.09.17',
           }}
         />
         <PreorderCard
           data={{
+            id: '2',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: '2026.09.01',
+            closes_at: '2026.09.17',
           }}
         />
         <PreorderCard
           data={{
+            id: '3',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
         <PreorderCard
           data={{
+            id: '4',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
         <PreorderCard
           data={{
+            id: '5',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
         <PreorderCard
           data={{
+            id: '6',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
         <PreorderCard
           data={{
+            id: '7',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
         <PreorderCard
           data={{
+            id: '8',
             imageSrc: placeholderImage,
             imageAlt: 'Image description',
             title: 'Preorder Title',
-            period: 'Preorder Period',
+            opens_at: 'Preorder Opens At',
+            closes_at: 'Preorder Closes At',
           }}
         />
       </div>

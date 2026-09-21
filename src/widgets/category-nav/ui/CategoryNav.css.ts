@@ -19,7 +19,7 @@ export const root = style({
 
 // 보더 표시 여부를 토글해도 레이아웃이 흔들리지 않도록 두께는 유지하고 색만 바꾼다.
 export const border = styleVariants({
-  visible: { borderBottom: `1px solid ${color.primary.hover}` },
+  visible: { borderBottom: `1px solid ${color.primary.focus}` },
   hidden: { borderBottom: '1px solid transparent' },
 })
 

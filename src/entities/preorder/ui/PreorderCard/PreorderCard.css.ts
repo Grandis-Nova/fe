@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color, spacing } from '@/shared/config/theme'
+import { typography, color, spacing, lineClamp } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -11,6 +11,7 @@ export const root = style({
   borderRadius: '8px',
   background: color.background.base,
   overflow: 'hidden',
+  cursor: 'pointer',
 })
 
 export const image = style({
@@ -21,7 +22,7 @@ export const image = style({
   background: color.background.surface,
 })
 
-export const body_ = style({
+export const body = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacing[10],
@@ -29,5 +30,15 @@ export const body_ = style({
   padding: `${spacing[12]} ${spacing[8]}`,
 })
 
-export const title_ = style({ color: color.text.primary })
-export const period = style({ color: color.text.tertiary })
+export const title = style([
+  typography.title.mdMedium,
+  {
+    color: color.text.primary,
+    ...lineClamp(2),
+  },
+])
+
+export const period = style([
+  typography.body.sub,
+  { color: color.text.tertiary },
+])

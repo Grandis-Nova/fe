@@ -4,9 +4,6 @@ title: 메인 페이지 히어로 오토스크롤 캐러셀
 description: MainPage의 SwirlBackground 히어로와 embla-carousel 기반 무한 오토스크롤 캐러셀 구현, 그리고 loop 구현에서 실제로 겪은 비직관적 제약과 그 근본 원인을 설명한다.
 tags:
   [workflow, main-page, carousel, embla-carousel, canvas-animation, frontend]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-19T17:13:03.359Z
 sources:
   - id: openwiki-source-142553122a4b594242936aa7
     resource: repo://src/pages/main/ui/MainPage.css.ts
@@ -16,7 +13,10 @@ sources:
     resource: repo://src/shared/ui/SwirlBackground.css.ts
   - id: openwiki-source-4cf73d81f10980ec3e5e4d7f
     resource: repo://src/shared/ui/SwirlBackground.tsx
-generated: { by: 'claude-code', at: '2026-09-19T17:13:03.359Z' }
+generated: { by: "claude-code", at: "2026-09-20T09:53:37.867Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-20T09:53:37.867Z
 ---
 
 ## 개요
@@ -65,7 +65,18 @@ CSS `gap`은 형제 요소 "사이"에만 적용되는 속성이라, `loop: true
 흐른다.
 
 세 가지 모두 `CLAUDE.md`의 Gotchas 섹션에도 같은 결론이 한 줄씩 요약돼 있다 — 이 문서는
-왜 그런지 메커니즘까지 풀어 쓴 버전이다.
+왜 그런지 메커니즘까지 풀어 쓴 버전이다. 히어로 타이틀 스타일은 `title`이 아니라
+`bestTitle`이라는 이름으로 export된다(`recommendedTitle`과 구분하기 위함).
+
+## 추천 상품 섹션: Container + typography 직접 조합
+
+히어로 아래 "추천 상품" 그리드는 더 이상 인라인 `sprinkles({ maxWidth, paddingX, paddingY,
+marginX })` 호출로 레이아웃을 만들지 않고, `shared/ui`의 `Container` 컴포넌트로 감싼다 —
+페이지 콘텐츠 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px)을 이 페이지도 그대로
+따르기 위해서다. 제목 텍스트는 `[typography.title.xlSemibold, styles.recommendedTitle]
+.join(' ')`처럼 `typography` 배럴의 프리셋 클래스를 `.css.ts`의 나머지 스타일과 className
+레벨에서 직접 합성하는 패턴을 쓴다 — `entities` 컴포넌트들과 동일한 패턴이며, 자세한 배경은
+[상품 카탈로그 컴포넌트 구성](product-catalog.md) 참고.
 
 ## 관련
 

@@ -4,12 +4,13 @@ import * as styles from './Button.css'
 
 type ButtonColor = 'primary' | 'secondary' | 'cancel'
 type ButtonVariant = 'solid' | 'outline'
-type ButtonSize = 'medium' | 'small'
+type ButtonSize = 'large' | 'medium' | 'small'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: ButtonColor
   variant?: ButtonVariant
   size?: ButtonSize
+  rounded?: boolean
   icon?: ReactNode
 }
 
@@ -17,6 +18,7 @@ export function Button({
   color = 'primary',
   variant = 'solid',
   size = 'medium',
+  rounded,
   icon,
   className,
   children,
@@ -28,12 +30,17 @@ export function Button({
   return (
     <button
       type="button"
-      className={[styles.size[size], variantClassName, className]
+      className={[
+        styles.size[size],
+        variantClassName,
+        rounded && styles.rounded,
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
       {...rest}
     >
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && <div className={styles.icon}>{icon}</div>}
       {children}
     </button>
   )

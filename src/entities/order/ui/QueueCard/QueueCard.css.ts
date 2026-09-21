@@ -57,7 +57,7 @@ export const orderGroup = style({
   width: '100%',
 })
 
-export const orderLabel = style({ color: color.secondary.hover })
+export const orderLabel = style({ color: color.secondary.focus })
 export const orderNumber = style({ color: color.primary.base })
 
 export const progressGroup = style({

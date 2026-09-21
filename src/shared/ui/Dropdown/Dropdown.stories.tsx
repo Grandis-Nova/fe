@@ -30,10 +30,6 @@ export const Open: Story = {
   },
 }
 
-export const Small: Story = {
-  args: { label: '정렬', options, open: false, size: 'small' },
-}
-
 export const Interactive: Story = {
   args: { label: '지역 선택', options },
   render: function Render(args) {

@@ -36,15 +36,15 @@ export function Dropdown({
     >
       <button
         type="button"
-        className={styles.trigger}
+        className={styles.trigger[size]}
         onClick={onToggle}
         aria-expanded={open}
       >
         {selectedOption ?? label}
         {open ? (
-          <ChevronUp className={styles.triggerIcon} aria-hidden="true" />
+          <ChevronUp className={styles.triggerIcon[size]} aria-hidden="true" />
         ) : (
-          <ChevronDown className={styles.triggerIcon} aria-hidden="true" />
+          <ChevronDown className={styles.triggerIcon[size]} aria-hidden="true" />
         )}
       </button>
       {open &&
@@ -53,7 +53,7 @@ export function Dropdown({
             key={option}
             type="button"
             className={[
-              styles.option,
+              styles.option[size],
               option === selectedOption && styles.optionSelected,
             ]
               .filter(Boolean)

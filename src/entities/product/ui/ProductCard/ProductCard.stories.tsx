@@ -1,4 +1,5 @@
-import placeholderImage from '@/shared/assets/react.svg'
+import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
+import macbook2 from '@/shared/assets/macbook_neo_sliver2.png'
 
 import { ProductCard } from './ProductCard'
 
@@ -20,7 +21,7 @@ const colorSwatches = [
 export const Default: Story = {
   args: {
     product: {
-      imageSrc: placeholderImage,
+      imageSrcs: [macbook1, macbook2],
       name: 'NOVA Phone',
       modelNumber: 'NV-2026',
       colorName: '미드나이트',

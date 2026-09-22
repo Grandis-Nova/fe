@@ -6,14 +6,18 @@ import * as styles from './ProductPaymentCard.css'
 export type ProductPaymentCardVariant =
   'default' | 'preorder-pending' | 'checkout' | 'cart'
 
-export type ProductPaymentCardProps = {
-  variant?: ProductPaymentCardVariant
+export type ProductPaymentCardItem = {
   imageSrc?: string
   name: string
   modelNumber: string
   optionSummary: string
   quantityLabel: string
   priceLabel: string
+}
+
+export type ProductPaymentCardProps = {
+  variant?: ProductPaymentCardVariant
+  product: ProductPaymentCardItem
   actionLabel?: string
   onActionClick?: () => void
   checked?: boolean
@@ -23,12 +27,7 @@ export type ProductPaymentCardProps = {
 
 export function ProductPaymentCard({
   variant = 'default',
-  imageSrc,
-  name,
-  modelNumber,
-  optionSummary,
-  quantityLabel,
-  priceLabel,
+  product: { imageSrc, name, modelNumber, optionSummary, quantityLabel, priceLabel },
   actionLabel,
   onActionClick,
   checked = false,

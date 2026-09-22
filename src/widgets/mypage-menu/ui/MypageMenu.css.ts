@@ -1,6 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color, spacing, typography } from '@/shared/config/theme'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
 import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
 
 export const root = style({
@@ -64,21 +64,23 @@ export const linkList = style({
 export const link = style([
   typography.body.sub,
   {
+    boxSizing: 'border-box',
+    height: '24px',
     padding: `${spacing[2]} 0`,
     color: color.text.secondary,
     background: 'transparent',
     border: 'none',
+    borderBottom: '1.5px solid transparent',
     cursor: 'pointer',
-    selectors: {
-      '&:hover': {
-        color: color.primary.base,
-      },
-    },
+    transition: [
+      `color ${motion.duration.fast} ${motion.easing.default}`,
+      `border-bottom-color ${motion.duration.fast} ${motion.easing.default}`,
+    ].join(', '),
   },
 ])
 
 export const linkActive = style({
   fontWeight: fontWeight.semibold,
   color: color.primary.base,
-  borderBottom: `1.5px solid ${color.primary.base}`,
+  borderBottomColor: color.primary.base,
 })

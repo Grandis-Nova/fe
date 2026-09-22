@@ -19,9 +19,8 @@ type AdminProduct = {
   status: ProductStatus
 }
 
-const products: AdminProduct[] = [
+const baseProducts: Omit<AdminProduct, 'id'>[] = [
   {
-    id: 'model-a-preorder',
     name: '아이폰 18 PRO',
     type: 'preorder',
     optionCount: 4,
@@ -29,7 +28,6 @@ const products: AdminProduct[] = [
     status: 'selling',
   },
   {
-    id: 'model-a-normal',
     name: '아이폰 18',
     type: 'normal',
     optionCount: 4,
@@ -37,7 +35,6 @@ const products: AdminProduct[] = [
     status: 'selling',
   },
   {
-    id: 'model-b-preorder',
     name: 'Samsung Fold 8',
     type: 'preorder',
     optionCount: 2,
@@ -45,6 +42,11 @@ const products: AdminProduct[] = [
     status: 'scheduled',
   },
 ]
+
+const products: AdminProduct[] = Array.from({ length: 13 }, (_, index) => ({
+  ...baseProducts[index % baseProducts.length],
+  id: `product-${index + 1}`,
+}))
 
 const typeLabel: Record<ProductType, string> = {
   preorder: '사전 예약',
@@ -234,6 +236,7 @@ export function AdminProductsPage() {
         columns={columns}
         rows={visibleProducts}
         rowKey={(product) => product.id}
+        pageSize={10}
         emptyMessage="조건에 맞는 상품이 없습니다."
       />
     </div>

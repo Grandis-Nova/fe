@@ -32,7 +32,8 @@ export const router = createBrowserRouter([
           { path: '*', element: <NotFoundPage /> },
         ],
       },
-      // admin 라우트가 생기면 MainLayout 밖, 여기 형제로 추가한다 (Header만 적용, CategoryNav 제외).
+      // admin 라우트가 생기면 MainLayout 밖, 여기 형제로 추가한다 — CategoryNav는 이제 Header가
+      // 직접 렌더링하므로, admin에서 빼려면 Header에 showCategoryNav 같은 prop을 먼저 추가해야 한다.
     ],
   },
 ])

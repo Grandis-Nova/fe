@@ -10,22 +10,50 @@ const optionEnter = keyframes({
 export const root = style([
   typography.body.subMedium,
   {
-    display: 'flex',
-    flexDirection: 'column',
-    background: color.background.base,
-    border: `1px solid ${color.border.default}`,
-    overflow: 'hidden',
-    transition: `border-color ${motion.duration.fast} ${motion.easing.default}`,
+    position: 'relative',
+    width: '100%',
   },
 ])
 
-export const rootOpen = style({
-  borderColor: color.border.hover,
+export const box = style({
+  display: 'flex',
+  background: color.background.base,
+  border: `1px solid ${color.border.default}`,
+  overflow: 'hidden',
+  transition: `border-color ${motion.duration.fast} ${motion.easing.default}`,
 })
 
 export const size = styleVariants({
-  medium: { width: '100%', borderRadius: '12px' },
-  small: { width: '100%', borderRadius: '6px' },
+  medium: { borderRadius: '12px' },
+  small: { borderRadius: '6px' },
+})
+
+export const boxOpen = style({
+  borderColor: color.border.hover,
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
+})
+
+export const menu = style({
+  position: 'absolute',
+  top: 'calc(100% - 1px)',
+  left: 0,
+  right: 0,
+  zIndex: 20,
+  display: 'flex',
+  flexDirection: 'column',
+  background: color.background.base,
+  border: `1px solid ${color.border.hover}`,
+  borderTop: 'none',
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 0,
+  // 마지막 옵션까지 모서리가 잘리도록.
+  overflow: 'hidden',
+})
+
+export const menuSize = styleVariants({
+  medium: { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' },
+  small: { borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' },
 })
 
 export const trigger = styleVariants({

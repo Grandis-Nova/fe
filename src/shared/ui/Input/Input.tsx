@@ -8,27 +8,30 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   label: string
   size?: 'medium' | 'small'
   required?: boolean
-  error?: string
+  invalid?: boolean
 }
 
 export function Input({
   label,
   size = 'medium',
   required,
-  error,
+  invalid,
   className,
   placeholder,
   ...rest
 }: InputProps) {
+  const showError = Boolean(required && invalid)
+  const errorMessage = showError ? `${label}을(를) 필수로 작성해주세요` : null
+
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div
-        className={[styles.box[size], error && styles.boxError]
+        className={[styles.box[size], showError && styles.boxError]
           .filter(Boolean)
           .join(' ')}
       >
         <input
-          className={[styles.field[size], error && styles.fieldError]
+          className={[styles.field[size], showError && styles.fieldError]
             .filter(Boolean)
             .join(' ')}
           placeholder={placeholder ?? ' '}
@@ -36,7 +39,7 @@ export function Input({
           {...rest}
         />
         <label
-          className={[styles.label[size], error && styles.labelError]
+          className={[styles.label[size], showError && styles.labelError]
             .filter(Boolean)
             .join(' ')}
         >
@@ -44,10 +47,10 @@ export function Input({
           {required && ' *'}
         </label>
       </div>
-      {error && (
+      {errorMessage && (
         <div className={styles.errorRow}>
           <AlertCircle className={styles.errorIcon[size]} aria-hidden="true" />
-          <span className={styles.errorText[size]}>{error}</span>
+          <span className={styles.errorText[size]}>{errorMessage}</span>
         </div>
       )}
     </div>

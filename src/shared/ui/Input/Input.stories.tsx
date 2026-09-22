@@ -12,7 +12,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Empty: Story = {
+export const Default: Story = {
   args: { label: '이름' },
 }
 
@@ -46,59 +46,32 @@ export const Required: Story = {
   play: async ({ canvas }) => {
     await expect(canvas.getByText('이름 *')).toBeVisible()
     await expect(canvas.getByRole('textbox')).toBeRequired()
+    await expect(
+      canvas.queryByText(/필수로 작성해주세요/),
+    ).not.toBeInTheDocument()
   },
 }
 
-export const WithError: Story = {
-  args: { label: '휴대폰 번호', error: '숫자만 입력해주세요.' },
+export const Invalid: Story = {
+  args: { label: '휴대폰 번호', required: true, invalid: true },
   play: async ({ canvas }) => {
-    await expect(canvas.getByText('숫자만 입력해주세요.')).toBeVisible()
+    const message = canvas.getByText('휴대폰 번호을(를) 필수로 작성해주세요')
+    await expect(message).toBeVisible()
 
-    const label = canvas.getByText('휴대폰 번호')
+    const label = canvas.getByText('휴대폰 번호 *')
     await expect(label).toHaveStyle({ color: 'rgb(220, 38, 38)' }) // status.danger
 
     const field = canvas.getByRole('textbox')
     await expect(field).toHaveStyle({ color: 'rgb(220, 38, 38)' })
+    await expect(field).toBeRequired()
   },
 }
 
-export const RequiredWithError: Story = {
-  args: {
-    label: '휴대폰 번호',
-    required: true,
-    error: '숫자만 입력해주세요.',
-  },
+export const InvalidWithoutRequired: Story = {
+  args: { label: '이름', invalid: true },
   play: async ({ canvas }) => {
-    const label = canvas.getByText('휴대폰 번호 *')
-    await expect(label).toBeVisible()
-    await expect(label).toHaveStyle({ color: 'rgb(220, 38, 38)' })
-    await expect(canvas.getByRole('textbox')).toBeRequired()
-  },
-}
-
-export const Small: Story = {
-  args: { label: '검색어', size: 'small', defaultValue: '노바폰' },
-  play: async ({ canvas }) => {
-    const field = canvas.getByRole('textbox')
-    await expect(field).toHaveStyle({ fontSize: '14px' })
-
-    const label = canvas.getByText('검색어')
-    await expect(label).toHaveStyle({ fontSize: '9px' })
-  },
-}
-
-export const SmallWithError: Story = {
-  args: {
-    label: '검색어',
-    size: 'small',
-    required: true,
-    error: '2자 이상 입력해주세요.',
-  },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByText('검색어 *')).toBeVisible()
-
-    const errorText = canvas.getByText('2자 이상 입력해주세요.')
-    await expect(errorText).toBeVisible()
-    await expect(errorText).toHaveStyle({ fontSize: '10px' })
+    await expect(
+      canvas.queryByText(/필수로 작성해주세요/),
+    ).not.toBeInTheDocument()
   },
 }

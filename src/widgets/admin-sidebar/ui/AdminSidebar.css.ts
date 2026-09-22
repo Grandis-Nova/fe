@@ -6,7 +6,7 @@ import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '240px',
+  width: '300px',
   flexShrink: 0,
   padding: `${spacing[20]} 0`,
   background: color.background.base,
@@ -19,7 +19,7 @@ export const navList = style({
 })
 
 export const navItem = style([
-  typography.body.defaultRegular,
+  typography.title.mdMedium,
   {
     boxSizing: 'border-box',
     display: 'flex',

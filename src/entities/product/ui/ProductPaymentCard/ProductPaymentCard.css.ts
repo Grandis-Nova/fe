@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color, spacing } from '@/shared/config/theme'
+import { color, motion, spacing } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -13,7 +13,7 @@ export const thumbnail = style({
   width: '120px',
   height: '120px',
   borderRadius: '8px',
-  background: color.secondary.subtle,
+  background: color.background.surface,
   flexShrink: 0,
   objectFit: 'cover',
 })
@@ -62,6 +62,12 @@ export const action = style({
   whiteSpace: 'nowrap',
   flexShrink: 0,
   cursor: 'pointer',
+  transition: `transform 160ms ${motion.easing.default}`,
+  selectors: {
+    '&:active:not(:disabled)': {
+      transform: 'scale(0.97)',
+    },
+  },
 })
 
 export const actionCheckout = style({

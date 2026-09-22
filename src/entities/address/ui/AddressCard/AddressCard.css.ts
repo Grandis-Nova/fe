@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color, spacing, typography } from '@/shared/config/theme'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -49,5 +49,11 @@ export const action = style([
     color: color.text.tertiary,
     cursor: 'pointer',
     padding: 0,
+    transition: `opacity 160ms ${motion.easing.default}`,
+    selectors: {
+      '&:active': {
+        opacity: 0.6,
+      },
+    },
   },
 ])

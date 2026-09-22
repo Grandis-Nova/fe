@@ -43,3 +43,5 @@ export const swatchInteractive = style({
   cursor: 'pointer',
   background: 'none',
 })
+
+export const label = style({ color: color.text.primary })

@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { color, spacing } from '@/shared/config/theme'
+import { color, spacing, typography } from '@/shared/config/theme'
 
 export const root = style({
   display: 'flex',
@@ -20,6 +20,14 @@ export const media = style({
   aspectRatio: '1 / 1',
   background: color.background.surface,
   borderRadius: '16px',
+})
+
+// height:100%를 Slider(Swiper)까지 퍼센트로 내려보내면 aspect-ratio(media) + flex(swiper-wrapper) 조합에서
+// 순환 계산이 발생해 크롬이 LayoutUnit 상한값(약 33554432px)으로 튀는 버그가 있었다 — absolute + inset:0으로
+// media의 padding box에 기하학적으로 고정시켜 퍼센트 순환 자체를 피한다.
+export const sliderFill = style({
+  position: 'absolute',
+  inset: 0,
 })
 
 // 267.5px 카드 기준 34px 인셋/200px 크기 비율을 %로 유지해, media가 커져도 같은 비율을 유지한다.
@@ -46,7 +54,13 @@ export const nameGroup = style({
   gap: spacing[4],
 })
 
-export const name = style({ color: color.text.primary })
+export const name = style([
+  typography.title.mdMedium,
+  {
+    color: color.text.primary,
+    cursor: 'pointer',
+  },
+])
 export const modelNumber = style({ color: color.text.tertiary })
 
 export const storageRow = style({

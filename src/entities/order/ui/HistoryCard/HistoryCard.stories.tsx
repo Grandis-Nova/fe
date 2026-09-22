@@ -24,16 +24,7 @@ const item = {
   priceLabel: '1,290,000원',
 }
 
-const renderItem = (item: HistoryCardItem) => (
-  <ProductPaymentCard
-    imageSrc={item.imageSrc}
-    name={item.name}
-    modelNumber={item.modelNumber}
-    optionSummary={item.optionSummary}
-    quantityLabel={item.quantityLabel}
-    priceLabel={item.priceLabel}
-  />
-)
+const renderItem = (item: HistoryCardItem) => <ProductPaymentCard product={item} />
 
 const base = {
   orderDate: '2026.09.01',

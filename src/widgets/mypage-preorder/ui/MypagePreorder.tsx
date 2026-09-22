@@ -1,4 +1,5 @@
 import { ProductPaymentCard } from '@/entities/product'
+import { InlineAlert } from '@/shared/ui'
 
 import * as styles from './MypagePreorder.css'
 
@@ -17,6 +18,12 @@ const preorderItems = [
 export function MypagePreorder() {
   return (
     <div className={styles.root}>
+      <InlineAlert status="info" icon="info">
+        사전 예약 상품은 24시간 이내에 결제가 완료되어야 합니다.
+      </InlineAlert>
+      <InlineAlert status="warning" icon="box_planet">
+        사전 예약 상품은 24시간 이내에 결제가 완료되어야 합니다.
+      </InlineAlert>
       {preorderItems.map((item) => (
         <ProductPaymentCard
           key={item.id}

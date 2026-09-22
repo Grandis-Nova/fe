@@ -2,6 +2,17 @@ import { style, styleVariants } from '@vanilla-extract/css'
 
 import { color, motion, spacing, typography } from '@/shared/config/theme'
 
+export const wrapper = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacing[20],
+  width: '100%',
+})
+
+export const navigator = style({
+  alignSelf: 'center',
+})
+
 export const root = style({
   width: '100%',
   overflowX: 'auto',
@@ -20,8 +31,8 @@ const headerCellBase = style([
   typography.body.subMedium,
   {
     padding: `${spacing[14]} ${spacing[16]}`,
-    color: color.text.tertiary,
-    background: color.background.surface,
+    color: color.text.secondary,
+    background: color.background.subSurface,
     borderBottom: `1px solid ${color.border.subtle}`,
     whiteSpace: 'nowrap',
   },

@@ -20,6 +20,7 @@ export type TableProps<T> = {
   rowKey: (row: T) => string
   emptyMessage?: string
   pageSize?: number
+  onRowClick?: (row: T) => void
   className?: string
 }
 
@@ -29,6 +30,7 @@ export function Table<T>({
   rowKey,
   emptyMessage = '데이터가 없습니다.',
   pageSize,
+  onRowClick,
   className,
 }: TableProps<T>) {
   const [page, setPage] = useState(1)
@@ -70,7 +72,13 @@ export function Table<T>({
               </tr>
             ) : (
               visibleRows.map((row) => (
-                <tr key={rowKey(row)} className={styles.row}>
+                <tr
+                  key={rowKey(row)}
+                  className={[styles.row, onRowClick && styles.rowClickable]
+                    .filter(Boolean)
+                    .join(' ')}
+                  onClick={onRowClick && (() => onRowClick(row))}
+                >
                   {columns.map(({ key, render, align = 'left' }) => (
                     <td key={key} className={styles.cell[align]}>
                       {render(row)}

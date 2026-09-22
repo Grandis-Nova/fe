@@ -56,6 +56,10 @@ export const row = style({
   },
 })
 
+export const rowClickable = style({
+  cursor: 'pointer',
+})
+
 const cellBase = style([
   typography.body.sub,
   {

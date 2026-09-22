@@ -6,6 +6,7 @@ import { MypageLayout } from '@/app/layouts/MypageLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
 import { AdminHomePage } from '@/pages/admin-home'
 import { AdminPlaceholderPage } from '@/pages/admin-placeholder'
+import { AdminProductDetailPage } from '@/pages/admin-product-detail'
 import { AdminProductsPage } from '@/pages/admin-products'
 import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
           // 홈을 제외한 나머지는 아직 기능 범위가 안 정해져서 전부 placeholder —
           // 스코프가 정해지는 대로 각자 전용 페이지로 교체.
           { path: '/admin/products', element: <AdminProductsPage /> },
+          {
+            path: '/admin/products/:productId',
+            element: <AdminProductDetailPage />,
+          },
           {
             path: '/admin/preorders',
             element: <AdminPlaceholderPage title="사전 예약 관리" />,

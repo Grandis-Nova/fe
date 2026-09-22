@@ -1,0 +1,133 @@
+import { useState } from 'react'
+
+import { ChevronRight } from 'lucide-react'
+import { Link, useParams } from 'react-router'
+
+import {
+  adminProductStatusColor,
+  adminProductStatusLabel,
+  findAdminProduct,
+  getAdminProductStocks,
+  type AdminProductStock,
+} from '@/entities/admin-product'
+import { SegmentedTabs, Table, Tag } from '@/shared/ui'
+import type { TableColumn } from '@/shared/ui'
+
+import * as styles from './AdminProductDetailPage.css'
+
+const tabs = [
+  { value: 'edit', label: '수정' },
+  { value: 'stock', label: '재고 조회' },
+  { value: 'shipping', label: '배송 구간 설정' },
+] as const
+
+type TabValue = (typeof tabs)[number]['value']
+
+const numberFormatter = new Intl.NumberFormat('ko-KR')
+
+const stockColumns: TableColumn<AdminProductStock>[] = [
+  { key: 'color', header: '색상', align: 'center', render: (row) => row.color },
+  {
+    key: 'capacity',
+    header: '용량',
+    align: 'center',
+    render: (row) => row.capacity,
+  },
+  {
+    key: 'totalCount',
+    header: '총수량',
+    align: 'center',
+    render: (row) => numberFormatter.format(row.totalCount),
+  },
+  {
+    key: 'price',
+    header: '가격',
+    align: 'center',
+    render: (row) => `${numberFormatter.format(row.price)}원`,
+  },
+  {
+    key: 'confirmedCount',
+    header: '확정',
+    align: 'center',
+    render: (row) => `${numberFormatter.format(row.confirmedCount)}건`,
+  },
+  {
+    key: 'remainingCount',
+    header: '잔여',
+    align: 'center',
+    // 잔여가 적을수록 눈에 띄어야 해서 소진 임박(10% 미만)은 색을 달리한다.
+    render: (row) => (
+      <span
+        className={
+          row.remainingCount / row.totalCount < 0.1
+            ? styles.remainingLow
+            : styles.remaining
+        }
+      >
+        {`${numberFormatter.format(row.remainingCount)}건`}
+      </span>
+    ),
+  },
+]
+
+export function AdminProductDetailPage() {
+  const { productId = '' } = useParams()
+  // 재고 조회를 기본으로 연다.
+  const [tab, setTab] = useState<TabValue>('stock')
+
+  const product = findAdminProduct(productId)
+
+  if (!product) {
+    return (
+      <div className={styles.root}>
+        <div className={styles.notFound}>
+          찾을 수 없는 상품입니다.
+          <Link className={styles.breadcrumbLink} to="/admin/products">
+            상품 관리로 돌아가기
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={styles.root}>
+      <nav className={styles.breadcrumb} aria-label="breadcrumb">
+        <Link className={styles.breadcrumbLink} to="/admin/products">
+          상품 관리
+        </Link>
+        <ChevronRight className={styles.breadcrumbIcon} aria-hidden="true" />
+        <span className={styles.breadcrumbCurrent}>{product.name}</span>
+      </nav>
+
+      <div className={styles.titleRow}>
+        <h1 className={styles.title}>{product.name}</h1>
+        <Tag
+          variant="subtle"
+          size="medium"
+          rounded={false}
+          color={adminProductStatusColor[product.status]}
+        >
+          {adminProductStatusLabel[product.status]}
+        </Tag>
+      </div>
+
+      <SegmentedTabs items={tabs} value={tab} onChange={setTab} />
+
+      {tab === 'stock' ? (
+        <Table
+          columns={stockColumns}
+          rows={getAdminProductStocks(product)}
+          rowKey={(row) => row.id}
+          pageSize={10}
+          emptyMessage="등록된 재고가 없습니다."
+        />
+      ) : (
+        // 수정 / 배송 구간 설정은 아직 범위가 정해지지 않아 안내만 둔다.
+        <div className={styles.placeholder}>
+          {tabs.find((item) => item.value === tab)?.label} 화면은 준비 중입니다.
+        </div>
+      )}
+    </div>
+  )
+}

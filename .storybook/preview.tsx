@@ -6,8 +6,10 @@ import '../src/shared/config/theme'
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
-      <MemoryRouter>
+    // 경로에 따라 화면이 달라지는 컴포넌트(Header 등)는 스토리에서
+    // parameters: { initialEntries: ['/admin'] } 으로 진입 경로를 지정한다.
+    (Story, { parameters }) => (
+      <MemoryRouter initialEntries={parameters.initialEntries ?? ['/']}>
         <Story />
       </MemoryRouter>
     ),

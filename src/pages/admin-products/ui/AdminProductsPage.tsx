@@ -1,71 +1,25 @@
 import { useState } from 'react'
 
 import { ChevronRight } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
+import {
+  adminProducts,
+  adminProductStatusColor as statusColor,
+  adminProductStatusLabel as statusLabel,
+  adminProductTypeLabel as typeLabel,
+  type AdminProduct,
+  type AdminProductType,
+} from '@/entities/admin-product'
 import { Button, Dropdown, Input, SegmentedTabs, Table, Tag } from '@/shared/ui'
 import type { TableColumn, TagProps } from '@/shared/ui'
 
 import * as styles from './AdminProductsPage.css'
 
-type ProductType = 'preorder' | 'normal'
-type ProductStatus = 'selling' | 'scheduled' | 'closed'
-
-type AdminProduct = {
-  id: string
-  name: string
-  type: ProductType
-  optionCount: number
-  openPeriod: string | null
-  status: ProductStatus
-}
-
-const baseProducts: Omit<AdminProduct, 'id'>[] = [
-  {
-    name: '아이폰 18 PRO',
-    type: 'preorder',
-    optionCount: 4,
-    openPeriod: '2026년 9월 15일 09:00 ~ 2026년 9월 15일 23:59',
-    status: 'selling',
-  },
-  {
-    name: '아이폰 18',
-    type: 'normal',
-    optionCount: 4,
-    openPeriod: null,
-    status: 'selling',
-  },
-  {
-    name: 'Samsung Fold 8',
-    type: 'preorder',
-    optionCount: 2,
-    openPeriod: '2026년 9월 20일 10:00 ~ 2026년 9월 21일 23:59',
-    status: 'scheduled',
-  },
-]
-
-const products: AdminProduct[] = Array.from({ length: 13 }, (_, index) => ({
-  ...baseProducts[index % baseProducts.length],
-  id: `product-${index + 1}`,
-}))
-
-const typeLabel: Record<ProductType, string> = {
-  preorder: '사전 예약',
-  normal: '일반 판매',
-}
-
-const statusLabel: Record<ProductStatus, string> = {
-  selling: '판매 중',
-  scheduled: '판매 예정',
-  closed: '판매 종료',
-}
-
-const statusColor: Record<ProductStatus, 'green' | 'blue' | 'gray'> = {
-  selling: 'green',
-  scheduled: 'blue',
-  closed: 'gray',
-}
-
-const typeTagProps: Record<ProductType, Pick<TagProps, 'variant' | 'color'>> = {
+const typeTagProps: Record<
+  AdminProductType,
+  Pick<TagProps, 'variant' | 'color'>
+> = {
   preorder: { variant: 'subtle', color: 'primary' },
   normal: { variant: 'outline', color: 'primary' },
 }
@@ -82,6 +36,7 @@ const statusOptions = ['전체', '판매 중', '판매 예정', '판매 종료']
 const sortOptions = ['오픈 시각순', '상품명순']
 
 export function AdminProductsPage() {
+  const navigate = useNavigate()
   const [typeFilter, setTypeFilter] = useState<TypeFilter>('all')
   const [keyword, setKeyword] = useState('')
   const [statusOpen, setStatusOpen] = useState(false)
@@ -89,7 +44,10 @@ export function AdminProductsPage() {
   const [sortOpen, setSortOpen] = useState(false)
   const [sort, setSort] = useState<string>()
 
-  const visibleProducts = products
+  const openDetail = (product: AdminProduct) =>
+    navigate(`/admin/products/${product.id}`)
+
+  const visibleProducts = adminProducts
     .filter((product) => typeFilter === 'all' || product.type === typeFilter)
     .filter(
       (product) =>
@@ -140,8 +98,13 @@ export function AdminProductsPage() {
       key: 'detail',
       header: '상세 정보',
       align: 'center',
-      render: () => (
-        <Button size="small" variant="outline" color="cancel">
+      render: (product) => (
+        <Button
+          size="small"
+          variant="outline"
+          color="cancel"
+          onClick={() => openDetail(product)}
+        >
           수정
         </Button>
       ),
@@ -171,6 +134,7 @@ export function AdminProductsPage() {
           type="button"
           className={styles.rowLink}
           aria-label={`${product.name} ${typeLabel[product.type]} 상세 보기`}
+          onClick={() => openDetail(product)}
         >
           <ChevronRight className={styles.rowLinkIcon} aria-hidden="true" />
         </button>
@@ -237,6 +201,7 @@ export function AdminProductsPage() {
         rows={visibleProducts}
         rowKey={(product) => product.id}
         pageSize={10}
+        onRowClick={openDetail}
         emptyMessage="조건에 맞는 상품이 없습니다."
       />
     </div>

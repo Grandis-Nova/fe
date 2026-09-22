@@ -30,6 +30,9 @@ export const box = style({
   background: color.background.base,
   pointerEvents: 'none',
   selectors: {
+    [`${input}:hover ~ &`]: {
+      background: color.primary.surface,
+    },
     [`${input}:checked ~ &`]: {
       background: color.primary.base,
       borderColor: color.primary.base,

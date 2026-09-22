@@ -8,6 +8,7 @@ export type DropdownProps = {
   open?: boolean
   size?: 'medium' | 'small'
   selectedOption?: string
+  width?: string
   onToggle?: () => void
   onSelect?: (option: string, index: number) => void
   className?: string
@@ -19,6 +20,7 @@ export function Dropdown({
   open = false,
   size = 'medium',
   selectedOption,
+  width,
   onToggle,
   onSelect,
   className,
@@ -33,18 +35,22 @@ export function Dropdown({
       ]
         .filter(Boolean)
         .join(' ')}
+      style={width ? { width } : undefined}
     >
       <button
         type="button"
-        className={styles.trigger}
+        className={styles.trigger[size]}
         onClick={onToggle}
         aria-expanded={open}
       >
-        {label}
+        <span className={styles.triggerLabel}>{selectedOption ?? label}</span>
         {open ? (
-          <ChevronUp className={styles.triggerIcon} aria-hidden="true" />
+          <ChevronUp className={styles.triggerIcon[size]} aria-hidden="true" />
         ) : (
-          <ChevronDown className={styles.triggerIcon} aria-hidden="true" />
+          <ChevronDown
+            className={styles.triggerIcon[size]}
+            aria-hidden="true"
+          />
         )}
       </button>
       {open &&
@@ -53,7 +59,7 @@ export function Dropdown({
             key={option}
             type="button"
             className={[
-              styles.option,
+              styles.option[size],
               option === selectedOption && styles.optionSelected,
             ]
               .filter(Boolean)

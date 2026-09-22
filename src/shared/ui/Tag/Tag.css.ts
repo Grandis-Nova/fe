@@ -2,20 +2,21 @@ import { style, styleVariants } from '@vanilla-extract/css'
 
 import { color, spacing, typography } from '@/shared/config/theme'
 
-const base = style([
-  typography.body.captionMedium,
-  {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid transparent',
-    whiteSpace: 'nowrap',
-  },
-])
+const base = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: '1px solid transparent',
+  whiteSpace: 'nowrap',
+})
 
 const size = styleVariants({
-  small: [base, { minWidth: '36px', fontSize: '10px' }],
-  medium: [base, { minWidth: '48px' }],
+  small: [
+    base,
+    typography.body.captionMedium,
+    { minWidth: '36px', fontSize: '10px' },
+  ],
+  medium: [base, typography.body.subMedium, { minWidth: '48px' }],
 })
 
 export const shape = {
@@ -29,9 +30,9 @@ export const shape = {
   medium: styleVariants({
     full: [
       size.medium,
-      { padding: `8px ${spacing[14]}`, borderRadius: '9999px' },
+      { padding: `8px ${spacing[12]}`, borderRadius: '9999px' },
     ],
-    rect: [size.medium, { padding: `8px ${spacing[12]}`, borderRadius: '6px' }],
+    rect: [size.medium, { padding: `8px ${spacing[10]}`, borderRadius: '6px' }],
   }),
 }
 

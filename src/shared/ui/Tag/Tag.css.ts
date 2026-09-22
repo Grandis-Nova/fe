@@ -2,24 +2,35 @@ import { style, styleVariants } from '@vanilla-extract/css'
 
 import { color, spacing, typography } from '@/shared/config/theme'
 
+// captionMedium = 12px / Medium / line-height 130% / letter-spacing -2%.
+// small만 폰트 크기를 10px로 줄이고 나머지 타이포 규칙은 그대로 물려받는다.
 const base = style([
   typography.body.captionMedium,
   {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: '36px',
     border: '1px solid transparent',
-    lineHeight: 1.3,
     whiteSpace: 'nowrap',
-    fontSize: '10px',
   },
 ])
 
-export const shape = styleVariants({
-  full: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
-  rect: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
+const size = styleVariants({
+  small: [base, { minWidth: '36px', fontSize: '10px' }],
+  medium: [base, { minWidth: '48px' }],
 })
+
+// padding은 크기와 모양(pill/사각) 둘 다에 따라 달라져서 조합으로 만든다.
+export const shape = {
+  small: styleVariants({
+    full: [size.small, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
+    rect: [size.small, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
+  }),
+  medium: styleVariants({
+    full: [size.medium, { padding: `7px ${spacing[14]}`, borderRadius: '9999px' }],
+    rect: [size.medium, { padding: `7px ${spacing[12]}`, borderRadius: '6px' }],
+  }),
+}
 
 export const solid = styleVariants({
   primary: {

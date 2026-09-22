@@ -36,6 +36,11 @@ export function ProductColorSwatches({
 
   return (
     <div className={[styles.root[size], className].filter(Boolean).join(' ')}>
+      {size === 'medium' && (
+        <div className={[typography.title.smMedium, styles.label].join(' ')}>
+          색상
+        </div>
+      )}
       <div className={[colorNameTypography[size], styles.colorName].join(' ')}>
         {selectedLabel}
       </div>

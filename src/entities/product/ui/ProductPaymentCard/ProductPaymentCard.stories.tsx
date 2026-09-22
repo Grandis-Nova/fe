@@ -14,7 +14,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const base = {
+const product = {
   imageSrc: placeholderImage,
   name: 'NOVA Phone',
   modelNumber: '256GB · 미드나이트',
@@ -24,16 +24,16 @@ const base = {
 }
 
 export const Default: Story = {
-  args: { ...base, variant: 'default' },
+  args: { product, variant: 'default' },
 }
 
 export const PreorderPending: Story = {
-  args: { ...base, variant: 'preorder-pending', actionLabel: '예약 대기중' },
+  args: { product, variant: 'preorder-pending', actionLabel: '예약 대기중' },
 }
 
 export const Checkout: Story = {
   args: {
-    ...base,
+    product,
     variant: 'checkout',
     actionLabel: '결제하기',
     onActionClick: fn(),
@@ -45,7 +45,7 @@ export const Checkout: Story = {
 }
 
 export const Cart: Story = {
-  args: { ...base, variant: 'cart', checked: false, onCheckedChange: fn() },
+  args: { product, variant: 'cart', checked: false, onCheckedChange: fn() },
   play: async ({ canvas, userEvent, args }) => {
     await userEvent.click(canvas.getByRole('checkbox'))
     await expect(args.onCheckedChange).toHaveBeenCalledWith(true)

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 
 import { MainLayout } from '@/app/layouts/MainLayout'
+import { MypageLayout } from '@/app/layouts/MypageLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
 import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
@@ -22,7 +23,11 @@ export const router = createBrowserRouter([
           { path: '/preorder/:preorderId', element: <PreorderDetailPage /> },
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/result', element: <ResultPage /> },
-          { path: '/mypage', element: <Mypage /> },
+          {
+            path: '/mypage',
+            element: <MypageLayout />,
+            children: [{ index: true, element: <Mypage /> }],
+          },
           // 구매후기, 브랜드별 상품 목록(/products?brand=...) 페이지는 아직 미구현 — 만들면 여기 추가.
           { path: '*', element: <NotFoundPage /> },
         ],

@@ -87,7 +87,11 @@ export function HistoryCard({
       </div>
 
       {visibleItems.map((item, index) => (
-        <div key={`${item.name}-${index}`}>
+        <div
+          key={`${item.name}-${index}`}
+          className={index > 0 ? styles.itemEnter : undefined}
+          style={index > 0 ? { animationDelay: `${(index - 1) * 50}ms` } : undefined}
+        >
           {index > 0 && <div className={styles.divider} />}
           <div className={styles.itemRow}>{renderItem(item, index)}</div>
         </div>

@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router'
+
 import { typography } from '@/shared/config/theme'
-import { SelectButton } from '@/shared/ui'
+import { SelectButton, Slider } from '@/shared/ui'
 
 import { ProductColorSwatches } from '../ProductColorSwatches'
 
@@ -13,7 +15,7 @@ export type ProductStorageOption = {
 }
 
 export type ProductCardData = {
-  imageSrc: string
+  imageSrcs: string[]
   imageAlt?: string
   name: string
   modelNumber: string
@@ -37,8 +39,9 @@ export function ProductCard({
   onStorageSelect,
   className,
 }: ProductCardProps) {
+  const navigate = useNavigate()
   const {
-    imageSrc,
+    imageSrcs,
     imageAlt = '',
     name,
     modelNumber,
@@ -51,11 +54,22 @@ export function ProductCard({
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.media}>
-        <img src={imageSrc} alt={imageAlt} className={styles.image} />
+        <div className={styles.sliderFill}>
+          <Slider>
+            {imageSrcs.map((src) => (
+              <img
+                key={src}
+                src={src}
+                alt={imageAlt}
+                className={styles.image}
+              />
+            ))}
+          </Slider>
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.nameGroup}>
-          <div className={[typography.title.mdMedium, styles.name].join(' ')}>
+          <div className={styles.name} onClick={() => navigate('/products/1')}>
             {name}
           </div>
           <div className={[typography.body.sub, styles.modelNumber].join(' ')}>

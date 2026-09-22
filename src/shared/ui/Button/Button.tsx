@@ -7,8 +7,14 @@ import { spacing } from '@/shared/config/theme'
 import * as styles from './Button.css'
 
 type ButtonColor = 'primary' | 'secondary' | 'cancel'
-type ButtonVariant = 'solid' | 'outline'
+type ButtonVariant = 'solid' | 'outline' | 'subtle'
 type ButtonSize = 'large' | 'medium' | 'small'
+
+const variantStyles = {
+  solid: styles.solid,
+  outline: styles.outline,
+  subtle: styles.subtle,
+}
 
 const iconSize: Record<ButtonSize, string> = {
   small: spacing[16],
@@ -34,8 +40,7 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
-  const variantClassName =
-    variant === 'outline' ? styles.outline[color] : styles.solid[color]
+  const variantClassName = variantStyles[variant][color]
 
   return (
     <button

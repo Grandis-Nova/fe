@@ -1,6 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color, spacing, typography } from '@/shared/config/theme'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
 
 export const base = style({
   display: 'inline-flex',
@@ -8,6 +8,11 @@ export const base = style({
   justifyContent: 'center',
   border: '1px solid transparent',
   cursor: 'pointer',
+  transition: [
+    `background-color ${motion.duration.fast} ${motion.easing.default}`,
+    `border-color ${motion.duration.fast} ${motion.easing.default}`,
+    `opacity ${motion.duration.fast} ${motion.easing.default}`,
+  ].join(', '),
   selectors: {
     '&:disabled': {
       cursor: 'not-allowed',
@@ -84,6 +89,42 @@ export const solid = styleVariants({
     selectors: {
       '&:hover:not(:disabled)': {
         opacity: 0.85,
+      },
+    },
+  },
+})
+
+export const subtle = styleVariants({
+  primary: {
+    background: color.primary.subtler,
+    borderColor: color.primary.subtler,
+    color: color.primary.base,
+    selectors: {
+      '&:hover:not(:disabled)': {
+        background: color.primary.subtlerHover,
+        borderColor: color.primary.subtlerHover,
+      },
+    },
+  },
+  secondary: {
+    background: color.secondary.subtler,
+    borderColor: color.secondary.subtler,
+    color: color.secondary.base,
+    selectors: {
+      '&:hover:not(:disabled)': {
+        background: color.secondary.subtlerHover,
+        borderColor: color.secondary.subtlerHover,
+      },
+    },
+  },
+  cancel: {
+    background: color.background.surface,
+    borderColor: color.background.surface,
+    color: color.text.secondary,
+    selectors: {
+      '&:hover:not(:disabled)': {
+        background: color.background.subSurface,
+        borderColor: color.background.subSurface,
       },
     },
   },

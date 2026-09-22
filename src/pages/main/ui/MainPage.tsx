@@ -4,7 +4,8 @@ import AutoScroll from 'embla-carousel-auto-scroll'
 import useEmblaCarousel from 'embla-carousel-react'
 
 import { ProductCard } from '@/entities/product'
-import placeholderImage from '@/shared/assets/react.svg'
+import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
+import macbook2 from '@/shared/assets/macbook_neo_sliver2.png'
 import { typography } from '@/shared/config/theme'
 import { Container, SwirlBackground } from '@/shared/ui'
 import { Banner } from '@/widgets/banner'
@@ -51,7 +52,7 @@ export function MainPage() {
               <div key={index} className={styles.carouselSlide}>
                 <ProductCard
                   product={{
-                    imageSrc: placeholderImage,
+                    imageSrcs: [macbook1, macbook2],
                     name: `NOVA Phone ${index + 1}`,
                     modelNumber: 'NV-2026',
                     colorName: '미드나이트',
@@ -88,7 +89,7 @@ export function MainPage() {
             <ProductCard
               key={index}
               product={{
-                imageSrc: placeholderImage,
+                imageSrcs: [macbook1, macbook2],
                 name: `NOVA Phone ${index + 1}`,
                 modelNumber: 'NV-2026',
                 colorName: '미드나이트',

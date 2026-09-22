@@ -16,7 +16,7 @@ const links: CategoryNavLink[] = ['구매후기', '사전예약', '마이페이�
 const linkPaths: Record<CategoryNavLink, string> = {
   구매후기: '/reviews',
   사전예약: '/preorder',
-  마이페이지: '/mypage',
+  마이페이지: '/mypage?state=preorder-check',
 }
 
 export function CategoryNav({

@@ -8,6 +8,7 @@ export const root = style({
   flexDirection: 'column',
   width: '300px',
   flexShrink: 0,
+  overflowY: 'auto',
   padding: `${spacing[20]} 0`,
   background: color.background.base,
   borderRight: `1px solid ${color.border.default}`,

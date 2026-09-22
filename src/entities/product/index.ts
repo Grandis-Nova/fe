@@ -20,4 +20,5 @@ export { ProductPaymentCard } from './ui/ProductPaymentCard'
 export type {
   ProductPaymentCardProps,
   ProductPaymentCardVariant,
+  ProductPaymentCardItem,
 } from './ui/ProductPaymentCard'

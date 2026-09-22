@@ -8,56 +8,54 @@ const base = style([
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    minWidth: '36px',
     border: '1px solid transparent',
-    // Pretendard's Hangul metrics push the body line-height(1.3) box's ink upward
-    // when flex-centered; a tight line-height keeps the pill text optically centered.
-    lineHeight: 1,
+    lineHeight: 1.3,
     whiteSpace: 'nowrap',
+    fontSize: '10px',
   },
 ])
 
 export const shape = styleVariants({
-  pill: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
-  rounded: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
+  full: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
+  rect: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
 })
-
-const solidText = { color: color.text.inverse }
 
 export const solid = styleVariants({
   primary: {
     background: color.primary.base,
     borderColor: color.primary.base,
-    ...solidText,
+    color: color.primary.subtler,
   },
   secondary: {
     background: color.secondary.base,
     borderColor: color.secondary.base,
-    ...solidText,
+    color: color.secondary.subtler,
   },
   blue: {
     background: color.status.info,
     borderColor: color.status.info,
-    ...solidText,
+    color: color.background.subtleInfo,
   },
   green: {
     background: color.status.success,
     borderColor: color.status.success,
-    ...solidText,
+    color: color.background.subtleSuccess,
   },
   yellow: {
     background: color.status.warning,
     borderColor: color.status.warning,
-    ...solidText,
+    color: color.background.subtleWarning,
   },
   red: {
     background: color.status.danger,
     borderColor: color.status.danger,
-    ...solidText,
+    color: color.background.subtleDanger,
   },
   gray: {
     background: color.text.tertiary,
     borderColor: color.text.tertiary,
-    ...solidText,
+    color: color.background.surface,
   },
 })
 

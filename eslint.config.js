@@ -67,27 +67,37 @@ const fsdBoundaryRules = {
         // shared는 다른 모든 레이어를 import할 수 없음
         {
           target: './src/shared/**',
-          from: './src/(app|pages|widgets|features|entities)/**',
+          from: './src/@(app|pages|widgets|features|entities)/**',
         },
         // entities는 features, widgets, pages, app을 import할 수 없음
         {
           target: './src/entities/**',
-          from: './src/(app|pages|widgets|features)/**',
+          from: './src/@(app|pages|widgets|features)/**',
         },
         // features는 widgets, pages, app을 import할 수 없음
         {
           target: './src/features/**',
-          from: './src/(app|pages|widgets)/**',
+          from: './src/@(app|pages|widgets)/**',
         },
         // widgets는 pages, app을 import할 수 없음
         {
           target: './src/widgets/**',
-          from: './src/(app|pages)/**',
+          from: './src/@(app|pages)/**',
         },
         // pages는 app을 import할 수 없음
         {
           target: './src/pages/**',
           from: './src/app/**',
+        },
+        // 서버 DTO는 entities의 api/model에서만 import할 수 있음 (CLAUDE.md Data layer)
+        {
+          target: [
+            './src/@(app|pages|widgets|features)/**',
+            './src/entities/*/ui/**',
+          ],
+          from: './src/shared/api/types/**',
+          message:
+            'DTO는 entities/*/api에서 모델로 변환하고, 엔티티 배럴의 모델 타입을 쓴다.',
         },
       ],
     },

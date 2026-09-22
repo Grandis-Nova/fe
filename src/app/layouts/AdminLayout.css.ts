@@ -13,5 +13,6 @@ export const root = style({
 export const content = style({
   flex: '1 1 0%',
   minWidth: 0,
-  padding: spacing[30],
+  // 상하 40 / 좌 20 / 우 80
+  padding: `${spacing[40]} ${spacing[80]} ${spacing[40]} ${spacing[20]}`,
 })

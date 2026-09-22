@@ -1,8 +1,4 @@
 export { QueueCard } from './ui/QueueCard'
 export type { QueueCardProps } from './ui/QueueCard'
 export { HistoryCard } from './ui/HistoryCard'
-export type {
-  HistoryCardProps,
-  HistoryCardStatus,
-  HistoryCardItem,
-} from './ui/HistoryCard'
+export type { HistoryCardProps, HistoryCardStatus } from './ui/HistoryCard'

@@ -7,9 +7,9 @@ import * as styles from './MypagePreorder.css'
 const preorderItems = [
   {
     id: '1',
-    name: 'IPhone 18 Pro',
-    modelNumber: '256GB · 스타라이트',
-    optionSummary: 'AppleCare+ 포함',
+    name: '아이폰 18 Pro',
+    modelNumber: 'A3714',
+    optionSummary: '스타라이트 · 256GB · AppleCare+ 포함',
     quantityLabel: '수량 1개',
     priceLabel: '2,278,100원',
   },
@@ -18,19 +18,17 @@ const preorderItems = [
 export function MypagePreorder() {
   return (
     <div className={styles.root}>
-      <InlineAlert status="info" icon="info">
-        사전 예약 상품은 24시간 이내에 결제가 완료되어야 합니다.
-      </InlineAlert>
-      <InlineAlert status="warning" icon="box_planet">
+      <InlineAlert status="warning" icon="clock">
         사전 예약 상품은 24시간 이내에 결제가 완료되어야 합니다.
       </InlineAlert>
       {preorderItems.map((item) => (
-        <ProductPaymentCard
-          key={item.id}
-          variant="checkout"
-          product={item}
-          actionLabel="결제하기"
-        />
+        <div key={item.id} className={styles.card}>
+          <ProductPaymentCard
+            variant="checkout"
+            product={item}
+            actionLabel="결제하기"
+          />
+        </div>
       ))}
     </div>
   )

@@ -7,7 +7,13 @@ export const root = style({
   flexDirection: 'column',
   gap: spacing[16],
   width: '100%',
-  borderRadius: spacing[16],
-  backgroundColor: color.background.surface,
-  padding: spacing[24],
+})
+
+export const card = style({
+  boxSizing: 'border-box',
+  width: '100%',
+  padding: spacing[20],
+  borderRadius: '12px',
+  border: `1px solid ${color.border.default}`,
+  background: color.background.base,
 })

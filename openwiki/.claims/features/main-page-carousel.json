@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5e25aa6dda84199f82828c6ad5a69510c1d79cf6d39e1e8b041281f2806e23be",
+  "claims": [
+    {
+      "id": "claim_fc8c9900dc76466287af2778f2b1b79b",
+      "statement": "SwirlBackground는 useRef로 얻은 컴테이너 안에 순수 DOM API로 <canvas> 요소를 직접 생성해 파티클 애니메이션을 그리며, 리사이즈 시 container.clientWidth/clientHeight를 읽어 캔버스 크기를 맞추므로 부모 컴테이너 크기가 곷 애니메이션 영역이 된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/ui/SwirlBackground/SwirlBackground.tsx",
+          "version": "repo-file-v1:sha256:50556b923c5dac2ae97c0660c4248b487770a97995b004766c029bec36d920bc"
+        }
+      ]
+    },
+    {
+      "id": "claim_148b78c699f34e90bd4540c722cc14b5",
+      "statement": "SwirlBackground.css.ts의 root는 position:absolute; inset:0으로 부모 요소 전체를 채우며, MainPage.tsx에서는 height:770px인 hero div가 그 부모여서 뷰포트 전체가 아니라 hero의 크기에 맞춰 리사이즈된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts",
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
+        },
+        {
+          "resource": "repo://src/shared/ui/SwirlBackground/SwirlBackground.css.ts",
+          "version": "repo-file-v1:sha256:3220bd92ca0ed9c90b01d4efe0e39b49de30795ad4907b6beab70aa72bb62ba8"
+        }
+      ]
+    },
+    {
+      "id": "claim_27070806219e47de9b9a30fab195c5c8",
+      "statement": "MainPage.tsx는 useEmblaCarousel({ loop: true, dragFree: true, align: 'start' }, [AutoScroll({ speed: 1, stopOnInteraction: false })])로 히어로 캐러셀을 구성한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.tsx",
+          "version": "repo-file-v1:sha256:26a5d9fd619453b5c115a94f02617d72bbfd9a4904b5e3f037bcd02e34194f6c"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1844de1c0f14f5cbb0ec1dbdd7ae02d",
+      "statement": "carouselContainer 스타일은 width를 명시하지 않는다 — 코드 주석에 따르면 Embla의 canLoop() 판정이 이 요소 자신의 박스 폭이 전체 슬라이드 합계 폭보다 충분히 작아야(=런포트 정도) 통과하기 때문이며, width:'max-content'를 주면 canLoop()가 항상 실패해 loop가 loop:false로 조용히 폴백된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts",
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
+        }
+      ]
+    },
+    {
+      "id": "claim_f3c3bfce014249398cc15c11f3977961",
+      "statement": "carouselSlide 스타일은 &:last-child에 gap과 같은 크기의 marginRight를 추가해 flex gap이 마지막↔첫 슬라이드 사이에는 적용되지 않는다는 CSS 제약을 보정한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts",
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
+        }
+      ]
+    },
+    {
+      "id": "claim_586cf67d22524a078437f3c6ae9fb8d9",
+      "statement": "추천 상품 섬션은 인라인 sprinkles 호출 대신 shared/ui의 Container로 감싸고, 제목은 typography.title.xlSemibold와 styles.recommendedTitle을 className 레벨에서 합성해서 쓴다. 히어로 타이틀 스타일은 title이 아니라 bestTitle로 export된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.css.ts",
+          "version": "repo-file-v1:sha256:8c2dc91e5451144d740143410bd71860855f0df8e1e1baf111f29c4421849fa5"
+        },
+        {
+          "resource": "repo://src/pages/main/ui/MainPage.tsx",
+          "version": "repo-file-v1:sha256:26a5d9fd619453b5c115a94f02617d72bbfd9a4904b5e3f037bcd02e34194f6c"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-21T01:15:36.692Z"
+  }
+}

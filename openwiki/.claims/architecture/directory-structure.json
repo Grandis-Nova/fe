@@ -1,66 +1,170 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2b22d6fb6c3ba224fc58dfb1ce961a92a5548788d3b01edf0c1d6a085c90f823",
+  "pageVersion": "sha256:db329ffd5ef982d2a598262ef199269acc963a64583ba454b037dc295cef52fd",
   "claims": [
     {
-      "id": "claim_07e7581dc0474dcaa7dbcc04e014e303",
-      "statement": "src/main.tsx is a bootstrap file outside the FSD layers that only creates the React root and imports the App component and global styles from the app layer.",
+      "id": "claim_34f5be3abf084e719cda0ec74f23df3f",
+      "statement": "eslint.config.js의 import-x/no-restricted-paths 규칙(error 레벨)이 shared/entities/features/widgets/pages 각 레이어별 zones를 정의해 상위 레이어를 import하는 것을 정적으로 차단한다.",
       "evidence": [
+        {
+          "resource": "repo://eslint.config.js#L69-L99",
+          "version": "repo-lines-v1:sha256:3f116726d7abe0a1f70abe6239c4e8014743dac5b2c6fcd3a3d3092b543b29f6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwOThhYzExYjhmYjU2ODQ0YjA5MzgxY2JiYTU0YTJiOTFhMGQyYzMyMWNjZjZmZjFhZTQwNzM2ODIxMTcwMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxNGVmMDQwYmE5ZTJiZmVmNzAzYmU3OGRjZGVmOTE0Yjc0Y2Y3MTU1YmU3OTExODNlZGY5MmE2MzcxZGE3ODIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5NDY5NjY1ZjkxYjg0N2E4YzZlNWU0MDQ4NWNiNGJiMTlkYmNhMDJiYmU4ZWE3YWJjZTAyYjMyMWY4MDliMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkNjZjZGE0ZTYyNWM4NGRkZThjNDFlZTdlZWRlNTUzZWEyZDIwZTg2YmVmZDg4ZmYzNTE2NTUzYWE3MzliNmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ee85624c6b5e451bb1fbda7b6c7c3f14",
+      "statement": "app 레이어에서는 카운터 데모 UI였던 App.tsx/App.css.ts가 제거되었고, main.tsx는 router의 RouterProvider와 전역 스타일만 불러오는 순수 부트스트랩 파일로 바뀌었다.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/router/index.tsx",
+          "version": "repo-file-v1:sha256:f7a69810504af4f9b63a2f6e59860d915ff8050ad8cd108d1b01f9e1d240e19a"
+        },
         {
           "resource": "repo://src/main.tsx",
-          "version": "repo-file-v1:sha256:4ab315a70577af86846ee0888314c3bfc88c32efb2ce168d697806e006ebe954"
+          "version": "repo-file-v1:sha256:8af84349bfd07d17ac380386fbd6e44501dbf7f40fd5dc4b7239cec9ee29191f"
         }
       ]
     },
     {
-      "id": "claim_fe5886956323453488f6a01949d90305",
-      "statement": "The app layer's App.tsx imports logo assets from the shared layer (src/shared/assets), following the FSD rule that higher layers may import from lower layers.",
+      "id": "claim_14939d69d5044e42aaf72d455d9886a2",
+      "statement": "pages 레이어는 main, mypage, product-detail, preorder, preorder-detail, result, not-found 7개 슬라이스로 채워졌다.",
       "evidence": [
         {
-          "resource": "repo://src/app/App.tsx#L1-L4",
-          "version": "repo-lines-v1:sha256:d28a9f85561d997e0668836643b325a1280ce452fca61c486b24a4896d794b1d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTEzZDczZDhhNTcxZDk0MDRkNGJkMTZkYTg2NjgxMzEzOWMxOTc1MmQyMzYxOTk1MDBiNDgzYjUxMzlhNTg0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJlODgxMmVmNThkZGRhNGMyZDJmMDE1OTgwNGE4NWM2YTg1YjNhNmE3YjYzOGY3YjZmNzg0MzExNzFmNWY4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2VhZDVlOTBhY2Q5ZDcyZGY4ODEwODk0NDdlMmIxOTNmOWEzZTA4MjA2YjJjNmNmMzMzYzlhYjZiMzEzNjM5MSJ9"
+          "resource": "repo://src/pages/main/index.ts",
+          "version": "repo-file-v1:sha256:ba8f74526bde266a2b3711e1e00a82b0274486242484889baaf41e76d9401dde"
+        },
+        {
+          "resource": "repo://src/pages/mypage/index.ts",
+          "version": "repo-file-v1:sha256:3e8a792f09f467fbd692c19df3a53b25fb6c9a875e686e92cc2c15612df7da07"
+        },
+        {
+          "resource": "repo://src/pages/not-found/index.ts",
+          "version": "repo-file-v1:sha256:23b88dd11880d9e44bb9367d6a10ef25c4867e099003abfa9540c5a5090b1d77"
+        },
+        {
+          "resource": "repo://src/pages/preorder-detail/index.ts",
+          "version": "repo-file-v1:sha256:cb5ee0969f60bee9fbd30d04d765b74d93d344587770e0577178cdf423ffd034"
+        },
+        {
+          "resource": "repo://src/pages/preorder/index.ts",
+          "version": "repo-file-v1:sha256:70413b3fd7d1db837a0475fdc8404c23cdb11e34915afb5aa79d8f108ff54e48"
+        },
+        {
+          "resource": "repo://src/pages/product-detail/index.ts",
+          "version": "repo-file-v1:sha256:5f7b827a79354032ba5ae8a6c11ebb89b6372a71a186eff8cdd2206fca00f317"
+        },
+        {
+          "resource": "repo://src/pages/result/index.ts",
+          "version": "repo-file-v1:sha256:e2b0a6ca9ce265060e7aa1397e03937427f0774430f3829c4fca63f8c6f32909"
         }
       ]
     },
     {
-      "id": "claim_b437fd5615be463b958841cf28345808",
-      "statement": "The pages, widgets, features, and entities layers currently contain no implementation code, only a .gitkeep placeholder file each to keep the empty directories tracked in git.",
+      "id": "claim_fbf6d6a1de204380aa4ab34e56f252e6",
+      "statement": "widgets 레이어는 banner, header, category-nav, mypage-menu, product-page-tab 5개 슬라이스로 채워졌다.",
       "evidence": [
         {
-          "resource": "repo://src/entities/.gitkeep",
-          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          "resource": "repo://src/widgets/banner/index.ts",
+          "version": "repo-file-v1:sha256:20c34ae5cd032d3fe7a17c92573f34e2b310a920b903303d34d341f8887b3b60"
+        },
+        {
+          "resource": "repo://src/widgets/category-nav/index.ts",
+          "version": "repo-file-v1:sha256:cab1da8665a274920ebd99585540d3a422081b04f302193426a8e090d2c42f5a"
+        },
+        {
+          "resource": "repo://src/widgets/header/index.ts",
+          "version": "repo-file-v1:sha256:d5f39cb7a47a231539ffb4bdb292c497c7794ef3f0a9fa547d2c581999728ad6"
+        },
+        {
+          "resource": "repo://src/widgets/mypage-menu/index.ts",
+          "version": "repo-file-v1:sha256:00b0d7f47f8124385787a0733eba3cb9915ade6208aa981bc1dd2c5b6441d3d7"
+        },
+        {
+          "resource": "repo://src/widgets/product-page-tab/index.ts",
+          "version": "repo-file-v1:sha256:5979ced65973962b23eec71bc1c1473b52e6d4b1991c70695e19608de3caf05a"
+        }
+      ]
+    },
+    {
+      "id": "claim_df4dc822c4e44854a06d45a5646646ce",
+      "statement": "entities 레이어는 order, preorder(PreorderCard, PreorderModelSummary), product, review 4개 도메인 슬라이스로 채워졌고, features 레이어는 여전히 .gitkeep뿐인 빈 레이어다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/order/index.ts",
+          "version": "repo-file-v1:sha256:e38007caa1123403c8fd5f9ac8dcf29f2e7401e490ab05e249b41cbe059c61e8"
+        },
+        {
+          "resource": "repo://src/entities/preorder/index.ts",
+          "version": "repo-file-v1:sha256:b1d50c81306d26c872292a57e164628478eb16a05b4f84b65f65a9ff2f26fadc"
+        },
+        {
+          "resource": "repo://src/entities/product/index.ts",
+          "version": "repo-file-v1:sha256:577525265346a03bdd79c8474cf4c01cd37657f0f1b5582327fcb6f6f77fbafb"
+        },
+        {
+          "resource": "repo://src/entities/review/index.ts",
+          "version": "repo-file-v1:sha256:4d9bc988afab581126de7222174030aa7e3c6adbf83c3fb9df2aa58eb0d63a6f"
         },
         {
           "resource": "repo://src/features/.gitkeep",
           "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        {
-          "resource": "repo://src/pages/.gitkeep",
-          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        {
-          "resource": "repo://src/widgets/.gitkeep",
-          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ]
     },
     {
-      "id": "claim_2359c7850ce14347a4d72b74c3a3960e",
-      "statement": "The shared layer currently only has an assets segment (react.svg, vite.svg); conventional shared sub-segments like ui, lib, api, and config have not been created because they have no content yet.",
+      "id": "claim_ffa307b4e5d04e61a9eeafb95b4b3cd4",
+      "statement": "entities/product는 ui/ProductCard.tsx 단일 파일 대신 ui/ProductCard/{ProductCard.tsx,ProductCard.css.ts,ProductCard.stories.tsx,index.ts}처럼 컴포넌트마다 자체 하위 폴더를 갖는 패턴을 쓴다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/product/ui/ProductCard/index.ts",
+          "version": "repo-file-v1:sha256:cb51e638bf101659c80b8a7a705e88a782cf0d5c89e4471eb5a7fb46334377f5"
+        }
+      ]
+    },
+    {
+      "id": "claim_903c808b19e04994a98e467f12d21b66",
+      "statement": "shared 레이어는 초기에 이미지 자산만 있었으나 지금은 ui, config/theme, lib 세그먼트가 채워졌고 api 세그먼트만 여전히 없다. shared/ui의 모든 컴포넌트(BottomSheet, Slider 포함)가 entities/product와 같은 컴포넌트별 하위 폴더 패턴을 따른다 — 예전에 flat하게 있던 Button/Checkbox/Dropdown/Input/Navigator/SelectButton/Tag/Toggle/SwirlBackground도 각자 폴더로 정리되었다.",
       "evidence": [
         {
           "resource": "repo://src/shared/assets/react.svg",
           "version": "repo-file-v1:sha256:35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
         },
         {
-          "resource": "repo://src/shared/assets/vite.svg",
-          "version": "repo-file-v1:sha256:5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
+          "resource": "repo://src/shared/config/theme/index.ts",
+          "version": "repo-file-v1:sha256:746200cab6bebb6ebbf725a415c2bad3655a4841749ce09dae17d401e2d56f34"
+        },
+        {
+          "resource": "repo://src/shared/lib/simplexNoise.js",
+          "version": "repo-file-v1:sha256:dddecbc80184f5cf0b36f8ebff23c923e833b7cd1d6c615a6cb885212b4c5fd6"
+        },
+        {
+          "resource": "repo://src/shared/ui/Button/index.ts",
+          "version": "repo-file-v1:sha256:09cba733866a92cbb2bff3b5551f4b5a8f88827c1d682814b63f5d22eedf3ba0"
+        },
+        {
+          "resource": "repo://src/shared/ui/index.ts",
+          "version": "repo-file-v1:sha256:942e904a5349cc0545a1fb03115ac5a099dd7bc04df8bfe7c395e31ab7128cdc"
+        }
+      ]
+    },
+    {
+      "id": "claim_aa7459f5ff334c179e13ce18d27816c2",
+      "statement": "Container는 페이지 콘텐츠 표준 레이아웃(모바일 full / 데스크톱 max-width 1200px)을 강제하는 전용 컴포넌트로, maxWidth는 prop으로 못 바꿀지만 desktopPaddingX/desktopPaddingY/mobilePaddingX/mobilePaddingY 네 padding 값은 모두 옵션 prop(기본 30/50/16/24)으로 덮어쓸 수 있다. Box는 sprinkles 속성을 sx prop으로 받는 범용 div 래퍼다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/ui/Box/Box.tsx",
+          "version": "repo-file-v1:sha256:b01a2ca9bca2e06eaa85b814189c3374c446ad463200eafc8932dd1747167369"
+        },
+        {
+          "resource": "repo://src/shared/ui/Container/Container.tsx",
+          "version": "repo-file-v1:sha256:11fb6b5b99240158bb5c158a2f4caf32134d1272d7c151f728b3d9b859e57110"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-15T04:58:54.229Z"
+    "at": "2026-09-21T01:15:36.692Z"
   }
 }

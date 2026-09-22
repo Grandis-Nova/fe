@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b36901f70180659f729b5744dd39dff97d11f5ff8255f19b18725172db30b099",
+  "claims": [
+    {
+      "id": "claim_d2fb2ca87d474df69505572e13f6ba40",
+      "statement": "useCountdown은 target Date까지 남은 시간을 1초 간격 setInterval로 갱신하며, remainingMs가 0이 되면 isOver: true로 고정되고 더 이상 갱신되지 않는다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/lib/useCountdown.ts",
+          "version": "repo-file-v1:sha256:d0da86b156492e99ca9a24ff3a3360d5e90691a8994d90aeae632debdd371bea"
+        }
+      ]
+    },
+    {
+      "id": "claim_123570a48ac6410e9721bc81c2810009",
+      "statement": "PreorderDetailPage의 CTA 버튼은 isOver 값과 무관하게 handleActionClick이 항상 setBottomSheetOpen(true)만 호출해 BottomSheet를 열고, isOver에 따른 문구/동작 분기는 시트 안의 타이틀/설명/PreorderModelSummary CTA에서만 일어난다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/preorder-detail/ui/PreorderDetailPage.tsx#L21-L23",
+          "version": "repo-lines-v1:sha256:16754529fc89d19c5119ab8d32cba79b993df41d297e61ebfa24b4905b072c6d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIxZmMxNzVhNmNjZDA5YmVkZjQ2ZjFjMzYyNjg1NDU4MjYyNzNiYjZjMTIzOWVjNjI3YjUzMGYxOGNjYmY2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGVlMmRiNGYzYWU3YWUyMzc2OTkzNWI2NGFjY2Y5ODA4ODYzMTc2NjA3ZWEyNWMxMzJmY2UzN2UzYmIzNWFkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmJhMWI2NzllODgxMGU2YzlkMTNlZjA4ZjMxZTE5NzgwNTI5OTQzNGRkMWJiZWExMGExMTFiNDVlNzBmMDQ3NyJ9"
+        },
+        {
+          "resource": "repo://src/pages/preorder-detail/ui/PreorderDetailPage.tsx#L62-L68",
+          "version": "repo-lines-v1:sha256:b7a2f94324aa594898a0fadb75b761c6292627c06440ddd02f68f1ceb778ce63:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzc3NTkzODBjOTY0MjA5ODljODY2M2YxOTViOWNkYmNiZmE2OWI0NGRmMWU1M2E4NWRmNWZhY2I3ZGFmM2NiNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmUzYWFhNGM0NTg0Mjg2NmZlOWI5MmQyMDk1MTU5ZTM0Mjk0M2NhMDBiZWFiMzgzOGIxM2NmNjVkYjhiNTM4MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODZlZGJlZjA1ZTk0ODI5OWUyZDJlMjdjYjgzYmEwY2UwYTQ3MjdiNzcxMjEwNzA5ZTBkNzI4NzUwZmY2ZGUwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTU0NDgyOGU4ODAyYjIzOTVmN2E1YjFmNmViZjkwMThlZGU5ZTg1YjAxN2ZjMGViZjdkYzY0ZjZlYjhiODMyYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_52bfcf52a3f6475c983e96a2d449f611",
+      "statement": "BottomSheet의 Content는 vaul Drawer의 Overlay/Content를 스타일만 교체해 그대로 쓰며, 배경 스크롤 잠금이나 오버레이 클릭 동작을 위한 커스텀 로직은 없고 vaul 기본 동작에 그대로 의존한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/ui/BottomSheet/BottomSheet.tsx",
+          "version": "repo-file-v1:sha256:3b47ab1bec0db17572cb38ad9157f866171e1978bb33ecdc918f1a65b334321f"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab0191318dd24bdc98c13ad8fdaf0819",
+      "statement": "PreorderModelSummary는 isOver/isAlert 조합으로 ctaLabel(예약 하기/알림 신청/신청 완료)과 disabled 상태를 내부에서 계산하지만, 실제 클릭 시 실행되는 동작(navigate 등)은 호출부가 넘겨주는 onReserve/onNotify 콜백으로 위임한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/entities/preorder/ui/PreorderModelSummary/PreorderModelSummary.tsx#L31-L57",
+          "version": "repo-lines-v1:sha256:2c0451936ad78f6668346bcc4b1977ae4e75e48acfa0a97b4563e9be0bb8d33a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNTI5MDBhOTQwZDI0MDcwYzIzY2ZhMTc5MGFlYzRlOGI4ZDY2Y2Q5ZGFhOGQ1MjI5MzkwODUxNThhN2EyMTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1ZTAzYzljMzhjYjAzZThlZmI5NTgyMmU4ZDE4ZDg2ZjRhYWExNDcyMDZmZDllOTAzYThmYTU4MzQwMDUzODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmYmIwM2IzN2Q3MGNmMTU5OWQ4NThkYzlhNzhkOGQwZWQ4MTMyODMxMzBkYTNiYzkwYzY1MzY0YjNlZjhlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVhM2IyMjQyZWI5M2NkYWI3M2FmNzMzMTY0NjE3ZWViNTZiZDM0MjFmYWVhY2U0ZmEzYzE4ODVkYjhkZDdmYzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f1292d947214c448306e1f2e1232675",
+      "statement": "PreorderDetailPage는 PreorderModelSummary를 두 모델(IPhone 18 Pro, IPhone 18 Pro Max)에 대해 느 단일 isAlert state를 공유해서 렌더링하여, 한 족의 알림 신청이 완료되면 두 모델의 CTA가 동시에 '신청 완료'로 바뀌고, handleNotify의 완료 안내 문구도 클릭한 모델과 무관하게 항상 'IPhone 18 Pro'를 가리킨다.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/preorder-detail/ui/PreorderDetailPage.tsx#L25-L29",
+          "version": "repo-lines-v1:sha256:408ba83c0f88e0cfe023d828d05a2bfe6a07d5c2afc531f9806178a3fa714e9d:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWEyYjhmYzRjZGUyZjIzODgzZTVmOTBhMWQwYmY0ZWQ2NWU0Nzg4ZDI2ZTliMThmZjdlZTAwZTAwZWQ1ZTJiMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODFjZjAyMDg0ZjA4NzlhMDlkYzk5ZGVmNGY0ZjE2ZWYwNTRmOTVkNjIxN2VmYzdkNzY4NDRiYzMxYjk4ZDBlNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzkwM2NjZmQ2ZTZkNjQyOTBlNjcxYzZjYmZkYWNjMTRlZmVjMDRmZmMzZGFjYWM5Y2RlMDU2YjU2MjZlY2NhNiJ9"
+        },
+        {
+          "resource": "repo://src/pages/preorder-detail/ui/PreorderDetailPage.tsx#L84-L102",
+          "version": "repo-lines-v1:sha256:e209b01981e96d3196129f04b16595e3c80a5dd5633a341eb6930a0f432c3828:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1Mjc4YWZkMzUxZmUyYjViMTRjMDg5MzA3NDY2YWQ2ZjY3OGQ1NGFhNGFjYmM4MDJhYmVkYmFjYjEyOWFkNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlMDA2Mzk5NzZmYTc2MzFhNWRiZDI3ZTNlNGNjMjI3YmI0YzM3MWM3NTVlNjVlNzlkNDlkZDMwMGVkOGY0M2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2OGNkZDc2NTJkZDY4YzM3YzQxNzJjNTQzMWFiYWVkZTQyNWZjN2ZiYjljMDMyMWZhZjJkYmMxZGEyMDFiNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3NzJmODdhMDI1OTIxYWEwM2MyNmJiZTY5ZTZhYTQ3M2U3ZDE4ZTA5YmE1NDVhZGM0ZmI4NzBhYzQ2M2UxYWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8408cb80811145b88822ca2399a26e00",
+      "statement": "BottomSheet.css.ts의 content 스타일은 shared/config/theme/tokens/container의 maxWidth.content(1200px) 토큰과 boxSizing: 'border-box'를 써서 Container/Header 등과 같은 페이지 콘텐츠 폭 계약을 따른다.",
+      "evidence": [
+        {
+          "resource": "repo://src/shared/ui/BottomSheet/BottomSheet.css.ts",
+          "version": "repo-file-v1:sha256:4f5d0d01aa39db521c0cbb75c23ece2e2ddb2da2a8f172ce97999a63b599bc01"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-21T00:58:42.533Z"
+  }
+}

@@ -1,6 +1,7 @@
 import * as styles from './MypageMenu.css'
 
-export type MypageMenuLink = 'preorder-check' | 'cart' | 'history' | 'address-manage' | 'alert-setting'
+export type MypageMenuLink =
+  'preorder-check' | 'cart' | 'history' | 'address-manage'
 
 export type MypageMenuProps = {
   userName: string
@@ -17,10 +18,17 @@ const shoppingLinks: { link: MypageMenuLink; label: string }[] = [
 
 const accountLinks: { link: MypageMenuLink; label: string }[] = [
   { link: 'address-manage', label: '주소록 관리' },
-  { link: 'alert-setting', label: '알림 설정' },
 ]
 
-export function MypageMenu({ userName, activeLink, onLinkClick, className }: MypageMenuProps) {
+export function MypageMenu({
+  userName,
+  activeLink,
+  onLinkClick,
+  className,
+}: MypageMenuProps) {
+  const isShoppingActive = shoppingLinks.some(({ link }) => link === activeLink)
+  const isAccountActive = accountLinks.some(({ link }) => link === activeLink)
+
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.heading}>
@@ -29,7 +37,13 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
       </div>
       <div className={styles.sections}>
         <div className={styles.section}>
-          <div className={styles.sectionTitle}>쇼핑정보</div>
+          <div
+            className={
+              styles.sectionTitle[isShoppingActive ? 'active' : 'inactive']
+            }
+          >
+            쇼핑정보
+          </div>
           <div className={styles.linkList}>
             {shoppingLinks.map(({ link, label }) => {
               const isActive = link === activeLink
@@ -37,11 +51,7 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
                 <button
                   key={link}
                   type="button"
-                  className={[
-                    styles.link,
-                    isActive && styles.linkActive,
-                    isActive && styles.linkActiveUnderlined,
-                  ]
+                  className={[styles.link, isActive && styles.linkActive]
                     .filter(Boolean)
                     .join(' ')}
                   onClick={() => onLinkClick?.(link)}
@@ -53,7 +63,13 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
           </div>
         </div>
         <div className={styles.section}>
-          <div className={styles.sectionTitle}>회원정보</div>
+          <div
+            className={
+              styles.sectionTitle[isAccountActive ? 'active' : 'inactive']
+            }
+          >
+            회원정보
+          </div>
           <div className={styles.linkList}>
             {accountLinks.map(({ link, label }) => {
               const isActive = link === activeLink
@@ -61,7 +77,9 @@ export function MypageMenu({ userName, activeLink, onLinkClick, className }: Myp
                 <button
                   key={link}
                   type="button"
-                  className={[styles.link, isActive && styles.linkActive].filter(Boolean).join(' ')}
+                  className={[styles.link, isActive && styles.linkActive]
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => onLinkClick?.(link)}
                 >
                   {label}

@@ -1,16 +1,14 @@
-import { style } from '@vanilla-extract/css'
+import { style, styleVariants } from '@vanilla-extract/css'
 
-import { color } from '@/shared/config/theme/tokens/color/semantic.css'
-import { spacing } from '@/shared/config/theme/tokens/spacing'
+import { color, motion, spacing, typography } from '@/shared/config/theme'
 import { fontWeight } from '@/shared/config/theme/tokens/typography/base'
-import { body, title } from '@/shared/config/theme/tokens/typography/semantic.css'
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacing[30],
   width: '202px',
-  padding: `${spacing[20]} ${spacing[20]} ${spacing[30]}`,
+  padding: spacing[20],
   borderRadius: '12px',
   background: color.background.surface,
 })
@@ -19,11 +17,17 @@ export const heading = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacing[4],
-  alignItems: 'center',
+  alignItems: 'flex-start',
 })
 
-export const headingLabel = style([body.subMedium, { color: color.text.tertiary }])
-export const userName = style([title.lgSemibold, { color: color.text.primary }])
+export const headingLabel = style([
+  typography.body.subMedium,
+  { color: color.text.tertiary },
+])
+export const userName = style([
+  typography.title.lgSemibold,
+  { color: color.text.primary },
+])
 
 export const sections = style({
   display: 'flex',
@@ -39,34 +43,44 @@ export const section = style({
   width: '100%',
 })
 
-export const sectionTitle = style([
-  body.subMedium,
-  { color: color.primary.hover, textAlign: 'center' },
-])
+export const sectionTitle = styleVariants({
+  active: [
+    typography.body.subMedium,
+    { color: color.primary.focus, textAlign: 'left' },
+  ],
+  inactive: [
+    typography.body.subMedium,
+    { color: color.text.tertiary, textAlign: 'left' },
+  ],
+})
 
 export const linkList = style({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   gap: spacing[6],
 })
 
 export const link = style([
-  body.sub,
+  typography.body.sub,
   {
+    boxSizing: 'border-box',
+    height: '24px',
     padding: `${spacing[2]} 0`,
     color: color.text.secondary,
     background: 'transparent',
     border: 'none',
+    borderBottom: '1.5px solid transparent',
     cursor: 'pointer',
+    transition: [
+      `color ${motion.duration.fast} ${motion.easing.default}`,
+      `border-bottom-color ${motion.duration.fast} ${motion.easing.default}`,
+    ].join(', '),
   },
 ])
 
 export const linkActive = style({
   fontWeight: fontWeight.semibold,
   color: color.primary.base,
-})
-
-export const linkActiveUnderlined = style({
-  borderBottom: `1.5px solid ${color.primary.base}`,
+  borderBottomColor: color.primary.base,
 })

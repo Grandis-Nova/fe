@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:889010b952f6a1e7abbd363b0d17c6c4b13030b5555851e1f6e54cbc426d6273",
+  "claims": [
+    {
+      "id": "claim_eeb939c4a72d4369b16eca204a2245fe",
+      "statement": "main.tsx는 router/index.tsx가 만드는 router를 RouterProvider에 넘기는 순수 부트스트랩 파일이다.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.tsx",
+          "version": "repo-file-v1:sha256:8af84349bfd07d17ac380386fbd6e44501dbf7f40fd5dc4b7239cec9ee29191f"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9b5964f58a44eec9da337495def75f9",
+      "statement": "라우트 트리는 RootLayout 아래 MainLayout을 중첩한 구조이며, MainLayout 자식으로 /, /preorder, /preorder/:preorderId, /products/:productId, /result, /mypage, *(NotFoundPage) 7개 라우트가 등록된다.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/router/index.tsx#L13-L33",
+          "version": "repo-lines-v1:sha256:40dd189aab984684ab2afa72f77c76589c171b196b4a26dac64f6690e5dc5adc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzYzk5NWQ0OWJiM2JhNmRjNTVlMTA3MjAxMWNiOTA0MTU2YThiYWE5NmMwYmJjZWI5ZDEzNzQyN2QzYjg2ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2M2FhZTM5YWQ1OWZhZjMyZDNhMDQ1OGI4OTM0NmU4ZTg4ZTkxZmRkNDA0NTQwM2E4OGEwNjdlYjU2Mjk5NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZjNmYTA5ZGYxODM4NDBkMGFmMmZjZGFmZTYxZTE2NjYxM2M1OGQ4MDI2ODk1MTMwMzZjYTkwNjE4MmYyODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e2487d93b19747c19b8f58ea630fdd3b",
+      "statement": "RootLayout은 <Header />와 <Outlet />만 렌더링해서 이 트리 아래 모든 라우트가 예외 없이 Header를 갖게 한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/layouts/RootLayout.tsx#L1-L12",
+          "version": "repo-lines-v1:sha256:8ce3650ef1ae59b269af347f507899a37d4231a525adf3b8027d1f0af8fdc7e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYTdjNDllM2Q4YjIyYjY1ZTgyYmU0OGFjN2Y4YTYzODVlMDNhMmRlNmY4YTMwYWQ3MTY4M2QxMTllZTczNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f1db5ffc7bd64ddaaa2c8e1bab8fb87e",
+      "statement": "MainLayout은 useLocation()으로 현재 경로가 '/'인지 판별해 CategoryNav의 showBorder를 !isMainPage로 넘기고, sprinkles({ marginX: 'auto' })를 적용한 div 안에 Outlet을 렌더링한다.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/layouts/MainLayout.tsx#L1-L18",
+          "version": "repo-lines-v1:sha256:1116051aaa0caf635ab5d28b4163afcf486b5cadba7d9f86b3eb333d75443540:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhYmZhOGVmZTBjYTA0MDI4ODg0YzczNDNkOTk3NDk2OWY3MzI2OTlhODFlODIyZWJmOGQ4NjU5NWZjN2M4NjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_aaecb7ec9fe24bdcb11942f14661533c",
+      "statement": "router/index.tsx의 주석은 admin 라우트가 생기면 MainLayout 밖 RootLayout 자식으로 둘 의도를 명시하며(Header는 적용되고 CategoryNav는 제외), 구매후기와 브랜드별 상품 목록 페이지도 아직 미구현이라고 적혀있다.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/router/index.tsx#L26-L30",
+          "version": "repo-lines-v1:sha256:29d325d22f461083310638115fe9076d784420fcaa1b004b64ff16a413bb2a04:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzhjZWRjZGJlNmQ5MjRiZDExOTMzM2Y5YjE1OTNjYTU3MzkyNWI3ZjIzZmU2YTY4MmE1OTljYTk4NjVlNjYxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiNWU4YTVmYTUxNDZiOWJkNzdhMmY5ZDUyYjdhOTI1MjcxMmUxZTRmYzVkZDM1NjNmMDg5MmY0YjYyYzM0MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTRlNjU2ODFlYmFhZDgzYTBkZDgyN2EzMTNkZmExNzY3N2I1ZmY4NjU4YTkyNDZkOWY4Y2M5NGUzMGE4OTEzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTBiZTJhNjZkZjNjY2MxODc5YmIyM2QwNjhjOGQ2MDE3ZTQ4NTgxMTQ2NWYyYTc0OTc0NzZmNjUyYzU3YWY0NiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-19T17:13:03.359Z"
+  }
+}

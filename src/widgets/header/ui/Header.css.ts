@@ -1,9 +1,7 @@
-import { style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css'
 
-import { motion, typography } from '@/shared/config/theme';
-import { color } from '@/shared/config/theme/tokens/color/semantic.css';
-import { maxWidth } from '@/shared/config/theme/tokens/container';
-import { spacing } from '@/shared/config/theme/tokens/spacing';
+import { color, motion, spacing, typography } from '@/shared/config/theme'
+import { maxWidth } from '@/shared/config/theme/tokens/container'
 
 export const root = style({
   display: 'flex',
@@ -16,7 +14,7 @@ export const root = style({
   margin: '0 auto',
   padding: `${spacing[20]} ${spacing[20]} ${spacing[8]}`,
   background: color.background.base,
-});
+})
 
 export const logo = style([
   typography.logo.wordmark,
@@ -25,19 +23,19 @@ export const logo = style([
     color: color.primary.base,
     textDecoration: 'none',
   },
-]);
+])
 
 export const logoMember = style({
-  backgroundImage: `linear-gradient(90deg, ${color.primary.hover}, #55428c, ${color.secondary.subtle})`,
+  backgroundImage: `linear-gradient(90deg, ${color.primary.focus}, #55428c, ${color.secondary.subtle})`,
   backgroundClip: 'text',
   color: 'transparent',
-});
+})
 
 export const actions = style({
   display: 'flex',
   alignItems: 'center',
   gap: spacing[20],
-});
+})
 
 export const iconButton = style({
   display: 'inline-flex',
@@ -49,12 +47,12 @@ export const iconButton = style({
   transition: `color ${motion.duration.fast} ${motion.easing.default}`,
   selectors: {
     '&:hover': {
-      color: color.primary.hover,
+      color: color.primary.focus,
     },
   },
-});
+})
 
 export const icon = style({
   width: '24px',
   height: '24px',
-});
+})

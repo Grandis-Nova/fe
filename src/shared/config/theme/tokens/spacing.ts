@@ -9,6 +9,7 @@ export const spacing = {
   14: '14px',
   16: '16px',
   20: '20px',
+  22: '22px',
   24: '24px',
   30: '30px',
   32: '32px',
@@ -19,4 +20,4 @@ export const spacing = {
   80: '80px',
   90: '90px',
   100: '100px',
-} as const;
+} as const

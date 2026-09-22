@@ -25,7 +25,7 @@ export const rootOpen = style({
 
 export const size = styleVariants({
   medium: { width: '100%', borderRadius: '12px' },
-  small: { width: 'fit-content', borderRadius: '6px' },
+  small: { width: '100%', borderRadius: '6px' },
 })
 
 export const trigger = styleVariants({
@@ -60,6 +60,13 @@ export const trigger = styleVariants({
       textAlign: 'left',
     },
   ],
+})
+
+export const triggerLabel = style({
+  flex: '0 1 auto',
+  minWidth: 0,
+  whiteSpace: 'normal',
+  wordBreak: 'break-word',
 })
 
 export const triggerIcon = styleVariants({

@@ -1,7 +1,5 @@
-import { useState } from 'react'
-
 import { ChevronRight } from 'lucide-react'
-import { Link, useNavigate, useParams } from 'react-router'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router'
 
 import {
   adminProductStatusColor,
@@ -27,6 +25,11 @@ const tabs = [
 ] as const
 
 type TabValue = (typeof tabs)[number]['value']
+
+const DEFAULT_TAB: TabValue = 'stock'
+
+const isTabValue = (value: string | null): value is TabValue =>
+  tabs.some((tab) => tab.value === value)
 
 const numberFormatter = new Intl.NumberFormat('ko-KR')
 
@@ -78,8 +81,16 @@ const stockColumns: TableColumn<AdminProductStock>[] = [
 export function AdminProductDetailPage() {
   const navigate = useNavigate()
   const { productId = '' } = useParams()
-  // 재고 조회를 기본으로 연다.
-  const [tab, setTab] = useState<TabValue>('stock')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tabParam = searchParams.get('tab')
+  const tab = isTabValue(tabParam) ? tabParam : DEFAULT_TAB
+
+  const setTab = (next: TabValue) => {
+    const params = new URLSearchParams(searchParams)
+    params.set('tab', next)
+    // 탭 전환마다 히스토리가 쌓이면 뒤로 가기로 목록에 못 돌아간다.
+    setSearchParams(params, { replace: true })
+  }
 
   const product = findAdminProduct(productId)
 

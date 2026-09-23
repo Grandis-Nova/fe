@@ -127,13 +127,15 @@ export const name = style([
     color: color.text.primary,
   },
 ])
-// 상품명이 링크일 때 — 밑줄은 hover에서만 보인다.
+// 상품명이 링크일 때. 밑줄 대신 색으로만 반응한다 — 밑줄은 글자 아래 여백을 먹어
+// 바로 밑 모델명과 간격이 흔들려 보인다.
 export const nameLink = style([
   name,
   {
     textDecoration: 'none',
+    transition: `color ${motion.duration.fast} ${motion.easing.default}`,
     selectors: {
-      '&:hover': { textDecoration: 'underline' },
+      '&:hover': { color: color.primary.base },
     },
   },
 ])

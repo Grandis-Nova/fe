@@ -12,7 +12,8 @@ export type ProductVariant = {
 const KEY_SEPARATOR = '|'
 
 export function buildVariantKey(colorName: string, optionLabels: string[]) {
-  return [colorName, ...optionLabels].join(KEY_SEPARATOR)
+  // 색상도 옵션도 없는 경우 키가 빈 문자열이 되지 않게 한다.
+  return [colorName, ...optionLabels].join(KEY_SEPARATOR) || 'default'
 }
 
 /** 옵션 그룹들의 값을 곱집합으로 펼친다 */
@@ -37,11 +38,6 @@ function combineOptionValues(groups: ProductOptionGroup[]) {
 export function getProductVariants(
   value: Pick<AdminProductFormValue, 'colors' | 'optionGroups' | 'basePrice'>,
 ): ProductVariant[] {
-  const namedColors = value.colors.filter(
-    (colorOption) => colorOption.noColor || colorOption.name.trim() !== '',
-  )
-  if (namedColors.length === 0) return []
-
   const filledGroups = value.optionGroups.filter((group) =>
     group.values.some((optionValue) => optionValue.label.trim() !== ''),
   )
@@ -54,13 +50,27 @@ export function getProductVariants(
     })),
   )
 
-  return namedColors.flatMap((colorOption) => {
-    const colorName = colorOption.noColor ? '색상 없음' : colorOption.name
+  // '색상 없음'을 체크하면 색상은 조합 축에서 빠지고 옵션만 남는다.
+  if (value.colors.some((colorOption) => colorOption.noColor)) {
     return combos.map((combo) => ({
-      key: buildVariantKey(colorName, combo.labels),
-      colorName,
+      key: buildVariantKey('', combo.labels),
+      colorName: '',
       optionLabels: combo.labels,
       price: value.basePrice + combo.extraPrice,
     }))
-  })
+  }
+
+  const namedColors = value.colors.filter(
+    (colorOption) => colorOption.name.trim() !== '',
+  )
+  if (namedColors.length === 0) return []
+
+  return namedColors.flatMap((colorOption) =>
+    combos.map((combo) => ({
+      key: buildVariantKey(colorOption.name, combo.labels),
+      colorName: colorOption.name,
+      optionLabels: combo.labels,
+      price: value.basePrice + combo.extraPrice,
+    })),
+  )
 }

@@ -33,23 +33,30 @@ export function VariantTable({
     ]),
   )
 
+  // '색상 없음'이면 색상 컬럼 자체가 의미가 없어 빼버린다.
+  const hasNoColor = colors.some((colorOption) => colorOption.noColor)
+
   // 옵션 그룹 수에 따라 가운데 컬럼이 늘어나므로 컬럼도 함께 만들어낸다.
   const columns: TableColumn<ProductVariant>[] = [
-    {
-      key: 'color',
-      header: '색상',
-      align: 'center',
-      render: (variant) => (
-        <span className={styles.colorCell}>
-          <span
-            className={styles.swatch}
-            style={{ background: hexByName.get(variant.colorName) }}
-            aria-hidden="true"
-          />
-          {variant.colorName}
-        </span>
-      ),
-    },
+    ...(hasNoColor
+      ? []
+      : [
+          {
+            key: 'color',
+            header: '색상',
+            align: 'center' as const,
+            render: (variant: ProductVariant) => (
+              <span className={styles.colorCell}>
+                <span
+                  className={styles.swatch}
+                  style={{ background: hexByName.get(variant.colorName) }}
+                  aria-hidden="true"
+                />
+                {variant.colorName}
+              </span>
+            ),
+          },
+        ]),
     ...optionGroups
       .filter((group) =>
         group.values.some((value) => value.label.trim() !== ''),

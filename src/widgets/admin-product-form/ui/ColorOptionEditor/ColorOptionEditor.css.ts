@@ -125,7 +125,12 @@ export const addButton = style([
     cursor: 'pointer',
     transition: `background ${motion.duration.fast} ${motion.easing.default}`,
     selectors: {
-      '&:hover': { background: color.primary.subtlerHover },
+      '&:hover:not(:disabled)': { background: color.primary.subtlerHover },
+      '&:disabled': {
+        background: color.background.surface,
+        color: color.text.disabled,
+        cursor: 'not-allowed',
+      },
     },
   },
 ])

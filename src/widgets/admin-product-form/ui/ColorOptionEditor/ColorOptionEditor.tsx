@@ -16,6 +16,9 @@ export function ColorOptionEditor({
   colors,
   onChange,
 }: ColorOptionEditorProps) {
+  // '색상 없음'인 상품은 색상을 더 만들 수 없다.
+  const hasNoColor = colors.some((colorOption) => colorOption.noColor)
+
   const patchColor = (id: string, partial: Partial<ProductColorOption>) =>
     onChange(
       colors.map((colorOption) =>
@@ -94,6 +97,7 @@ export function ColorOptionEditor({
       <button
         type="button"
         className={styles.addButton}
+        disabled={hasNoColor}
         onClick={() => onChange([...colors, createColorOption()])}
       >
         <Plus className={styles.addIcon} aria-hidden="true" />

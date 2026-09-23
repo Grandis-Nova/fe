@@ -44,4 +44,8 @@ export const icon = style({
   width: '14px',
   height: '14px',
   color: color.text.inverse,
+  opacity: 0,
+  selectors: {
+    [`${input}:checked ~ ${box} &`]: { opacity: 1 },
+  },
 })

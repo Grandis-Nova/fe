@@ -4,6 +4,9 @@ import { color, motion, spacing, typography } from '@/shared/config/theme'
 
 export const root = style({
   display: 'inline-flex',
+  // 세로 flex 부모 안에서는 align-items: stretch 때문에 가로로 늘어난다.
+  // inline-flex만으로는 못 막으므로 폭을 내용에 맞춰 고정한다.
+  width: 'fit-content',
   gap: spacing[4],
   padding: spacing[4],
   borderRadius: '10px',

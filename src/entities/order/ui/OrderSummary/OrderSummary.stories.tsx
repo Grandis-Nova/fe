@@ -39,7 +39,7 @@ export const WithChildren: Story = {
     ...base,
     children: (
       <label>
-        <Checkbox defaultChecked />
+        <Checkbox checked readOnly />
         약관에 모두 동의합니다
       </label>
     ),

@@ -146,7 +146,11 @@ export function AdminProductsPage() {
     <div className={styles.root}>
       <div className={styles.header}>
         <div className={styles.title}>상품 관리</div>
-        <Button icon="plus" size="medium">
+        <Button
+          icon="plus"
+          size="medium"
+          onClick={() => navigate('/admin/products/new')}
+        >
           새 상품 등록
         </Button>
       </div>

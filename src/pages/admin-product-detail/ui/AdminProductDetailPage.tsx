@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { ChevronRight } from 'lucide-react'
-import { Link, useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 
 import {
   adminProductStatusColor,
@@ -12,6 +12,11 @@ import {
 } from '@/entities/admin-product'
 import { SegmentedTabs, Table, Tag } from '@/shared/ui'
 import type { TableColumn } from '@/shared/ui'
+import {
+  AdminProductForm,
+  createEmptyProductFormValue,
+} from '@/widgets/admin-product-form'
+import type { AdminProductFormValue } from '@/widgets/admin-product-form'
 
 import * as styles from './AdminProductDetailPage.css'
 
@@ -71,6 +76,7 @@ const stockColumns: TableColumn<AdminProductStock>[] = [
 ]
 
 export function AdminProductDetailPage() {
+  const navigate = useNavigate()
   const { productId = '' } = useParams()
   // 재고 조회를 기본으로 연다.
   const [tab, setTab] = useState<TabValue>('stock')
@@ -114,7 +120,7 @@ export function AdminProductDetailPage() {
 
       <SegmentedTabs items={tabs} value={tab} onChange={setTab} />
 
-      {tab === 'stock' ? (
+      {tab === 'stock' && (
         <Table
           columns={stockColumns}
           rows={getAdminProductStocks(product)}
@@ -122,10 +128,31 @@ export function AdminProductDetailPage() {
           pageSize={10}
           emptyMessage="등록된 재고가 없습니다."
         />
-      ) : (
-        // 수정 / 배송 구간 설정은 아직 범위가 정해지지 않아 안내만 둔다.
+      )}
+
+      {tab === 'edit' && (
+        <AdminProductForm
+          mode="edit"
+          // ponytail: 상세 조회 API가 붙으면 서버 값을 폼 값으로 변환해 넘긴다.
+          defaultValue={{
+            ...createEmptyProductFormValue(),
+            name: product.name,
+            isPreorder: product.type === 'preorder',
+          }}
+          onSubmit={(value: AdminProductFormValue) =>
+            console.info('상품 수정', value)
+          }
+          onCancel={() => navigate('/admin/products')}
+          onPreview={(value: AdminProductFormValue) =>
+            console.info('미리보기', value)
+          }
+        />
+      )}
+
+      {tab === 'shipping' && (
+        // 배송 구간 설정은 아직 범위가 정해지지 않아 안내만 둔다.
         <div className={styles.placeholder}>
-          {tabs.find((item) => item.value === tab)?.label} 화면은 준비 중입니다.
+          배송 구간 설정 화면은 준비 중입니다.
         </div>
       )}
     </div>

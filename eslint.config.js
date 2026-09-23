@@ -113,6 +113,9 @@ export default defineConfig([
     'stats.html',
     // flat config 파일 자신을 자기 자신으로 린트하면 순환적 경고가 발생하므로 제외
     'eslint.config.js',
+    // MSW가 만드는 서비스 워커. "Please do NOT modify this file"이라 손댈 수 없고
+    // npx msw init public/ 을 다시 돌리면 덮어쓰인다 — 파일 맨 위 eslint-disable도 그래서 못 지운다.
+    'public/mockServiceWorker.js',
   ]),
 
   // import-x 기본 + TypeScript resolver 설정 (전체 파일에 적용)

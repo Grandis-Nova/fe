@@ -17,7 +17,7 @@ export function Checkbox({ className, ...rest }: CheckboxProps) {
     <span className={[styles.root, className].filter(Boolean).join(' ')}>
       <input type="checkbox" className={styles.input} {...rest} />
       <span className={styles.box}>
-        <Check className={styles.icon} aria-hidden="true" />
+        {checked && <Check className={styles.icon} aria-hidden="true" />}
       </span>
     </span>
   )

@@ -1,8 +1,14 @@
 import { createBrowserRouter } from 'react-router'
 
+import { AdminLayout } from '@/app/layouts/AdminLayout'
 import { MainLayout } from '@/app/layouts/MainLayout'
 import { MypageLayout } from '@/app/layouts/MypageLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
+import { AdminHomePage } from '@/pages/admin-home'
+import { AdminPlaceholderPage } from '@/pages/admin-placeholder'
+import { AdminProductDetailPage } from '@/pages/admin-product-detail'
+import { AdminProductNewPage } from '@/pages/admin-product-new'
+import { AdminProductsPage } from '@/pages/admin-products'
 import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
 import { NotFoundPage } from '@/pages/not-found'
@@ -34,8 +40,44 @@ export const router = createBrowserRouter([
           { path: '*', element: <NotFoundPage /> },
         ],
       },
-      // admin 라우트가 생기면 MainLayout 밖, 여기 형제로 추가한다 — CategoryNav는 이제 Header가
-      // 직접 렌더링하므로, admin에서 빼려면 Header에 showCategoryNav 같은 prop을 먼저 추가해야 한다.
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: '/admin', element: <AdminHomePage /> },
+          // 홈을 제외한 나머지는 아직 기능 범위가 안 정해져서 전부 placeholder —
+          // 스코프가 정해지는 대로 각자 전용 페이지로 교체.
+          { path: '/admin/products', element: <AdminProductsPage /> },
+          { path: '/admin/products/new', element: <AdminProductNewPage /> },
+          {
+            path: '/admin/products/:productId',
+            element: <AdminProductDetailPage />,
+          },
+          {
+            path: '/admin/preorders',
+            element: <AdminPlaceholderPage title="사전 예약 관리" />,
+          },
+          {
+            path: '/admin/orders',
+            element: <AdminPlaceholderPage title="예약 현황" />,
+          },
+          {
+            path: '/admin/consistency-check',
+            element: <AdminPlaceholderPage title="정합성 대조" />,
+          },
+          {
+            path: '/admin/load-test',
+            element: <AdminPlaceholderPage title="부하 검증" />,
+          },
+          {
+            path: '/admin/notifications',
+            element: <AdminPlaceholderPage title="관리자 알림 내역 확인" />,
+          },
+          {
+            path: '/admin/mock-settings',
+            element: <AdminPlaceholderPage title="Mock 설정" />,
+          },
+        ],
+      },
     ],
   },
 ])

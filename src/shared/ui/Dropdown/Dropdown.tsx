@@ -27,48 +27,50 @@ export function Dropdown({
 }: DropdownProps) {
   return (
     <div
-      className={[
-        styles.root,
-        styles.size[size],
-        open && styles.rootOpen,
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       style={width ? { width } : undefined}
     >
-      <button
-        type="button"
-        className={styles.trigger[size]}
-        onClick={onToggle}
-        aria-expanded={open}
+      <div
+        className={[styles.box, styles.size[size], open && styles.boxOpen]
+          .filter(Boolean)
+          .join(' ')}
       >
-        <span className={styles.triggerLabel}>{selectedOption ?? label}</span>
-        {open ? (
-          <ChevronUp className={styles.triggerIcon[size]} aria-hidden="true" />
-        ) : (
-          <ChevronDown
-            className={styles.triggerIcon[size]}
-            aria-hidden="true"
-          />
-        )}
-      </button>
-      {open &&
-        options.map((option, index) => (
-          <button
-            key={option}
-            type="button"
-            className={[
-              styles.option[size],
-              option === selectedOption && styles.optionSelected,
-            ]
-              .filter(Boolean)
-              .join(' ')}
-            onClick={() => onSelect?.(option, index)}
-          >
-            {option}
-          </button>
-        ))}
+        <button
+          type="button"
+          className={styles.trigger[size]}
+          onClick={onToggle}
+          aria-expanded={open}
+        >
+          <span className={styles.triggerLabel}>{selectedOption ?? label}</span>
+          {open ? (
+            <ChevronUp className={styles.triggerIcon[size]} aria-hidden="true" />
+          ) : (
+            <ChevronDown
+              className={styles.triggerIcon[size]}
+              aria-hidden="true"
+            />
+          )}
+        </button>
+      </div>
+      {open && (
+        <div className={[styles.menu, styles.menuSize[size]].join(' ')}>
+          {options.map((option, index) => (
+            <button
+              key={option}
+              type="button"
+              className={[
+                styles.option[size],
+                option === selectedOption && styles.optionSelected,
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() => onSelect?.(option, index)}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

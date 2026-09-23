@@ -35,3 +35,13 @@ export const Outline: Story = {
 export const Rect: Story = {
   args: { children: 'Tag', color: 'primary', variant: 'solid', rounded: false },
 }
+
+export const Medium: Story = {
+  args: {
+    children: 'Tag',
+    color: 'primary',
+    variant: 'solid',
+    size: 'medium',
+    rounded: true,
+  },
+}

@@ -5,18 +5,21 @@ import { outline, shape as shapeStyles, solid, subtle } from './Tag.css'
 type TagColor =
   'primary' | 'secondary' | 'blue' | 'green' | 'yellow' | 'red' | 'gray'
 type TagVariant = 'solid' | 'subtle' | 'outline'
+type TagSize = 'small' | 'medium'
 
 const variantStyles = { solid, subtle, outline }
 
 export type TagProps = HTMLAttributes<HTMLSpanElement> & {
   color?: TagColor
   variant?: TagVariant
+  size?: TagSize
   rounded?: boolean
 }
 
 export function Tag({
   color = 'primary',
   variant = 'solid',
+  size = 'small',
   rounded = true,
   className,
   children,
@@ -27,7 +30,7 @@ export function Tag({
   return (
     <span
       className={[
-        shapeStyles[rounded ? 'full' : 'rect'],
+        shapeStyles[size][rounded ? 'full' : 'rect'],
         variantClassName,
         className,
       ]

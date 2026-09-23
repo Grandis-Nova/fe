@@ -2,24 +2,39 @@ import { style, styleVariants } from '@vanilla-extract/css'
 
 import { color, spacing, typography } from '@/shared/config/theme'
 
-const base = style([
-  typography.body.captionMedium,
-  {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: '36px',
-    border: '1px solid transparent',
-    lineHeight: 1.3,
-    whiteSpace: 'nowrap',
-    fontSize: '10px',
-  },
-])
-
-export const shape = styleVariants({
-  full: [base, { padding: `5px ${spacing[10]}`, borderRadius: '9999px' }],
-  rect: [base, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
+const base = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: '1px solid transparent',
+  whiteSpace: 'nowrap',
 })
+
+const size = styleVariants({
+  small: [
+    base,
+    typography.body.captionMedium,
+    { minWidth: '36px', fontSize: '10px' },
+  ],
+  medium: [base, typography.body.subMedium, { minWidth: '48px' }],
+})
+
+export const shape = {
+  small: styleVariants({
+    full: [
+      size.small,
+      { padding: `5px ${spacing[10]}`, borderRadius: '9999px' },
+    ],
+    rect: [size.small, { padding: `5px ${spacing[8]}`, borderRadius: '6px' }],
+  }),
+  medium: styleVariants({
+    full: [
+      size.medium,
+      { padding: `8px ${spacing[12]}`, borderRadius: '9999px' },
+    ],
+    rect: [size.medium, { padding: `8px ${spacing[10]}`, borderRadius: '6px' }],
+  }),
+}
 
 export const solid = styleVariants({
   primary: {

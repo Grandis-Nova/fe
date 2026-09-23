@@ -196,15 +196,14 @@ export function PaymentPage() {
   )
 
   // 필수 입력은 결제를 한 번 눌러 본 뒤에만 빨갛게 표시한다 — 처음부터 빨간 화면을 보여주지 않는다.
-  const field = (key: FormKey, label: string, requiredMessage?: string) => ({
+  // 라벨 뒤 별표와 에러 문구는 Input이 required/invalid를 보고 스스로 만든다.
+  const field = (key: FormKey, label: string, required?: boolean) => ({
     label,
     value: form[key],
     onChange: (event: ChangeEvent<HTMLInputElement>) =>
       setForm((prev) => ({ ...prev, [key]: event.target.value })),
-    error:
-      requiredMessage && submitted && !form[key].trim()
-        ? requiredMessage
-        : undefined,
+    required,
+    invalid: submitted && !form[key].trim(),
   })
 
   const toggleAgree = (id: string, checked: boolean) =>
@@ -232,15 +231,9 @@ export function PaymentPage() {
           <section className={styles.section}>
             <div className={styles.sectionTitle}>수령인</div>
             <div className={styles.fieldRow}>
+              <Input {...field('name', '이름', true)} />
               <Input
-                {...field('name', '이름*', '이름을 필수로 작성해주세요.')}
-              />
-              <Input
-                {...field(
-                  'phone',
-                  "휴대폰 ('-'을 제외한 숫자만)*",
-                  '휴대폰 번호를 필수로 작성해주세요.',
-                )}
+                {...field('phone', "휴대폰 ('-'을 제외한 숫자만)", true)}
                 inputMode="numeric"
               />
             </div>
@@ -259,38 +252,16 @@ export function PaymentPage() {
               </div>
             </div>
 
-            <Input
-              {...field(
-                'addressLabel',
-                '배송지명*',
-                '배송지명을 필수로 작성해주세요.',
-              )}
-            />
+            <Input {...field('addressLabel', '배송지명', true)} />
             <div className={styles.postcodeRow}>
               <Input
-                {...field(
-                  'postcode',
-                  '우편 번호*',
-                  '우편 번호를 필수로 작성해주세요.',
-                )}
+                {...field('postcode', '우편 번호', true)}
                 inputMode="numeric"
               />
               <Button className={styles.postcodeAction}>주소 찾기</Button>
             </div>
-            <Input
-              {...field(
-                'address',
-                '기본 주소*',
-                '기본 주소를 필수로 작성해주세요.',
-              )}
-            />
-            <Input
-              {...field(
-                'addressDetail',
-                '상세 주소*',
-                '상세 주소를 필수로 작성해주세요.',
-              )}
-            />
+            <Input {...field('address', '기본 주소', true)} />
+            <Input {...field('addressDetail', '상세 주소', true)} />
           </section>
         </div>
 

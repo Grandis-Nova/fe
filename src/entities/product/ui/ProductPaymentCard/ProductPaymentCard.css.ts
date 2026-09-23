@@ -9,11 +9,27 @@ import {
 
 export const root = style({
   display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+})
+
+export const main = style({
+  display: 'flex',
   // 썸네일·본문·삭제 버튼의 윗줄을 맞춘다 — 가운데 정렬이면 본문이 길어질 때 썸네일 위로
   // 빈 공간이 생겨서 top: 0에 붙인 삭제 버튼만 혼자 떠 보인다.
   alignItems: 'flex-start',
   gap: spacing[20],
   width: '100%',
+})
+
+// 결제/대기 액션은 이 카드 전체에 대한 행동이라 금액과 같은 줄에 두지 않고
+// 구분선 아래로 내린다 — 금액을 다 읽은 다음 누르는 순서가 된다.
+export const actionRow = style({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  marginTop: spacing[16],
+  paddingTop: spacing[16],
+  borderTop: `1px solid ${color.border.subtle}`,
 })
 
 // 체크박스만은 카드 높이 기준 가운데에 둔다.

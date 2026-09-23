@@ -24,6 +24,8 @@ export type ProductPaymentCardProps = {
   product: ProductPaymentCardItem
   actionLabel?: string
   onActionClick?: () => void
+  /** 결제 기한 만료처럼 바깥 사정으로 액션을 막아야 할 때 */
+  actionDisabled?: boolean
   checked?: boolean
   onCheckedChange?: (checked: boolean) => void
   /** variant가 'cart'일 때 수량 조절기에 쓰인다. 없으면 quantityLabel을 그대로 보여준다. */
@@ -47,6 +49,7 @@ export function ProductPaymentCard({
   },
   actionLabel,
   onActionClick,
+  actionDisabled,
   checked = false,
   onCheckedChange,
   quantity,
@@ -61,73 +64,84 @@ export function ProductPaymentCard({
 
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
-      {isCart && (
-        <Checkbox
-          className={styles.checkbox}
-          aria-label={`${name} 선택`}
-          checked={checked}
-          onChange={(event) => onCheckedChange?.(event.target.checked)}
-        />
-      )}
-      {imageSrc ? (
-        <img src={imageSrc} alt="" className={styles.thumbnail} />
-      ) : (
-        <div className={styles.thumbnail} />
-      )}
-      <div
-        className={[styles.body_, isCart && styles.bodyCart]
-          .filter(Boolean)
-          .join(' ')}
-      >
-        <div className={styles.infoGroup}>
-          <div>
-            <div className={styles.titleRow}>
-              {productId ? (
-                <Link to={`/products/${productId}`} className={styles.nameLink}>
-                  {name}
-                </Link>
-              ) : (
-                <div className={styles.name}>{name}</div>
-              )}
-              {isCart && onRemove && (
-                <button
-                  type="button"
-                  className={styles.remove}
-                  aria-label={`${name} 삭제`}
-                  onClick={onRemove}
-                >
-                  <X size={18} aria-hidden="true" />
-                </button>
+      <div className={styles.main}>
+        {isCart && (
+          <Checkbox
+            className={styles.checkbox}
+            aria-label={`${name} 선택`}
+            checked={checked}
+            onChange={(event) => onCheckedChange?.(event.target.checked)}
+          />
+        )}
+        {imageSrc ? (
+          <img src={imageSrc} alt="" className={styles.thumbnail} />
+        ) : (
+          <div className={styles.thumbnail} />
+        )}
+        <div
+          className={[styles.body_, isCart && styles.bodyCart]
+            .filter(Boolean)
+            .join(' ')}
+        >
+          <div className={styles.infoGroup}>
+            <div>
+              <div className={styles.titleRow}>
+                {productId ? (
+                  <Link
+                    to={`/products/${productId}`}
+                    className={styles.nameLink}
+                  >
+                    {name}
+                  </Link>
+                ) : (
+                  <div className={styles.name}>{name}</div>
+                )}
+                {isCart && onRemove && (
+                  <button
+                    type="button"
+                    className={styles.remove}
+                    aria-label={`${name} 삭제`}
+                    onClick={onRemove}
+                  >
+                    <X size={18} aria-hidden="true" />
+                  </button>
+                )}
+              </div>
+              {modelNumber && (
+                <div className={styles.modelNumber}>{modelNumber}</div>
               )}
             </div>
-            {modelNumber && (
-              <div className={styles.modelNumber}>{modelNumber}</div>
-            )}
+            <div className={styles.optionSummary}>{optionSummary}</div>
           </div>
-          <div className={styles.optionSummary}>{optionSummary}</div>
-        </div>
-        <div className={styles.quantityPriceRow}>
-          {showStepper ? (
-            <QuantityStepper
-              value={quantity}
-              onChange={onQuantityChange}
-              label={name}
-            />
-          ) : (
-            <span className={styles.quantityLabel}>{quantityLabel}</span>
-          )}
-          <div className={styles.priceActionGroup}>
-            <span className={styles.price}>
-              <PriceText value={priceLabel} />
-            </span>
-            {showAction && (
-              <Button size="small" disabled={isPending} onClick={onActionClick}>
-                {actionLabel}
-              </Button>
+          <div className={styles.quantityPriceRow}>
+            {showStepper ? (
+              <QuantityStepper
+                value={quantity}
+                onChange={onQuantityChange}
+                label={name}
+              />
+            ) : (
+              <span className={styles.quantityLabel}>{quantityLabel}</span>
             )}
+            <div className={styles.priceActionGroup}>
+              <span className={styles.price}>
+                <PriceText value={priceLabel} />
+              </span>
+            </div>
           </div>
         </div>
       </div>
+      {showAction && (
+        <div className={styles.actionRow}>
+          <Button
+            size="small"
+            disabled={isPending || actionDisabled}
+            onClick={onActionClick}
+          >
+            {actionLabel}
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

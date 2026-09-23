@@ -6,11 +6,10 @@ import '../src/shared/config/theme'
 
 const preview: Preview = {
   decorators: [
-    // react-router는 <Router>를 중첩하면 에러를 던지므로, 특정 경로를 활성 상태로
-    // 보고 싶은 story는 story 안에서 새 MemoryRouter로 감싸지 말고
-    // parameters.initialEntries로 경로만 넘긴다.
-    (Story, context) => (
-      <MemoryRouter initialEntries={context.parameters.initialEntries ?? ['/']}>
+    // 경로에 따라 화면이 달라지는 컴포넌트(Header 등)는 스토리에서
+    // parameters: { initialEntries: ['/admin'] } 으로 진입 경로를 지정한다.
+    (Story, { parameters }) => (
+      <MemoryRouter initialEntries={parameters.initialEntries ?? ['/']}>
         <Story />
       </MemoryRouter>
     ),

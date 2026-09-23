@@ -4,14 +4,48 @@ import * as styles from './CategoryNav.css'
 
 export type CategoryNavLink = '구매후기' | '사전예약' | '마이페이지'
 
+export type CategoryNavTone = 'default' | 'onDark'
+
 export type CategoryNavProps = {
+  tone?: CategoryNavTone
   activeLink?: CategoryNavLink
-  showBorder?: boolean
   onLinkClick?: (link: CategoryNavLink) => void
   className?: string
 }
 
-const brands = ['SAMSUNG', 'Apple', '악세사리']
+type MenuLink = { label: string; to: string }
+
+type BrandMenu = {
+  categories: string[]
+  more: MenuLink[]
+}
+
+// 브랜드에 hover/focus하면 열리는 메가 메뉴의 내용.
+// 카테고리 API가 붙으면 이 상수 대신 응답을 쓴다(썸네일도 그때 같이 붙인다).
+const brandMenus = {
+  모바일: {
+    categories: ['스마트폰', '태블릿', '폴더블'],
+    more: [
+      { label: '사전예약 중인 모바일', to: '/preorder' },
+      { label: '모바일 구매후기', to: '/reviews' },
+    ],
+  },
+  'PC/주변기기': {
+    categories: ['노트북', '모니터', '키보드/마우스'],
+    more: [
+      { label: '사전예약 중인 PC', to: '/preorder' },
+      { label: 'PC 구매후기', to: '/reviews' },
+    ],
+  },
+  웨어러블: {
+    categories: ['스마트워치', '무선이어폰', '스마트밴드'],
+    more: [
+      { label: '사전예약 중인 웨어러블', to: '/preorder' },
+      { label: '웨어러블 구매후기', to: '/reviews' },
+    ],
+  },
+} satisfies Record<string, BrandMenu>
+
 const links: CategoryNavLink[] = ['구매후기', '사전예약', '마이페이지']
 const linkPaths: Record<CategoryNavLink, string> = {
   구매후기: '/reviews',
@@ -19,49 +53,68 @@ const linkPaths: Record<CategoryNavLink, string> = {
   마이페이지: '/mypage?state=preorder-check',
 }
 
+// URLSearchParams가 인코딩까지 해주므로 쿼리를 손으로 붙이지 않는다.
+const productsPath = (params: Record<string, string>) =>
+  `/products?${new URLSearchParams(params)}`
+
 export function CategoryNav({
+  tone = 'default',
   activeLink,
-  showBorder = true,
   onLinkClick,
   className,
 }: CategoryNavProps) {
   return (
-    <nav
-      className={[
-        styles.root,
-        styles.border[showBorder ? 'visible' : 'hidden'],
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
-      <div className={styles.row}>
-        <div className={styles.links}>
-          {brands.map((brand) => (
-            <Link
-              key={brand}
-              to={`/products?brand=${encodeURIComponent(brand)}`}
-              className={styles.link}
-            >
+    <nav className={[styles.root, className].filter(Boolean).join(' ')}>
+      <div className={[styles.links, styles.linksTone[tone]].join(' ')}>
+        {Object.entries(brandMenus).map(([brand, menu]) => (
+          <div key={brand} className={styles.brand}>
+            <Link to={productsPath({ brand })} className={styles.link}>
               {brand}
             </Link>
-          ))}
-        </div>
-        <span className={styles.divider}>|</span>
-        <div className={styles.links}>
-          {links.map((link) => (
-            <Link
-              key={link}
-              to={linkPaths[link]}
-              className={[styles.link, link === activeLink && styles.linkActive]
-                .filter(Boolean)
-                .join(' ')}
-              onClick={() => onLinkClick?.(link)}
-            >
-              {link}
-            </Link>
-          ))}
-        </div>
+            <div className={styles.menu}>
+              <div className={styles.menuInner}>
+                <div className={styles.menuCategories}>
+                  {menu.categories.map((category) => (
+                    <Link
+                      key={category}
+                      to={productsPath({ brand, q: category })}
+                      className={styles.menuTile}
+                    >
+                      {category}
+                    </Link>
+                  ))}
+                </div>
+                <div className={styles.menuAside}>
+                  <div className={styles.menuAsideTitle}>더 알아보기</div>
+                  {menu.more.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      className={styles.menuAsideLink}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <span className={styles.divider}>|</span>
+      <div className={[styles.links, styles.linksTone[tone]].join(' ')}>
+        {links.map((link) => (
+          <Link
+            key={link}
+            to={linkPaths[link]}
+            className={[styles.link, link === activeLink && styles.linkActive]
+              .filter(Boolean)
+              .join(' ')}
+            onClick={() => onLinkClick?.(link)}
+          >
+            {link}
+          </Link>
+        ))}
       </div>
     </nav>
   )

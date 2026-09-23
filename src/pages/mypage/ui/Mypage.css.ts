@@ -6,7 +6,7 @@ import { breakpoint } from '@/shared/config/theme/tokens/breakpoint'
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: spacing[24],
+  gap: spacing[40],
   '@media': {
     [breakpoint.desktop]: {
       flexDirection: 'row',

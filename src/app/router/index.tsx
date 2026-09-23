@@ -12,6 +12,7 @@ import { AdminProductsPage } from '@/pages/admin-products'
 import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
 import { NotFoundPage } from '@/pages/not-found'
+import { PaymentPage } from '@/pages/payment'
 import { PreorderPage } from '@/pages/preorder'
 import { PreorderDetailPage } from '@/pages/preorder-detail'
 import { ProductDetailPage } from '@/pages/product-detail'
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
           { path: '/preorder', element: <PreorderPage /> },
           { path: '/preorder/:preorderId', element: <PreorderDetailPage /> },
           { path: '/products/:productId', element: <ProductDetailPage /> },
+          { path: '/payment', element: <PaymentPage /> },
           { path: '/result', element: <ResultPage /> },
           {
             path: '/mypage',

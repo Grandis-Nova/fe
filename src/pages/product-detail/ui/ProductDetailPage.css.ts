@@ -103,6 +103,15 @@ export const orderBarCheckoutButton = style({
   padding: `0 ${spacing[24]}`,
 })
 
+export const quantityPriceRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: spacing[8],
+})
+
+export const price = style([typography.title.lgSemibold])
+
 export const actions = style({
   display: 'grid',
   gridTemplateColumns: 'auto 1fr',

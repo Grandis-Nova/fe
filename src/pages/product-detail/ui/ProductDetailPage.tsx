@@ -5,7 +5,13 @@ import { useSearchParams } from 'react-router'
 import { ProductColorSwatches, ProductOptionSelector } from '@/entities/product'
 import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
 import macbook2 from '@/shared/assets/macbook_neo_sliver2.png'
-import { Container, Slider, Button } from '@/shared/ui'
+import {
+  Container,
+  Slider,
+  Button,
+  QuantityStepper,
+  PriceText,
+} from '@/shared/ui'
 import { ProductPageTab } from '@/widgets/product-page-tab'
 import type { ProductPageTabKey } from '@/widgets/product-page-tab'
 
@@ -35,11 +41,16 @@ const tabPanelContent: Record<
 const SHIPMENT_STARTS_AT = new Date('2026-10-15')
 const shipmentLabel = `${SHIPMENT_STARTS_AT.getMonth() + 1}월 ${SHIPMENT_STARTS_AT.getDate()}일 이후 순차배송`
 
+// ponytail: 실제 상품 API 전까지 단가 하드코딩
+const UNIT_PRICE = 120000
+
 export function ProductDetailPage() {
   const [searchParams] = useSearchParams()
   const isPreorder = searchParams.get('preorder') === 'true'
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedStorage, setSelectedStorage] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+  const priceLabel = `${(UNIT_PRICE * quantity).toLocaleString()}원`
   const {
     layoutRef,
     orderBarRef,
@@ -92,6 +103,16 @@ export function ProductDetailPage() {
                 }))}
                 onSelect={setSelectedStorage}
               />
+            </div>
+            <div className={styles.quantityPriceRow}>
+              <QuantityStepper
+                value={quantity}
+                onChange={setQuantity}
+                label="IPhone 18 Pro"
+              />
+              <span className={styles.price}>
+                <PriceText value={priceLabel} />
+              </span>
             </div>
             {isPreorder && (
               <div className={styles.shipmentNotice}>{shipmentLabel}</div>

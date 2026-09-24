@@ -1,0 +1,77 @@
+import { useEffect, useRef, useState } from 'react'
+
+import { useNavigate, useSearchParams } from 'react-router'
+
+import { postKakaoCallback, useSessionStore } from '@/entities/auth'
+import { consumeStoredState, KAKAO_CALLBACK_PATH } from '@/features/kakao-login'
+import { ApiRequestError } from '@/shared/api/client'
+
+type Status = 'processing' | 'error'
+
+const GENERIC_ERROR = '로그인 처리 중 문제가 발생했습니다. 다시 시도해 주세요.'
+
+export function KakaoCallbackPage() {
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const [status, setStatus] = useState<Status>('processing')
+  const [message, setMessage] = useState(GENERIC_ERROR)
+  // StrictMode에서 effect가 두 번 실행돼도 code(1회용)를 두 번 보내지 않도록 막는다.
+  const started = useRef(false)
+
+  useEffect(() => {
+    if (started.current) return
+    started.current = true
+
+    async function run() {
+      const code = searchParams.get('code')
+      const state = searchParams.get('state')
+      const error = searchParams.get('error')
+
+      // state는 성공/실패와 무관하게 여기서 한 번만 소비한다.
+      const stateValid = consumeStoredState(state)
+
+      if (error) {
+        setStatus('error')
+        setMessage('로그인을 취소했습니다.')
+        return
+      }
+      if (!stateValid || !code) {
+        setStatus('error')
+        setMessage(GENERIC_ERROR)
+        return
+      }
+
+      const redirectUri = `${window.location.origin}${KAKAO_CALLBACK_PATH}`
+
+      try {
+        const session = await postKakaoCallback({ code, redirectUri })
+        useSessionStore.getState().setSession(session)
+        // code는 1회용이라 새로고침으로 같은 code를 다시 보내면 반드시 실패한다 —
+        // history.replaceState 대신 react-router의 replace 내비게이션으로 URL을 정리한다.
+        navigate('/', { replace: true })
+      } catch (caught) {
+        setStatus('error')
+        setMessage(
+          caught instanceof ApiRequestError &&
+            caught.error.code === 'INVALID_OAUTH_CALLBACK'
+            ? '로그인 코드가 만료되었거나 이미 사용됐습니다. 다시 시도해 주세요.'
+            : GENERIC_ERROR,
+        )
+      }
+    }
+
+    void run()
+  }, [navigate, searchParams])
+
+  useEffect(() => {
+    if (status !== 'error') return
+    const timer = setTimeout(() => navigate('/', { replace: true }), 2000)
+    return () => clearTimeout(timer)
+  }, [status, navigate])
+
+  return (
+    <div>
+      {status === 'processing' ? '카카오 로그인 처리 중입니다…' : message}
+    </div>
+  )
+}

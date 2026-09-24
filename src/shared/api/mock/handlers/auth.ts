@@ -5,9 +5,12 @@ import { url } from '../url'
 
 import type {
   AdminLoginRequest,
+  ApiViolation,
   KakaoCallbackRequest,
+  ProfileInfo,
   Session,
   SessionInfo,
+  UpdateProfileRequest,
 } from '../../types'
 import type { RequestHandler } from 'msw'
 
@@ -15,11 +18,21 @@ import type { RequestHandler } from 'msw'
 // 컨텍스트에서 실행되므로(MSW v2 구조) 새로고침하면 이 파일의 모듈도 다시 평가된다 —
 // 그래서 DB를 sessionStorage에 함께 태워 새로고침에도 살아남게 한다(cart.ts와 같은 패턴).
 // 탭을 닫으면 사라진다. 실제 서버 저장소를 대체하지 않는다.
-type SessionRecord = { displayName: string; role: Session['role'] }
+//
+// ponytail: 스키마 버전이 없다 — 이 커밋 이전에 저장된 sessionStorage 기록엔
+// profileComplete가 없어 undefined(falsy)로 읽힌다. 이 브랜치 받은 뒤 한 번
+// 로그아웃(또는 sessionStorage 지우기)하고 새로 로그인. 반복적으로 문제되면
+// 버전 필드 추가.
+type SessionRecord = {
+  displayName: string
+  role: Session['role']
+  profileComplete: boolean
+}
 type DB = {
   sessions: [string, SessionRecord][]
   refreshTokens: [string, SessionRecord][]
   usedCodes: string[]
+  profile: ProfileRecord
 }
 
 const DB_KEY = 'nova-auth-mock-db'
@@ -31,7 +44,12 @@ function loadDB(): DB {
   } catch {
     // 파싱 실패 시 빈 DB로 시작한다.
   }
-  return { sessions: [], refreshTokens: [], usedCodes: [] }
+  return {
+    sessions: [],
+    refreshTokens: [],
+    usedCodes: [],
+    profile: { name: null, email: null, phoneNumber: null },
+  }
 }
 
 const initial = loadDB()
@@ -39,20 +57,70 @@ const sessions = new Map<string, SessionRecord>(initial.sessions)
 const refreshTokens = new Map<string, SessionRecord>(initial.refreshTokens)
 const usedCodes = new Set<string>(initial.usedCodes)
 
+const MOCK_USER: SessionRecord = {
+  displayName: '기매진',
+  role: 'USER',
+  profileComplete: false,
+}
+// 로컬 개발용 관리자 계정. 실제 값이 아니다.
+const ADMIN_USERNAME = 'admin'
+const ADMIN_PASSWORD = 'admin1234'
+const MOCK_ADMIN: SessionRecord = {
+  displayName: '관리자',
+  role: 'ADMIN',
+  profileComplete: true,
+}
+
+// ponytail: 로그인 목업과 마찬가지로 메모리 저장 — 실제 회원(카카오 회원번호)별로
+// 갈리지 않고 전역 하나뿐이다(entities/address의 defaultAddress와 같은 이유).
+type ProfileRecord = {
+  name: string | null
+  email: string | null
+  phoneNumber: string | null
+}
+let profile: ProfileRecord = initial.profile
+
 function saveDB() {
   const db: DB = {
     sessions: [...sessions.entries()],
     refreshTokens: [...refreshTokens.entries()],
     usedCodes: [...usedCodes],
+    profile,
   }
   sessionStorage.setItem(DB_KEY, JSON.stringify(db))
 }
 
-const MOCK_USER: SessionRecord = { displayName: '기매진', role: 'USER' }
-// 로컬 개발용 관리자 계정. 실제 값이 아니다.
-const ADMIN_USERNAME = 'admin'
-const ADMIN_PASSWORD = 'admin1234'
-const MOCK_ADMIN: SessionRecord = { displayName: '관리자', role: 'ADMIN' }
+const PROFILE_LIMITS: Record<keyof UpdateProfileRequest, number> = {
+  name: 50,
+  email: 255,
+  phoneNumber: 20,
+}
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+// 코드포인트 기준 — 서버와 동일하게 이모지 1개를 1로 센다.
+const codePointLength = (value: string) => [...value].length
+
+function validateProfile(body: Partial<UpdateProfileRequest> | null) {
+  const violations: ApiViolation[] = []
+  const required = ['name', 'email', 'phoneNumber'] as const
+
+  for (const field of required) {
+    const value = body?.[field]
+    if (!value || codePointLength(value) > PROFILE_LIMITS[field]) {
+      violations.push({
+        field,
+        message: !value
+          ? '필수 값입니다.'
+          : `${PROFILE_LIMITS[field]}자 이하로 입력해 주세요.`,
+      })
+      continue
+    }
+    // 이메일만 형식을 검사한다 — 연락처는 길이만 본다(11-frontend-guide.md와 같은 계약).
+    if (field === 'email' && !EMAIL_PATTERN.test(value)) {
+      violations.push({ field, message: '이메일 형식이 올바르지 않습니다.' })
+    }
+  }
+  return violations
+}
 
 const REFRESH_COOKIE: Record<Session['role'], string> = {
   USER: 'refresh_token',
@@ -183,5 +251,53 @@ export const authHandlers: RequestHandler[] = [
     const response = ok<Session>({ sessionToken, ...MOCK_ADMIN })
     response.headers.set('X-Mock-Set-Cookie', cookie)
     return response
+  }),
+
+  http.get(url('/api/v1/me/profile'), ({ request }) => {
+    const token = request.headers.get('X-Session-Token')
+    const record = token ? sessions.get(token) : undefined
+    if (!record) {
+      return fail(401, {
+        code: 'UNAUTHENTICATED',
+        message: '로그인이 필요합니다.',
+      })
+    }
+    return ok<ProfileInfo>({ displayName: record.displayName, ...profile })
+  }),
+
+  http.put(url('/api/v1/me/profile'), async ({ request }) => {
+    const token = request.headers.get('X-Session-Token')
+    const record = token ? sessions.get(token) : undefined
+    if (!record) {
+      return fail(401, {
+        code: 'UNAUTHENTICATED',
+        message: '로그인이 필요합니다.',
+      })
+    }
+
+    const body = (await request
+      .json()
+      .catch(() => null)) as Partial<UpdateProfileRequest> | null
+
+    const violations = validateProfile(body)
+    if (violations.length > 0) {
+      return fail(400, {
+        code: 'VALIDATION_FAILED',
+        message: '요청 값이 올바르지 않습니다.',
+        violations,
+      })
+    }
+
+    profile = {
+      name: body!.name!,
+      email: body!.email!,
+      phoneNumber: body!.phoneNumber!,
+    }
+    // 세 칸이 다 채워졌으니 이 회원은 이제 profileComplete: true다 — 같은 참조를
+    // 공유하는 sessions/refreshTokens 맵의 기존 항목에도 그대로 반영된다.
+    record.profileComplete = true
+    saveDB()
+
+    return ok<ProfileInfo>({ displayName: record.displayName, ...profile })
   }),
 ]

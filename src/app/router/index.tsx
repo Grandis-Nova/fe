@@ -19,6 +19,7 @@ import { PreorderPage } from '@/pages/preorder'
 import { PreorderDetailPage } from '@/pages/preorder-detail'
 import { ProductDetailPage } from '@/pages/product-detail'
 import { ResultPage } from '@/pages/result'
+import { SignupPage, SIGNUP_PATH } from '@/pages/signup'
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/payment', element: <PaymentPage /> },
           { path: '/result', element: <ResultPage /> },
+          { path: SIGNUP_PATH, element: <SignupPage /> },
           {
             path: KAKAO_CALLBACK_PATH,
             element: <KakaoCallbackPage />,

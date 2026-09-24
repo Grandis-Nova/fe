@@ -11,19 +11,32 @@ export const root = style({
   // position은 일부러 주지 않는다 — 메뉴가 헤더(Header.css의 root)를 기준으로 잡혀야
   // 가로 전체를 차지할 수 있기 때문이다.
   alignSelf: 'stretch',
-  gap: spacing[30],
   minWidth: 0,
 })
+
+// 간격을 gap이 아니라 링크 안쪽 여백으로 준다 — 링크 사이에 커서가 빠지는 빈 틈이
+// 없어야 hover 영역이 끊기지 않는다. 양쪽 15px씩이라 인접 링크 사이는 기존 gap과
+// 같은 30px로 유지된다. 토큰에 없는 값이라(15px) 여기 둔다.
+// 헤더도 로고~첫 링크 간격을 맞추려면 이 값을 알아야 해서 내보낸다.
+export const NAV_LINK_PADDING_X = '15px'
+
+// 메가 메뉴가 열려 있는 상태를 가리키는 선택자. 메뉴는 JS 상태 없이 hover/focus로만
+// 열리므로(아래 menu 스타일), 헤더도 이 선택자를 :has()로 보고 배경을 맞춘다.
+// data-mega-menu는 CategoryNav.tsx의 brand 요소에 붙어 있다.
+export const MEGA_MENU_OPEN = '[data-mega-menu]:is(:hover, :focus-within)'
 
 // 헤더 겹치기가 데스크톱 전용이라 밝은 색 처리도 같은 조건에서만 건다.
 export const linksTone = styleVariants({
   default: { color: color.text.secondary },
   onDark: {
     color: color.text.secondary,
+    selectors: {
+      // 메뉴가 열리면 헤더가 불투명해지므로(Header.css) 밝은 색을 되돌린다.
+      [`${root}:has(${MEGA_MENU_OPEN}) &`]: { color: color.text.secondary },
+    },
     '@media': {
       [breakpoint.desktop]: {
         color: color.text.inverse,
-        mixBlendMode: 'normal',
       },
     },
   },
@@ -36,27 +49,22 @@ export const links = style([
     alignItems: 'center',
     // brand가 헤더 높이를 채우려면 그 부모인 이 그룹도 같이 늘어나야 한다.
     alignSelf: 'stretch',
-    gap: spacing[30],
   },
 ])
 
 export const divider = style({
   fontSize: '10px',
   color: color.border.default,
-  mixBlendMode: 'difference',
 })
 
 export const link = style({
   border: 'none',
   background: 'transparent',
-  padding: 0,
+  padding: `0 ${NAV_LINK_PADDING_X}`,
   font: 'inherit',
   color: 'inherit',
   textDecoration: 'none',
   cursor: 'pointer',
-  // mixBlendMode는 자식까지 한 그룹으로 묶어 blend하므로 links가 아니라 링크 텍스트에만 건다
-  // — links에 걸면 그 안의 메가 메뉴(흰 배경)까지 반전된다.
-  mixBlendMode: 'difference',
   // font-weight를 바꾸면 글자 폭이 늘어나 레이아웃이 흔들리므로, 실제 두께는 유지하고
   // 글자 윤곽선 전체에 얇은 stroke를 둘러 가로/세로 모두 고르게 두꺼워 보이게 한다.
   WebkitTextStrokeWidth: '0.6px',
@@ -70,11 +78,21 @@ export const link = style({
       color: color.primary.base,
       WebkitTextStrokeColor: 'currentColor',
     },
+    // 메뉴가 열리면 헤더가 불투명해지므로 blend를 끈다.
+    [`${root}:has(${MEGA_MENU_OPEN}) &`]: { mixBlendMode: 'normal' },
+    // onDark의 hover 색은 흰색이라, 불투명해진 흰 헤더에선 글자가 사라진다.
+    [`${root}:has(${MEGA_MENU_OPEN}) &:hover`]: {
+      color: color.primary.base,
+      WebkitTextStrokeColor: 'currentColor',
+    },
   },
   '@media': {
     [breakpoint.desktop]: {
       selectors: {
-        [`${linksTone.onDark} &`]: { mixBlendMode: 'normal' },
+        // blend는 배너/히어로 이미지 위에서만 쓴다 — 흰 헤더에 걸면 색이 탁해진다.
+        // links가 아니라 링크 텍스트에만 거는 이유: mixBlendMode는 자식까지 한 그룹으로
+        // 묶어 blend해서, links에 걸면 그 안의 메가 메뉴(흰 배경)까지 반전된다.
+        [`${linksTone.onDark} &`]: { mixBlendMode: 'difference' },
         // 남색 hover는 어두운 배너에서 묻히므로 흰색을 유지하고 굵기로만 반응한다.
         [`${linksTone.onDark} &:hover`]: {
           color: color.text.inverse,
@@ -102,6 +120,8 @@ const menuOpen = {
   opacity: 1,
   visibility: 'visible',
   transform: 'translateY(0)',
+  // 열 때는 기다리지 않는다 — 아래 menu의 지연은 닫힐 때만 걸리게 한다.
+  transitionDelay: '0s',
 } as const
 
 // 여는 데 JS 상태를 쓰지 않는다 — :hover와 :focus-within만으로 열린다.
@@ -125,6 +145,12 @@ export const menu = style({
     `transform ${motion.duration.fast} ${motion.easing.default}`,
     `visibility ${motion.duration.fast} ${motion.easing.default}`,
   ].join(', '),
+  // 브랜드는 저마다 패널을 하나씩 갖고 있어서, 옆 브랜드로 옮기면 나가는 패널과
+  // 들어오는 패널이 동시에 반투명해지는 구간이 생긴다 — 그 사이로 어두워진 페이지가
+  // 비쳐서 번쩍여 보인다. 들어오는 쪽이 완전히 불투명해질 때까지(= 열리는 시간만큼)
+  // 닫기를 미뤄 두 패널이 겹치게 하면 빈 구간 자체가 없어진다.
+  // 메뉴 밖으로 아예 나갔을 때도 이만큼은 유지돼서, 살짝 스쳤을 때 닫히지 않는다.
+  transitionDelay: motion.duration.fast,
   // 키보드 포커스는 기기와 무관하게 연다.
   selectors: {
     [`${brand}:focus-within &`]: menuOpen,
@@ -157,11 +183,14 @@ globalStyle('body::after', {
     `opacity ${motion.duration.fast} ${motion.easing.default}`,
     `visibility ${motion.duration.fast} ${motion.easing.default}`,
   ].join(', '),
+  // 패널과 같은 지연 — 딤만 먼저 걷히면 그것대로 번쩍인다.
+  transitionDelay: motion.duration.fast,
 })
 
 globalStyle(`body:has(${brand}:focus-within)::after`, {
   opacity: 1,
   visibility: 'visible',
+  transitionDelay: '0s',
 })
 
 globalStyle(`body:has(${brand}:hover)::after`, {
@@ -169,6 +198,7 @@ globalStyle(`body:has(${brand}:hover)::after`, {
     '(hover: hover)': {
       opacity: 1,
       visibility: 'visible',
+      transitionDelay: '0s',
     },
   },
 })

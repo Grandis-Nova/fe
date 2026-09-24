@@ -28,11 +28,11 @@ export const dialog = style({
       transform: 'scale(1)',
     },
     '&::backdrop': {
-      background: 'rgba(0, 0, 0, 0)',
+      background: 'transparent',
       transition: `background ${motion.duration.normal} ${motion.easing.out} allow-discrete`,
     },
     '&[open]::backdrop': {
-      background: 'rgba(0, 0, 0, 0.5)',
+      background: `color-mix(in srgb, ${color.backgroundDark.base} 50%, transparent)`,
     },
   },
   '@starting-style': {
@@ -42,7 +42,7 @@ export const dialog = style({
         transform: 'scale(0.95)',
       },
       '&[open]::backdrop': {
-        background: 'rgba(0, 0, 0, 0)',
+        background: 'transparent',
       },
     },
   },

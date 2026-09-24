@@ -117,6 +117,11 @@ export const brand = style({
 })
 
 const menuOpen = {
+  // 옆 브랜드로 옮길 때 닫히는 패널과 열리는 패널이 잠깐 겹친다(아래 주석) — 모든
+  // 패널이 같은 zIndex(20)면 나중 브랜드일수록 DOM 순서상 위에 그려져, 앞쪽 브랜드로
+  // 옮겨갈 때 닫히는 패널이 새로 열리는 패널을 가리고 포인터 이벤트까지 가로챈다.
+  // 지금 열려 있는 패널만 더 높여서 항상 위에 오게 한다.
+  zIndex: 21,
   opacity: 1,
   visibility: 'visible',
   transform: 'translateY(0)',

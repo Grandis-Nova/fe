@@ -3,9 +3,17 @@ import { style, styleVariants } from '@vanilla-extract/css'
 import { color, motion, spacing, typography } from '@/shared/config/theme'
 import { breakpoint } from '@/shared/config/theme/tokens/breakpoint'
 import { maxWidth } from '@/shared/config/theme/tokens/container'
-import { MEGA_MENU_OPEN, NAV_LINK_PADDING_X } from '@/widgets/category-nav'
 
 export const HEADER_HEIGHT = 63
+
+// CategoryNav의 MEGA_MENU_OPEN과 같은 선택자다 — 위젯끼리 서로 import하지 않는다는
+// 규칙 때문에 값을 가져오지 않고 계약(요소에 data-mega-menu 속성)만 복제해 둔다.
+// CategoryNav.css.ts를 고치면 여기도 같이 고친다.
+const MEGA_MENU_OPEN = '[data-mega-menu]:is(:hover, :focus-within)'
+// CategoryNav의 NAV_LINK_PADDING_X와 같은 값이다 — 링크 좌우 padding(15px)에 맞춰
+// 로고~첫 링크 간격을 링크 사이 간격(30px)과 맞춘다. 스케일에 없는 값이라 토큰화하지
+// 않고 그대로 둔다(CategoryNav.css.ts와 동일한 이유).
+const NAV_LINK_PADDING_X = '15px'
 
 export const root = style({
   width: '100%',

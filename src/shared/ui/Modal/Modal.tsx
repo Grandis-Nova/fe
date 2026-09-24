@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import type { ReactNode } from 'react'
 
 import { X } from 'lucide-react'
 
 import * as styles from './Modal.css'
+import { ModalTitleIdContext } from './ModalTitleIdContext'
 
 export type ModalProps = {
   open: boolean
@@ -13,6 +14,7 @@ export type ModalProps = {
 
 export function Modal({ open, onClose, children }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const titleId = useId()
 
   // <dialog>는 항상 마운트해 두고 열림/닫힘은 showModal()/close()로만 바꾼다.
   // CSS의 [open] + @starting-style + allow-discrete가 여닫는 애니메이션을 맡는데,
@@ -29,6 +31,7 @@ export function Modal({ open, onClose, children }: ModalProps) {
     <dialog
       ref={dialogRef}
       className={styles.dialog}
+      aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => {
         // dialog 엘리먼트 자체가 클릭됐다면 콘텐츠(자식) 바깥, 즉 backdrop 클릭이다.
@@ -46,7 +49,9 @@ export function Modal({ open, onClose, children }: ModalProps) {
       {/* 여백/레이아웃은 내용 쪽이 자기 래퍼에 들고 온다 — dialog 자신에 컨슈머
           스타일(예: display:flex)이 붙으면 [open] 여부와 무관하게 항상 적용돼
           버려서 닫힌 상태를 가릴 방법이 없어진다(예전에 겪은 버그). */}
-      {children}
+      <ModalTitleIdContext.Provider value={titleId}>
+        {children}
+      </ModalTitleIdContext.Provider>
     </dialog>
   )
 }

@@ -1,4 +1,4 @@
-import { configureApiAuth } from '@/shared/api/client'
+import { ApiRequestError, configureApiAuth } from '@/shared/api/client'
 import type { Session } from '@/shared/api/types'
 
 import { refreshSession } from '../api/auth'
@@ -37,6 +37,14 @@ function getChannel() {
   return channel
 }
 
+// 다른 탭에도 세션이 끊겼음을 알린다 — logout()처럼 이 파일 바깥에서 세션을
+// 지우는 경로도 재발급 실패와 같은 프로토콜을 타야 탭 간 상태가 어긋나지 않는다.
+export function broadcastSessionCleared() {
+  getChannel()?.postMessage({
+    type: 'session-cleared',
+  } satisfies BroadcastMessage)
+}
+
 async function performRefresh(): Promise<boolean> {
   try {
     const session = await refreshSession()
@@ -47,11 +55,13 @@ async function performRefresh(): Promise<boolean> {
       session,
     } satisfies BroadcastMessage)
     return true
-  } catch {
-    useSessionStore.getState().clearSession()
-    getChannel()?.postMessage({
-      type: 'session-cleared',
-    } satisfies BroadcastMessage)
+  } catch (caught) {
+    // 인증이 실제로 끊긴 경우(401)만 세션을 지운다 — 일시적 네트워크 오류까지
+    // 로그아웃 처리하면 멀쩡한 세션이 끊긴다.
+    if (caught instanceof ApiRequestError && caught.status === 401) {
+      useSessionStore.getState().clearSession()
+      broadcastSessionCleared()
+    }
     return false
   }
 }

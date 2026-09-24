@@ -3,7 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 
 import { postKakaoCallback, useSessionStore } from '@/entities/auth'
-import { consumeStoredState, KAKAO_CALLBACK_PATH } from '@/features/kakao-login'
+import {
+  consumeReturnTo,
+  consumeStoredState,
+  KAKAO_CALLBACK_PATH,
+} from '@/features/kakao-login'
 import { ApiRequestError } from '@/shared/api/client'
 
 type Status = 'processing' | 'error'
@@ -17,10 +21,13 @@ export function KakaoCallbackPage() {
   const [message, setMessage] = useState(GENERIC_ERROR)
   // StrictMode에서 effect가 두 번 실행돼도 code(1회용)를 두 번 보내지 않도록 막는다.
   const started = useRef(false)
+  // 성공/실패 모두 로그인을 시작한 화면으로 돌아간다 — state와 같이 한 번만 소비한다.
+  const destination = useRef('/')
 
   useEffect(() => {
     if (started.current) return
     started.current = true
+    destination.current = consumeReturnTo()
 
     async function run() {
       const code = searchParams.get('code')
@@ -48,7 +55,7 @@ export function KakaoCallbackPage() {
         useSessionStore.getState().setSession(session)
         // code는 1회용이라 새로고침으로 같은 code를 다시 보내면 반드시 실패한다 —
         // history.replaceState 대신 react-router의 replace 내비게이션으로 URL을 정리한다.
-        navigate('/', { replace: true })
+        navigate(destination.current, { replace: true })
       } catch (caught) {
         setStatus('error')
         setMessage(
@@ -65,7 +72,10 @@ export function KakaoCallbackPage() {
 
   useEffect(() => {
     if (status !== 'error') return
-    const timer = setTimeout(() => navigate('/', { replace: true }), 2000)
+    const timer = setTimeout(
+      () => navigate(destination.current, { replace: true }),
+      2000,
+    )
     return () => clearTimeout(timer)
   }, [status, navigate])
 

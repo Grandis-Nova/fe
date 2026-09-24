@@ -1,5 +1,8 @@
 import { deleteSession, postAdminSession, postKakaoCallback } from './api/auth'
-import { ensureFreshSession } from './model/refreshCoordinator'
+import {
+  broadcastSessionCleared,
+  ensureFreshSession,
+} from './model/refreshCoordinator'
 import { useSessionStore } from './model/sessionStore'
 
 export { postKakaoCallback, postAdminSession }
@@ -28,5 +31,7 @@ export async function logout() {
   } finally {
     // 로그아웃 응답은 항상 204다 — 실패해도 로컬 상태는 반드시 지운다.
     useSessionStore.getState().clearSession()
+    // 다른 탭도 refreshCoordinator와 같은 프로토콜로 세션 해제를 알아야 한다.
+    broadcastSessionCleared()
   }
 }

@@ -63,7 +63,21 @@ async function request<TData>(
   // 로그아웃 등 204 No Content는 파싱할 본문이 없다.
   if (response.status === 204) return undefined as TData
 
-  const json = (await response.json()) as ApiResponse<TData>
+  let json: ApiResponse<TData>
+  try {
+    json = (await response.json()) as ApiResponse<TData>
+  } catch {
+    // 응답 본문이 JSON이 아니면(프록시 에러 페이지 등) SyntaxError를 그대로
+    // 던지지 않고 나머지 호출부와 같은 ApiRequestError로 감싼다.
+    throw new ApiRequestError(
+      {
+        code: 'INVALID_RESPONSE',
+        message: '서버 응답을 처리할 수 없습니다.',
+        details: null,
+      },
+      response.status,
+    )
+  }
   if (json.success) return json.data
 
   const { error } = json

@@ -38,7 +38,12 @@ export function MainPage() {
 
   return (
     <>
-      <Banner />
+      {/* 헤더가 이 구간 위에 떠 있는 동안만 이미지에 녹아든 모습(투명 + blend)을 유지한다.
+          Header가 이 표시를 보고 판단한다. 히어로까지 넓히면 캐러셀의 흰 상품 카드가
+          투명 헤더 밑으로 지나가면서 로고/메뉴가 읽히지 않는다. */}
+      <div data-header-overlay-region>
+        <Banner />
+      </div>
 
       <div className={styles.hero}>
         <SwirlBackground />

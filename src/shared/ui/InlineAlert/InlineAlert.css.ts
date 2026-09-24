@@ -21,6 +21,13 @@ const textTone = (status: string) =>
   `color-mix(in srgb, ${status} 55%, ${color.text.primary})`
 
 export const tone = styleVariants({
+  // 상태색이 아니라 브랜드색으로 알리는 자리 — 결제 기한 안내처럼 경고까지는 아니고
+  // 화면의 브랜드 톤과 이어져야 하는 문구에 쓴다.
+  brand: {
+    background: color.primary.subtler,
+    borderColor: color.border.default,
+    color: color.primary.base,
+  },
   error: {
     background: color.background.subtleDanger,
     borderColor: `color-mix(in srgb, ${color.status.danger} 20%, transparent)`,

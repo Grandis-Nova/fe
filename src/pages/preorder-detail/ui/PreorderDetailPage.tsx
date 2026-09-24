@@ -54,6 +54,24 @@ export function PreorderDetailPage() {
       >
         first information section
       </div>
+      <div
+        style={{
+          width: '100%',
+          height: '1000px',
+          backgroundColor: '#797979',
+        }}
+      >
+        second information section
+      </div>
+      <div
+        style={{
+          width: '100%',
+          height: '1000px',
+          backgroundColor: '#303030',
+        }}
+      >
+        third information section
+      </div>
       <div className={styles.countdownWrapper}>
         <div className={styles.countdown}>
           {!isOver &&

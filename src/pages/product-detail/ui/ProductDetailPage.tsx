@@ -48,12 +48,24 @@ export function ProductDetailPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const isPreorder = searchParams.get('preorder') === 'true'
-  const handleCheckout = () =>
-    navigate(isPreorder ? '/result?status=preorder' : '/payment')
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedStorage, setSelectedStorage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const priceLabel = `${(UNIT_PRICE * quantity).toLocaleString()}원`
+
+  // 결제·사전예약 화면이 같은 주문을 이어서 보여줄 수 있도록 선택 상태를 함께 넘긴다.
+  const handleCheckout = () => {
+    const purchase = {
+      productName: '아이폰 18 Pro',
+      colorLabel: colorSwatches[selectedColor].label,
+      storageLabel: storageLabels[selectedStorage],
+      quantity,
+      unitPrice: UNIT_PRICE,
+    }
+    navigate(isPreorder ? '/result?status=preorder' : '/payment', {
+      state: purchase,
+    })
+  }
   const {
     layoutRef,
     orderBarRef,
@@ -148,7 +160,10 @@ export function ProductDetailPage() {
         >
           <div className={styles.orderBarInfo}>
             <div className={styles.productName}>아이폰 18 Pro</div>
-            <div className={styles.productOption}>실버 · 512GB · 애플케어</div>
+            <div className={styles.productOption}>
+              {colorSwatches[selectedColor].label} ·{' '}
+              {storageLabels[selectedStorage]}
+            </div>
           </div>
           <div className={styles.orderBarButtons}>
             {!isPreorder && (
@@ -162,7 +177,7 @@ export function ProductDetailPage() {
               className={styles.orderBarCheckoutButton}
               onClick={handleCheckout}
             >
-              {isPreorder ? '사전예약하기' : '122,000,000원 결제하기'}
+              {isPreorder ? '사전예약하기' : `${priceLabel} 결제하기`}
             </Button>
           </div>
         </Container>

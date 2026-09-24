@@ -6,7 +6,7 @@ import { PlanetIcon } from '@/shared/ui/PlanetIcon'
 import * as styles from './InlineAlert.css'
 
 export type InlineAlertProps = {
-  status: 'error' | 'warning' | 'info' | 'success'
+  status: keyof typeof styles.tone
   icon?: IconName | 'box_planet'
 }
 

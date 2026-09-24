@@ -45,7 +45,7 @@ export const content = style({
   flexDirection: 'column',
   gap: spacing[12],
   width: '100%',
-  padding: `${spacing[16]} ${spacing[12]}`,
+  padding: `${spacing[16]}`,
 })
 
 export const nameGroup = style({

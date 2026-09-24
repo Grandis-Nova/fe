@@ -87,7 +87,7 @@ export function PreorderDetailPage() {
               opensAtLabel={`오픈일 ${TEMP_OPENS_AT.toLocaleDateString()}`}
               isOver={isOver}
               isAlert={isAlert}
-              onReserve={() => navigate(`/products/1`)}
+              onReserve={() => navigate(`/products/1?preorder=true`)}
               onNotify={handleNotify}
             />
 
@@ -96,7 +96,7 @@ export function PreorderDetailPage() {
               opensAtLabel={`오픈일 ${TEMP_OPENS_AT.toLocaleDateString()}`}
               isOver={isOver}
               isAlert={isAlert}
-              onReserve={() => navigate(`/products/2`)}
+              onReserve={() => navigate(`/products/2?preorder=true`)}
               onNotify={handleNotify}
             />
           </div>

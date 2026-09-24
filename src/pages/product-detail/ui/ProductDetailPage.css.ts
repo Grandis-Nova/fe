@@ -109,6 +109,21 @@ export const actions = style({
   gap: spacing[8],
 })
 
+export const actionsSingle = style({
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gap: spacing[8],
+})
+
+export const shipmentNotice = style([
+  typography.body.sub,
+  {
+    color: color.text.tertiary,
+    marginBottom: spacing[8],
+    textAlign: 'right',
+  },
+])
+
 export const imageFrame = style({
   position: 'relative',
   width: '100%',

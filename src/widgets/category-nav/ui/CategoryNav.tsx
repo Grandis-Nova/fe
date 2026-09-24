@@ -66,8 +66,10 @@ export function CategoryNav({
   return (
     <nav className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={[styles.links, styles.linksTone[tone]].join(' ')}>
+        {/* data-mega-menu: 메뉴가 열렸는지(hover/focus)를 헤더가 :has()로 보고
+            배경을 불투명하게 바꾼다 — 흰 패널과 한 덩어리로 보이게. */}
         {Object.entries(brandMenus).map(([brand, menu]) => (
-          <div key={brand} className={styles.brand}>
+          <div key={brand} className={styles.brand} data-mega-menu>
             <Link to={productsPath({ brand })} className={styles.link}>
               {brand}
             </Link>

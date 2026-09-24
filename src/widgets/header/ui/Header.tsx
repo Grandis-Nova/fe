@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { Bell, LogOut, Search, ShoppingCart, User } from 'lucide-react'
 import { Link, useLocation } from 'react-router'
 
+import { KakaoLoginModal } from '@/features/kakao-login'
+import { useModalStore } from '@/shared/model/modalStore'
 import { CategoryNav } from '@/widgets/category-nav'
 
 import * as styles from './Header.css'
@@ -10,7 +12,6 @@ import * as styles from './Header.css'
 export type HeaderProps = {
   isMember?: boolean
   onSearchClick?: () => void
-  onAccountClick?: () => void
   onCartClick?: () => void
   onNotificationClick?: () => void
   onLogoutClick?: () => void
@@ -20,12 +21,12 @@ export type HeaderProps = {
 export function Header({
   isMember = false,
   onSearchClick,
-  onAccountClick,
   onCartClick,
   onNotificationClick,
   onLogoutClick,
   className,
 }: HeaderProps) {
+  const openModal = useModalStore((state) => state.open)
   const { pathname } = useLocation()
   const isMainPage = pathname === '/'
   const isProductDetailPage = pathname.startsWith('/products/')
@@ -126,7 +127,7 @@ export function Header({
                   type="button"
                   className={styles.iconButton}
                   aria-label="계정"
-                  onClick={onAccountClick}
+                  onClick={() => openModal(<KakaoLoginModal />)}
                 >
                   <User className={styles.icon} aria-hidden="true" />
                 </button>

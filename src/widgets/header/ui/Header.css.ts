@@ -4,7 +4,16 @@ import { color, motion, spacing, typography } from '@/shared/config/theme'
 import { breakpoint } from '@/shared/config/theme/tokens/breakpoint'
 import { maxWidth } from '@/shared/config/theme/tokens/container'
 
-export const HEADER_HEIGHT = 70
+export const HEADER_HEIGHT = 63
+
+// CategoryNav의 MEGA_MENU_OPEN과 같은 선택자다 — 위젯끼리 서로 import하지 않는다는
+// 규칙 때문에 값을 가져오지 않고 계약(요소에 data-mega-menu 속성)만 복제해 둔다.
+// CategoryNav.css.ts를 고치면 여기도 같이 고친다.
+const MEGA_MENU_OPEN = '[data-mega-menu]:is(:hover, :focus-within)'
+// CategoryNav의 NAV_LINK_PADDING_X와 같은 값이다 — 링크 좌우 padding(15px)에 맞춰
+// 로고~첫 링크 간격을 링크 사이 간격(30px)과 맞춘다. 스케일에 없는 값이라 토큰화하지
+// 않고 그대로 둔다(CategoryNav.css.ts와 동일한 이유).
+const NAV_LINK_PADDING_X = '15px'
 
 export const root = style({
   width: '100%',
@@ -14,6 +23,23 @@ export const root = style({
   // 상품 상세 페이지에서도 메뉴가 헤더를 기준으로 잡히도록 여기서 보장한다.
   position: 'relative',
   transition: `background-color ${motion.duration.fast} ${motion.easing.default}`,
+  // 메뉴가 닫힐 때 패널·딤과 같은 지연으로 움직여야 한다(CategoryNav.css) — 헤더만
+  // 먼저 투명해지면 아직 떠 있는 흰 패널이 헤더에서 떨어져 나온 것처럼 보인다.
+  transitionDelay: motion.duration.fast,
+  selectors: {
+    // 메뉴가 열리면 흰 패널이 헤더 바로 밑에 붙는다 — 헤더가 반투명하거나 배너가
+    // 비쳐 보이면 둘이 따로 놀아서, 이때만 배경을 완전히 불투명하게 만든다.
+    // :has() 안쪽 선택자의 명시도가 더해져 surface 변형(클래스 하나)을 이긴다.
+    [`&:has(${MEGA_MENU_OPEN})`]: {
+      // 상품 상세/마이페이지는 overlay·sticky 둘 다 안 걸려 z-index가 없다 —
+      // 메뉴의 딤(body::after, z-index 5)이 그 위에 얹혀 헤더가 회색으로 비친다.
+      zIndex: 10,
+      background: color.background.base,
+      backdropFilter: 'none',
+      WebkitBackdropFilter: 'none',
+      transitionDelay: '0s',
+    },
+  },
 })
 
 // 메인 최상단에선 배너가 헤더 뒤로 비쳐야 하므로 배경을 완전히 없앤다.
@@ -86,7 +112,9 @@ export const leftGroup = style({
   alignItems: 'center',
   // CategoryNav의 메가 메뉴가 헤더 바닥 기준으로 열릴 수 있도록 헤더 높이를 그대로 넘겨준다.
   alignSelf: 'stretch',
-  gap: spacing[30],
+  // nav 링크가 자체 좌우 padding 15px를 갖고 있어, 여기에 15를 더해야 로고~첫 링크가
+  // 링크 사이 간격(30px)과 같아진다.
+  gap: NAV_LINK_PADDING_X,
   minWidth: 0,
 })
 
@@ -97,15 +125,22 @@ export const logo = style([
     color: color.primary.base,
     textDecoration: 'none',
     cursor: 'pointer',
-    // 흰 헤더 위에서 로고가 브랜드 톤으로 반전되도록 — 어두운 배너 위에선 이 반전이
-    // 오히려 색을 어둡게 만들어 안 보이므로 onDark에서 끈다.
-    mixBlendMode: 'difference',
+    // blend는 배너/히어로 이미지 위에 떠 있는 onDark에서만 쓴다 — 흰 헤더에 걸면
+    // |흰색 - 남색|이 계산돼 로고가 탁한 카키색으로 나온다.
+    selectors: {
+      // 메뉴가 열려 헤더가 불투명해지면 이미지 위가 아니므로 평소 색으로 돌아간다.
+      [`${root}:has(${MEGA_MENU_OPEN}) &`]: {
+        color: color.primary.base,
+        mixBlendMode: 'normal',
+      },
+    },
     '@media': {
       [breakpoint.desktop]: {
         selectors: {
           [`${onDark} &`]: {
             color: color.text.inverse,
-            mixBlendMode: 'normal',
+            // 이미지의 밝은 부분에선 글자가 어두워지며 알아서 대비를 잡는다.
+            mixBlendMode: 'difference',
           },
         },
       },
@@ -122,11 +157,17 @@ export const logoMember = style({
 export const actions = style({
   display: 'flex',
   alignItems: 'center',
+  // 버튼이 height:100%로 헤더 높이를 채우려면 이 묶음부터 늘어나야 한다
+  // (content가 alignItems:center라 기본은 내용 높이만큼만 잡힌다).
+  alignSelf: 'stretch',
   gap: spacing[20],
 })
 
 export const iconButton = style({
   display: 'inline-flex',
+  // 버튼이 헤더 높이를 꽉 채우고, 아이콘은 그 안에서 가운데 정렬된다.
+  height: '100%',
+  alignItems: 'center',
   border: 'none',
   background: 'transparent',
   padding: 0,
@@ -137,6 +178,8 @@ export const iconButton = style({
     '&:hover': {
       color: color.primary.focus,
     },
+    [`${root}:has(${MEGA_MENU_OPEN}) &`]: { color: color.primary.base },
+    [`${root}:has(${MEGA_MENU_OPEN}) &:hover`]: { color: color.primary.focus },
   },
   '@media': {
     [breakpoint.desktop]: {
@@ -151,11 +194,13 @@ export const iconButton = style({
 export const icon = style({
   width: '24px',
   height: '24px',
-  mixBlendMode: 'difference',
+  selectors: {
+    [`${root}:has(${MEGA_MENU_OPEN}) &`]: { mixBlendMode: 'normal' },
+  },
   '@media': {
     [breakpoint.desktop]: {
       selectors: {
-        [`${onDark} &`]: { mixBlendMode: 'normal' },
+        [`${onDark} &`]: { mixBlendMode: 'difference' },
       },
     },
   },

@@ -1,9 +1,17 @@
 import { useState } from 'react'
 
+import { useNavigate, useSearchParams } from 'react-router'
+
 import { ProductColorSwatches, ProductOptionSelector } from '@/entities/product'
 import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
 import macbook2 from '@/shared/assets/macbook_neo_sliver2.png'
-import { Container, Slider, Button } from '@/shared/ui'
+import {
+  Container,
+  Slider,
+  Button,
+  QuantityStepper,
+  PriceText,
+} from '@/shared/ui'
 import { ProductPageTab } from '@/widgets/product-page-tab'
 import type { ProductPageTabKey } from '@/widgets/product-page-tab'
 
@@ -29,9 +37,35 @@ const tabPanelContent: Record<
   review: { label: '구매 후기', background: '#222222' },
 }
 
+// ponytail: 실제 배송 시작일 API 전까지 하드코딩
+const SHIPMENT_STARTS_AT = new Date('2026-10-15')
+const shipmentLabel = `${SHIPMENT_STARTS_AT.getMonth() + 1}월 ${SHIPMENT_STARTS_AT.getDate()}일 이후 순차배송`
+
+// ponytail: 실제 상품 API 전까지 단가 하드코딩
+const UNIT_PRICE = 120000
+
 export function ProductDetailPage() {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const isPreorder = searchParams.get('preorder') === 'true'
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedStorage, setSelectedStorage] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+  const priceLabel = `${(UNIT_PRICE * quantity).toLocaleString()}원`
+
+  // 결제·사전예약 화면이 같은 주문을 이어서 보여줄 수 있도록 선택 상태를 함께 넘긴다.
+  const handleCheckout = () => {
+    const purchase = {
+      productName: '아이폰 18 Pro',
+      colorLabel: colorSwatches[selectedColor].label,
+      storageLabel: storageLabels[selectedStorage],
+      quantity,
+      unitPrice: UNIT_PRICE,
+    }
+    navigate(isPreorder ? '/result?status=preorder' : '/payment', {
+      state: purchase,
+    })
+  }
   const {
     layoutRef,
     orderBarRef,
@@ -85,11 +119,28 @@ export function ProductDetailPage() {
                 onSelect={setSelectedStorage}
               />
             </div>
-            <div className={styles.actions}>
-              <Button variant="subtle" icon="handbag">
-                장바구니
+            <div className={styles.quantityPriceRow}>
+              <QuantityStepper
+                value={quantity}
+                onChange={setQuantity}
+                label="IPhone 18 Pro"
+              />
+              <span className={styles.price}>
+                <PriceText value={priceLabel} />
+              </span>
+            </div>
+            {isPreorder && (
+              <div className={styles.shipmentNotice}>{shipmentLabel}</div>
+            )}
+            <div className={isPreorder ? styles.actionsSingle : styles.actions}>
+              {!isPreorder && (
+                <Button variant="subtle" icon="handbag">
+                  장바구니
+                </Button>
+              )}
+              <Button onClick={handleCheckout}>
+                {isPreorder ? '사전예약하기' : '결제하기'}
               </Button>
-              <Button>120,000원 결제하기</Button>
             </div>
           </div>
         </div>
@@ -109,16 +160,24 @@ export function ProductDetailPage() {
         >
           <div className={styles.orderBarInfo}>
             <div className={styles.productName}>아이폰 18 Pro</div>
-            <div className={styles.productOption}>실버 · 512GB · 애플케어</div>
+            <div className={styles.productOption}>
+              {colorSwatches[selectedColor].label} ·{' '}
+              {storageLabels[selectedStorage]}
+            </div>
           </div>
           <div className={styles.orderBarButtons}>
+            {!isPreorder && (
+              <Button
+                variant="subtle"
+                icon="handbag"
+                className={styles.orderBarIconButton}
+              />
+            )}
             <Button
-              variant="subtle"
-              icon="handbag"
-              className={styles.orderBarIconButton}
-            />
-            <Button className={styles.orderBarCheckoutButton}>
-              2,278,100원 결제하기
+              className={styles.orderBarCheckoutButton}
+              onClick={handleCheckout}
+            >
+              {isPreorder ? '사전예약하기' : `${priceLabel} 결제하기`}
             </Button>
           </div>
         </Container>
@@ -127,18 +186,24 @@ export function ProductDetailPage() {
         className={styles.tabBarWrapper}
         style={{ top: isLayoutVisible ? 0 : orderBarHeight }}
       >
-        <ProductPageTab activeTab={activeTab} onTabChange={handleTabChange} />
+        <ProductPageTab
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          excludeTabs={isPreorder ? ['review'] : undefined}
+        />
       </div>
-      {Object.entries(tabPanelContent).map(([tab, { label, background }]) => (
-        <div
-          key={tab}
-          ref={registerPanelRef(tab as ProductPageTabKey)}
-          className={styles.tabPanel}
-          style={{ background }}
-        >
-          {label}
-        </div>
-      ))}
+      {Object.entries(tabPanelContent)
+        .filter(([tab]) => !isPreorder || tab !== 'review')
+        .map(([tab, { label, background }]) => (
+          <div
+            key={tab}
+            ref={registerPanelRef(tab as ProductPageTabKey)}
+            className={styles.tabPanel}
+            style={{ background }}
+          >
+            {label}
+          </div>
+        ))}
     </Container>
   )
 }

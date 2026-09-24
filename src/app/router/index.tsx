@@ -4,11 +4,13 @@ import { AdminLayout } from '@/app/layouts/AdminLayout'
 import { MainLayout } from '@/app/layouts/MainLayout'
 import { MypageLayout } from '@/app/layouts/MypageLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
+import { KAKAO_CALLBACK_PATH } from '@/features/kakao-login'
 import { AdminHomePage } from '@/pages/admin-home'
 import { AdminPlaceholderPage } from '@/pages/admin-placeholder'
 import { AdminProductDetailPage } from '@/pages/admin-product-detail'
 import { AdminProductNewPage } from '@/pages/admin-product-new'
 import { AdminProductsPage } from '@/pages/admin-products'
+import { KakaoCallbackPage } from '@/pages/kakao-callback'
 import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
 import { NotFoundPage } from '@/pages/not-found'
@@ -31,6 +33,10 @@ export const router = createBrowserRouter([
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/payment', element: <PaymentPage /> },
           { path: '/result', element: <ResultPage /> },
+          {
+            path: KAKAO_CALLBACK_PATH,
+            element: <KakaoCallbackPage />,
+          },
           {
             path: '/mypage',
             element: <MypageLayout />,

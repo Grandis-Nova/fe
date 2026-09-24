@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from 'react'
 
 import { ChevronDown } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router'
 
 import { OrderSummary } from '@/entities/order'
 import { ProductPaymentCard } from '@/entities/product'
@@ -10,18 +11,28 @@ import * as styles from './PaymentPage.css'
 
 const won = (value: number) => `${value.toLocaleString('ko-KR')}원`
 
-// ponytail: 아직 주문서 API가 없어서 목업 데이터로 대체.
-const orderProduct = {
-  name: '아이폰 18 Pro',
-  modelNumber: 'A3714',
-  optionSummary: '실버 · 512GB · Apple care+',
-  quantityLabel: '1개',
-  priceLabel: won(2278100),
+// 상품 상세의 handleCheckout이 navigate(path, { state })로 넘기는 모양 —
+// 직접 /payment로 들어오면(딥링크 등) 없을 수 있어 아래 목업으로 대체한다.
+type PurchaseDraft = {
+  productName: string
+  colorLabel: string
+  storageLabel: string
+  quantity: number
+  unitPrice: number
 }
 
-const orderAmount = 2278100
-const preorderBenefit = 278100
-const totalAmount = orderAmount - preorderBenefit
+// ponytail: 아직 주문서 API가 없어서 목업 데이터로 대체.
+const fallbackDraft: PurchaseDraft = {
+  productName: '아이폰 18 Pro',
+  colorLabel: '실버',
+  storageLabel: '512GB',
+  quantity: 1,
+  unitPrice: 2278100,
+}
+
+// 원래 고정 금액(278,100원)이었는데, orderAmount가 선택한 수량에 따라 달라지게
+// 되면서 소액 주문에서 총액이 음수로 떨어졌다 — 금액이 아니라 비율로 할인한다.
+const PREORDER_BENEFIT_RATE = 0.1
 
 type TermDetail = { heading: string; body: string }
 
@@ -186,13 +197,40 @@ const initialForm = {
 
 type FormKey = keyof typeof initialForm
 
+// email을 제외한 나머지가 결제를 막는 필수 입력이다(각 field() 호출의 required와 맞춘다).
+const requiredFieldKeys: FormKey[] = [
+  'name',
+  'phone',
+  'addressLabel',
+  'postcode',
+  'address',
+  'addressDetail',
+]
+
 export function PaymentPage() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const draft = (location.state as PurchaseDraft | null) ?? fallbackDraft
   const [form, setForm] = useState(initialForm)
   const [agreedIds, setAgreedIds] = useState<Set<string>>(new Set())
   const [submitted, setSubmitted] = useState(false)
 
+  const orderAmount = draft.unitPrice * draft.quantity
+  const preorderBenefit = Math.round(orderAmount * PREORDER_BENEFIT_RATE)
+  const totalAmount = orderAmount - preorderBenefit
+  const orderProduct = {
+    name: draft.productName,
+    modelNumber: 'A3714',
+    optionSummary: `${draft.colorLabel} · ${draft.storageLabel} · Apple care+`,
+    quantityLabel: `${draft.quantity}개`,
+    priceLabel: won(orderAmount),
+  }
+
   const requiredAgreed = terms.every(
     (term) => !term.required || agreedIds.has(term.id),
+  )
+  const requiredFieldsFilled = requiredFieldKeys.every((key) =>
+    form[key].trim(),
   )
 
   // 필수 입력은 결제를 한 번 눌러 본 뒤에만 빨갛게 표시한다 — 처음부터 빨간 화면을 보여주지 않는다.
@@ -267,7 +305,7 @@ export function PaymentPage() {
 
         <OrderSummary
           rows={[
-            { label: '상품 수', value: '1개' },
+            { label: '상품 수', value: `${draft.quantity}개` },
             { label: '주문 금액', value: won(orderAmount) },
             {
               label: '사전예약 혜택',
@@ -277,9 +315,13 @@ export function PaymentPage() {
           ]}
           totalLabel="결제 예정 금액"
           totalValue={won(totalAmount)}
-          actionLabel={`${won(totalAmount)} 결제 하기`}
+          actionLabel={`${won(totalAmount)} 결제하기`}
           actionDisabled={!requiredAgreed}
-          onAction={() => setSubmitted(true)}
+          onAction={() => {
+            setSubmitted(true)
+            if (!requiredFieldsFilled) return
+            navigate('/result?status=paid')
+          }}
         >
           <TermsAgreement
             agreedIds={agreedIds}

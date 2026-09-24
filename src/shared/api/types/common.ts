@@ -3,12 +3,17 @@ export type ApiViolation = {
   message: string
 }
 
+// violations/retryable은 에러 코드별로 있을 때만 오는 부가 정보라 details 아래에
+// 중첩된다 — 서버 봉투가 실제로 이 모양이다(11-frontend-guide.md §1).
+export type ApiErrorDetails = {
+  violations?: ApiViolation[]
+  retryable?: boolean
+}
+
 export type ApiError = {
   code: string
   message: string
-  detail: string | null
-  retryable: boolean
-  violations?: ApiViolation[]
+  details: ApiErrorDetails | null
 }
 
 // success를 판별자로 쓰는 union — success가 true면 data가 non-null로 좁혀지고,

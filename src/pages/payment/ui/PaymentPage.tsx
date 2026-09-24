@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from 'react'
 
 import { ChevronDown } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
 import { OrderSummary } from '@/entities/order'
 import { ProductPaymentCard } from '@/entities/product'
@@ -187,6 +188,7 @@ const initialForm = {
 type FormKey = keyof typeof initialForm
 
 export function PaymentPage() {
+  const navigate = useNavigate()
   const [form, setForm] = useState(initialForm)
   const [agreedIds, setAgreedIds] = useState<Set<string>>(new Set())
   const [submitted, setSubmitted] = useState(false)
@@ -277,9 +279,12 @@ export function PaymentPage() {
           ]}
           totalLabel="결제 예정 금액"
           totalValue={won(totalAmount)}
-          actionLabel={`${won(totalAmount)} 결제 하기`}
+          actionLabel={`${won(totalAmount)} 결제하기`}
           actionDisabled={!requiredAgreed}
-          onAction={() => setSubmitted(true)}
+          onAction={() => {
+            setSubmitted(true)
+            navigate('/result?status=paid')
+          }}
         >
           <TermsAgreement
             agreedIds={agreedIds}

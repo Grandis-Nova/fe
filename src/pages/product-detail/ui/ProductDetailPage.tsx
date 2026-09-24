@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useSearchParams } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 
 import { ProductColorSwatches, ProductOptionSelector } from '@/entities/product'
 import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
@@ -45,8 +45,11 @@ const shipmentLabel = `${SHIPMENT_STARTS_AT.getMonth() + 1}월 ${SHIPMENT_STARTS
 const UNIT_PRICE = 120000
 
 export function ProductDetailPage() {
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const isPreorder = searchParams.get('preorder') === 'true'
+  const handleCheckout = () =>
+    navigate(isPreorder ? '/result?status=preorder' : '/payment')
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedStorage, setSelectedStorage] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -123,7 +126,9 @@ export function ProductDetailPage() {
                   장바구니
                 </Button>
               )}
-              <Button>{isPreorder ? '사전예약하기' : '결제하기'}</Button>
+              <Button onClick={handleCheckout}>
+                {isPreorder ? '사전예약하기' : '결제하기'}
+              </Button>
             </div>
           </div>
         </div>
@@ -153,7 +158,10 @@ export function ProductDetailPage() {
                 className={styles.orderBarIconButton}
               />
             )}
-            <Button className={styles.orderBarCheckoutButton}>
+            <Button
+              className={styles.orderBarCheckoutButton}
+              onClick={handleCheckout}
+            >
               {isPreorder ? '사전예약하기' : '122,000,000원 결제하기'}
             </Button>
           </div>

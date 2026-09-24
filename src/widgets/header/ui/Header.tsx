@@ -35,15 +35,23 @@ export function Header({
   const isAdminPage = pathname.startsWith('/admin')
   const [scrolled, setScrolled] = useState(false)
 
-  // 메인 최상단에서만 배너와 겹쳐 보이게 배경을 없앤다. 조금이라도 스크롤하면
-  // 흰 콘텐츠가 헤더 뒤로 지나가므로 배경을 되살려 글자가 묻히지 않게 한다.
+  // 메인의 배너~히어로(어두운 이미지 구간) 위에 떠 있는 동안만 배경을 없애 이미지가
+  // 헤더 뒤로 이어지게 한다. 그 구간을 지나 흰 콘텐츠가 올라오면 배경을 되살려
+  // 글자가 묻히지 않게 한다. 구간의 끝은 MainPage가 data 속성으로 알려준다.
   useEffect(() => {
     if (!isMainPage) return
 
-    const syncScrolled = () => setScrolled(window.scrollY > 0)
-    syncScrolled()
-    window.addEventListener('scroll', syncScrolled, { passive: true })
-    return () => window.removeEventListener('scroll', syncScrolled)
+    const region = document.querySelector('[data-header-overlay-region]')
+    if (!region) return
+
+    // rootMargin으로 뷰포트 위쪽을 헤더 높이만큼 잘라내, 구간의 밑단이 헤더 아래를
+    // 지나가는 순간을 경계로 삼는다. scroll 이벤트마다 레이아웃을 읽지 않아도 된다.
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { rootMargin: `-${styles.HEADER_HEIGHT}px 0px 0px 0px` },
+    )
+    observer.observe(region)
+    return () => observer.disconnect()
   }, [isMainPage])
 
   const isOverlay = isMainPage && !scrolled

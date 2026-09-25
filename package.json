@@ -20,6 +20,7 @@
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/sprinkles": "^1.7.1",
     "@vanilla-extract/vite-plugin": "^5.2.6",
+    "axios": "^1.20.0",
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^1.46.0",

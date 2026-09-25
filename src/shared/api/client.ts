@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import type { ApiError, ApiResponse } from './types'
 
 // shared는 entities를 import할 수 없어서(FSD 경계), 인증 헤더/401 처리를
@@ -27,14 +29,20 @@ export class ApiRequestError extends Error {
   }
 }
 
-export type ApiRequestOptions = Omit<RequestInit, 'body'> & {
+export type ApiRequestOptions = {
+  method?: string
   body?: unknown
+  headers?: Record<string, string>
   /**
    * 401을 받아도 재발급을 트리거하지 않는다 — /session/refresh, /admin/session처럼
    * 그 자체가 인증 흐름인 호출에 쓴다. 안 그러면 재발급 실패가 또 재발급을 부른다.
    */
   skipAuthRefresh?: boolean
 }
+
+// 서버가 401 같은 실패도 JSON 봉투로 내려주므로, axios가 비2xx를 reject하지
+// 않게 하고 아래에서 envelope의 success로 직접 판단한다.
+const http = axios.create({ withCredentials: true, validateStatus: () => true })
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -46,29 +54,26 @@ async function request<TData>(
   options: ApiRequestOptions = {},
   attempted = false,
 ): Promise<TData> {
-  const { body, skipAuthRefresh, headers, ...rest } = options
+  const { body, skipAuthRefresh, method = 'GET', headers } = options
 
-  const response = await fetch(path, {
-    ...rest,
-    credentials: 'include',
+  const response = await http.request<ApiResponse<TData> | string>({
+    url: path,
+    method,
+    data: body,
     headers: {
-      ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
       'X-Request-Id': requestId(),
       ...getAuthHeaders(),
       ...headers,
     },
-    body: body !== undefined ? JSON.stringify(body) : undefined,
   })
 
   // 로그아웃 등 204 No Content는 파싱할 본문이 없다.
   if (response.status === 204) return undefined as TData
 
-  let json: ApiResponse<TData>
-  try {
-    json = (await response.json()) as ApiResponse<TData>
-  } catch {
-    // 응답 본문이 JSON이 아니면(프록시 에러 페이지 등) SyntaxError를 그대로
-    // 던지지 않고 나머지 호출부와 같은 ApiRequestError로 감싼다.
+  const json = response.data
+  // 응답 본문이 JSON 객체가 아니면(프록시 에러 페이지 등) 나머지 호출부와
+  // 같은 ApiRequestError로 감싼다 — axios는 파싱 실패 시 원문 문자열을 돌려준다.
+  if (typeof json !== 'object' || json === null) {
     throw new ApiRequestError(
       {
         code: 'INVALID_RESPONSE',

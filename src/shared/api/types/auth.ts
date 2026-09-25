@@ -6,6 +6,9 @@ export type Session = {
   sessionToken: string
   displayName: string
   role: SessionRole
+  // 이름·이메일·연락처(entities/profile)가 다 채워졌는지 — 로그인/재발급/세션조회
+  // 세 응답에 다 실려 온다. ADMIN은 항상 true.
+  profileComplete: boolean
 }
 
 export type KakaoCallbackRequest = {
@@ -14,7 +17,10 @@ export type KakaoCallbackRequest = {
 }
 
 // 세션 조회는 토큰을 돌려주지 않는다 — 이미 갖고 있는 값이다.
-export type SessionInfo = Pick<Session, 'displayName' | 'role'>
+export type SessionInfo = Pick<
+  Session,
+  'displayName' | 'role' | 'profileComplete'
+>
 
 export type AdminLoginRequest = {
   username: string

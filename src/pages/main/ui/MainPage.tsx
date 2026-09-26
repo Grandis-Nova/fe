@@ -12,7 +12,20 @@ import { Banner } from '@/widgets/banner'
 
 import * as styles from './MainPage.css'
 
-const storageLabels = ['256GB', '512GB']
+const storageOptions = [
+  { label: '256GB', extraPrice: 0 },
+  { label: '512GB', extraPrice: 130000 },
+]
+// 색상마다 별도 촬영본(1~4)이 public/images에 이미 있다 — import 대신 경로 문자열로
+// 참조한다(Banner의 banner1.png와 같은 방식).
+const macbookColors = [
+  { hex: '#D9D9DE', label: '실버', slug: 'sliver' },
+  { hex: '#E8B4B8', label: '블러쉬', slug: 'blush' },
+  { hex: '#F5A623', label: '시트러스', slug: 'citrus' },
+  { hex: '#3B3A6E', label: '인디고', slug: 'indigo' },
+]
+const macbookImages = (slug: string) =>
+  [1, 2, 3, 4].map((n) => `/images/macbook_neo_${slug}${n}.png`)
 // ponytail: 아직 상품 목록 API가 없어서 목업 상품 1종을 캐러셀 채우기용으로 반복 렌더링
 const PRODUCT_COUNT = 6
 const RECOMMENDED_COUNT = 11
@@ -65,11 +78,11 @@ export function MainPage() {
                       ...swatch,
                       selected: i === selectedColor,
                     })),
-                    storageOptions: storageLabels.map((label, i) => ({
-                      label,
+                    storageOptions: storageOptions.map((option, i) => ({
+                      ...option,
                       selected: i === selectedStorage,
                     })),
-                    priceAmount: '1,290,000',
+                    basePrice: 1290000,
                   }}
                   onColorSelect={setSelectedColor}
                   onStorageSelect={setSelectedStorage}
@@ -94,19 +107,21 @@ export function MainPage() {
             <ProductCard
               key={index}
               product={{
-                imageSrcs: [macbook1, macbook2],
-                name: `NOVA Phone ${index + 1}`,
-                modelNumber: 'NV-2026',
-                colorName: '미드나이트',
-                colorSwatches: colorSwatches.map((swatch, i) => ({
+                imageSrcs: macbookImages(
+                  macbookColors[recommendedColorSelections[index]].slug,
+                ),
+                name: `NOVA MacBook Neo ${index + 1}`,
+                modelNumber: 'MB-NEO',
+                colorName: macbookColors[0].label,
+                colorSwatches: macbookColors.map((swatch, i) => ({
                   ...swatch,
                   selected: i === recommendedColorSelections[index],
                 })),
-                storageOptions: storageLabels.map((label, i) => ({
-                  label,
+                storageOptions: storageOptions.map((option, i) => ({
+                  ...option,
                   selected: i === recommendedStorageSelections[index],
                 })),
-                priceAmount: '1,290,000',
+                basePrice: 1690000,
               }}
               onColorSelect={(i) =>
                 setRecommendedColorSelections((prev) =>

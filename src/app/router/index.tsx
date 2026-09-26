@@ -5,6 +5,7 @@ import { MainLayout } from '@/app/layouts/MainLayout'
 import { MypageLayout } from '@/app/layouts/MypageLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
 import { KAKAO_CALLBACK_PATH } from '@/features/kakao-login'
+import { PAYMENT_CALLBACK_PATH } from '@/features/toss-payment'
 import { AdminHomePage } from '@/pages/admin-home'
 import { AdminPlaceholderPage } from '@/pages/admin-placeholder'
 import { AdminProductDetailPage } from '@/pages/admin-product-detail'
@@ -15,6 +16,7 @@ import { MainPage } from '@/pages/main'
 import { Mypage } from '@/pages/mypage'
 import { NotFoundPage } from '@/pages/not-found'
 import { PaymentPage } from '@/pages/payment'
+import { PaymentCallbackPage } from '@/pages/payment-callback'
 import { PreorderPage } from '@/pages/preorder'
 import { PreorderDetailPage } from '@/pages/preorder-detail'
 import { ProductDetailPage } from '@/pages/product-detail'
@@ -33,6 +35,7 @@ export const router = createBrowserRouter([
           { path: '/preorder/:preorderId', element: <PreorderDetailPage /> },
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/payment', element: <PaymentPage /> },
+          { path: PAYMENT_CALLBACK_PATH, element: <PaymentCallbackPage /> },
           { path: '/result', element: <ResultPage /> },
           { path: SIGNUP_PATH, element: <SignupPage /> },
           {

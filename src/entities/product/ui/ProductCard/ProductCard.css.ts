@@ -63,12 +63,6 @@ export const name = style([
 ])
 export const modelNumber = style({ color: color.text.tertiary })
 
-export const storageRow = style({
-  display: 'flex',
-  gap: spacing[6],
-  alignItems: 'center',
-})
-
 export const priceRow = style({
   height: '26px',
   display: 'flex',

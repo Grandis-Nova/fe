@@ -26,7 +26,7 @@ export const Default: Story = {
       modelNumber: 'NV-2026',
       colorName: '미드나이트',
       colorSwatches,
-      storageOptions: [
+      options: [
         { label: '256GB', selected: true },
         { label: '512GB', extraPrice: 130000 },
       ],
@@ -35,20 +35,20 @@ export const Default: Story = {
   },
 }
 
-export const NoStorageSelected: Story = {
+export const NoOptionSelected: Story = {
   args: {
     product: {
       ...Default.args.product,
-      storageOptions: [{ label: '256GB' }, { label: '512GB' }],
+      options: [{ label: '256GB' }, { label: '512GB' }],
     },
   },
 }
 
-export const ExtraPriceStorageSelected: Story = {
+export const ExtraPriceOptionSelected: Story = {
   args: {
     product: {
       ...Default.args.product,
-      storageOptions: [
+      options: [
         { label: '256GB' },
         { label: '512GB', selected: true, extraPrice: 130000 },
       ],

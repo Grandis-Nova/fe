@@ -110,6 +110,11 @@ export const quantityPriceRow = style({
   gap: spacing[8],
 })
 
+export const fixedQuantity = style([
+  typography.body.defaultMedium,
+  { color: color.text.primary },
+])
+
 export const price = style([typography.title.lgSemibold])
 
 export const actions = style({
@@ -154,6 +159,13 @@ export const image = style({
   width: '100%',
   height: '100%',
   objectFit: 'cover',
+})
+
+export const reviewList = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacing[20],
+  padding: `${spacing[40]} 0`,
 })
 
 export const tabPanel = style({

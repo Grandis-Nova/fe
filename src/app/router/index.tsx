@@ -19,6 +19,7 @@ import { PreorderPage } from '@/pages/preorder'
 import { PreorderDetailPage } from '@/pages/preorder-detail'
 import { ProductDetailPage } from '@/pages/product-detail'
 import { ResultPage } from '@/pages/result'
+import { ReviewsPage } from '@/pages/reviews'
 import { SearchPage } from '@/pages/search'
 import { SignupPage, SIGNUP_PATH } from '@/pages/signup'
 
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/payment', element: <PaymentPage /> },
           { path: '/result', element: <ResultPage /> },
+          { path: '/reviews', element: <ReviewsPage /> },
           { path: '/search', element: <SearchPage /> },
           { path: SIGNUP_PATH, element: <SignupPage /> },
           {

@@ -3,8 +3,10 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 
 import { ProductColorSwatches, ProductOptionSelector } from '@/entities/product'
+import { mockReviews, ReviewCard } from '@/entities/review'
 import macbook1 from '@/shared/assets/macbook_neo_sliver1.png'
 import macbook2 from '@/shared/assets/macbook_neo_sliver2.png'
+import { color } from '@/shared/config/theme'
 import {
   Container,
   Slider,
@@ -24,7 +26,7 @@ const colorSwatches = [
   { hex: '#F5F5F0', label: '스타라이트' },
   { hex: '#F68C4C', label: '코즈믹 오렌지' },
 ]
-const storageLabels = ['256GB', '512GB']
+const optionLabels = ['256GB', '512GB']
 
 // ponytail: 실제 탭 콘텐츠 API 전까지 자리표시자 배경색으로 대체
 const tabPanelContent: Record<
@@ -34,8 +36,13 @@ const tabPanelContent: Record<
   benefits: { label: '구매 혜택', background: '#f5f5f5' },
   info: { label: '모델 정보', background: '#c1c1c1' },
   notice: { label: '유의 사항', background: '#6a6a6a' },
-  review: { label: '구매 후기', background: '#222222' },
+  review: { label: '구매 후기', background: color.background.base },
 }
+
+// 상세에서는 이 상품(아이폰 18 Pro) 후기만 보여준다.
+const reviews = mockReviews.filter(({ productName }) =>
+  productName.startsWith('아이폰 18 Pro'),
+)
 
 // ponytail: 실제 배송 시작일 API 전까지 하드코딩
 const SHIPMENT_STARTS_AT = new Date('2026-10-15')
@@ -49,7 +56,7 @@ export function ProductDetailPage() {
   const [searchParams] = useSearchParams()
   const isPreorder = searchParams.get('preorder') === 'true'
   const [selectedColor, setSelectedColor] = useState(0)
-  const [selectedStorage, setSelectedStorage] = useState(0)
+  const [selectedOption, setSelectedOption] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const priceLabel = `${(UNIT_PRICE * quantity).toLocaleString()}원`
 
@@ -58,7 +65,7 @@ export function ProductDetailPage() {
     const purchase = {
       productName: '아이폰 18 Pro',
       colorLabel: colorSwatches[selectedColor].label,
-      storageLabel: storageLabels[selectedStorage],
+      optionLabel: optionLabels[selectedOption],
       quantity,
       unitPrice: UNIT_PRICE,
     }
@@ -112,19 +119,24 @@ export function ProductDetailPage() {
               />
               <ProductOptionSelector
                 label="용량"
-                options={storageLabels.map((label, index) => ({
+                options={optionLabels.map((label, index) => ({
                   label,
-                  selected: index === selectedStorage,
+                  selected: index === selectedOption,
                 }))}
-                onSelect={setSelectedStorage}
+                onSelect={setSelectedOption}
               />
             </div>
             <div className={styles.quantityPriceRow}>
-              <QuantityStepper
-                value={quantity}
-                onChange={setQuantity}
-                label="IPhone 18 Pro"
-              />
+              {/* 사전예약은 1인 1개라 수량을 고를 수 없다 — quantity는 초기값 1 그대로 간다. */}
+              {isPreorder ? (
+                <span className={styles.fixedQuantity}>1개</span>
+              ) : (
+                <QuantityStepper
+                  value={quantity}
+                  onChange={setQuantity}
+                  label="IPhone 18 Pro"
+                />
+              )}
               <span className={styles.price}>
                 <PriceText value={priceLabel} />
               </span>
@@ -162,7 +174,7 @@ export function ProductDetailPage() {
             <div className={styles.productName}>아이폰 18 Pro</div>
             <div className={styles.productOption}>
               {colorSwatches[selectedColor].label} ·{' '}
-              {storageLabels[selectedStorage]}
+              {optionLabels[selectedOption]}
             </div>
           </div>
           <div className={styles.orderBarButtons}>
@@ -201,7 +213,15 @@ export function ProductDetailPage() {
             className={styles.tabPanel}
             style={{ background }}
           >
-            {label}
+            {tab === 'review' ? (
+              <div className={styles.reviewList}>
+                {reviews.map(({ id, ...review }) => (
+                  <ReviewCard key={id} {...review} />
+                ))}
+              </div>
+            ) : (
+              label
+            )}
           </div>
         ))}
     </Container>

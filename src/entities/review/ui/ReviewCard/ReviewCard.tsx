@@ -2,6 +2,8 @@ import { typography } from '@/shared/config/theme'
 
 import * as styles from './ReviewCard.css'
 
+const MAX_RATING = 5
+
 export type ReviewCardProps = {
   thumbnailSrc?: string
   rating: number
@@ -29,21 +31,35 @@ export function ReviewCard({
         <div className={styles.thumbnail} />
       )}
       <div className={styles.main}>
-        <div className={styles.rating}>
-          {'★'.repeat(Math.max(0, Math.min(5, rating)))}
-        </div>
-        <div className={styles.textGroup}>
-          <div className={styles.reviewText}>{reviewText}</div>
+        <div className={styles.top}>
           <div
-            className={[typography.body.subMedium, styles.productName].join(
+            className={styles.rating}
+            role="img"
+            aria-label={`별점 ${rating}점`}
+          >
+            {Array.from({ length: MAX_RATING }, (_, index) => (
+              <span
+                key={index}
+                className={styles.star[index < rating ? 'filled' : 'empty']}
+                aria-hidden="true"
+              >
+                ★
+              </span>
+            ))}
+          </div>
+          <div
+            className={[typography.body.defaultRegular, styles.reviewText].join(
               ' ',
             )}
           >
-            {productName}
+            {reviewText}
           </div>
         </div>
+        <div className={[typography.body.sub, styles.productName].join(' ')}>
+          {productName}
+        </div>
       </div>
-      <div className={[typography.body.subMedium, styles.meta].join(' ')}>
+      <div className={[typography.body.sub, styles.meta].join(' ')}>
         <span>{maskedAuthorName}</span>
         <span>{date}</span>
       </div>

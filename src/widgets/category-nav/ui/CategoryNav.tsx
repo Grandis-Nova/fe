@@ -54,8 +54,8 @@ const linkPaths: Record<CategoryNavLink, string> = {
 }
 
 // URLSearchParams가 인코딩까지 해주므로 쿼리를 손으로 붙이지 않는다.
-const productsPath = (params: Record<string, string>) =>
-  `/products?${new URLSearchParams(params)}`
+const searchPath = (params: Record<string, string>) =>
+  `/search?${new URLSearchParams(params)}`
 
 export function CategoryNav({
   tone = 'default',
@@ -69,8 +69,17 @@ export function CategoryNav({
         {/* data-mega-menu: 메뉴가 열렸는지(hover/focus)를 헤더가 :has()로 보고
             배경을 불투명하게 바꾼다 — 흰 패널과 한 덩어리로 보이게. */}
         {Object.entries(brandMenus).map(([brand, menu]) => (
-          <div key={brand} className={styles.brand} data-mega-menu>
-            <Link to={productsPath({ brand })} className={styles.link}>
+          // 링크를 누른 뒤에도 포커스가 남아 있으면 :focus-within 때문에 이동한 페이지 위로
+          // 메뉴가 계속 열려 있으므로, 메뉴 안에서 클릭하면 포커스를 풀어 닫는다.
+          <div
+            key={brand}
+            className={styles.brand}
+            data-mega-menu
+            onClick={() =>
+              (document.activeElement as HTMLElement | null)?.blur()
+            }
+          >
+            <Link to={searchPath({ category: brand })} className={styles.link}>
               {brand}
             </Link>
             <div className={styles.menu}>
@@ -79,7 +88,10 @@ export function CategoryNav({
                   {menu.categories.map((category) => (
                     <Link
                       key={category}
-                      to={productsPath({ brand, q: category })}
+                      to={searchPath({
+                        category: brand,
+                        subCategory: category,
+                      })}
                       className={styles.menuTile}
                     >
                       {category}

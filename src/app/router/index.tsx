@@ -19,6 +19,7 @@ import { PreorderPage } from '@/pages/preorder'
 import { PreorderDetailPage } from '@/pages/preorder-detail'
 import { ProductDetailPage } from '@/pages/product-detail'
 import { ResultPage } from '@/pages/result'
+import { SearchPage } from '@/pages/search'
 import { SignupPage, SIGNUP_PATH } from '@/pages/signup'
 
 export const router = createBrowserRouter([
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
           { path: '/products/:productId', element: <ProductDetailPage /> },
           { path: '/payment', element: <PaymentPage /> },
           { path: '/result', element: <ResultPage /> },
+          { path: '/search', element: <SearchPage /> },
           { path: SIGNUP_PATH, element: <SignupPage /> },
           {
             path: KAKAO_CALLBACK_PATH,
@@ -44,7 +46,6 @@ export const router = createBrowserRouter([
             element: <MypageLayout />,
             children: [{ index: true, element: <Mypage /> }],
           },
-          // 구매후기, 브랜드별 상품 목록(/products?brand=...) 페이지는 아직 미구현 — 만들면 여기 추가.
           { path: '*', element: <NotFoundPage /> },
         ],
       },

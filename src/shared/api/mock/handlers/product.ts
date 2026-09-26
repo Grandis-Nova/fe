@@ -1,12 +1,19 @@
 import { http } from 'msw'
 
 import { categories, dispatchWindows, products } from '../fixtures/product'
+import {
+  bestProductCards,
+  recommendedProductCards,
+  searchProductCardGroups,
+} from '../fixtures/productCards'
 import { fail, ok } from '../response'
 import { url } from '../url'
 
 import type {
   Category,
   Paged,
+  ProductCardListResponse,
+  ProductCardSearchResponse,
   ProductDetail,
   ProductSort,
   ProductSummary,
@@ -86,6 +93,37 @@ const comparators: Record<
 
 export const productHandlers: RequestHandler[] = [
   http.get(url('/categories'), () => ok({ items: categories })),
+
+  // 메인페이지 카드 캐러셀 전용 — 페이지네이션/필터를 타지 않는 별도 curated 목록.
+  // query가 없으면 undefined를 돌려주고, 아래 일반 목록 핸들러로 넘어간다
+  // (MSW는 resolver가 undefined를 돌려주면 다음 매칭 핸들러를 이어서 시도한다).
+  http.get(url('/products'), ({ request }) => {
+    const query = new URL(request.url).searchParams.get('query')
+    if (query !== 'best' && query !== 'recommend') return undefined
+    const items = query === 'best' ? bestProductCards : recommendedProductCards
+    return ok<ProductCardListResponse>({ items })
+  }),
+
+  // 카테고리 검색 화면(/search) 카드 목록. category·subCategory가 없으면 전체를 돌려준다.
+  // /products/:productId보다 먼저 등록해야 'search'가 productId로 잡히지 않는다.
+  http.get(url('/products/search'), ({ request }) => {
+    const params = new URL(request.url).searchParams
+    const category = params.get('category')
+    const subCategory = params.get('subCategory')
+    const sort = params.get('sort')
+
+    const items = searchProductCardGroups
+      .filter(
+        (group) =>
+          (!category || group.category === category) &&
+          (!subCategory || group.subCategory === subCategory),
+      )
+      .flatMap((group) => group.cards)
+    if (sort === 'PRICE_ASC') items.sort((a, b) => a.basePrice - b.basePrice)
+    if (sort === 'PRICE_DESC') items.sort((a, b) => b.basePrice - a.basePrice)
+
+    return ok<ProductCardSearchResponse>({ items, total: items.length })
+  }),
 
   http.get(url('/products'), ({ request }) => {
     const params = new URL(request.url).searchParams

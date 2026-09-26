@@ -130,3 +130,45 @@ export type ProductDetail = ProductSummary & {
 export type CategoryTreeResponse = {
   items: Category[]
 }
+
+// 메인페이지 카드 캐러셀 전용 — ProductDetail/ProductSummary는 목록 페이지·상세
+// 페이지가 필요로 하는 정보(카테고리, 평점, variants 등)까지 다 실어서 카드 하나
+// 그리는 데는 과하다. 카드가 실제로 쓰는 모양만 딱 맞춘 별도 DTO.
+export type ProductListQuery = 'best' | 'recommend'
+
+export type ProductCardColorDto = {
+  hex: string
+  label: string
+  imageUrls: string[]
+}
+
+export type ProductCardOptionDto = {
+  label: string
+  extraPrice: number
+}
+
+export type ProductCardSummaryDto = {
+  productId: string
+  name: string
+  modelNumber: string
+  basePrice: number
+  colors: ProductCardColorDto[]
+  options: ProductCardOptionDto[]
+}
+
+export type ProductCardListResponse = {
+  items: ProductCardSummaryDto[]
+}
+
+// 카테고리 검색 화면은 가격 정렬만 노출한다.
+export type ProductCardSort = Extract<ProductSort, 'PRICE_ASC' | 'PRICE_DESC'>
+
+export type ProductCardSearchParams = {
+  category?: string
+  subCategory?: string
+  sort?: ProductCardSort
+}
+
+export type ProductCardSearchResponse = ProductCardListResponse & {
+  total: number
+}
